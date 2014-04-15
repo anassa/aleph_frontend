@@ -1,7 +1,6 @@
-steal(
-	'can/model'
-).then(
-	function()
+define(
+	['can/model']
+,	function()
 	{
 		can.Model(
 			'Aleph.Model'

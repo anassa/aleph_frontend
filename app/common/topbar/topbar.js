@@ -1,7 +1,6 @@
-steal(
-	'dev/controls/menu'
-).then(
-	function()
+define(
+	['common/menu/menu']
+,	function()
 	{
 		Frame.Menu(
 			'Aleph.Topbar'
@@ -12,7 +11,7 @@ steal(
 					can.append(
 						element
 					,	can.view(
-							steal.idToUri(options.view).path
+							options.view
 						,	options.data
 						)
 					)

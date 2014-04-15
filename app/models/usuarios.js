@@ -1,7 +1,6 @@
-steal(
-	'apps/aleph/models/aleph.js'
-).then(
-	function()
+define(
+	['models/aleph']
+,	function()
 	{
 		Aleph.Model(
 			'Aleph.Model.Usuarios'

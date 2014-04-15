@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="favicon.ico">
 		<title>Aleph</title>
 
 		<!-- Bootstrap -->
@@ -17,5 +18,41 @@
 	</head>
 	<body>
 	</body>
-	<script src='../../steal/steal.js?apps/aleph/aleph.js'></script>
+	<script type="text/javascript" src="bower_components/requirejs/require.js"></script>
+	<script type="text/javascript">
+		require
+			.config(
+				{
+					map:
+					{
+						'*':
+						{
+							'css':	'bower_components/require-css/css'
+						} 
+					}
+				,	paths:
+					{
+					//	Librerias
+						'jquery':		'bower_components/jquery/dist/jquery.min'
+					,	'can':			'bower_components/canjs/amd/can'
+					,	'bootstrap':	'bower_components/bootstrap/dist'
+					,	'fontawesome':	'bower_components/fontawesome'
+					//	Accessos APP
+					//	Base
+					,	'common':	'app/common'
+					,	'models':	'app/models'
+					,	'views':	'app/views'
+					,	'images':	'app/images'
+					,	'styles':	'app/styles'
+					//	Modulos
+					,	'venta':	'app/venta'
+					,	'compra':	'app/compra'
+					,	'stock':	'app/stock'
+					,	'usuario':	'app/usuario'
+					,	'reporte':	'app/reporte'
+					}
+				}
+			)	
+	</script>
+	<script type="text/javascript" src="app/aleph.js"></script>
 </html>
