@@ -13,29 +13,34 @@ require
 			//	Caminos cortos para determinar donde buscar los componentes, asi no se escribe la url completa.
 		,   paths:
 			{
-				'jquery':				'bower_components/jquery/dist/jquery.min'
-			,	'can':					'bower_components/canjs/amd/can'
-			,	'bootstrap':			'bower_components/bootstrap'
-			,	'fontawesome':			'bower_components/fontawesome'
-			,	'localstorage':			'bower_components/canjs-localstorage/can.localstorage'
-			,	'typeahead':			'bower_components/typeahead/bootstrap3-typeahead'
-			,	'lodash':				'bower_components/lodash/dist/lodash'	
-			,	'draggabilly':			'bower_components/draggabilly/draggabilly'
+				'jquery':				'frame/bower_components/jquery/dist/jquery.min'
+			,	'can':					'frame/bower_components/canjs/amd/can'
+			,	'bootstrap':			'frame/bower_components/bootstrap'
+			,	'fontawesome':			'frame/bower_components/fontawesome'
+			,	'localstorage':			'frame/bower_components/canjs-localstorage/can.localstorage'
+			,	'typeahead':			'frame/bower_components/typeahead/bootstrap3-typeahead'
+			,	'lodash':				'frame/bower_components/lodash/dist/lodash'	
+			,	'draggabilly':			'frame/bower_components/draggabilly/draggabilly'
 			//	Start Draggabilly Dependencies
-			,	'classie':				'bower_components/classie'
-			,	'eventie':				'bower_components/eventie'
-			,	'get-style-property':	'bower_components/get-style-property'
-			,	'eventEmitter':			'bower_components/eventEmitter'
-			,	'get-size':				'bower_components/get-size'
+			,	'classie':				'frame/bower_components/classie'
+			,	'eventie':				'frame/bower_components/eventie'
+			,	'get-style-property':	'frame/bower_components/get-style-property'
+			,	'eventEmitter':			'frame/bower_components/eventEmitter'
+			,	'get-size':				'frame/bower_components/get-size'
 			//	End
-			,	'datetimepicker':		'bower_components/bootstrap3-datetimepicker/build'
+			,	'datetimepicker':		'frame/bower_components/bootstrap3-datetimepicker/build'
 			//	Start DateTimerPicker Dependencies
-			,	'moment':				'bower_components/moment/moment'
-			,	'time-locale-es':		'bower_components/bootstrap3-datetimepicker/src/js/locales/bootstrap-datetimepicker.es'
+			,	'moment':				'frame/bower_components/moment/moment'
+			,	'time-locale-es':		'frame/bower_components/bootstrap3-datetimepicker/src/js/locales/bootstrap-datetimepicker.es'
 			//	END
-			,	'validator':			'bower_components/bootstrapValidator/dist'
-			,	'iCheck':				'bower_components/iCheck'
+			,	'validator':			'frame/bower_components/bootstrapValidator/dist'
+			,	'iCheck':				'frame/bower_components/iCheck'
+			//	Frame
+			,	'lib':					'frame/lib'
+			,	'styles':				'frame/styles'
+			,	'views':				'frame/views'
 			//	Modulos
+			,	'models':	'app/models'
 			,	'venta':	'app/venta'
 			,	'compra':	'app/compra'
 			,	'stock':	'app/stock'

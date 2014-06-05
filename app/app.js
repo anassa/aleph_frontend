@@ -1,0 +1,8 @@
+define(
+	[
+		'lib/styles'
+	]
+,	function()
+	{
+	}
+)

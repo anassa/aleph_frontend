@@ -9,67 +9,43 @@ define(
 			,	host: 'localhost'
 			,	port: 1337
 			,	path: 'insertModelHere'
-			,	findAll: function(sucess,error)
+			,	findAll: function(params)
 				{
 					var	Model
 					=	this
 
 					return	this
-								.request('GET',this.getURL(),undefined,sucess,error)
-								.pipe(
-									function(raw)
-									{
-										return	Model.models(raw)
-									}
-								)
+								.request('GET',this.getURL(),params)
 				}
-			,	findOne: function(data,sucess,error)
+			,	findOne: function(data)
 				{
 					var	Model
 					=	this
 					
 					return	this
-								.request('GET',this.getURL(data.id),undefined,sucess,error)
-								.pipe(
-									function(raw)
-									{
-										return	Model.model(raw)
-									}
-								)
+								.request('GET',this.getURL(data.id),undefined)
 				}
-			,	create: function(params,sucess,error)
+			,	create: function(params)
 				{
 					var	Model
 					=	this
 
 					return	this
-								.request('POST',this.getURL(),params,sucess,error)
-								.pipe(
-									function(raw)
-									{
-										return	Model.model(raw)
-									}
-								)
+								.request('POST',this.getURL(),params)
 				}
-			,	update: function(id,data,sucess,error)
+			,	update: function(id,data)
 				{
 					var	Model
 					=	this
 
 					return	this
-								.request('PUT',this.getURL(data.id),data,sucess,error)
-								.pipe(
-									function(raw)
-									{
-										return	Model.model(raw)
-									}
-								)
+								.request('PUT',this.getURL(data.id),data)
 				}
-			,	destroy: function(params,sucess,error)
+			,	destroy: function(params)
 				{
-					return	this.request('DELETE',this.getURL(params),params,sucess,error)
+					return	this.request('DELETE',this.getURL(params),params)
 				}
-			,	request: function(method,url,data,sucess,error)
+			,	request: function(method,url,data)
 				{
 					return	can.ajax(
 								{
@@ -78,9 +54,6 @@ define(
 								,	type:	method
 								,	dataType: 'json'
 								}
-							).then(
-								sucess && can.proxy(sucess,this)
-							,	error && can.proxy(error,this)
 							)
 				}
 			,	beforeSend: function(data)
@@ -89,7 +62,9 @@ define(
 				}
 			,	getURL: function(id)
 				{
-					return	can.sub('{protocol}://{host}:{port}/{path}',{protocol: this.protocol, host: this.host, port: this.port, path: this.path})
+					return	(can.fixture && can.fixture.on)
+							?	can.sub('/{path}',{path: this.path})
+							:	can.sub('{protocol}://{host}:{port}/{path}',{protocol: this.protocol, host: this.host, port: this.port, path: this.path})
 				}
 			}
 		,	{
