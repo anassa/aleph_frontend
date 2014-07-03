@@ -46,3 +46,11 @@
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
   border-right: 1px solid #eee;
 }
+
+.sidebar dl dt {
+  width: 100px;
+}
+
+.sidebar dl dd {
+  margin-left: 120px;
+}
