@@ -4,11 +4,13 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Bootstrap 101 Template</title>
+		<title>Aleph - Demo</title>
 
 		<!-- Bootstrap -->
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="wizard/wizard.css" rel="stylesheet">
 		<link href="css/sidebar.css" rel="stylesheet">
+		<link href="css/login.css" rel="stylesheet">
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,332 +20,26 @@
 		<![endif]-->
 	</head>
 	<body>
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Mostrar Menu</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Aleph</a>
-				</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li class="dropdown active">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								Ventas
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu" role="menu">
-								<li class="active">
-									<a href="#">
-										Nueva
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										Historial
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										Pendientes
-										<span class="badge pull-right">42</span>
-									</a>
-								</li>
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								Compras
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu" role="menu">
-								<li>
-									<a href="#">
-										Opción 1
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										Opción 2
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										Opción 3
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										Opción 4
-									</a>
-								</li>
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								Stock
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu" role="menu">
-								<li>
-									<a href="#">
-										Opción 1
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										Opción 2
-									</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<span class="glyphicon glyphicon-user"></span>
-								Nombre Usuario
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu" role="menu">
-								<li>
-									<a href="#">
-										Perfil
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										Salir
-									</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-8 main-content">
-					<h3>Resultado de la Busqueda <small>(Nombre: Samsung)</small></h3>
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th>
-									Marca
-								</th>
-								<th>
-									Tipo
-								</th>
-								<th>
-									Modelo
-								</th>
-								<th>
-									Código
-								</th>
-								<th>
-									Descripción
-								</th>
-								<th>
-									Stock
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="success">
-								<td>Samsung</td>
-								<td>TV LED</td>
-								<td>EH6030</td>
-								<td>TVLSAMEH6030</td>
-								<td>TV LED ideal para ver el mundial...</td>
-								<td><span class="text-danger">1</span></td>
-							</tr>
-							<tr>
-								<td>Samsung</td>
-								<td>TV LED</td>
-								<td>EH6020</td>
-								<td>TVLSAMEH6020</td>
-								<td>TV LED ideal para ver el mundial...</td>
-								<td><span class="text-warning">3</span></td>
-							</tr>
-							<tr>
-								<td>Samsung</td>
-								<td>TV LED</td>
-								<td>EH6010</td>
-								<td>TVLSAMEH6010</td>
-								<td>TV LED ideal para ver el mundial...</td>
-								<td><span class="text-danger">1</span></td>
-							</tr>
-							<tr>
-								<td>Samsung</td>
-								<td>TV LED</td>
-								<td>EH5030</td>
-								<td>TVLSAMEH5030</td>
-								<td>TV LED ideal para ver el mundial...</td>
-								<td>6</span></td>
-							</tr>
-							<tr>
-								<td>Samsung</td>
-								<td>TV LED</td>
-								<td>EH5020</td>
-								<td>TVLSAMEH5020</td>
-								<td>TV LED ideal para ver el mundial...</td>
-								<td><span class="text-warning">3</span></td>
-							</tr>
-							<tr>
-								<td>Samsung</td>
-								<td>Home Theater</td>
-								<td>HT5020</td>
-								<td>HTLSAMEH5020</td>
-								<td>Sistema de Audio ideal para disfrutar...</td>
-								<td><span class="text-warning">4</span></td>
-							</tr>
-							<tr>
-								<td>Samsung</td>
-								<td>Home Theater</td>
-								<td>HT6020</td>
-								<td>HTLSAMEH6020</td>
-								<td>Sistema de Audio ideal para disfrutar...</td>
-								<td><span class="text-danger">1</span></td>
-							</tr>
-							<tr>
-								<td>Samsung</td>
-								<td>Home Theater</td>
-								<td>HT7020</td>
-								<td>HTLSAMEH7020</td>
-								<td>Sistema de Audio ideal para disfrutar...</td>
-								<td>5</td>
-							</tr>
-						</tbody>
-					</table>
-					<div class="center-block">
-						<ul class="pagination">
-							<li><a href="#">&laquo;</a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&raquo;</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-4 sidebar">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								Buscar producto
-								<span class="glyphicon glyphicon-minus pull-right"></span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<form class="form-horizontal" role="form">
-								<div class="form-group">
-									<label for="nombre" class="col-sm-2 control-label">
-										Nombre
-									</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" id="nombre" value="Samsung">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="codigo" class="col-sm-2 control-label">
-										Código
-									</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" id="codigo" placeholder="Código del Producto">
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-offset-2 col-sm-10">
-										<button type="button" class="btn btn-primary pull-right">
-											<span class="glyphicon glyphicon-search"></span>
-											Buscar
-										</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								Detalle del producto seleccionado
-								<span class="glyphicon glyphicon-minus pull-right"></span>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<dl class="dl-horizontal">
-								<dt>Nombre</dt>
-								<dd>Samsung LED TV EH6030</dd>
-								<dt>Código</dt>
-								<dd>TVLSAMEH6030</dd>
-								<dt>Dimensiones</dt>
-								<dd>42x82x52 cm</dd>
-								<dt>Resolución</dt>
-								<dd>FULL HD</dd>
-								<dt>Precio</dt>
-								<dd>$6520</dd>
-							</dl>
-							<div class="pull-right">
-								<button type="button" class="btn btn-default">Detalles</button>
-								<button type="button" class="btn btn-primary">Agregar</button>
-							</div>
-						</div>
-					</div>
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								Carrito de productos
-								<span class="glyphicon glyphicon-minus pull-right"></span>
-							</h3>
-						</div>
-						<table class="table">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>Código</th>
-									<th>Precio</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>HTLG7230</td>
-									<td>$4251</td>
-									<td><span class="text-danger glyphicon glyphicon-remove"></span></td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>MESAROBLE13</td>
-									<td>$2325</td>
-									<td><span class="text-danger glyphicon glyphicon-remove"></span></td>
-								</tr>
-							</tbody>
-							<tfoot>
-								<tr>
-									<th colspan="2">Total de la venta</th>
-									<th colspan="2">$6576</th>
-								</tr>
-							</tfoot>
-						</table>
-						<div class="panel-body">
-							<div class="pull-right">
-								<button type="button" class="btn btn-primary">Facturar</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<div id="login-content"></div>
+		<div id="ventas-content"></div>
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="jquery/jquery.1.11.1.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="canjs/can.custom.js"></script>
+		<script src="wizard/wizard.min.js"></script>
+		<!-- LOGIN -->
+		<script src="app/login/login.js"></script>
+		<!-- VENTAS -->
+		<script src="app/ventas/main.js"></script>
+		<script src="app/ventas/ventas/ventas.js"></script>
+		<script>
+			new	Login(
+				can.$('#login-content')
+			,	{
+
+				}
+			)
+		</script>
 	</body>
 </html>

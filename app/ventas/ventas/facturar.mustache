@@ -1,0 +1,132 @@
+<div class="wizard-card" data-cardname="card1">
+	<h3>Cliente</h3>
+	<div class="form-group">
+		<label for="nombre" class="col-sm-3 control-label">Nombre</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control" name="nombre" value="Neri">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="apellido" class="col-sm-3 control-label">Apellido</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control" name="apellido" value="Guidi">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="razon_social" class="col-sm-3 control-label">Razon Social</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control" name="razon_social">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="dni" class="col-sm-3 control-label">DNI</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control" name="dni" value="35.405.5566">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="cuil" class="col-sm-3 control-label">CUIL</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control" name="cuil" value="20-354055566-0">
+		</div>
+	</div>
+</div>
+
+<div class="wizard-card" data-cardname="card2">
+	<h3>Descuentos</h3>
+	<div class="form-group">
+		<label for="descuento" class="col-sm-3 control-label">Descuentos disponibles</label>
+		<div class="col-sm-8">
+			<select class="form-control" name="descuento">
+				<option>5%</option>
+				<option>10%</option>
+				<option>15%</option>
+				<option>20%</option>
+			</select>
+		</div>
+	</div>
+</div>
+
+<div class="wizard-card" data-cardname="card3">
+	<h3>Forma de Pago</h3>
+	<div class="form-group">
+		<label for="cuotas" class="col-sm-3 control-label">Tipo</label>
+		<div class="col-sm-8">
+			<label class="radio-inline">
+				<input type="radio" name="forma_pago" value="efectivo"> Efectivo
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="forma_pago" value="debito"> Tarjeta de Débito
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="forma_pago" value="credito"  checked> Tarjeta de Crédito
+			</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="cuotas" class="col-sm-3 control-label">Numero de Cuotas</label>
+		<div class="col-sm-8">
+			<select class="form-control" name="descuento">
+				<option>1</option>
+				<option>2</option>
+				<option>4</option>
+				<option>6</option>
+				<option>12</option>
+				<option>18</option>
+				<option>24</option>
+			</select>
+		</div>
+	</div>
+</div>
+
+<div class="wizard-card" data-cardname="card4">
+	<h3>Verificar</h3>
+	<dl class="dl-horizontal">
+		<dt>Nombre</dt>
+		<dd>Neri</dd>
+		<dt>Apellido</dt>
+		<dd>Guidi</dd>
+		<dt>Razon Social</dt>
+		<dd>-</dd>
+		<dt>DNI</dt>
+		<dd>35.405.566</dd>
+		<dt>CUIT</dt>
+		<dd>20-35405566-0</dd>
+		<dt>Descuento</dt>
+		<dd>5%</dd>
+		<dt>Tipo de Pago</dt>
+		<dd>Tarjeta de Crédito</dd>
+		<dt>Cuotas</dt>
+		<dd>12</dd>
+	</dl>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Código</th>
+				<th>Cantidad</th>
+				<th>Precio</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>HTLG7230</td>
+				<td>1</td>
+				<td>$4251</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>MESAROBLE13</td>
+				<td>1</td>
+				<td>$2325</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th colspan="3">Total de la venta</th>
+				<th colspan="2">$6576</th>
+			</tr>
+		</tfoot>
+	</table>
+</div>
