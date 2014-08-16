@@ -37,8 +37,6 @@ require
 			,	'iCheck':				'frame/bower_components/iCheck'
 			//	Frame
 			,	'lib':					'frame/lib'
-			,	'styles':				'frame/styles'
-			,	'views':				'frame/views'
 			//	Modulos
 			,	'models':	'app/models'
 			,	'venta':	'app/venta'
@@ -47,6 +45,8 @@ require
 			,	'usuario':	'app/usuario'
 			,	'reporte':	'app/reporte'
 			,	'home':		'app/home'
+			,	'styles':	'app/styles'
+			,	'views':	'app/views'
 			}
 			//	Carga de modulos no-amd. Bootstrap y plugins de jQuery.
 		,	shim:
@@ -149,3 +149,5 @@ require
 			}
 		}
 	)
+
+require(['app'])

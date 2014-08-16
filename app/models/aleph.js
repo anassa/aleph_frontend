@@ -1,5 +1,7 @@
 define(
-	['can/model']
+	[
+		'can/model'
+	]
 ,	function()
 	{
 		can.Model(
