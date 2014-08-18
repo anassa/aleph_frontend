@@ -35,6 +35,7 @@ require
 			//	END
 			,	'validator':			'frame/bower_components/bootstrapValidator/dist'
 			,	'iCheck':				'frame/bower_components/iCheck'
+			,	'growl':				'frame/bower_components/bootstrap.growl/bootstrap-growl.min'
 			//	Frame
 			,	'lib':					'frame/lib'
 			//	Modulos
@@ -45,6 +46,7 @@ require
 			,	'usuario':	'app/usuario'
 			,	'reporte':	'app/reporte'
 			,	'home':		'app/home'
+			,	'common':	'app/common'
 			,	'styles':	'app/styles'
 			,	'views':	'app/views'
 			}
@@ -145,6 +147,12 @@ require
 				{
 					deps:	['jquery']
 				,	exports:'$.fn.datetimepicker'
+				}
+			//	Bootstrap 3 Growl Notifications
+			,	'growl':
+				{
+					deps:	['jquery']
+				,	exports:'$.growl'
 				}
 			}
 		}

@@ -2,6 +2,11 @@ define(
 	[
 	//	Cargo el Login
 		'frame/controls/login/login'
+	,	'frame/controls/notify/notify'
+	//	Cargo el Profile
+	,	'common/profile'
+	//	Cargo el Logout
+	,	'common/logout'
 	//	Cargo Ventas
 	,	'venta/venta'
 	//	Cargo el Modelo de Usuario
@@ -26,6 +31,11 @@ define(
 		,	{
 				init: function(element,options)
 				{
+					//	Instancio el Handler de Notificaciones
+					new	Frame.Notify(
+						this.element
+					,	{}
+					)
 					//	Genera un DIV para contener el topbar
 					this.$topbar
 					=	can.$('<div>')
@@ -59,6 +69,7 @@ define(
 							,	default_option:	'login'
 							,	event_prefix:	'aleph.render'
 							,	route:			options.route
+							,	prevent:		['profile','logout']
 							}
 						)
 				}
@@ -81,29 +92,45 @@ define(
 					)
 				}
 				//	Evento que al ser escuchado renderiza el contenido dependiendo del usuario
-			,	'aleph.render.content': function(el,ev,user)
+			,	'aleph.render.content': function(el,ev)
 				{
 					//	User.getProfile devuelve el nombre del perfil del usuario, por ejemplo Ventas.
 					//	Al hacer Aleph["Ventas"] se hace referencia al controlador Aleph.Ventas.
 					//	Recordar que es Aleph es un objeto y "Ventas" sera la key a acceder
-					new Aleph[user.getProfile()](
+					new Aleph[this.currentUser.getProfile()](
 						can.$(ev.target)
 					,	{
-							user:	user
+							user:	this.currentUser
 						}
 					)
+					//	Inserto el Handler del Modal Profile
+					this.userProfile
+					=	new	Aleph.Profile(
+							this.element
+						,	{
+								user:	this.currentUser
+							}	
+						)
+					//	Inserto el Handler del Modal de Logout
+					this.userLogout
+					=	new	Aleph.Logout(
+							this.element
+						,	{
+								user:	this.currentUser
+							}	
+						)
 				}
 				//	Evento que al ser escuchado renderiza profile
 			,	'aleph.render.profile': function(el,ev)
 				{
-					//	Ev.target es el contenido donde se lanzo el evento, en ese elemento se va a instanciar profile
-					console.log("Profile",arguments)
+					//	Activo el Modal del Profile
+					this.userProfile.show()
 				}
 				//	Evento que al ser escuchado renderiza logout
 			,	'aleph.render.logout': function(el,ev)
 				{
 					//	Ev.target es el contenido donde se lanzo el evento, en ese elemento se va a instanciar logout
-					console.log("Logout",arguments)
+					this.userLogout.show()
 				}
 				//	Funcion a llamar cuando se solicita el login
 			,	signIn: function(formData)
@@ -118,6 +145,9 @@ define(
 				//	Evento a escuchar i el login es satisfactorio
 			,	'frame.login.signin.success': function(el,ev,user)
 				{
+					//	Seteo quien es el usuario logeado
+					this.currentUser
+					=	user
 					//	Ev.target contiene el DIV donde se va a instanciar el contenido.
 					//	Vacio el elemento
 					can.$(ev.target).empty()
@@ -125,7 +155,6 @@ define(
 					can.$(ev.target)
 						.trigger(
 							'aleph.render.content'
-						,	user
 						)
 				}
 			}
