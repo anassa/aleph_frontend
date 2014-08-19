@@ -11,19 +11,6 @@ define(
 		,	{
 				//	Path en el backend de la collecion user
 				path: 'user'
-				//	Funcion que convierte data cruda en una instancia
-			,	model: function(raw)
-				{
-					//	Agrega los perfiles del usuario como instancias del modelo Profile
-					return	this._super(
-								_.extend(
-									raw
-								,	{
-										profile:	!_.isEmpty(raw.profile) 	?	new Aleph.Model.Profile(raw.profile)	:	raw.profile
-									}
-								)
-							)
-				}
 				//	Loguea el usuario al sistema
 			,	signIn: function(userData)
 				{
@@ -47,12 +34,14 @@ define(
 				//	Antes de actualizar cambia el objeto profile por el ID del mismo
 			,	beforeUpdate: function(data)
 				{
-					var	idProfile
-					=	data.profile.id
-					
-					delete	data.profile
+					if	(!_.isUndefined(data.profile)) {
+						var	idProfile
+						=	data.profile.id
+						
+						delete	data.profile
 
-					data.profile = idProfile
+						data.profile = idProfile
+					}
 
 					return	this._super(data)
 				}
@@ -72,6 +61,24 @@ define(
 										'POST'
 									,	this.constructor.getURL()+'/logout'
 									)
+				}
+				//	Actualiza la password del usuario
+			,	updatePassword: function(newPassword)
+				{
+					//	Agrega el atributo password y llama a la funcion save (http://canjs.com/docs/can.Model.prototype.save.html)
+					return	this
+								.attr('password',newPassword)
+									.save()
+									.pipe(
+										function(raw)
+										{
+											//	Elimina el atributo password del usuario
+											delete raw.password
+											//	Devuelve el usuario sin la password
+											return 	raw
+										}
+									)
+										
 				}
 			}
 		)

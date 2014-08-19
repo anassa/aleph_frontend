@@ -13,18 +13,7 @@ define(
 			,	host: 'localhost'
 			,	port: 1337
 			,	path: 'insertModelHere'
-				//	La funcion model convierte data cruda en una instancia del modelo actual
-			,	model: function(raw)
-				{
-					return	_.extend(
-								raw
-							,	{
-									createdAt:	new Date(raw.createdAt)
-								,	updatedAt:	new Date(raw.updatedAt)
-								}
-							)
-				}
-				//	Obtiene una collecion de instancias del modelo
+			//	Obtiene una collecion de instancias del modelo
 			,	findAll: function(query)
 				{
 					var	Model
@@ -32,9 +21,6 @@ define(
 
 					return	this
 								.request('GET',this.getURL(),query)
-									.pipe(
-										can.proxy(this.models,this)
-									)
 				}
 				//	Obtiene una instancia del modelo
 			,	findOne: function(data)
@@ -44,9 +30,6 @@ define(
 					
 					return	this
 								.request('GET',this.getURL((_.isObject(data) ? data.id : data)),undefined)
-									.pipe(
-										can.proxy(this.model,this)
-									)
 				}
 				//	Crea una instancia del modelo
 			,	create: function(data)
@@ -56,9 +39,6 @@ define(
 
 					return	this
 								.request('POST',this.getURL(),this.beforeCreate(data))
-									.pipe(
-										can.proxy(this.model,this)
-									)
 				}
 				//	Actualiza una instancia del modelo
 			,	update: function(id,data)
@@ -68,18 +48,12 @@ define(
 
 					return	this
 								.request('PUT',this.getURL(id),this.beforeUpdate(data))
-									.pipe(
-										can.proxy(this.model,this)
-									)
 				}
 				//	Elimina una instancia del modelo
 			,	destroy: function(id)
 				{
 					return	this
 								.request('DELETE',this.getURL(id),params)
-									.pipe(
-										can.proxy(this.model,this)
-									)
 				}
 				//	Realiza una peticion al backend
 			,	request: function(method,url,data)

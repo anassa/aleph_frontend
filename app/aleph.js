@@ -8,7 +8,7 @@ define(
 	//	Cargo el Logout
 	,	'common/logout'
 	//	Cargo Ventas
-	,	'venta/venta'
+	,	'venta/home'
 	//	Cargo el Modelo de Usuario
 	,	'models/user'
 	//	Cargo los Estilos Genericos
@@ -46,7 +46,7 @@ define(
 					can.append(
 						element
 					,	can.view(
-							'views/footbar/footbar.mustache'
+							'views/common/footbar.mustache'
 						)
 					)
 					//	Borra el Hash
@@ -60,7 +60,7 @@ define(
 					=	new	Frame.Menu(
 							this.$topbar
 						,	{
-								view:			'views/topbar/topbar.mustache'
+								view:			'views/common/topbar.mustache'
 							,	options:
 								{
 									brand:		'Aleph'
@@ -80,17 +80,13 @@ define(
 					new Frame.Login(
 						can.$(ev.target)
 					,	{
-							view:		'views/login/login.mustache'
-						,	view_alert:	'views/login/alert.mustache'
-						,	data:
-							{
-								brand:	'Aleph'	
-							}
+							view:		'views/common/login.mustache'
+						,	view_alert:	'views/common/alert.mustache'
 						,	onSignin:	can.proxy(this.signIn,this)
-						,	onSignout:	can.proxy(this.signOut,this)
 						}
 					)
 				}
+				/*
 				//	Evento que al ser escuchado renderiza el contenido dependiendo del usuario
 			,	'aleph.render.content': function(el,ev)
 				{
@@ -106,7 +102,8 @@ define(
 					//	Inserto el Handler del Modal Profile
 					this.userProfile
 					=	new	Aleph.Profile(
-							this.element
+							can.$('<div>')
+								.appendTo(this.$topbar)
 						,	{
 								user:	this.currentUser
 							}	
@@ -114,12 +111,14 @@ define(
 					//	Inserto el Handler del Modal de Logout
 					this.userLogout
 					=	new	Aleph.Logout(
-							this.element
+							can.$('<div>')
+								.appendTo(this.$topbar)
 						,	{
 								user:	this.currentUser
 							}	
 						)
 				}
+				*/
 				//	Evento que al ser escuchado renderiza profile
 			,	'aleph.render.profile': function(el,ev)
 				{
@@ -137,14 +136,43 @@ define(
 				{
 					return	Aleph.Model.User.signIn(formData)
 				}
-				//	Funcion a llamar cuando se solicita el logout
-			,	signOut: function()
+			,	getUserMenu: function()
 				{
-					return	true
+					return	[
+								{
+									title:	'Ventas'
+								,	key:	'ventas'
+								}
+							,	{
+									title:	'Cambios'
+								,	key:	'cambios'
+								}
+							,	{
+									title:	'Clientes'
+								,	key:	'clientes'
+								}
+							,	{
+									title:	'Descuentos'
+								,	key:	'descuentos'
+								}
+							,	{
+									title:	'Articulos'
+								,	key:	'articulos'
+								}
+							,	{
+									title:	'Formas de Pago'
+								,	key:	'formas_de_pago'
+								}
+							]
+				}
+			,	getUserDefaultOption: function()
+				{
+					return	'ventas'
 				}
 				//	Evento a escuchar i el login es satisfactorio
 			,	'frame.login.signin.success': function(el,ev,user)
 				{
+					/*
 					//	Seteo quien es el usuario logeado
 					this.currentUser
 					=	user
@@ -155,6 +183,46 @@ define(
 					can.$(ev.target)
 						.trigger(
 							'aleph.render.content'
+						)
+					*/
+					this
+						.$topbar
+							.trigger(
+								'frame.menu.update'
+							,	{
+									viewData:
+									{
+										options:	this.getUserMenu(user)
+									,	user:		user
+									}
+								,	controlData:
+									{
+										default_option:	this.getUserDefaultOption(user)
+									}
+								,	contentHandler:	Aleph[user.getProfile()]
+								,	handlerOptions:
+									{
+										user:		user
+									}
+								}
+							)
+					//	Inserto el Handler del Modal Profile
+					this.userProfile
+					=	new	Aleph.Profile(
+							can.$('<div>')
+								.appendTo(this.$topbar)
+						,	{
+								user:	user
+							}	
+						)
+					//	Inserto el Handler del Modal de Logout
+					this.userLogout
+					=	new	Aleph.Logout(
+							can.$('<div>')
+								.appendTo(this.$topbar)
+						,	{
+								user:	user
+							}	
 						)
 				}
 			}
