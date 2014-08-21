@@ -1,0 +1,116 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8 main-content">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Buscar producto
+						<a href="#"><span class="fa fa-minus pull-right"></a></span>
+					</h3>
+				</div>
+				<div class="panel-body">
+					<form class="form-horizontal" role="form" id="searchItems">
+						<div class="form-group">
+							<label for="nombre" class="col-sm-2 control-label">
+								Nombre
+							</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="codigo" class="col-sm-2 control-label">
+								Código
+							</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="code">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="button" class="btn btn-primary pull-right search-items">
+									<span class="fa fa-search"></span>
+									Buscar
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 sidebar">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Detalle del producto seleccionado
+						<a href="#"><span class="fa fa-minus pull-right"></span></a>
+					</h3>
+				</div>
+				<div class="panel-body">
+					<dl class="dl-horizontal">
+						<dt>Nombre</dt>
+						<dd>Samsung LED TV EH6030</dd>
+						<dt>Código</dt>
+						<dd>TVLSAMEH6030</dd>
+						<dt>Dimensiones</dt>
+						<dd>42x82x52 cm</dd>
+						<dt>Resolución</dt>
+						<dd>FULL HD</dd>
+						<dt>Precio</dt>
+						<dd>$6520</dd>
+					</dl>
+					<div class="pull-right">
+						<button type="button" class="btn btn-default">Detalles</button>
+						<button type="button" class="btn btn-primary">Agregar</button>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Carrito de productos
+						<a href="#"><span class="fa fa-minus pull-right"></span></a>
+					</h3>
+				</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Código</th>
+							<th>Cantidad</th>
+							<th>Precio</th>
+							<th><span class="text-info fa fa-asterisk"></span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>HTLG7230</td>
+							<td>1</td>
+							<td>$4251</td>
+							<td><a href="#"><span class="text-danger fa fa-times"></span></a></td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>MESAROBLE13</td>
+							<td>1</td>
+							<td>$2325</td>
+							<td><a href="#"><span class="text-danger fa fa-times"></span></a></td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th colspan="3">Total de la venta</th>
+							<th colspan="2">$6576</th>
+						</tr>
+					</tfoot>
+				</table>
+				<div class="panel-body">
+					<div class="pull-right">
+						<button type="button" class="btn btn-primary facturar">Facturar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
