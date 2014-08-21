@@ -2,6 +2,8 @@ define(
 	[
 	//	Librerias de Can
 		'lib/util'
+	//	Frame table
+	,	'frame/controls/table/table'
 	//	Modelo de Articulos
 	,	'models/item'
 	//	Estilos de Venta
@@ -15,8 +17,9 @@ define(
 		,	{
 				defaults:
 				{
-					user:	undefined
-				,	view:	'views/ventas/ventas.mustache'
+					user:		undefined
+				,	view:		'views/ventas/ventas.mustache'
+				,	view_table:	'views/ventas/tablaArticulos.mustache'
 				}
 			}
 		,	{
@@ -34,52 +37,18 @@ define(
 
 					this.$content
 					=	this.element.find('.main-content')
-				}
 
-			,	generateQuery: function()
-				{
-					var	formData
-					=	can.getFormData(
-							this.$form
-						)
 
-					return	{
-								name:
-								{
-									contains:	formData.name
-								}
-							,	code:
-								{
-									contains:	formData.code
-								}
+
+					this.table
+					=	new	Frame.Table(
+							this.$content
+						,	{
+								view:				options.view_table
+							,	model:				Aleph.Model.Item
+							,	defaultErrorMsg:	'Ocurrio un error al buscar los Articulos. <br> Por favor intente nuevamente.'
 							}
-				}
-
-			,	updateTable: function()
-				{
-					console.log(arguments)
-				}
-
-			,	notifyError: function()
-				{
-					console.log(arguments)
-				}
-
-			,	'button.search-items click': function(el,ev)
-				{
-					Aleph
-						.Model
-							.Item
-								.findAll(
-									{
-										where:	this.generateQuery()
-									,	limit:	10
-									,	sort:	'name DESC'
-									}
-								).then(
-									can.proxy(this.updateTable,this)
-								,	can.proxy(this.notifyError,this)
-								)
+						)
 				}
 			}
 		)
