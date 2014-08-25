@@ -1,7 +1,7 @@
 define(
 	[
 	//	Cargo el Menu
-		'frame/controls/menu/menu'
+		'controls/menu/menu'
 	//	Cargo los controladores de Ventas
 	,	'venta/venta'
 	,	'venta/formaDePago'

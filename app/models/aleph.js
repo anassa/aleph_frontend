@@ -13,6 +13,13 @@ define(
 			,	host: 'localhost'
 			,	port: 1337
 			,	path: 'insertModelHere'
+			,	models: function(response)
+				{
+					return	{
+								count:	response.count
+							,	data:	this._super(response.data)
+							}
+				}
 			//	Obtiene una collecion de instancias del modelo
 			,	findAll: function(query)
 				{

@@ -1,8 +1,8 @@
 define(
 	[
 	//	Cargo el Login
-		'frame/controls/login/login'
-	,	'frame/controls/notify/notify'
+		'controls/login/login'
+	,	'controls/notify/notify'
 	//	Cargo el Profile
 	,	'common/profile'
 	//	Cargo el Logout

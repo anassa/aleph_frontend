@@ -3,7 +3,7 @@ define(
 	//	Librerias de Can
 		'lib/util'
 	//	Frame table
-	,	'frame/controls/table/table'
+	,	'controls/table/table'
 	//	Modelo de Articulos
 	,	'models/item'
 	//	Estilos de Venta
@@ -17,9 +17,10 @@ define(
 		,	{
 				defaults:
 				{
-					user:		undefined
-				,	view:		'views/ventas/ventas.mustache'
-				,	view_table:	'views/ventas/tablaArticulos.mustache'
+					user:				undefined
+				,	view:				'views/ventas/ventas.mustache'
+				,	view_table:			'views/ventas/tablaArticulos.mustache'
+				,	view_pagination:	'views/common/pagination.mustache'
 				}
 			}
 		,	{
@@ -47,6 +48,7 @@ define(
 								view:				options.view_table
 							,	model:				Aleph.Model.Item
 							,	defaultErrorMsg:	'Ocurrio un error al buscar los Articulos. <br> Por favor intente nuevamente.'
+							,	view_pagination:	options.view_pagination
 							}
 						)
 				}

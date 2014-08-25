@@ -40,6 +40,7 @@ require
 			,	'lib':					'frame/lib'
 			//	Modulos
 			,	'models':	'app/models'
+			,	'controls':	'frame/controls'
 			,	'venta':	'app/venta'
 			,	'compra':	'app/compra'
 			,	'stock':	'app/stock'

@@ -2,7 +2,7 @@
 	<div class="panel-heading">
 		<h3 class="panel-title">
 			Buscar producto
-			<a href="#"><span class="fa fa-minus pull-right"></a></span>
+			<a href="#"><span class="link fa fa-minus pull-right"></a></span>
 		</h3>
 	</div>
 	<div class="panel-body">
@@ -40,23 +40,23 @@
 		<tr>
 			<th attr-name="name">
 				Nombre
-				<i class="pull-right sort-table fa fa-sort-alpha-asc"></i>
+				<i class="link pull-right sort-table fa fa-sort-alpha-asc"></i>
 			</th>
 			<th>
 				Código
 			</th>
 			<th attr-name="stock">
 				Stock
-				<i class="pull-right sort-table fa fa-sort-amount-asc"></i>
+				<i class="link pull-right sort-table fa fa-sort-amount-asc"></i>
 			</th>
 			<th attr-name="marketPrice">
 				Precio
-				<i class="pull-right sort-table fa fa-sort-numeric-asc"></i>
+				<i class="link pull-right sort-table fa fa-sort-numeric-asc"></i>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
-		{{#each records}}
+		{{#each data}}
 		<tr>
 			<td>{{name}}</td>
 			<td>{{code}}</td>
@@ -66,14 +66,3 @@
 		{{/each}}
 	</tbody>
 </table>
-<div class="center-block">
-	<ul class="pagination">
-		<li><a href="#">&laquo;</a></li>
-		<li class="active"><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">4</a></li>
-		<li><a href="#">5</a></li>
-		<li><a href="#">&raquo;</a></li>
-	</ul>
-</div>

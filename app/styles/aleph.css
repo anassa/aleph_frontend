@@ -7,3 +7,24 @@
 	margin-top: 15px;
 	margin-right: 10px;
 }
+
+.link {
+	cursor: pointer;
+}
+
+.pagination {
+	float: left;
+}
+
+form.pagination {
+	margin: 20px;
+}
+
+.pagination input[name=page] {
+	width: 50px;
+	text-align: center;
+}
+
+.pagination .form-group {
+	margin-left: 10px;
+}

@@ -1,0 +1,61 @@
+<div class="center-block">
+	<ul class="pagination">
+	{{#show}}
+		<li>
+			<a class="link jump-first">
+				<i class="fa fa-angle-double-left"></i>
+			</a>
+		</li>
+		<li>
+			<a class="link jump-previous">
+				<i class="fa fa-angle-left"></i>
+			</a>
+		</li>
+		{{#hidden_left}}
+		<li class="dots disabled">
+			<a class="link">
+				...
+			</a>
+		</li>
+		{{/hidden_left}}
+		{{#each page}}
+		<li>
+			<a jump-key="{{pageNumber}}" class="link jump-to">
+				{{pageNumber}}
+			</a>
+		</li>
+		{{/each}}
+		{{#hidden_right}}
+		<li class="dots disabled">
+			<a class="link">
+				...
+			</a>
+		</li>
+		{{/hidden_right}}
+		<li>
+			<a class="link jump-next">
+				<i class="fa fa-angle-right"></i>
+			</a>
+		</li>
+		<li >
+			<a class="link jump-last">
+				<i class="fa fa-angle-double-right"></i>
+			</a>
+		</li>
+	{{/show}}
+	</ul>	
+	<form class="pagination form-inline" role="form" onsubmit="return false;">
+		<div class="form-group">
+			<label for="page">Ir a</label>
+			<input type="text" class="form-control" name="page" placeholder="1">
+		</div>
+		<div class="form-group">
+			<label for="limit">Articulos por Página</label>
+			<select class="form-control" name="limit">
+				<option>5</option>
+				<option>10</option>
+				<option>15</option>
+			</select>
+		</div>
+	</form>
+</div>
