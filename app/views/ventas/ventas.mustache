@@ -7,75 +7,99 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						Detalle del producto seleccionado
-						<a href="#"><span class="fa fa-minus pull-right"></span></a>
-					</h3>
-				</div>
-				<div class="panel-body">
-					<dl class="dl-horizontal">
-						<dt>Nombre</dt>
-						<dd>Samsung LED TV EH6030</dd>
-						<dt>Código</dt>
-						<dd>TVLSAMEH6030</dd>
-						<dt>Dimensiones</dt>
-						<dd>42x82x52 cm</dd>
-						<dt>Resolución</dt>
-						<dd>FULL HD</dd>
-						<dt>Precio</dt>
-						<dd>$6520</dd>
-					</dl>
-					<div class="pull-right">
-						<button type="button" class="btn btn-default">Detalles</button>
-						<button type="button" class="btn btn-primary">Agregar</button>
-					</div>
-				</div>
-			</div>
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h3 class="panel-title">
 						Carrito de productos
-						<a href="#"><span class="fa fa-minus pull-right"></span></a>
+						<a class="link">
+							<i class="fa fa-minus pull-right"></i>
+						</a>
 					</h3>
 				</div>
 				<table class="table">
 					<thead>
 						<tr>
 							<th>#</th>
-							<th>Código</th>
+							<th>Marca</th>
+							<th>Modelo</th>
 							<th>Cantidad</th>
 							<th>Precio</th>
-							<th><span class="text-info fa fa-asterisk"></span></th>
+							<th>
+								<i class="text-info fa fa-asterisk"></i>
+							</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>HTLG7230</td>
-							<td>1</td>
-							<td>$4251</td>
-							<td><a href="#"><span class="text-danger fa fa-times"></span></a></td>
+						{{#shopCart}}
+						<tr {{data 'item'}}>
+							<td>{{itemPos}}</td>
+							<td>{{brand}}</td>
+							<td>{{model}}</td>
+							<td>{{quantity}}</td>
+							<td>${{marketPrice}}</td>
+							<td>
+								<a class="link">
+									<i class="text-danger fa fa-times"></i>
+								</a>
+							</td>
 						</tr>
-						<tr>
-							<td>2</td>
-							<td>MESAROBLE13</td>
-							<td>1</td>
-							<td>$2325</td>
-							<td><a href="#"><span class="text-danger fa fa-times"></span></a></td>
+						{{/shopCart}}
+						{{^shopCart}}
+						<tr class="danger">
+							<td colspan="6">
+								Aun no se agrego ningun articulo al carrito.
+							</td>
 						</tr>
+						{{/shopCart}}
 					</tbody>
+					{{#amount}}
 					<tfoot>
 						<tr>
-							<th colspan="3">Total de la venta</th>
-							<th colspan="2">$6576</th>
+							<th colspan="4">Total de la venta</th>
+							<th colspan="2">${{amount}}</th>
 						</tr>
 					</tfoot>
+					{{/amount}}
 				</table>
 				<div class="panel-body">
 					<div class="pull-right">
-						<button type="button" class="btn btn-primary facturar">Facturar</button>
+						<button type="button" class="btn btn-primary facturar {{^shopCart}} disabled {{/shopCart}}">Facturar</button>
 					</div>
 				</div>
 			</div>
+			{{#currentItem}}
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Detalle del producto seleccionado
+						<a class="link">
+							<i class="fa fa-minus pull-right"></i>
+						</a>
+					</h3>
+				</div>
+				<div class="panel-body">
+					<dl class="dl-horizontal">
+						<dt>Tipo</dt>
+						<dd>{{currentItem.type}}</dd>
+						<dt>Marca</dt>
+						<dd>{{currentItem.brand}}</dd>
+						<dt>Modelo</dt>
+						<dd>{{currentItem.model}}</dd>
+						<dt>Código</dt>
+						<dd>{{currentItem.code}}</dd>
+						<dt>Precio</dt>
+						<dd>{{currentItem.marketPrice}}</dd>
+					</dl>
+					<div class="pull-right">
+						<button type="button" class="btn btn-danger cancel-item">Cancelar</button>
+						<button type="button" class="btn btn-default item-details">Detalles</button>
+						<button type="button" class="btn btn-primary add-quantity">Agregar</button>
+					</div>
+				</div>
+			</div>
+			{{/currentItem}}
+			{{^currentItem}}
+			<div class="alert alert-danger" role="alert">
+				Aun no se selecciono ningun artículo.
+			</div>
+			{{/currentItem}}
 		</div>
 	</div>
 </div>

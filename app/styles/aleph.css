@@ -28,3 +28,7 @@ form.pagination {
 .pagination .form-group {
 	margin-left: 10px;
 }
+
+input.marginated {
+	margin-bottom: 10px!important;
+}

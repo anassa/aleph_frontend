@@ -10,7 +10,14 @@ define(
 				path: 'item'
 			}
 		,	{
-
+				getStatus: function()
+				{
+					return	this.attr('stock') <= 2
+							?	'danger'
+							:	this.attr('stock') <= 5
+								?	'warning'
+								:	''
+				}
 			}
 		)
 	}
