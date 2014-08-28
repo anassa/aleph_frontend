@@ -20,6 +20,7 @@ require
 			,	'localstorage':			'frame/bower_components/canjs-localstorage/can.localstorage'
 			,	'typeahead':			'frame/bower_components/typeahead/bootstrap3-typeahead'
 			,	'lodash':				'frame/bower_components/lodash/dist/lodash'	
+			,	'wizard':				'frame/bower_components/bootstrap-application-wizard/src'
 			,	'draggabilly':			'frame/bower_components/draggabilly/draggabilly'
 			//	Start Draggabilly Dependencies
 			,	'classie':				'frame/bower_components/classie'
@@ -154,6 +155,12 @@ require
 				{
 					deps:	['jquery']
 				,	exports:'$.growl'
+				}
+			//	Wizard
+			,	'wizard/bootstrap-wizard.min':
+				{
+					deps:	['jquery']
+				,	exports:'$.fn.wizard'	
 				}
 			}
 		}

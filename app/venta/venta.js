@@ -8,6 +8,8 @@ define(
 	,	'models/item'
 	//	Estilos de Venta
 	,	'css!styles/sidebar'
+	//	Control de Facturacion
+	,	'venta/invoice'
 	]
 ,	function()
 	{
@@ -22,10 +24,11 @@ define(
 				,	view_amount:		'views/ventas/cantidadArticulo.mustache'
 				,	view_table:			'views/ventas/tablaArticulos.mustache'
 				,	view_pagination:	'views/common/pagination.mustache'
+				,	view_remove:		'views/ventas/removeItem.mustache'
 				}
 			}
 		,	{
-				//	Cuando se inicia por primera vez debera actualizar las opciones del Topbar
+			//	Inicializo el controlador
 				init: function(element,options)
 				{
 					//	Creo un objeto que contendra el item acutal
@@ -62,14 +65,14 @@ define(
 							,	view_pagination:	options.view_pagination
 							}
 						)
-					//	Inserto el modal
+					//	Inserto el modal de cantidad de items
 					can.append(
 						this.element
 					,	can.view(
 							this.options.view_amount
 						)
 					)
-					//	Busco el modal y lo asigno a una variable del controlador
+					//	Busco el modal de cantidad de items y lo asigno a una variable del controlador
 					this.$quantityModal
 					=	this.element.find('#itemQuantity')
 					//	Seteo las validaciones del formulario
@@ -95,6 +98,16 @@ define(
 										}
 									}
 								)
+					//	Inserto el modal de confirmar eliminacion del carrito
+					can.append(
+						this.element
+					,	can.view(
+							this.options.view_remove
+						)
+					)
+					//	Busco el modal de confirmacion y lo asigno a variable del controlador
+					this.$confirmRemoveModal
+					=	this.element.find('#removeItem')
 				}
 			//	Actualizo el item actual
 			,	updateCurrentItem: function(item)
@@ -193,6 +206,53 @@ define(
 						//	Actualizo el item actual
 						this.updateCurrentItem(undefined)
 					}
+				}
+			//	Escucho que se aprete el bonton eliminar del carrito
+			,	'table#itemCart tbody tr i.fa-times click': function(el,ev)
+				{
+					//	Obtengo el item que desero remover
+					this.itemToRemove
+					=	can.$(el).parents('tr').index()
+					//	Muestro el boton de confirmar eliminacion
+					this.$confirmRemoveModal.modal('show')
+				}
+			//	Escucho que se aprete el boton remover item
+			,	'button.remove-item click': function(el,ev)
+				{
+					//	Oculto el modal de confirmacion
+					this.$confirmRemoveModal.modal('hide')
+					//	Remuevo el item que corresponde
+					this
+						.viewData
+							.attr('shopCart')
+								.splice(this.itemToRemove,1)
+					//	Actualizo el monto total de la compra
+					this
+						.viewData
+							.attr('amount',this.getPurchaseOrderAmount())
+				}
+			//	Escucho que se aprete el boton facturar
+			,	'button.facturar click': function(el,ev)
+				{
+					this.$facturarDiv
+					=	can.$('<div>')	
+					
+					new	Aleph.Ventas_Facturar_Venta(
+						this.$facturarDiv
+							.appendTo(
+								this.element
+							)
+					,	{
+							shopCart:	this.viewData.attr('shopCart')
+						,	amount:		this.viewData.attr('amount')
+						}
+					)
+				}
+			//	Escucho cuando se cierra el wizard de facturar
+			,	'aleph.ventas.facturar.done': function()
+				{
+					//	Destruyo el div de facturar junto al controlador
+					this.$facturarDiv.remove()
 				}
 			//	Escucho que se aprete el boton minimizar de cualquier panel
 			,	'.panel-heading .fa-minus click': function(el,ev)
