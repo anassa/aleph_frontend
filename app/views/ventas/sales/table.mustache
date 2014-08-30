@@ -1,0 +1,102 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			Buscar producto
+			<a class="link"><span class="link fa fa-minus pull-right"></a></span>
+		</h3>
+	</div>
+	<div class="panel-body">
+		<form class="form-horizontal" role="form" id="searchItems">
+			<div class"row">
+				<div class="col-md-6">
+					<label for="nombre" class="col-sm-2 control-label">
+						Tipo
+					</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control marginated" name="type" attr-query="contains">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label for="nombre" class="col-sm-2 control-label">
+						Marca
+					</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control marginated" name="brand" attr-query="contains">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label for="nombre" class="col-sm-2 control-label">
+						Modelo
+					</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control marginated" name="model" attr-query="contains">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label for="codigo" class="col-sm-2 control-label">
+						Código
+					</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control marginated" name="code" attr-query="contains">
+					</div>
+				</div>
+				<div class="col-md-6 col-md-offset-6">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="button" class="btn btn-primary pull-right search-records" data-loading-text="Buscando...">
+							<span class="fa fa-search"></span>
+							Buscar
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<h3>Resultado de la Busqueda</h3>
+<table class="table table-bordered table-hover" id="itemsAvailable">
+	<thead>
+		<tr>
+			<th attr-name="type">
+				Tipo
+				<i class="link pull-right sort-table fa fa-sort-alpha-asc"></i>
+			</th>
+			<th attr-name="brand">
+				Marca
+				<i class="link pull-right sort-table fa fa-sort-alpha-asc"></i>
+			</th>
+			<th attr-name="model">
+				Modelo
+				<i class="link pull-right sort-table fa fa-sort-alpha-asc"></i>
+			</th>
+			<th>
+				Código
+			</th>
+			<th attr-name="stock">
+				Stock
+				<i class="link pull-right sort-table fa fa-sort-amount-asc"></i>
+			</th>
+			<th attr-name="marketPrice">
+				Precio ($)
+				<i class="link pull-right sort-table fa fa-sort-numeric-asc"></i>
+			</th>
+			<th class="text-center">
+				<i class="fa fa-cog"></i>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each data}}
+		<tr {{data 'item'}} class="{{getStatus}}">
+			<td>{{type}}</td>
+			<td>{{brand}}</td>
+			<td>{{model}}</td>
+			<td>{{code}}</td>
+			<td>{{stock}}</td>
+			<td>{{marketPrice}}</td>
+			<td class="text-center">
+				<i class="link text-info fa fa-arrow-right"></i>
+			</td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>

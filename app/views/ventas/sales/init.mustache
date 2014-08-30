@@ -1,0 +1,105 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8 main-content">
+			
+		</div>
+		<div class="col-md-4 sidebar">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Carrito de productos
+						<a class="link">
+							<i class="fa fa-minus pull-right"></i>
+						</a>
+					</h3>
+				</div>
+				<table class="table" id="itemCart">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Marca</th>
+							<th>Modelo</th>
+							<th>Cantidad</th>
+							<th>Precio</th>
+							<th>
+								<i class="text-info fa fa-asterisk"></i>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#shopCart}}
+						<tr {{data 'item'}}>
+							<td>{{itemPos}}</td>
+							<td>{{brand}}</td>
+							<td>{{model}}</td>
+							<td>{{quantity}}</td>
+							<td>${{marketPrice}}</td>
+							<td>
+								<a class="link">
+									<i class="text-danger fa fa-times"></i>
+								</a>
+							</td>
+						</tr>
+						{{/shopCart}}
+						{{^shopCart}}
+						<tr class="danger">
+							<td colspan="6">
+								Aun no se agrego ningun articulo al carrito.
+							</td>
+						</tr>
+						{{/shopCart}}
+					</tbody>
+					{{#amount}}
+					<tfoot>
+						<tr>
+							<th colspan="4">Total de la venta</th>
+							<th colspan="2">${{amount}}</th>
+						</tr>
+					</tfoot>
+					{{/amount}}
+				</table>
+				<div class="panel-body">
+					<div class="pull-right">
+						<button type="button" class="btn btn-primary facturar {{^shopCart}} disabled {{/shopCart}}">Facturar</button>
+					</div>
+				</div>
+			</div>
+			{{#currentItem}}
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Detalle del producto seleccionado
+						<a class="link">
+							<i class="fa fa-minus pull-right"></i>
+						</a>
+					</h3>
+				</div>
+				<div class="panel-body">
+					<dl class="dl-horizontal">
+						<dt>Tipo</dt>
+						<dd>{{currentItem.type}}</dd>
+						<dt>Marca</dt>
+						<dd>{{currentItem.brand}}</dd>
+						<dt>Modelo</dt>
+						<dd>{{currentItem.model}}</dd>
+						<dt>Código</dt>
+						<dd>{{currentItem.code}}</dd>
+						<dt>Precio</dt>
+						<dd>{{currentItem.marketPrice}}</dd>
+					</dl>
+					<div class="pull-right">
+						<button type="button" class="btn btn-danger cancel-item">Cancelar</button>
+						<button type="button" class="btn btn-default item-details">Detalles</button>
+						<button type="button" class="btn btn-primary add-quantity">Agregar</button>
+					</div>
+				</div>
+			</div>
+			{{/currentItem}}
+			{{^currentItem}}
+			<div class="alert alert-danger" role="alert">
+				Aun no se selecciono ningun artículo.
+			</div>
+			{{/currentItem}}
+		</div>
+	</div>
+</div>

@@ -3,8 +3,7 @@ define(
 	//	Cargo el Menu
 		'controls/menu/menu'
 	//	Cargo los controladores de Ventas
-	,	'venta/venta'
-	,	'venta/formaDePago'
+	,	'venta/sales/sales'
 	]
 ,	function()
 	{
@@ -21,7 +20,7 @@ define(
 				'aleph.render.ventas': function(el,ev)
 				{
 					//	Ev.target es el contenido donde se lanzo el evento, en ese elemento se va a instanciar ventas
-					new Aleph.Ventas_Venta(
+					new Aleph.Ventas_Sales(
 						can.$(ev.target)
 					,	{
 							user:	this.options.user
