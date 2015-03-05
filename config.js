@@ -39,6 +39,8 @@ require
 			,	'growl':				'frame/bower_components/bootstrap.growl/bootstrap-growl.min'
 			//	Frame
 			,	'lib':					'frame/lib'
+			//	Librerias
+			,	'accounting':			'bower_components/accounting.js/accounting.min'
 			//	Modulos
 			,	'models':	'app/models'
 			,	'controls':	'frame/controls'

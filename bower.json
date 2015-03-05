@@ -1,8 +1,25 @@
 {
   "name": "aleph_frontend",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:anassa/aleph_frontend.git",
+    "github": "https://github.com/anassa/aleph_frontend"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/mit-license.php"
+    }
+  ],
   "dependencies": {
-    "requirejs": "~2.1.11",
-    "require-css": "~0.1.2"
+    "jquery": "1.11.2",
+    "bootstrap": "~3.3.1",
+    "steal": "~0.4.0",
+    "accounting.js": "~0.3.2",
+    "canjs": "~2.1.4",
+    "bootstrapvalidator": "~0.5.3",
+    "fontawesome": "~4.3.0",
+    "lodash": "~3.0.0"
   }
 }

@@ -1,17 +1,11 @@
-define(
-	[
-		'models/aleph'
-	]
-,	function()
-	{
-		Aleph.Model(
-			'Aleph.Model.PaymentMethod'
-		,	{
-				path: 'paymentMethod'
-			}
-		,	{
+import	'models/aleph'
 
-			}
-		)
+Aleph.Model(
+	'Aleph.Model.PaymentMethod'
+,	{
+		path: 'paymentMethod'
+	}
+,	{
+
 	}
 )

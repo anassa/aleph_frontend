@@ -1,9 +1,21 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+	</div>
+</nav>
 <div class="container clearfix" id="main-content">
 	<div class="row">
 		<div class="col-md-7">
 			<div class="media center-block">
 				<a class="pull-left" href="#">
-					<img class="media-object img-circle" src="app/images/logo.png" >
+					<img class="media-object img-circle" src="images/logo.png" >
 				</a>
 				<div class="media-body slogan">
 					<blockquote class="blockquote-reverse">
@@ -14,16 +26,25 @@
 			</div>
 		</div>
 		<div class="col-md-5">
-			<form class="form-signin" role="form" onsubmit="return false;">
-				<h2 class="form-signin-heading">
-					{{title}}
-				</h2>
-				<input name="username" type="text" class="form-control" placeholder="Usuario" autofocus="">
-				<input name="password" type="password" class="form-control" placeholder="Contraseña">
-				<button class="btn btn-lg btn-primary btn-block signin" type="submit" data-loading-text="Ingresando...">
-					Ingresar
-				</button>
-			</form>
+			<form class="form-horizontal form-signin" role="form" id="login-form" onsubmit="return false;">
+					<div class="form-group">
+						<input name="username" type="text" class="form-control" placeholder="Usuario" autofocus="">
+					</div>
+					<div class="form-group">
+						<input name="password" type="password" class="form-control" placeholder="Contraseña">
+					</div>
+					<div class="form-group">
+						<input name="server" type="text" class="form-control hidden" placeholder="Server Status" disabled>
+					</div>
+					<div class="form-group last">
+						<button type="button" class="btn btn-lg btn-primary btn-block log-in" data-loading-text="Ingresando...">Ingresar</button>
+					</div>
+				</form>
 		</div>
 	</div>
 </div>
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+	<div class="container">
+		<p class="text-center">Copyrights <em>@Aleph</em> - 2014</p>
+	</div>
+</nav>
