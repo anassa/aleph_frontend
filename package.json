@@ -1,0 +1,90 @@
+{
+  "name": "aleph-frontend",
+  "version": "0.0.0",
+  "description": "Gestion de compras, ventas y stock",
+  "homepage": "",
+  "author": {
+    "name": "nguidi",
+    "email": "neri.guidi@gmail.com",
+    "url": ""
+  },
+  "scripts": {
+    "test": "testee src/test.html --browsers firefox --reporter Spec",
+    "start": "done-serve --port 8080",
+    "static": "done-serve --static --port 8080",
+    "develop": "done-serve --develop --port 8080",
+    "document": "documentjs",
+    "build": "node build"
+  },
+  "main": "aleph-frontend/index.stache!done-autorender",
+  "files": [
+    "src"
+  ],
+  "keywords": [],
+  "system": {
+    "main": "aleph-frontend/index.stache!done-autorender",
+    "directories": {
+      "lib": "src"
+    },
+    "configDependencies": [
+      "live-reload",
+      "node_modules/can-zone/register"
+    ],
+    "npmAlgorithm": "flat",
+    "bundle": [
+      "aleph-frontend/login/",
+      "aleph-frontend/admin/main.component!",
+      "aleph-frontend/admin/nuevo_usuario/",
+      "aleph-frontend/admin/registros_usuario/",
+      "aleph-frontend/compras/main.component!",
+      "aleph-frontend/compras/nueva_oc/",
+      "aleph-frontend/compras/nuevo_proveedor/",
+      "aleph-frontend/compras/registros_oc/",
+      "aleph-frontend/compras/registros_proveedor/",
+      "aleph-frontend/compras/reportes/",
+      "aleph-frontend/stock/main.component!",
+      "aleph-frontend/stock/nuevo_articulo/",
+      "aleph-frontend/stock/nuevo_remito/",
+      "aleph-frontend/stock/registros_articulo/",
+      "aleph-frontend/stock/registros_remito/",
+      "aleph-frontend/stock/reportes/",
+      "aleph-frontend/ventas/main.component!",
+      "aleph-frontend/ventas/nueva_forma_de_pago/",
+      "aleph-frontend/ventas/nueva_solicitud/",
+      "aleph-frontend/ventas/nueva_venta/",
+      "aleph-frontend/ventas/nuevo_cliente/",
+      "aleph-frontend/ventas/registros_forma_de_pago/",
+      "aleph-frontend/ventas/registros_solicitud/",
+      "aleph-frontend/ventas/registros_solicitud_venta/",
+      "aleph-frontend/ventas/registros_venta/",
+      "aleph-frontend/ventas/registros_cliente/",
+      "aleph-frontend/ventas/reportes/"
+    ]
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "bootstrap-datepicker": "^1.6.4",
+    "can": "^2.3.16",
+    "can-connect": "^0.5.0",
+    "can-zone": "^0.5.0",
+    "chart.js": "^2.2.2",
+    "done-autorender": "^0.8.0",
+    "done-component": "^0.4.0",
+    "done-css": "~2.0.2",
+    "done-serve": "^0.2.0",
+    "font-awesome": "^4.6.3",
+    "generator-donejs": "^0.9.0",
+    "jquery": "~2.2.1",
+    "steal": "^0.16.0"
+  },
+  "devDependencies": {
+    "documentjs": "^0.4.2",
+    "donejs-deploy": "^0.4.0",
+    "funcunit": "~3.0.0",
+    "steal-qunit": "^0.1.1",
+    "steal-tools": "^0.16.0",
+    "testee": "^0.2.4",
+    "donejs-cli": "^0.9.4",
+    "can-fixture": "^0.1.2"
+  }
+}

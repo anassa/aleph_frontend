@@ -1,0 +1,41 @@
+<legend>{{message}}</legend>
+<!-- Barra de busqueda -->
+<input type="text" class="form-control" placeholder="Buscar {{message}}">
+<div class="well">
+    <table class="table">
+		<thead>
+			<tr>
+
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>DNI</th>
+				<th>Domicilio</th>
+				<th>Telefono</th>
+				<th>Mail</th>
+				<th>Cuenta</th>
+				<th>Limite Cuenta</th>
+				<th>Etiquetas</th>
+				<th>Acciones</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<!-- Esto es una fila -->
+			{{#data}}
+			<tr>
+				<td>{{nombre}}</td>
+				<td>{{apellido}}</td>
+				<td>{{dni}}</td>
+				<td>{{domicilio}}</td>
+				<td>{{telefono}}</td>
+				<td>{{mail}}</td>
+				<td>{{cuenta}}</td>
+				<td>{{limiteCuenta}}</td>
+				<td>{{etiquetas}}</td>
+				<td><a href="#!" class="glyphicon glyphicon-pencil"></a></td>
+			</tr>
+			{{/data}}
+
+      </tbody>
+    </table>
+</div>

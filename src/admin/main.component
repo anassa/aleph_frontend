@@ -1,0 +1,33 @@
+<can-component tag="aleph-admin-main">
+	<template>
+		{{#switch section}}
+			{{#case "nuevo_usuario"}}
+				<can-import from="aleph-frontend/admin/nuevo_usuario/">
+					{{#if isPending}}
+						Loading...
+					{{else}}
+						<aleph-admin-nuevo-usuario/>
+					{{/if}}
+				</can-import>
+			{{/case}}
+			{{#case "registros_usuario"}}
+				<can-import from="aleph-frontend/admin/registros_usuario/">
+					{{#if isPending}}
+						Loading...
+					{{else}}
+						<aleph-admin-registros-usuario/>
+					{{/if}}
+				</can-import>
+			{{/case}}
+			{{#default}}
+				<can-import from="aleph-frontend/notfound.component!">
+					{{#if isPending}}
+						Loading...
+					{{else}}
+						<aleph-not-found/>
+					{{/if}}
+				</can-import>
+			{{/case}}
+		{{/switch}}
+	</template>
+</can-component>

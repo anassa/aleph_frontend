@@ -1,0 +1,48 @@
+<p>{{message}}</p>
+<!-- Barra de busqueda -->
+<input type="text" class="form-control" placeholder="Buscar {{message}}">
+<div class="well">
+    <table class="table">
+		<thead>
+			<tr>
+				<th>Fecha</th>
+				<th>Numero OC</th>
+				<th>Proveedor</th>
+				<th>Cant. Remito</th>
+				<th>Accion</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- Esto es una fila -->
+			<tr>
+				<td>22/08/2016</td>
+				<td><a href="">123</a></td>
+				<td>Thread Distrib.</td>
+				<td>15</td>
+				<td><a href="#!" class="glyphicon glyphicon-pencil"></a></td>
+			</tr>
+			<tr>
+				<td>22/08/2016</td>
+				<td><a href="">123</a></td>
+				<td>Thread Distrib.</td>
+				<td>15</td>
+				<td><a href="#!" class="glyphicon glyphicon-pencil"></a></td>
+			</tr>
+			<tr>
+				<td>22/08/2016</td>
+				<td><a href="">123</a></td>
+				<td>Thread Distrib.</td>
+				<td>15</td>
+				<td><a href="#!" class="glyphicon glyphicon-pencil"></a></td>
+			</tr>
+			<tr>
+				<td>22/08/2016</td>
+				<td><a href="">123</a></td>
+				<td>Thread Distrib.</td>
+				<td>15</td>
+				<td><a href="#!" class="glyphicon glyphicon-pencil"></a></td>
+			</tr>
+
+      </tbody>
+    </table>
+</div>

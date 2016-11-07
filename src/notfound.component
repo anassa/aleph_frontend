@@ -1,0 +1,22 @@
+<can-component tag="aleph-not-found">
+  <style type="less">
+    display: block;
+    
+    p { font-weight: bold; }
+  </style>
+  <template>
+    <p>{{message}}</p>
+  </template>
+  <script type="view-model">
+    import Map from 'can/map/';
+    import 'can/map/define/';
+
+    export default Map.extend({
+      define: {
+        message: {
+          value: 'This is the aleph-not-found component'
+        }
+      }
+    });
+  </script>
+</can-component>

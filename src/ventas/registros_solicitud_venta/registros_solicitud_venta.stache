@@ -1,0 +1,52 @@
+<h1>{{message}}</h1>
+
+<table class="table table-striped">
+<thead>
+	<tr>
+		<th>Fecha</th>
+		<th>Cliente</th>
+		<th>Articulos</th>
+		<th>Accion</th>
+	</tr>
+</thead>
+<tbody>
+	<!-- Esto es una fila -->
+	<tr>
+		<td>Fecha1</td>
+		<td>Romina Perez</td>
+		<td>Hilo</td>
+		<td><a href="!#" class ="glyphicon glyphicon-plus-sign"></td>
+	</tr>
+	<tr>
+		<td>Fecha1</td>
+		<td>Romina Perez</td>
+		<td>Hilo</td>
+		<td><a href="!#" class ="glyphicon glyphicon-plus-sign"></td>
+	</tr>
+	<tr>
+		<td>Fecha1</td>
+		<td>Romina Perez</td>
+		<td>Hilo</td>
+		<td><a href="!#" class ="glyphicon glyphicon-plus-sign"></td>
+	</tr>
+	<tr>
+		<td>Fecha1</td>
+		<td>Romina Perez</td>
+		<td>Hilo</td>
+		<td><a href="!#" class ="glyphicon glyphicon-plus-sign"></td>
+	</tr>
+	<tr>
+		<td>Fecha1</td>
+		<td>Romina Perez</td>
+		<td>Hilo</td>
+		<td><a href="!#" class ="glyphicon glyphicon-plus-sign"></td>
+	</tr>
+	<tr>
+		<td>Fecha1</td>
+		<td>Romina Perez</td>
+		<td>Hilo</td>
+		<td><a href="!#" class ="glyphicon glyphicon-plus-sign"></td>
+	</tr>
+
+</tbody>
+</table>

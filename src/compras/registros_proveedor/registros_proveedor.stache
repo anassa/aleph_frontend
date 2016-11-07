@@ -1,0 +1,39 @@
+<p>{{message}}</p>
+<!-- Barra de busqueda -->
+<input type="text" class="form-control" placeholder="Buscar {{message}}">
+<div class="well">
+    <table class="table">
+		<thead>
+			<tr>
+				<th>Denominacion</th>
+				<th>Domicilio</th>
+				<th>Mail</th>
+				<th>Telefono</th>
+				<th>Accion</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- Esto es una fila -->
+			<tr>
+				<td><a href="">TEXTIL MAEMCA S.R.L</a></td>
+				<td>Calle 123(Rosario)</td>
+				<td>textil@asdf.com</td>
+				<td>011 4321 1234</td>
+				<td>
+					<a href="#!" class="glyphicon glyphicon-pencil"></a>
+					<a href="#!" class="glyphicon glyphicon-trash"></a>
+				</td>
+			</tr>
+			<tr>
+				<td><a href="">TEXTIL MAEMCA S.R.L</a></td>
+				<td>Calle 123(Rosario)</td>
+				<td>textil@asdf.com</td>
+				<td>011 4321 1234</td>
+				<td>
+					<a href="#!" class="glyphicon glyphicon-pencil"></a>
+					<a href="#!" class="glyphicon glyphicon-trash"></a>
+				</td>
+			</tr>
+      </tbody>
+    </table>
+</div>

@@ -1,0 +1,638 @@
+<div class="container-fluid">
+	<form class="form-inline report-type">
+		<div class="form-group">
+			<label for="type" class="control-label">
+				Reporte
+			</label>
+			<select class="form-control" name="type">
+				<option value="1">
+					Faltante de articulos
+				</option>
+				<option value="2">
+					Orden de compra por proveedor
+				</option>
+			</select>
+		</div>
+	</form>
+	<div class="division"></div>
+	<div class="report" id="option-1">
+		<div class="filters">
+			<form class="form-inline">
+				<div class="row">
+					<div class="col-md-3">
+						<p>
+							<strong>
+								Datos del Proveedor
+							</strong>
+						</p>
+					</div>
+					<div class="col-md-9">
+						<p>
+							<strong>
+								Datos del articulo
+							</strong>
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-3">
+						<input type="text" class="form-control" name="provider" placeholder="Nombre del Proveedor">
+					</div>
+					<div class="form-group col-md-3">
+						<input type="text" class="form-control" name="item" placeholder="Nombre del articulo">
+					</div>
+					<div class="form-group col-md-3">
+						<input type="text" class="form-control" name="code" placeholder="Codigo del articulo">
+					</div>
+					<button type="submit" class="btn btn-primary">Buscar</button>
+				</div>
+			</form>
+		</div>
+		<div class="division"></div>
+		<div class="results row">
+			<div class="col-md-8">
+				<div class="well">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>
+									Fecha alarma
+								</th>
+								<th>
+									Codigo
+								</th>
+								<th>
+									Nombre
+								</th>
+								<th>
+									Unidad medida
+								</th>
+								<th>
+									Stock
+								</th>
+								<th>
+									Minimo
+								</th>
+								<th>
+									Maximo
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									1
+								</td>
+								<td>
+									hilo DRIMA
+								</td>
+								<td>
+									unidad
+								</td>
+								<td>
+									59
+								</td>
+								<td>
+									100
+								</td>
+								<td>
+									500
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									1
+								</td>
+								<td>
+									hilo DRIMA
+								</td>
+								<td>
+									unidad
+								</td>
+								<td>
+									59
+								</td>
+								<td>
+									100
+								</td>
+								<td>
+									500
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									1
+								</td>
+								<td>
+									hilo DRIMA
+								</td>
+								<td>
+									unidad
+								</td>
+								<td>
+									59
+								</td>
+								<td>
+									100
+								</td>
+								<td>
+									500
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									1
+								</td>
+								<td>
+									hilo DRIMA
+								</td>
+								<td>
+									unidad
+								</td>
+								<td>
+									59
+								</td>
+								<td>
+									100
+								</td>
+								<td>
+									500
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									1
+								</td>
+								<td>
+									hilo DRIMA
+								</td>
+								<td>
+									unidad
+								</td>
+								<td>
+									59
+								</td>
+								<td>
+									100
+								</td>
+								<td>
+									500
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									1
+								</td>
+								<td>
+									hilo DRIMA
+								</td>
+								<td>
+									unidad
+								</td>
+								<td>
+									59
+								</td>
+								<td>
+									100
+								</td>
+								<td>
+									500
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									1
+								</td>
+								<td>
+									hilo DRIMA
+								</td>
+								<td>
+									unidad
+								</td>
+								<td>
+									59
+								</td>
+								<td>
+									100
+								</td>
+								<td>
+									500
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									1
+								</td>
+								<td>
+									hilo DRIMA
+								</td>
+								<td>
+									unidad
+								</td>
+								<td>
+									59
+								</td>
+								<td>
+									100
+								</td>
+								<td>
+									500
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									1
+								</td>
+								<td>
+									hilo DRIMA
+								</td>
+								<td>
+									unidad
+								</td>
+								<td>
+									59
+								</td>
+								<td>
+									100
+								</td>
+								<td>
+									500
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									1
+								</td>
+								<td>
+									hilo DRIMA
+								</td>
+								<td>
+									unidad
+								</td>
+								<td>
+									59
+								</td>
+								<td>
+									100
+								</td>
+								<td>
+									500
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									1
+								</td>
+								<td>
+									hilo DRIMA
+								</td>
+								<td>
+									unidad
+								</td>
+								<td>
+									59
+								</td>
+								<td>
+									100
+								</td>
+								<td>
+									500
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<nav aria-label="Page navigation">
+					<ul class="pagination">
+						<li>
+							<a href="#" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li>
+							<a href="#" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Detalle de la busqueda
+					</div>
+					<div class="panel-body">
+						<dl class="dl-horizontal">
+							<dt>
+								Nombre del proveedor
+							</dt>
+							<dd>
+								Sin especificar
+							</dd>
+							<dt>
+								Nombre del articulo
+							</dt>
+							<dd>
+								Sin especificar
+							</dd>
+							<dt>
+								Codigo del articulo
+							</dt>
+							<dd>
+								Sin especificar
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="report" id="option-2">
+		<div class="filters">
+			<form class="form-inline">
+				<div class="row">
+					<div class="col-md-3">
+						<p>
+							<strong>
+								Datos del Proveedor
+							</strong>
+						</p>
+					</div>
+					<div class="col-md-9">
+						<p>
+							<strong>
+								Rango de Busqueda
+							</strong>
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-3">
+						<input type="text" class="form-control" name="provider" placeholder="Nombre del Proveedor">
+					</div>
+					<div class="form-group col-md-3">
+						<label class="control-label">
+							Desde
+						</label>
+						<div class="input-group date">
+							<input type="text" class="form-control" name="datefrom" placeholder="Desde">
+							<div class="input-group-addon">
+								<span class="fa fa-calendar"></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group col-md-3">
+						<label class="control-label">
+							Hasta
+						</label>
+						<div class="input-group date">
+							<input type="text" class="form-control" name="dateto" placeholder="Hasta">
+							<div class="input-group-addon">
+								<span class="fa fa-calendar"></span>
+							</div>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary">Buscar</button>
+				</div>
+			</form>
+		</div>
+		<div class="division"></div>
+		<div class="results row">
+			<div class="col-md-8">
+				<div class="well">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>
+									Fecha
+								</th>
+								<th>
+									Numero de Orden de Compra
+								</th>
+								<th>
+									Cantidad remito
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									3450
+								</td>
+								<td>
+									0
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									3450
+								</td>
+								<td>
+									0
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									3451
+								</td>
+								<td>
+									0
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									3452
+								</td>
+								<td>
+									0
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									3453
+								</td>
+								<td>
+									0
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									3454
+								</td>
+								<td>
+									0
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									3455
+								</td>
+								<td>
+									0
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									3456
+								</td>
+								<td>
+									0
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									3457
+								</td>
+								<td>
+									0
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									3458
+								</td>
+								<td>
+									0
+								</td>
+							</tr>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									3459
+								</td>
+								<td>
+									0
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<nav aria-label="Page navigation">
+					<ul class="pagination">
+						<li>
+							<a href="#" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li>
+							<a href="#" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Detalle de la busqueda
+					</div>
+					<div class="panel-body">
+						<dl class="dl-horizontal">
+							<dt>
+								Nombre del Proveedor
+							</dt>
+							<dd>
+								Makor
+							</dd>
+							<dt>
+								Desde
+							</dt>
+							<dd>
+								01/04/2016
+							</dd>
+							<dt>
+								Hasta
+							</dt>
+							<dd>
+								30/04/2016
+							</dd>
+							<dt>
+								Cantidad de Ordenes de Compra
+							</dt>
+							<dd>
+								10
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

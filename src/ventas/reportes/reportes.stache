@@ -1,0 +1,789 @@
+<div class="container-fluid">
+	<form class="form-inline report-type">
+		<div class="form-group">
+			<label for="type" class="control-label">
+				Reporte
+			</label>
+			<select class="form-control" name="type">
+				<option value="1">
+					Ventas por cliente
+				</option>
+				<option value="2">
+					Ventas por periodo
+				</option>
+				<option value="3">
+					Articulos mas vendidos
+				</option>
+			</select>
+		</div>
+	</form>
+	<div class="division"></div>
+	<div class="report" id="option-1">
+		<div class="filters">
+			<form class="form-inline">
+				<div class="row">
+					<div class="col-md-6">
+						<p>
+							<strong>
+								Datos del cliente
+							</strong>
+						</p>
+					</div>
+					<div class="col-md-6">
+						<p>
+							<strong>
+								Rango de Busqueda
+							</strong>
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-2">
+						<input type="text" class="form-control" name="firstname" placeholder="Nombre del Cliente">
+					</div>
+					<div class="form-group col-md-2">
+						<input type="text" class="form-control" name="lastname" placeholder="Apellido del Cliente">
+					</div>
+					<div class="form-group col-md-2">
+						<input type="text" class="form-control" name="dni" placeholder="Numero de Documento">
+					</div>
+					<div class="form-group col-md-2">
+						<div class="input-group date">
+							<input type="text" class="form-control" name="datefrom" placeholder="Desde">
+							<div class="input-group-addon">
+								<span class="fa fa-calendar"></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group col-md-2">
+						<div class="input-group date">
+							<input type="text" class="form-control" name="dateto" placeholder="Hasta">
+							<div class="input-group-addon">
+								<span class="fa fa-calendar"></span>
+							</div>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary">Buscar</button>
+				</div>
+			</form>
+		</div>
+		<div class="division"></div>
+		<div class="results row">
+			<div class="col-md-8">
+				<div class="well">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>
+									Fecha
+								</th>
+								<th>
+									Forma de Pago
+								</th>
+								<th>
+									Total ($)
+								</th>
+								<th>
+									Articulos
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									Efectivo
+								</td>
+								<td>
+									34.00
+								</td>
+								<td>
+									3 hilo sisal, 1 par agujas tejer nro 7
+								</td>
+							</tr>
+							<tr>
+								<td>
+									02/04/2016
+								</td>
+								<td>
+									Tarjeta de Credito
+								</td>
+								<td>
+									345.75
+								</td>
+								<td>
+									20 mts entretela
+								</td>
+							</tr>
+							<tr>
+								<td>
+									03/04/2016
+								</td>
+								<td>
+									Tarjeta de Credito
+								</td>
+								<td>
+									43.10
+								</td>
+								<td>
+									2 mts tela raso
+								</td>
+							</tr>
+							<tr>
+								<td>
+									03/04/2016
+								</td>
+								<td>
+									Efectivo
+								</td>
+								<td>
+									112.20
+								</td>
+								<td>
+									1 hilo cadena grande
+								</td>
+							</tr>
+							<tr>
+								<td>
+									04/04/2016
+								</td>
+								<td>
+									Efectivo
+								</td>
+								<td>
+									198.05
+								</td>
+								<td>
+									8 mts tela azul
+								</td>
+							</tr>
+							<tr>
+								<td>
+									05/04/2016
+								</td>
+								<td>
+									Efectivo
+								</td>
+								<td>
+									34.00
+								</td>
+								<td>
+									34 pares de botones
+								</td>
+							</tr>
+							<tr>
+								<td>
+									06/04/2016
+								</td>
+								<td>
+									Tarjeta de Credito
+								</td>
+								<td>
+									99.99
+								</td>
+								<td>
+									promo 10 carriles de hilo
+								</td>
+							</tr>
+							<tr>
+								<td>
+									06/04/2016
+								</td>
+								<td>
+									Tarjeta de Credito
+								</td>
+								<td>
+									129.00
+								</td>
+								<td>
+									17 par agujas tejer nro 3, 9 hilo sisal
+								</td>
+							</tr>
+							<tr>
+								<td>
+									06/04/2016
+								</td>
+								<td>
+									Efectivo
+								</td>
+								<td>
+									215.00
+								</td>
+								<td>
+									1 par botones rr, 10 mts tela roja
+								</td>
+							</tr>
+							<tr>
+								<td>
+									07/04/2016
+								</td>
+								<td>
+									Efectivo
+								</td>
+								<td>
+									987.00
+								</td>
+								<td>
+									3 hilo sisal, 1 par agujas tejer nro 7
+								</td>
+							</tr>
+							<tr>
+								<td>
+									07/04/2016
+								</td>
+								<td>
+									Efectivo
+								</td>
+								<td>
+									100.00
+								</td>
+								<td>
+									3 hilo sisal, 1 par agujas tejer nro 7
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<nav aria-label="Page navigation">
+					<ul class="pagination">
+						<li>
+							<a href="#" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li>
+							<a href="#" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Cliente
+					</div>
+					<div class="panel-body">
+						<dl class="dl-horizontal">
+							<dt>
+								Nombre
+							</dt>
+							<dd>
+								Neri
+							</dd>
+							<dt>
+								Apellido
+							</dt>
+							<dd>
+								Guidi
+							</dd>
+							<dt>
+								DNI:
+							</dt>
+							<dd>
+								34.545.545
+							</dd>
+							<dt>
+								Total ($)
+							</dt>
+							<dd>
+								3048.65
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="report" id="option-2">
+		<div class="filters">
+			<form class="form-inline">
+				<div class="row">
+					<div class="col-md-12">
+						<p>
+							<strong>
+								Rango de Busqueda
+							</strong>
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-3">
+						<label class="control-label">
+							Desde
+						</label>
+						<div class="input-group date">
+							<input type="text" class="form-control" name="datefrom" placeholder="Desde">
+							<div class="input-group-addon">
+								<span class="fa fa-calendar"></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group col-md-3">
+						<label class="control-label">
+							Hasta
+						</label>
+						<div class="input-group date">
+							<input type="text" class="form-control" name="dateto" placeholder="Hasta">
+							<div class="input-group-addon">
+								<span class="fa fa-calendar"></span>
+							</div>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary">Buscar</button>
+				</div>
+			</form>
+		</div>
+		<div class="division"></div>
+		<div class="results row">
+			<div class="col-md-8">
+				<div class="well">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>
+									Fecha
+								</th>
+								<th>
+									Forma de Pago
+								</th>
+								<th>
+									Total ($)
+								</th>
+								<th>
+									Articulos
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									01/04/2016
+								</td>
+								<td>
+									Efectivo
+								</td>
+								<td>
+									34.00
+								</td>
+								<td>
+									3 hilo sisal, 1 par agujas tejer nro 7
+								</td>
+							</tr>
+							<tr>
+								<td>
+									02/04/2016
+								</td>
+								<td>
+									Tarjeta de Credito
+								</td>
+								<td>
+									345.75
+								</td>
+								<td>
+									20 mts entretela
+								</td>
+							</tr>
+							<tr>
+								<td>
+									03/04/2016
+								</td>
+								<td>
+									Tarjeta de Credito
+								</td>
+								<td>
+									43.10
+								</td>
+								<td>
+									2 mts tela raso
+								</td>
+							</tr>
+							<tr>
+								<td>
+									03/04/2016
+								</td>
+								<td>
+									Efectivo
+								</td>
+								<td>
+									112.20
+								</td>
+								<td>
+									1 hilo cadena grande
+								</td>
+							</tr>
+							<tr>
+								<td>
+									04/04/2016
+								</td>
+								<td>
+									Efectivo
+								</td>
+								<td>
+									198.05
+								</td>
+								<td>
+									8 mts tela azul
+								</td>
+							</tr>
+							<tr>
+								<td>
+									05/04/2016
+								</td>
+								<td>
+									Efectivo
+								</td>
+								<td>
+									34.00
+								</td>
+								<td>
+									34 pares de botones
+								</td>
+							</tr>
+							<tr>
+								<td>
+									06/04/2016
+								</td>
+								<td>
+									Tarjeta de Credito
+								</td>
+								<td>
+									99.99
+								</td>
+								<td>
+									promo 10 carriles de hilo
+								</td>
+							</tr>
+							<tr>
+								<td>
+									06/04/2016
+								</td>
+								<td>
+									Tarjeta de Credito
+								</td>
+								<td>
+									129.00
+								</td>
+								<td>
+									17 par agujas tejer nro 3, 9 hilo sisal
+								</td>
+							</tr>
+							<tr>
+								<td>
+									06/04/2016
+								</td>
+								<td>
+									Efectivo
+								</td>
+								<td>
+									215.00
+								</td>
+								<td>
+									1 par botones rr, 10 mts tela roja
+								</td>
+							</tr>
+							<tr>
+								<td>
+									07/04/2016
+								</td>
+								<td>
+									Efectivo
+								</td>
+								<td>
+									987.00
+								</td>
+								<td>
+									3 hilo sisal, 1 par agujas tejer nro 7
+								</td>
+							</tr>
+							<tr>
+								<td>
+									07/04/2016
+								</td>
+								<td>
+									Efectivo
+								</td>
+								<td>
+									100.00
+								</td>
+								<td>
+									3 hilo sisal, 1 par agujas tejer nro 7
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<nav aria-label="Page navigation">
+					<ul class="pagination">
+						<li>
+							<a href="#" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li>
+							<a href="#" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Periodo
+					</div>
+					<div class="panel-body">
+						<dl class="dl-horizontal">
+							<dt>
+								Desde
+							</dt>
+							<dd>
+								01/04/2016
+							</dd>
+							<dt>
+								Hasta
+							</dt>
+							<dd>
+								30/04/2016
+							</dd>
+							<dt>
+								Total ($)
+							</dt>
+							<dd>
+								3048.65
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="report" id="option-3">
+		<div class="filters">
+			<form class="form-inline">
+				<div class="row">
+					<div class="col-md-12">
+						<p>
+							<strong>
+								Rango de Busqueda
+							</strong>
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-3">
+						<label class="control-label">
+							Desde
+						</label>
+						<div class="input-group date">
+							<input type="text" class="form-control" name="datefrom" placeholder="Desde">
+							<div class="input-group-addon">
+								<span class="fa fa-calendar"></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group col-md-3">
+						<label class="control-label">
+							Hasta
+						</label>
+						<div class="input-group date">
+							<input type="text" class="form-control" name="dateto" placeholder="Hasta">
+							<div class="input-group-addon">
+								<span class="fa fa-calendar"></span>
+							</div>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary">Buscar</button>
+				</div>
+			</form>
+		</div>
+		<div class="division"></div>
+		<div class="results row">
+			<div class="col-md-8">
+				<div class="well">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>
+									Codigo
+								</th>
+								<th>
+									Articulo
+								</th>
+								<th>
+									Cantidad
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									549
+								</td>
+								<td>
+									3 hilo sisal
+								</td>
+								<td>
+									34
+								</td>
+							</tr>
+							<tr>
+								<td>
+									223
+								</td>
+								<td>
+									entre tela
+								</td>
+								<td>
+									345
+								</td>
+							</tr>
+							<tr>
+								<td>
+									89
+								</td>
+								<td>
+									tela raso
+								</td>
+								<td>
+									43
+								</td>
+							</tr>
+							<tr>
+								<td>
+									23
+								</td>
+								<td>
+									hilo cadena grande
+								</td>
+								<td>
+									112
+								</td>
+							</tr>
+							<tr>
+								<td>
+									12
+								</td>
+								<td>
+									tela azul
+								</td>
+								<td>
+									198
+								</td>
+							</tr>
+							<tr>
+								<td>
+									99
+								</td>
+								<td>
+									botones
+								</td>
+								<td>
+									34
+								</td>
+							</tr>
+							<tr>
+								<td>
+									8
+								</td>
+								<td>
+									carriles de hilo
+								</td>
+								<td>
+									99
+								</td>
+							</tr>
+							<tr>
+								<td>
+									1
+								</td>
+								<td>
+									agujas tejer nro 3
+								</td>
+								<td>
+									129
+								</td>
+							</tr>
+							<tr>
+								<td>
+									254
+								</td>
+								<td>
+									tela roja
+								</td>
+								<td>
+									215
+								</td>
+							</tr>
+							<tr>
+								<td>
+									2
+								</td>
+								<td>
+									agujas tejer nro 7
+								</td>
+								<td>
+									87
+								</td>
+							</tr>
+							<tr>
+								<td>
+									100
+								</td>
+								<td>
+									hilo verde
+								</td>
+								<td>
+									120
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<nav aria-label="Page navigation">
+					<ul class="pagination">
+						<li>
+							<a href="#" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li>
+							<a href="#" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Periodo 01/04/2016 - 30/04/2016
+					</div>
+					<div class="panel-body">
+						<canvas id="bar-chart" width="400" height="400"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

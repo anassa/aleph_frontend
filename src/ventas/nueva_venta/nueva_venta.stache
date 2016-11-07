@@ -1,0 +1,231 @@
+<div class="container-fluid">
+	<!-- <div class="division"></div> -->
+		
+		<!-- Movida de la parte de arriba -->
+<!-- 		<div class="filters">
+			<form class="form-inline">
+				<div class="row">
+					<div class="col-md-6">
+						<p><strong>Busqueda de articulos</strong></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-2">
+						<input type="text" class="form-control" name="articulo" placeholder="Hilo">
+					</div>
+					<div class="form-group col-md-2">
+						<input type="text" class="form-control" name="codigo" placeholder="Codigo">
+					</div>
+					<button type="submit" class="btn btn-primary">Buscar</button>
+				</div>
+			</form>
+		</div> -->
+
+		<!-- Tabla para elegir productos -->
+		<!-- <div class="division"></div> -->
+		<div class="results row">
+			<div class="col-md-6">	
+				<div class="panel panel-default">
+					<div class="panel-heading">Busqueda de articulos</div>
+					<div class="panel-body">
+
+						<!-- formulario de la tablita -->
+						<form class="form-inline">
+							<div class="row">
+								<div class="form-group col-md-5">
+									<input type="text" class="form-control" name="articulo" placeholder="Hilo">
+								</div>
+								<div class="form-group col-md-5">
+									<input type="text" class="form-control" name="codigo" placeholder="Codigo">
+								</div>
+								<button type="submit" class="btn btn-primary">Buscar</button>
+							</div>
+						</form>
+						
+						<!-- La tabla en si -->
+						<div class="well">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Codigo</th>
+										<th>Articulo</th>
+										<th>Precio($)</th>
+										<th>Stock</th>
+										<th>Unidad de medida</th>
+										<th>Accion</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td>Hilo DRIMA</td>
+										<td>4.50</td>
+										<td>59</td>
+										<td>unidad</td>
+										<td><p class = "glyphicon glyphicon-plus-sign"></p></td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>Hilo DRIMA</td>
+										<td>4.50</td>
+										<td>59</td>
+										<td>unidad</td>
+										<td><p class = "glyphicon glyphicon-plus-sign"></p></td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>Hilo DRIMA</td>
+										<td>4.50</td>
+										<td>59</td>
+										<td>unidad</td>
+										<td><p class = "glyphicon glyphicon-plus-sign"></p></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<!-- Navegacion de la pagina -->
+						<nav aria-label="Page navigation">
+							<ul class="pagination">
+								<li>
+									<a href="#" aria-label="Previous">
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+								</li>
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li>
+									<a href="#" aria-label="Next">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</ul>
+						</nav>
+
+					</div>
+				</div>
+
+			</div>
+			
+			<!-- Tabla de ventas de la pagina de la derecha -->
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">Venta</div>
+					<div class="panel-body">
+						
+					<!-- Formulario del costado -->
+						<form class="form-inline">
+							<div class="row">
+								<div class="form-group col-md-4">
+									<input type="text" class="form-control" name="valor" placeholder="15000">
+								</div>
+								<div class="form-group col-md-8">
+									<button type="submit" class="btn btn-primary pull-right">Buscar</button>
+								</div>
+								
+							</div>
+							<div class="row">
+								<div class="form-group col-md-4">
+									<label for="formaPago" class="control-label">Forma de pago</label>
+									<select name="formaPago" class="form-control" placeholder="Efectivo">
+	                					<option value="debito">Debito</option>
+					                  	<option value="credito">Credito</option>
+            						</select>
+								</div>
+								<div class="form-group col-md-3">
+									<label for="descuento" class="control-label">Descuento</label>
+									<!-- <input type="text" class="form-control" name="observacion" placeholder="Observacion"> -->
+									<select name="descuento" class="form-control" placeholder="10">
+	                					<option value="debito">10 %</option>
+					                  	<option value="credito">X %</option>
+            						</select>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group col-md-5">
+									<label>Observacion</label>
+									<input type="text" class="form-control" name="observacion" placeholder="Observacion">
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group col-md-3">
+									<p>Laura Varela</p>
+								</div>
+								<div class="form-group col-md-3">
+									<span class="label label-danger">Evitar solicitudes de venta</span>
+									
+								</div>
+								
+							</div>
+						</form>
+
+
+						<!-- Tabla de la muerte de la parte derecha -->
+						<div class="well">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Codigo</th>
+										<th>Articulo</th>
+										<th>Precio($)</th>
+										<th>Cantidad</th>
+										<th>Accion</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td>Hilo DRIMA</td>
+										<td>4.50</td>
+										<td>cant</td>
+										<td><p class = "glyphicon glyphicon-minus-sign"></p></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<!-- Botones de aceptar y cancelar -->
+						<div class="row">
+							<div class="col-md-6">
+								<nav aria-label="Page navigation">
+									<ul class="pagination">
+										<li>
+											<a href="#" aria-label="Previous">
+												<span aria-hidden="true">&laquo;</span>
+											</a>
+										</li>
+										<li><a href="#">1</a></li>
+										<li><a href="#">2</a></li>
+										<li><a href="#">3</a></li>
+										<li><a href="#">4</a></li>
+										<li><a href="#">5</a></li>
+										<li>
+											<a href="#" aria-label="Next">
+												<span aria-hidden="true">&raquo;</span>
+											</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+							<div class="col-md-6 clearfix">
+								<button class="btn btn-danger pull-right">
+									Cancelar
+								</button>
+								<button class="btn btn-primary pull-right padded-right">
+									Registrar
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+		</div>
+</div>

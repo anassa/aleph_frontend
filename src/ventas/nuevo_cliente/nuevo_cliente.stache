@@ -1,0 +1,42 @@
+<!-- <p>{{message}	}</p> -->
+<legend>{{message}}</legend>
+<!-- <div class="division"></div> -->
+<form>
+	<div class="container">
+		<div class="col-md-3">		
+			<label class="control-label">*Nombre</label>
+			<input type="text" class="form-control" name="nombre" placeholder="Nombre...">
+		
+			<label class="control-label">*Apellido</label>
+			<input type="text" class="form-control" name="apellido" placeholder="Apellido...">
+		
+			<label class="control-label">*D.N.I</label>
+			<input type="text" class="form-control" name="DNI" placeholder="d.n.i...">
+			
+			<label class="control-label">Domicilio</label>
+			<input type="text" class="form-control" name="domicilio" placeholder="Domicilio...">
+		</div>
+		<div class="col-md-3">
+			<label class="control-label">Telefono</label>
+			<input type="text" class="form-control" name="telefono" placeholder="Telefono...">
+			
+			<label class="control-label">Mail</label>
+			<input type="text" class="form-control" name="mail" placeholder="Mail...">
+			
+			<label class="control-label">Cuenta</label>
+			<input type="text" class="form-control" name="cuenta" placeholder="Cuenta...">
+			
+			<label class="control-label">Limite de cuenta</label>
+			<input type="text" class="form-control" name="limiteCuenta" placeholder="Limite...">
+		</div>
+	</div>
+	<div class="container">	
+		<div class="col-md-6">	
+			<label class="control-label">Etiquetas</label>
+			<input type="text" class="form-control" name="etiquetas">
+			<button type="submit" class="btn btn-primary">Registrar</button>		
+			<button type="submit" class="btn btn-default">Cancelar</button>		
+		</div>	
+	</div>			
+</form>
+		

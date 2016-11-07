@@ -1,4 +1,2 @@
-aleph_frontend
-==============
-
-Frontend de Aleph, Proyecto Final Sistemas
+# aleph
+Sistemas de compra, venta y stock.

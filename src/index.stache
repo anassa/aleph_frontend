@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>{{title}}</title>
+	</head>
+	<body>
+		<can-import from="bootstrap/less/bootstrap.less!" />
+		<can-import from="font-awesome/less/font-awesome.less!" />
+		<can-import from="aleph-frontend/styles.less!" />
+		<can-import from="aleph-frontend/app" export-as="viewModel" />
+
+		<can-import from="aleph-frontend/home/">
+			{{#if isPending}}
+				Loading...
+			{{else}}
+				<aleph-home/>
+			{{/if}}
+		</can-import>
+
+		{{#switch env.NODE_ENV}}
+			{{#case "production"}}
+				<script src="{{joinBase 'node_modules/steal/steal.production.js'}}"	main="aleph-frontend/index.stache!done-autorender"></script>
+			{{/case}}
+			{{#default}}
+				<script src="/node_modules/steal/steal.js"></script>
+			{{/default}}
+		{{/switch}}
+	</body>
+</html>

@@ -1,0 +1,50 @@
+<p>{{message}}</p>
+
+<!-- Barra de busqueda -->
+<input type="text" class="form-control" placeholder="Buscar {{message}}">
+
+<div class="well">
+    <table class="table">
+		<thead>
+			<tr>
+				<th>Codigo</th>
+				<th>Nombre</th>
+				<th>Descripcion</th>
+				<th>Unidad de medida</th>
+				<th>Stock</th>
+				<th>Minimo</th>
+				<th>Maximo</th>
+				<th>Accion</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- Esto es una fila -->
+			<tr>
+				<td>1234</td>
+				<td><a href="">Hilo 1</a></td>
+				<td>Hilo para coser</td>
+				<td>Unidad</td>
+				<td>59</td>
+				<td>100</td>
+				<td>500</td>
+				<td>
+					<a href="#!" class="glyphicon glyphicon-pencil"></a>
+					<a href="#!" class="glyphicon glyphicon-trash"></a>
+				</td>
+			</tr>
+			<tr>
+				<td>1234</td>
+				<td><a href="">Hilo 1</a></td>
+				<td>Hilo para coser</td>
+				<td>Unidad</td>
+				<td>59</td>
+				<td>100</td>
+				<td>500</td>
+				<td>
+					<a href="#!" class="glyphicon glyphicon-pencil"></a>
+					<a href="#!" class="glyphicon glyphicon-trash"></a>
+				</td>
+			</tr>
+      </tbody>
+    </table>
+</div>

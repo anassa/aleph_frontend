@@ -1,0 +1,105 @@
+<can-component tag="aleph-ventas-main">
+	<template>
+		{{#switch section}}
+			{{#case "nueva_forma_de_pago"}}
+				<can-import from="aleph-frontend/ventas/nueva_forma_de_pago/">
+					{{#if isPending}}
+						Loading...
+					{{else}}
+						<aleph-ventas-nueva-forma-de-pago/>
+					{{/if}}
+				</can-import>
+			{{/case}}
+			{{#case "nueva_solicitud"}}
+				<can-import from="aleph-frontend/ventas/nueva_solicitud/">
+					{{#if isPending}}
+						Loading...
+					{{else}}
+						<aleph-ventas-nueva-solicitud/>
+					{{/if}}
+				</can-import>
+			{{/case}}
+			{{#case "nueva_venta"}}
+				<can-import from="aleph-frontend/ventas/nueva_venta/">
+					{{#if isPending}}
+						Loading...
+					{{else}}
+						<aleph-ventas-nueva-venta/>
+					{{/if}}
+				</can-import>
+			{{/case}}
+			{{#case "nuevo_cliente"}}
+				<can-import from="aleph-frontend/ventas/nuevo_cliente/">
+					{{#if isPending}}
+						Loading...
+					{{else}}
+						<aleph-ventas-nuevo-cliente/>
+					{{/if}}
+				</can-import>
+			{{/case}}
+			{{#case "registros_cliente"}}
+				<can-import from="aleph-frontend/ventas/registros_cliente/">
+					{{#if isPending}}
+						Loading...
+					{{else}}
+						<aleph-ventas-registros-cliente/>
+					{{/if}}
+				</can-import>
+			{{/case}}
+			{{#case "registros_forma_de_pago"}}
+				<can-import from="aleph-frontend/ventas/registros_forma_de_pago/">
+					{{#if isPending}}
+						Loading...
+					{{else}}
+						<aleph-ventas-registros-forma-de-pago/>
+					{{/if}}
+				</can-import>
+			{{/case}}
+			{{#case "registros_solicitud"}}
+				<can-import from="aleph-frontend/ventas/registros_solicitud/">
+					{{#if isPending}}
+						Loading...
+					{{else}}
+						<aleph-ventas-registros-solicitud/>
+					{{/if}}
+				</can-import>
+			{{/case}}
+			{{#case "registros_solicitud_venta"}}
+				<can-import from="aleph-frontend/ventas/registros_solicitud_venta/">
+					{{#if isPending}}
+						Loading...
+					{{else}}
+						<aleph-ventas-registros-solicitud-venta/>
+					{{/if}}
+				</can-import>
+			{{/case}}
+			{{#case "registros_venta"}}
+				<can-import from="aleph-frontend/ventas/registros_venta/">
+					{{#if isPending}}
+						Loading...
+					{{else}}
+						<aleph-ventas-registros-venta/>
+					{{/if}}
+				</can-import>
+			{{/case}}
+			{{#case "reportes"}}
+				<can-import from="aleph-frontend/ventas/reportes/">
+					{{#if isPending}}
+						Loading...
+					{{else}}
+						<aleph-ventas-reportes/>
+					{{/if}}
+				</can-import>
+			{{/case}}
+			{{#default}}
+				<can-import from="aleph-frontend/notfound.component!">
+					{{#if isPending}}
+						Loading...
+					{{else}}
+						<aleph-not-found/>
+					{{/if}}
+				</can-import>
+			{{/case}}
+		{{/switch}}
+	</template>
+</can-component>

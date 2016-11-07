@@ -1,0 +1,54 @@
+<p>{{message}}</p>
+<!-- Barra de busqueda -->
+<input type="text" class="form-control" placeholder="Buscar {{message}}">
+<div class="well">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Fecha de vencimiento</th>
+          <th>Tipo de solicitud</th>
+          <th>Numero de solicitud</th>
+          <th>Cliente</th>
+          <th>Estado</th>
+          <th style="width: 36px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+         	<td>01/01/2017</td>
+			<td>Venta</td>
+			<td><a href="">666</a></td>
+			<td>Dickinson Bruce</td>
+			<td><span class="label label-primary">Cumplida</span></td>
+        </tr>
+        <tr>
+        	<td>01/01/2017</td>
+			<td>Venta</td>
+			<td><a href="">666</a></td>
+			<td>Dickinson Bruce</td>
+			<td><span class="label label-primary">Cumplida</span></td>
+        </tr>
+        <tr>
+         	<td>01/01/2017</td>
+			<td>Venta</td>
+			<td><a href="">666</a></td>
+			<td>Dickinson Bruce</td>
+			<td><span class="label label-primary">Cumplida</span></td>
+        </tr>
+        <tr>
+          	<td>01/01/2017</td>
+			<td>Venta</td>
+			<td><a href="">666</a></td>
+			<td>Dickinson Bruce</td>
+			<td><span class="label label-primary">Cumplida</span></td>
+        </tr>
+        <tr>
+          	<td>01/01/2017</td>
+			<td>Venta</td>
+			<td><a href="">666</a></td>
+			<td>Dickinson Bruce</td>
+			<td><span class="label label-success">En curso</span></td>
+        </tr>
+      </tbody>
+    </table>
+</div>

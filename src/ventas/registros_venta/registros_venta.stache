@@ -1,0 +1,58 @@
+<p>{{message}}</p>
+<!-- Barra de busqueda -->
+<input type="text" class="form-control" placeholder="Buscar {{message}}">
+<div class="well">
+    <table class="table">
+		<thead>
+			<tr>
+				<th>Fecha</th>
+				<th>Cliente</th>
+				<th>Forma de pago</th>
+				<th>Total (u$)</th>
+				<th>Articulos</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- Esto es una fila -->
+			<tr>
+				<td>22/08/2016</td>
+				<td>Romina Perez</td>
+				<td>Efectivo</td>
+				<td>10.00</td>
+				<td>1 hilo, 1 boton</td>
+			</tr>
+			<!-- Esto es una fila -->
+			<tr>
+				<td>22/08/2016</td>
+				<td>Romina Perez</td>
+				<td>Efectivo</td>
+				<td>10.00</td>
+				<td>1 hilo, 1 boton</td>
+			</tr>
+			<!-- Esto es una fila -->
+			<tr>
+				<td>22/08/2016</td>
+				<td>Romina Perez</td>
+				<td>Efectivo</td>
+				<td>10.00</td>
+				<td>1 hilo, 1 boton</td>
+			</tr>
+			<!-- Esto es una fila -->
+			<tr>
+				<td>22/08/2016</td>
+				<td>Romina Perez</td>
+				<td>Efectivo</td>
+				<td>10.00</td>
+				<td>1 hilo, 1 boton</td>
+			</tr>
+			<!-- Esto es una fila -->
+			<tr>
+				<td>22/08/2016</td>
+				<td>Romina Perez</td>
+				<td>Efectivo</td>
+				<td>10.00</td>
+				<td>1 hilo, 1 boton</td>
+			</tr>
+      </tbody>
+    </table>
+</div>

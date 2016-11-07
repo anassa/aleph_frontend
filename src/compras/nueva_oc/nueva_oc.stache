@@ -1,0 +1,701 @@
+<div class="container-fluid">
+	<div>
+
+	<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class="active">
+				<a href="#datos" aria-controls="data" role="tab" data-toggle="tab">
+					Datos
+				</a>
+			</li>
+			<li role="presentation">
+				<a href="#remitos" aria-controls="refer" role="tab" data-toggle="tab">
+					Remitos
+				</a>
+			</li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="datos">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								Busqueda de articulos
+							</div>
+							<div class="panel-body">
+								<div class="filters">
+									<form class="form-inline">
+										<div class="row">
+											<div class="col-md-3">
+												<p>
+													<strong>
+														Datos del Proveedor
+													</strong>
+												</p>
+											</div>
+											<div class="col-md-9">
+												<p>
+													<strong>
+														Datos del articulo
+													</strong>
+												</p>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-3">
+												<input type="text" class="form-control" name="provider" placeholder="Nombre del Proveedor">
+											</div>
+											<div class="form-group col-md-3">
+												<input type="text" class="form-control" name="item" placeholder="Nombre del articulo">
+											</div>
+											<div class="form-group col-md-3">
+												<input type="text" class="form-control" name="code" placeholder="Codigo del articulo">
+											</div>
+											<button type="submit" class="btn btn-primary">Buscar</button>
+										</div>
+									</form>
+								</div>
+								<div class="division"></div>
+								<div class="results">
+									<div class="well">
+										<table class="table">
+											<thead>
+												<tr>
+													<th>
+														Codigo
+													</th>
+													<th>
+														Nombre
+													</th>
+													<th>
+														Costo ($)
+													</th>
+													<th>
+														Stock
+													</th>
+													<th>
+														Min
+													</th>
+													<th>
+														Max
+													</th>
+													<th>
+														Unidad
+													</th>
+													<th>
+														Alarma
+													</th>
+													<th>
+														Accion
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>
+														1
+													</td>
+													<td>
+														hilo DRIMA
+													</td>
+													<td>
+														4.50
+													</td>
+													<td>
+														59
+													</td>
+													<td>
+														100
+													</td>
+													<td>
+														500
+													</td>
+													<td>
+														Unidad
+													</td>
+													<td>
+														<span class="label label-danger">
+															Min
+														</span>
+													</td>
+													<td>
+														<a class="text-center text-info">
+															<i class="fa fa-plus-circle" aria-hidden="true"></i>
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														1
+													</td>
+													<td>
+														hilo pesponto
+													</td>
+													<td>
+														3.80
+													</td>
+													<td>
+														57
+													</td>
+													<td>
+														40
+													</td>
+													<td>
+														300
+													</td>
+													<td>
+														Unidad
+													</td>
+													<td>
+														<span class="label label-danger">
+															Min
+														</span>
+													</td>
+													<td>
+														<a class="text-center text-info">
+															<i class="fa fa-plus-circle" aria-hidden="true"></i>
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														1
+													</td>
+													<td>
+														hilo sisal
+													</td>
+													<td>
+														3.50
+													</td>
+													<td>
+														12
+													</td>
+													<td>
+														50
+													</td>
+													<td>
+														400
+													</td>
+													<td>
+														Unidad
+													</td>
+													<td>
+													</td>
+													<td>
+														<a class="text-center text-info">
+															<i class="fa fa-plus-circle" aria-hidden="true"></i>
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														1
+													</td>
+													<td>
+														aguja nro 1
+													</td>
+													<td>
+														0.50
+													</td>
+													<td>
+														10
+													</td>
+													<td>
+														100
+													</td>
+													<td>
+														500
+													</td>
+													<td>
+														Unidad
+													</td>
+													<td>
+														<span class="label label-danger">
+															Min
+														</span>
+													</td>
+													<td>
+														<a class="text-center text-info">
+															<i class="fa fa-plus-circle" aria-hidden="true"></i>
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														1
+													</td>
+													<td>
+														aguja nro 2
+													</td>
+													<td>
+														1.50
+													</td>
+													<td>
+														80
+													</td>
+													<td>
+														100
+													</td>
+													<td>
+														500
+													</td>
+													<td>
+														Unidad
+													</td>
+													<td>
+														<span class="label label-danger">
+															Min
+														</span>
+													</td>
+													<td>
+														<a class="text-center text-info">
+															<i class="fa fa-plus-circle" aria-hidden="true"></i>
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														1
+													</td>
+													<td>
+														aguja nro 3
+													</td>
+													<td>
+														2.50
+													</td>
+													<td>
+														320
+													</td>
+													<td>
+														100
+													</td>
+													<td>
+														500
+													</td>
+													<td>
+														Par
+													</td>
+													<td>
+													</td>
+													<td>
+														<a class="text-center text-info">
+															<i class="fa fa-plus-circle" aria-hidden="true"></i>
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														1
+													</td>
+													<td>
+														hilo CADENA
+													</td>
+													<td>
+														10.00
+													</td>
+													<td>
+														410
+													</td>
+													<td>
+														100
+													</td>
+													<td>
+														500
+													</td>
+													<td>
+														Unidad
+													</td>
+													<td>
+													</td>
+													<td>
+														<a class="text-center text-info">
+															<i class="fa fa-plus-circle" aria-hidden="true"></i>
+														</a>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														1
+													</td>
+													<td>
+														hilo GUTERMAN
+													</td>
+													<td>
+														4.50
+													</td>
+													<td>
+														700
+													</td>
+													<td>
+														100
+													</td>
+													<td>
+														500
+													</td>
+													<td>
+														Unidad
+													</td>
+													<td>
+														<span class="label label-warning">
+															Max
+														</span>
+													</td>
+													<td>
+														<a class="text-center text-info">
+															<i class="fa fa-plus-circle" aria-hidden="true"></i>
+														</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<nav aria-label="Page navigation">
+										<ul class="pagination">
+											<li>
+												<a href="#" aria-label="Previous">
+													<span aria-hidden="true">&laquo;</span>
+												</a>
+											</li>
+											<li><a href="#">1</a></li>
+											<li><a href="#">2</a></li>
+											<li><a href="#">3</a></li>
+											<li><a href="#">4</a></li>
+											<li><a href="#">5</a></li>
+											<li>
+												<a href="#" aria-label="Next">
+													<span aria-hidden="true">&raquo;</span>
+												</a>
+											</li>
+										</ul>
+									</nav>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="panel panel-default order">
+							<div class="panel-heading">
+								Orden de compra
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-8">
+										<h4>
+											Makor
+										</h4>
+										<p>
+											<strong>
+												CUIL:	
+											</strong>
+											30-71469789-7
+											<strong>
+												Telefono:	
+											</strong>
+											0341 425-4500
+										</p>
+										<p>
+											<strong>
+												Direccion:	
+											</strong>
+											Ituzaingo 566, El Rosario, Santa Fe
+										</p>
+										<p>
+											<strong>
+												Mail:	
+											</strong>
+											makorsa@makorsa.com.ar
+										</p>
+									</div>
+									<div class="col-md-4">
+										<span class="label label-success detail">
+											Entrega en 30 dias
+										</span>
+										<span class="label label-info detail">
+											Acepta cheques
+										</span>
+									</div>
+								</div>
+								<div class="division"></div>
+								<div class="row">
+									<div class="col-md-12">
+										<form class="form">
+											<label>
+												Oservacion
+											</label>
+											<textarea class="form-control" rows="2"></textarea>
+										</form>
+									</div>
+								</div>
+								<div class="division"></div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="well">
+											<table class="table">
+												<thead>
+													<tr>
+														<th>
+															Codigo
+														</th>
+														<th>
+															Nombre
+														</th>
+														<th>
+															Costo ($)
+														</th>
+														<th>
+															Cantidad
+														</th>
+														<th>
+															Accion
+														</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>
+															1
+														</td>
+														<td>
+															hilo DRIMA
+														</td>
+														<td>
+															7.00
+														</td>
+														<td>
+															<input type="text" name="quantity[0]" class="form-control col-md-1" value="4">
+														</td>
+														<td>
+															<a class="text-center text-danger">
+																<i class="fa fa-minus-circle" aria-hidden="true"></i>
+															</a>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															1
+														</td>
+														<td>
+															hilo CADENA
+														</td>
+														<td>
+															17.00
+														</td>
+														<td>
+															<input type="text" name="quantity[0]" class="form-control col-md-1" value="1">
+														</td>
+														<td>
+															<a class="text-center text-danger">
+																<i class="fa fa-minus-circle" aria-hidden="true"></i>
+															</a>
+														</td>
+													</tr>
+												</tbody>
+												<tfoot>
+													<tr>
+														<td colspan="4" class="text-right">
+															Total
+														</td>
+														<td>
+															$45.50
+														</td>
+													</tr>
+												</tfoot>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<nav aria-label="Page navigation">
+											<ul class="pagination">
+												<li>
+													<a href="#" aria-label="Previous">
+														<span aria-hidden="true">&laquo;</span>
+													</a>
+												</li>
+												<li><a href="#">1</a></li>
+												<li><a href="#">2</a></li>
+												<li><a href="#">3</a></li>
+												<li><a href="#">4</a></li>
+												<li><a href="#">5</a></li>
+												<li>
+													<a href="#" aria-label="Next">
+														<span aria-hidden="true">&raquo;</span>
+													</a>
+												</li>
+											</ul>
+										</nav>
+									</div>
+									<div class="col-md-6 clearfix">
+										<button class="btn btn-danger pull-right">
+											Cancelar
+										</button>
+										<button class="btn btn-primary pull-right padded-right">
+											Registrar
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="remitos">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="radio">
+							<label>
+								<input type="radio" name="nroremito" value="1234-23" checked>
+								1234-23
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="nroremito" value="1654-09" checked>
+								1654-09
+							</label>
+						</div>
+					</div>
+					<div class="col-md-9">
+						<div class="well">
+							<table class="table">
+								<caption>
+									Fecha Remito: 04/02/2016
+								</caption>
+								<thead>
+									<tr>
+										<th>Articulo</th>
+										<th>Unidad Medida</th>
+										<th>Cantidad Pedida</th>
+										<th>Cantidad Recibida</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											hilo CADENA
+										</td>
+										<td>
+											Caja
+										</td>
+										<td>
+											20
+										</td>
+										<td>
+											20
+										</td>
+									</tr>
+									<tr>
+										<td>
+											hilo sisal
+										</td>
+										<td>
+											Caja
+										</td>
+										<td>
+											34
+										</td>
+										<td>
+											30
+										</td>
+									</tr>
+									<tr>
+										<td>
+											aguja nro 4
+										</td>
+										<td>
+											Docena
+										</td>
+										<td>
+											3
+										</td>
+										<td>
+											3
+										</td>
+									</tr>
+									<tr>
+										<td>
+											aguja nro 7
+										</td>
+										<td>
+											Docena
+										</td>
+										<td>
+											3
+										</td>
+										<td>
+											2
+										</td>
+									</tr>
+									<tr>
+										<td>
+											aguja lana nro 4
+										</td>
+										<td>
+											Par
+										</td>
+										<td>
+											10
+										</td>
+										<td>
+											10
+										</td>
+									</tr>
+									<tr>
+										<td>
+											aguja lana nro 5
+										</td>
+										<td>
+											Par
+										</td>
+										<td>
+											20
+										</td>
+										<td>
+											20
+										</td>
+									</tr>
+									<tr>
+										<td>
+											aguja lana nro 6
+										</td>
+										<td>
+											Par
+										</td>
+										<td>
+											20
+										</td>
+										<td>
+											20
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<nav aria-label="Page navigation">
+							<ul class="pagination">
+								<li>
+									<a href="#" aria-label="Previous">
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+								</li>
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li>
+									<a href="#" aria-label="Next">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
