@@ -3,6 +3,9 @@ import Map from 'can/map/';
 import 'can/map/define/';
 import './login.less!';
 import template from './login.stache!';
+import 'bootstrap/js/button.js'
+
+import Usuarios from 'aleph-frontend/models/usuarios';
 
 export const ViewModel = Map.extend(
 	{
@@ -24,22 +27,26 @@ export default Component.extend(
 
 				$button.button('loading');
 
-				setTimeout(
-					function()
-					{
-						$button.button('reset');
-
-						$('aleph-home').viewModel()
-							.attr(
-								'user'
-							,	{
-									username: can.$('form.form-signin input[name=username]').val()
-								}
-							)
-						
-					}
-				,	1500
-				)
+				Usuarios
+					.authenticate(
+						can.$('form.form-signin input[name=username]').val()
+					,	can.$('form.form-signin input[name=password]').val()
+					).then(
+						function(result)
+						{
+							can.$('aleph-home')
+								.viewModel()
+									.attr(
+										'user'
+									,	new Usuarios(result.data)
+									)
+						}
+					).catch(
+						function(error)
+						{
+							$button.button('reset');
+						}
+					);
 			}
 		}
 	,	template

@@ -6,7 +6,7 @@
 		<title>{{title}}</title>
 	</head>
 	<body>
-		<can-import from="bootstrap/less/bootstrap.less!" />
+		<can-import from="aleph-frontend/bootstrap.theme.css!" />
 		<can-import from="font-awesome/less/font-awesome.less!" />
 		<can-import from="aleph-frontend/styles.less!" />
 		<can-import from="aleph-frontend/app" export-as="viewModel" />

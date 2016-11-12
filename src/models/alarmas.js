@@ -2,7 +2,7 @@ import can from 'can';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
 import 'can/map/define/define';
-import feathers from 'aleph-frontend/feathers'; // Import the feathers instance.
+import feathers from 'aleph-frontend/feathers';
 
 export const Alarmas = can.Map.extend({
 	define: {}

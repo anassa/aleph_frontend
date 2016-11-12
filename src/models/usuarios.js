@@ -2,10 +2,36 @@ import can from 'can';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
 import 'can/map/define/define';
+import feathers from 'aleph-frontend/feathers';
 
-export const Usuarios = can.Map.extend({
-  define: {}
-});
+export const Usuarios
+=	can.Map.extend(
+		{
+			authenticate: function(username,password)
+			{
+				return	feathers
+							.authenticate(
+								{
+									type:		'local'
+								,	username:	username
+								,	password:	password
+								}
+							);
+			}
+		}
+	,	{
+			define:
+			{
+
+			}
+		,	logout: function()
+			{
+				return	feathers
+							.logout()
+
+			}
+		}
+	);
 
 Usuarios.List = can.List.extend({
   Map: Usuarios

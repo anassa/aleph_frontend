@@ -27,8 +27,7 @@
       "lib": "src"
     },
     "configDependencies": [
-      "live-reload",
-      "node_modules/can-zone/register"
+     "node_modules/can-zone/register"
     ],
     "npmAlgorithm": "flat",
     "bundle": [
