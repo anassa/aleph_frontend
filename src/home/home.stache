@@ -392,7 +392,7 @@
 						</label>
 						<div class="col-sm-10">
 							<p class="form-control-static">
-								asalas
+								{{username}}
 							</p>
 						</div>
 					</div>
@@ -407,13 +407,18 @@
 							<input type="password" class="form-control" name="cpassword" placeholder="Confirmar la contraseña">
 						</div>
 					</div>
+					{{#passwordError}}
+					<div class="alert alert-danger" role="alert">
+						{{.}}
+					</div>
+					{{/passwordError}}
 				</form>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">
 					Cancelar
 				</button>
-				<button type="button" class="btn btn-primary">
+				<button type="button" class="btn btn-primary" data-loading-text="Guardando..." ($click)="updateUser( %element )">
 					Guardar
 				</button>
 			</div>
@@ -442,9 +447,9 @@
 				<button type="button" class="btn btn-default" data-dismiss="modal">
 					Cancelar
 				</button>
-				<a type="button" class="btn btn-danger log-me-out" data-dismiss="modal" href="{{routeUrl page='/'}}">
+				<button type="button" class="btn btn-danger" data-loading-text="Saliendo..." ($click)="destroySession( %element )">
 					Salir
-				</a>
+				</button>
 			</div>
 		</div>
 	</div>

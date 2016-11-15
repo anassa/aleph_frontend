@@ -12,6 +12,34 @@ export const ViewModel = Map.extend(
 		define:
 		{
 		}
+	,	login: function(el)
+		{
+			var $button = $(el);
+
+			$button.button('loading');
+
+			Usuarios
+				.login(
+					can.$('form.form-signin input[name=username]').val()
+				,	can.$('form.form-signin input[name=password]').val()
+				).then(
+					function()
+					{
+						can.$('aleph-home').viewModel()
+							.attr(
+								'user'
+							,	Usuarios.getSession()
+							);
+
+						can.route.attr('page','home');
+					}
+				).catch(
+					function(error)
+					{
+						$button.button('reset');
+					}
+				);
+		}
 	}
 );
 
@@ -19,36 +47,6 @@ export default Component.extend(
 	{
 		tag:		'aleph-login'
 	,	viewModel:	ViewModel
-	,	events:
-		{
-			'.signin click': function(el, ev) {
-
-				var $button = $(el);
-
-				$button.button('loading');
-
-				Usuarios
-					.authenticate(
-						can.$('form.form-signin input[name=username]').val()
-					,	can.$('form.form-signin input[name=password]').val()
-					).then(
-						function(result)
-						{
-							can.$('aleph-home')
-								.viewModel()
-									.attr(
-										'user'
-									,	new Usuarios(result.data)
-									)
-						}
-					).catch(
-						function(error)
-						{
-							$button.button('reset');
-						}
-					);
-			}
-		}
 	,	template
 	}
 );

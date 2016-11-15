@@ -18,5 +18,7 @@ const feathers = new Feathers({
 	// Store the token in a cookie for SSR by default. 
 ,	ssr: true
 });
+
+window.feathers = feathers;
  
 export default feathers;

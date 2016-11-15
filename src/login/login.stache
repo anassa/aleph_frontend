@@ -20,7 +20,7 @@
 				</h2>
 				<input name="username" type="text" class="form-control" placeholder="Usuario" autofocus="">
 				<input name="password" type="password" class="form-control" placeholder="Contraseña">
-				<button class="btn btn-lg btn-primary btn-block signin" data-loading-text="Ingresando...">
+				<button class="btn btn-lg btn-primary btn-block" data-loading-text="Ingresando..." ($click)="login( %element )">
 					Ingresar
 				</button>
 			</form>

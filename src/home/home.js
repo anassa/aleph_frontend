@@ -4,6 +4,8 @@ import 'can/map/define/';
 import './home.less!';
 import template from './home.stache!';
 import 'bootstrap/dist/js/bootstrap.js'
+import 'bootstrap-notify/bootstrap-notify.js'
+import 'lodash/lodash.js'
 
 import Usuarios from 'aleph-frontend/models/usuarios';
 
@@ -13,9 +15,101 @@ export const ViewModel = Map.extend(
 		{
 			user:
 			{
-				value: undefined
+				value: function()
+				{
+					return	Usuarios.getSession();
+				}
 			,	serialize:	false
 			}
+		,	passwordError:
+			{
+				value:	undefined
+			,	type:	'string'
+			}
+		}
+	,	updateUser: function(el)
+		{
+			var	$button
+			=	$(el)
+			,	$modal
+			=	$(el).parents('.modal');
+
+			$button.button('loading');
+
+			var newPassword
+			=	$modal.find('input[name=password]').val()
+			,	confirmPassword
+			=	$modal.find('input[name=cpassword]').val();
+
+			this.attr('passwordError',null);
+
+			if (newPassword === confirmPassword) {
+				this.attr('user').attr('password',newPassword).save()
+					.then(
+						function()
+						{
+							$button.button('reset');
+							$modal.modal('hide');
+							can.$.notify(
+								{
+									message:	'Contraseña actualizada correctamente.' 
+								}
+							,	{
+									type:		'success'
+								,	placement:
+									{
+										from:	'bottom',
+										align:	'right'
+									}
+								}
+							);
+						}
+					,	function()
+						{
+							this.attr('passwordError','Ocurrio un error. Intentelo nuevamente.');
+							$button.button('reset');
+						}
+					)
+			}	else {
+				this.attr('passwordError','Las contraseñas ingresadas no coinciden');
+				$button.button('reset');
+			}
+		}
+	,	destroySession: function(el)
+		{
+			var	self
+			=	this;
+
+			var $modal
+			=	$(el).parents('.modal');
+
+			Usuarios.logout()
+				.then(
+					function()
+					{
+						$modal.modal('hide');
+						self.attr('user',null);
+						self.attr('passwordError',null);
+						can.route.removeAttr('page');
+						can.route.removeAttr('section');
+					}
+				,	function()
+					{
+						can.$.notify(
+							{
+								message:	'Ocurrio un error. Intentelo nuevamente.' 
+							}
+						,	{
+								type:		'danger'
+							,	placement:
+								{
+									from:	'bottom',
+									align:	'right'
+								}
+							}
+						);
+					}
+				)
 		}
 	}
 );

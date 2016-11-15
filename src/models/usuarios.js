@@ -7,27 +7,41 @@ import feathers from 'aleph-frontend/feathers';
 export const Usuarios
 =	can.Map.extend(
 		{
-			authenticate: function(username,password)
+			login: function(username,password)
 			{
-				return	feathers
-							.authenticate(
+				return	feathers.authenticate(
+							{
+								type:		'local'
+							,	username:	username
+							,	password:	password
+							}
+						).then(
+							function(result)
+							{
+								feathers.storage.setItem('user',JSON.stringify(result.data))
+							}
+						);
+			}
+		,	logout: function()
+			{
+				return	feathers.logout()
+							.then(
+								function()
 								{
-									type:		'local'
-								,	username:	username
-								,	password:	password
+									feathers.storage.clear()
 								}
 							);
+			}
+		,	getSession: function()
+			{
+				return	feathers.getSession()
+						?	new Usuarios(JSON.parse(feathers.storage.getItem('user')))
+						:	false
 			}
 		}
 	,	{
 			define:
 			{
-
-			}
-		,	logout: function()
-			{
-				return	feathers
-							.logout()
 
 			}
 		}
