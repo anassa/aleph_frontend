@@ -21,23 +21,25 @@
 				<form>
 					<div class="row">
 						<div class="col-md-3">
+							<!--
 							<div class="form-group">
 								<label for="codigo">
 									Codigo
 								</label>
 								<input type="text" class="form-control" name="code" value="12121" disabled="disabled">
 							</div>
+							-->
 							<div class="form-group">
 								<label for="codigo">
 									Nombre
 								</label>
-								<input type="text" class="form-control" name="name" placeholder="Nombre">
+								<input type="text" class="form-control" name="name" placeholder="Nombre" {($value)}="articulo.nombre">
 							</div>
 							<div class="form-group">
 								<label for="codigo">
 									Descripcion
 								</label>
-								<input type="text" class="form-control" name="desc" placeholder="Descripcion">
+								<input type="text" class="form-control" name="desc" placeholder="Descripcion" {($value)}="articulo.descripcion">
 							</div>
 						</div>
 						<div class="col-md-3">
@@ -45,19 +47,19 @@
 								<label for="codigo">
 									Stock
 								</label>
-								<input type="text" class="form-control" name="stock" placeholder="Stock">
+								<input type="text" class="form-control" name="stock" placeholder="Stock" {($value)}="articulo.stock">
 							</div>
 							<div class="form-group">
 								<label for="codigo">
 									Stock Minimo
 								</label>
-								<input type="text" class="form-control" name="min" placeholder="Stock Minimo">
+								<input type="text" class="form-control" name="min" placeholder="Stock Minimo" {($value)}="articulo.minimo">
 							</div>
 							<div class="form-group">
 								<label for="codigo">
 									Stock Maximo
 								</label>
-								<input type="text" class="form-control" name="max" placeholder="Stock Maximo">
+								<input type="text" class="form-control" name="max" placeholder="Stock Maximo" {($value)}="articulo.maximo">
 							</div>
 						</div>
 						<div class="col-md-3">
@@ -67,24 +69,26 @@
 								</label>
 								<select class="form-control">
 									<option value="-1">Seleccione una unidad</option>
-									<option value="1">Unidad</option>
-									<option value="2">Metro</option>
-									<option value="3">Centimetro</option>
-									<option value="4">Gramos</option>
-									<option value="5">Kilogramos</option>
+									{{#if unidadesDeMedida.isResolved}}
+										{{#each unidadesDeMedida.value}}
+											<option value="{{_id}}">
+												{{nombre}}
+											</option>
+										{{/each}}
+									{{/{{/if}}}}
 								</select>
 							</div>
 							<div class="form-group">
 								<label for="codigo">
 									Descuento
 								</label>
-								<input type="text" class="form-control" name="discount" placeholder="Descuento">
+								<input type="text" class="form-control" name="discount" placeholder="Descuento" {($value)}="articulo.descuento">
 							</div>
 							<div class="form-group">
 								<label for="codigo">
 									Ajuste de Inventario
 								</label>
-								<input type="text" class="form-control" name="invt" placeholder="Ajuste inventario">
+								<input type="text" class="form-control" name="invt" placeholder="Ajuste inventario" {($value)}="articulo.ajuste">
 							</div>
 						</div>
 						<div class="col-md-3">
@@ -92,20 +96,20 @@
 								<label for="codigo">
 									Precio de costo
 								</label>
-								<input type="text" class="form-control" name="cost" placeholder="Precio de costo">
+								<input type="text" class="form-control" name="cost" placeholder="Precio de costo" {($value)}="articulo.precioCosto">
 							</div>
 							<div class="form-group">
 								<label for="codigo">
 									Precio de venta
 								</label>
-								<input type="text" class="form-control" name="price" placeholder="Precio de venta">
+								<input type="text" class="form-control" name="price" placeholder="Precio de venta" {($value)}="articulo.precioVenta">
 							</div>
 						</div>			
 					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="clearfix">
-								<button type="button" class="btn btn-primary pull-right">
+								<button type="button" class="btn btn-primary pull-right" ($click)="saveArticulo()">
 									Guardar
 								</button>
 							</div>

@@ -4,12 +4,12 @@ import tag from 'can-connect/can/tag/';
 import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 
-export const UnidadesDeMedida = can.Map.extend({
+export const unidadesDeMedida = can.Map.extend({
   define: {}
 });
 
-UnidadesDeMedida.List = can.List.extend({
-  Map: UnidadesDeMedida
+unidadesDeMedida.List = can.List.extend({
+  Map: unidadesDeMedida
 }, {});
 
 export const unidadesDeMedidaConnection
@@ -17,8 +17,8 @@ export const unidadesDeMedidaConnection
 		{
 			url:	feathers.rest('unidadesDeMedida')
 		,	idProp:	'_id'
-		,	Map:	UnidadesDeMedida
-		,	List:	UnidadesDeMedida.List
+		,	Map:	unidadesDeMedida
+		,	List:	unidadesDeMedida.List
 		,	name:	'unidadesDeMedida'
 		}
 	);
@@ -30,4 +30,4 @@ feathers.io.on('unidadesDeMedida removed', unidadesDeMedida => unidadesDeMedidaC
 
 tag('unidadesDeMedida-model', unidadesDeMedidaConnection);
 
-export default UnidadesDeMedida;
+export default unidadesDeMedida;

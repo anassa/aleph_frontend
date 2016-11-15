@@ -4,9 +4,56 @@ import tag from 'can-connect/can/tag/';
 import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 
-export const Articulos = can.Map.extend({
-  define: {}
-});
+import UnidadesDeMedida from 'aleph-frontend/models/unidadesDeMedida';
+
+export const Articulos = can.Map.extend(
+	{}
+,	{
+		define:
+		{
+			nombre:
+			{
+				type: 'string'
+			}
+		,	descripcion:
+			{
+				type: 'string'
+			}
+		,	stock:
+			{
+				type: 'number'
+			}
+		,	minimo:
+			{
+				type: 'number'
+			}
+		,	maximo:
+			{
+				type: 'number'
+			}
+	//	,	unidadMedida:
+	//		{
+	//			type: UnidadesDeMedida
+	//		}
+		,	descuento:
+			{
+				type: 'number'
+			}
+		,	ajuste:
+			{
+				type: 'number'
+			}
+		,	precioCosto:
+			{
+				type: 'number'
+			}
+		,	precioVenta:
+			{
+				type: 'number'
+			}
+		}
+	}
+);
 
 Articulos.List = can.List.extend({
   Map: Articulos

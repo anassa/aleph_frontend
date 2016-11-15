@@ -1,7 +1,7 @@
 import QUnit from 'steal-qunit';
-import UnidadesDeMedida from '../unidadesDeMedida';
+import UnidadesDeMedida from '../unidadesDeMedidas';
 
-QUnit.module('models/unidadesDeMedida');
+QUnit.module('models/unidadesDeMedidas');
 
 QUnit.test('getList', function(){
   stop();
