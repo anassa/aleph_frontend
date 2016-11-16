@@ -7,27 +7,77 @@ import template from './nuevo_articulo.stache!';
 import UnidadesDeMedida from 'aleph-frontend/models/unidadesDeMedida';
 import Articulos from 'aleph-frontend/models/articulos';
 
-export const ViewModel = Map.extend({
-	define:
+export const ViewModel = Map.extend(
 	{
-		unidadesDeMedida:
+		define:
 		{
-			value: function()
+			unidadesDeMedida:
 			{
-				return UnidadesDeMedida.getList()
+				value: function()
+				{
+					return UnidadesDeMedida.getList();
+				}
+			}
+		,	articulo:
+			{
+				value:	Articulos
+			}
+		,	errorMsg:
+			{
+				value:	null
 			}
 		}
-	,	articulo:
+	,	saveArticulo: function(el)
 		{
-			value:	Articulos
-		,	type:	Articulos
+			var $button
+			=	$(el)
+			,	self
+			=	this;
+
+			$button.button('loading');
+
+			window.test = self.attr('articulo')
+
+			self.attr('articulo').save()
+				.then(
+					function()
+					{
+						$button.button('reset');
+						can.$.notify(
+							{
+								message:	'Artículo creado correctamente.' 
+							}
+						,	{
+								type:		'success'
+							,	placement:
+								{
+									from:	'bottom',
+									align:	'right'
+								}
+							}
+						);
+					}
+				,	function(data)
+					{
+						$('#nuevo-articulo-form').find('[name]').each(
+							function()
+							{
+								$(this).parents('.form-group')
+									.removeClass('has-error has-success')
+									.addClass(
+										(data.errors[$(this).attr('name')])
+										?	'has-error'
+										:	'has-success'
+									)
+							}
+						);
+						self.attr('errorMsg','Datos incorrectos, verifique los datos ingresados.');
+						$button.button('reset');
+					}
+				)
 		}
 	}
-,	saveArticulo: function()
-	{
-		console.log(this.attr('articulo'))
-	}
-});
+);
 
 export default Component.extend({
 	tag: 'aleph-stock-nuevo-articulo',
