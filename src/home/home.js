@@ -135,33 +135,6 @@ export default Component.extend(
 
 				$currentTree.toggle(300);
 			}
-		,	'.log-me-out click': function(el, ev)
-			{
-				ev.stopPropagation();
-				ev.preventDefault();
-
-				can.$('aleph-home')
-					.viewModel()
-						.attr('user')
-							.logout();
-
-				$('#modal-salir')
-					.one(
-						'hidden.bs.modal'
-					,	function(e)
-						{
-							can.$('aleph-home')
-								.viewModel()
-									.attr(
-										'user'
-									,	undefined
-									);
-
-							can.route.removeAttr('page');
-							can.route.removeAttr('section');
-						}
-					);
-			}
 		}
 	,	template
 	}

@@ -36,16 +36,16 @@ export const ViewModel = Map.extend(
 
 			$button.button('loading');
 
-			window.test = self.attr('articulo')
-
 			self.attr('articulo').save()
 				.then(
 					function()
 					{
 						$button.button('reset');
+						if (!self.attr('articulo').isNew())
+							$(el).parents('.modal').modal('hide')
 						can.$.notify(
 							{
-								message:	'Artículo creado correctamente.' 
+								message:	'Artículo '+(self.attr('articulo').isNew() ? 'creado' : 'actualizado')+' correctamente.' 
 							}
 						,	{
 								type:		'success'

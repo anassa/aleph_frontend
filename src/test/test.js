@@ -76,3 +76,5 @@ import 'aleph-frontend/stock/nuevo_remito/nuevo_remito_test';
 import 'aleph-frontend/stock/registros_articulo/registros_articulo_test';
 
 import 'aleph-frontend/stock/registros_remito/registros_remito_test';
+
+import 'aleph-frontend/aleph-paginador/aleph-paginador_test';

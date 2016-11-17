@@ -65,8 +65,6 @@ export const connection
 		}
 	);
 
-console.log(connection.save)
-
 feathers.io.on('articulos created', articulos => connection.createInstance(articulos));
 feathers.io.on('articulos updated', articulos => connection.updateInstance(articulos));
 feathers.io.on('articulos patched', articulos => connection.updateInstance(articulos));
