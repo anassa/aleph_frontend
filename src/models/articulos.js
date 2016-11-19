@@ -17,15 +17,22 @@ export const Articulos = can.Map.extend(
 			{
 				set: function(value)
 				{
-					if (value)
-						this.attr(
-							'unidadMedida'
-						,	{
+					this.attr(
+						'unidadMedida'
+					,	(value != -1)
+						?	{
 								_id:	value.split('-')[0]
 							,	nombre:	value.split('-')[1]
 							}
-						)
+						:	undefined
+					)
 					return value;
+				}
+			,	get: function()
+				{
+					return	this.attr('unidadMedida')
+							?	this.attr('unidadMedida._id')+'-'+this.attr('unidadMedida.nombre')
+							:	-1
 				}
 			,	serialize: function()
 				{

@@ -20,6 +20,14 @@
 				<form id="nuevo-articulo-form">
 					<div class="row">
 						<div class="col-md-3">
+							{{^articulo.isNew}}
+							<div class="form-group">
+								<label for="codigo">
+									Codigo
+								</label>
+								<input type="text" class="form-control" name="codigo" placeholder="Codigo" {($value)}="articulo.codigo" disabled>
+							</div>
+							{{/articulo.isNew}}
 							<div class="form-group">
 								<label for="codigo">
 									Nombre *
@@ -75,6 +83,18 @@
 								</label>
 								<input type="text" class="form-control" name="descuento" placeholder="Descuento" {($value)}="articulo.descuento">
 							</div>
+							{{^articulo.isNew}}
+							<div class="form-group">
+								<label for="codigo">
+									Ajuste de Inventario
+								</label>
+								<div class="material-switch pull-right">
+									<input id="ajuste-switch" name="ajuste-switch" type="checkbox" {{#if articulo.ajuste}} checked {{/if}}/>
+									<label for="ajuste-switch" class="label-default"></label>
+								</div>
+								<input type="text" class="form-control" name="ajuste" placeholder="Ajuste de inventario" {($value)}="articulo.ajuste" {{^if articulo.ajuste}} disabled {{/if}}>						
+							</div>
+							{{/articulo.isNew}}
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">

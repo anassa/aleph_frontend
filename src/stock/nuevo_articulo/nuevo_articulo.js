@@ -82,5 +82,19 @@ export const ViewModel = Map.extend(
 export default Component.extend({
 	tag: 'aleph-stock-nuevo-articulo',
 	viewModel: ViewModel,
+	events:
+	{
+		'#ajuste-switch change': function(el)
+		{
+			can.$('[name="ajuste"]')
+				.attr(
+					'disabled'
+				,	(!$(el).is(':checked'))
+					?	'disabled'
+					:	null
+				);
+
+		}
+	},
 	template
 });

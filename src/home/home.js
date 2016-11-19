@@ -5,6 +5,7 @@ import './home.less!';
 import template from './home.stache!';
 import 'bootstrap/dist/js/bootstrap.js'
 import 'bootstrap-notify/bootstrap-notify.js'
+import 'aleph-frontend/bootstrap.switch.css!'
 import 'lodash/lodash.js'
 
 import Usuarios from 'aleph-frontend/models/usuarios';

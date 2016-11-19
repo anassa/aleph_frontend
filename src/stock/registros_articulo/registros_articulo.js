@@ -159,29 +159,6 @@ export default Component.extend(
 	{
 		tag: 'aleph-stock-registros-articulo'
 	,	viewModel: ViewModel
-	,	events:
-		{
-			'#paginador-articulos .changePage click': function(ev, el)
-			{
-				console.log("A")
-			}
-			/*
-			inserted: function()
-			{
-				var self
-				=	this;
-
-				$(this.element).on(
-					'change'
-				,	function(ev, skip)
-					{
-						console.log(skip)
-						self.viewModel.attr('articulos',Articulos.getList({$skip: skip}))
-					}
-				)
-			}
-			*/
-		}
 	,	template
 	}
 );
