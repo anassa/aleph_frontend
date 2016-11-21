@@ -209,7 +209,7 @@
 	</div>
 </div>
 {{^articulo.isNew}}
-<div class="modal-footer">
+<div class="modal-footer innter-footer-fix">
 	<button type="button" class="btn btn-secondary" data-dismiss="modal">
 		Cerrar
 	</button>

@@ -5,6 +5,7 @@ import './registros_articulo.less!';
 import template from './registros_articulo.stache!';
 
 import Articulos from 'aleph-frontend/models/articulos';
+import 'aleph-frontend/util/func.js';
 
 export const ViewModel = Map.extend(
 	{
@@ -40,7 +41,6 @@ export const ViewModel = Map.extend(
 							'change'
 						,	function()
 							{
-								console.log(query.serialize())
 								self
 									.attr(
 										'articulos'
@@ -78,23 +78,7 @@ export const ViewModel = Map.extend(
 			this.attr(
 				'query.$or'
 			,	value.length
-				?	fields.map(
-						function(f)
-						{
-							var	fquery
-							=	{};
-
-							fquery[f.name]
-							=	(f.type == String)
-								?	{
-										$regex:		value
-									,	$options:	'i'
-									}
-								:	(f.type(value) || undefined)
-
-							return	 fquery
-						}
-					)
+				?	createQuery(fields,value)
 				:	undefined
 			);
 		}
