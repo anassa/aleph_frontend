@@ -38,11 +38,16 @@ export const ViewModel = Map.extend(
 
 			self.attr('articulo').save()
 				.then(
-					function()
+					function(data)
 					{
 						$button.button('reset');
-						if (!self.attr('articulo').isNew())
+
+						if (!self.attr('articulo').isNew()) {
 							$(el).parents('.modal').modal('hide')
+							self.attr('articulo.tempStock',data.stock);
+							can.$('#ajuste-switch').click();
+						}
+
 						can.$.notify(
 							{
 								message:	'Artículo '+(self.attr('articulo').isNew() ? 'creado' : 'actualizado')+' correctamente.' 
@@ -71,7 +76,9 @@ export const ViewModel = Map.extend(
 									)
 							}
 						);
+
 						self.attr('errorMsg','Datos incorrectos, verifique los datos ingresados.');
+
 						$button.button('reset');
 					}
 				)
@@ -86,6 +93,11 @@ export default Component.extend({
 	{
 		'#ajuste-switch change': function(el)
 		{
+			if (!$(el).is(':checked')) {
+				this.viewModel.attr('articulo.ajuste','');
+				can.$('[name="ajuste"]').val('')
+			}
+
 			can.$('[name="ajuste"]')
 				.attr(
 					'disabled'

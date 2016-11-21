@@ -25,7 +25,7 @@
 								<label for="codigo">
 									Codigo
 								</label>
-								<input type="text" class="form-control" name="codigo" placeholder="Codigo" {($value)}="articulo.codigo" disabled>
+								<input type="text" class="form-control" name="codigo" placeholder="Codigo" {($value)}="articulo.padedCodigo" disabled>
 							</div>
 							{{/articulo.isNew}}
 							<div class="form-group">
@@ -46,7 +46,7 @@
 								<label for="codigo">
 									Stock *
 								</label>
-								<input type="text" class="form-control" name="stock" placeholder="Stock" {($value)}="articulo.stock">
+								<input type="text" class="form-control" name="stock" placeholder="Stock" {($value)}="articulo.stock" {{^articulo.isNew}} disabled {{/articulo.isNew}}>
 							</div>
 							<div class="form-group">
 								<label for="codigo">

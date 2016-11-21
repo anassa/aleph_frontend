@@ -7,6 +7,7 @@ import 'lodash/lodash.js'
 
 import UnidadesDeMedida from 'aleph-frontend/models/unidadesDeMedida';
 import Usuarios from 'aleph-frontend/models/usuarios';
+import 'aleph-frontend/util/func';
 
 export const Articulos = can.Map.extend(
 	{}
@@ -38,7 +39,35 @@ export const Articulos = can.Map.extend(
 				{
 					return undefined;
 				}
-			}	
+			}
+		,	tempStock:
+			{
+				serialize: function()
+				{
+					return undefined;
+				}
+			}
+		,	ajuste:
+			{
+				set: function(value)
+				{
+					this.attr(
+						'stock'
+					,	value || this.attr('tempStock')
+					);
+				}
+			,	serialize: function()
+				{
+					return undefined;
+				}
+			}
+		,	padedCodigo:
+			{
+				get: function()
+				{
+					return pad(this.attr('codigo'),4)
+				}
+			}
 		}
 	,	init: function ()
 		{
@@ -53,6 +82,8 @@ export const Articulos = can.Map.extend(
 				,	permisos:	currentUser.attr('permisos')
 				}
 			);
+
+			this.attr('tempStock',this.attr('stock'))
 		}
 	}
 );

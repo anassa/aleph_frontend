@@ -18,3 +18,8 @@ function createQuery(fields,value)
 				}
 			);
 }
+
+function pad (num, max) {
+  str = num.toString();
+  return str.length < max ? pad("0" + str, max) : str;
+}

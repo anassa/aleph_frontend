@@ -22,7 +22,7 @@
 			{{#each articulos.value}}
 				<tr>
 					<td>
-						{{codigo}}
+						{{padedCodigo}}
 					</td>
 					<td>
 						<span class="text-underline">
