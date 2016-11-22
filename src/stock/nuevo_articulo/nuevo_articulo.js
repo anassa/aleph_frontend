@@ -27,6 +27,21 @@ export const ViewModel = Map.extend(
 				value:	null
 			}
 		}
+	,	toggleAjuste: function(el)
+		{
+			if (!$(el).is(':checked')) {
+				this.attr('articulo.ajuste','');
+				$('[name="ajuste"]').val('')
+			}
+
+			$('[name="ajuste"]')
+				.attr(
+					'disabled'
+				,	(!$(el).is(':checked'))
+					?	'disabled'
+					:	null
+				);
+		}
 	,	saveArticulo: function(el)
 		{
 			var $button
@@ -104,24 +119,5 @@ export const ViewModel = Map.extend(
 export default Component.extend({
 	tag: 'aleph-stock-nuevo-articulo',
 	viewModel: ViewModel,
-	events:
-	{
-		'#ajuste-switch change': function(el)
-		{
-			if (!$(el).is(':checked')) {
-				this.viewModel.attr('articulo.ajuste','');
-				$('[name="ajuste"]').val('')
-			}
-
-			$('[name="ajuste"]')
-				.attr(
-					'disabled'
-				,	(!$(el).is(':checked'))
-					?	'disabled'
-					:	null
-				);
-
-		}
-	},
 	template
 });
