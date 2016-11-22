@@ -29,13 +29,13 @@
 							</div>
 							{{/articulo.isNew}}
 							<div class="form-group">
-								<label for="codigo">
+								<label for="nombre">
 									Nombre *
 								</label>
 								<input type="text" class="form-control" name="nombre" placeholder="Nombre" {($value)}="articulo.nombre">
 							</div>
 							<div class="form-group">
-								<label for="codigo">
+								<label for="descripcion">
 									Descripcion
 								</label>
 								<input type="text" class="form-control" name="descripcion" placeholder="Descripcion" {($value)}="articulo.descripcion">
@@ -43,19 +43,19 @@
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
-								<label for="codigo">
+								<label for="stock">
 									Stock *
 								</label>
 								<input type="text" class="form-control" name="stock" placeholder="Stock" {($value)}="articulo.stock" {{^articulo.isNew}} disabled {{/articulo.isNew}}>
 							</div>
 							<div class="form-group">
-								<label for="codigo">
+								<label for="minimo">
 									Stock Minimo *
 								</label>
 								<input type="text" class="form-control" name="minimo" placeholder="Stock Minimo" {($value)}="articulo.minimo">
 							</div>
 							<div class="form-group">
-								<label for="codigo">
+								<label for="maximo">
 									Stock Maximo *
 								</label>
 								<input type="text" class="form-control" name="maximo" placeholder="Stock Maximo" {($value)}="articulo.maximo">
@@ -63,7 +63,7 @@
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
-								<label for="codigo">
+								<label for="unidadMedida">
 									Unidad de Medida
 								</label>
 								<select class="form-control" name="unidadMedida" {($value)}="articulo.unidadDeMedidaToParse">
@@ -78,14 +78,14 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="codigo">
+								<label for="descuento">
 									Descuento
 								</label>
 								<input type="text" class="form-control" name="descuento" placeholder="Descuento" {($value)}="articulo.descuento">
 							</div>
 							{{^articulo.isNew}}
 							<div class="form-group">
-								<label for="codigo">
+								<label for="ajuste">
 									Ajuste de Inventario
 								</label>
 								<div class="material-switch pull-right">
@@ -98,13 +98,13 @@
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
-								<label for="codigo">
+								<label for="precioCosto">
 									Precio de costo
 								</label>
 								<input type="text" class="form-control" name="precioCosto" placeholder="Precio de costo" {($value)}="articulo.precioCosto">
 							</div>
 							<div class="form-group">
-								<label for="codigo">
+								<label for="precioVenta">
 									Precio de venta
 								</label>
 								<input type="text" class="form-control" name="precioVenta" placeholder="Precio de venta" {($value)}="articulo.precioVenta">
