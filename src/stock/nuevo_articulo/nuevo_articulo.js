@@ -42,13 +42,15 @@ export const ViewModel = Map.extend(
 					{
 						$button.button('reset');
 
+						self.attr('articulo.codigo',data.codigo);
+
 						if (!self.attr('articulo').isNew()) {
 							$(el).parents('.modal').modal('hide')
 							self.attr('articulo.tempStock',data.stock);
-							can.$('#ajuste-switch').click();
+							$('#ajuste-switch').click();
 						}
 
-						can.$.notify(
+						$.notify(
 							{
 								message:	'Artículo '+(self.attr('articulo').isNew() ? 'creado' : 'actualizado')+' correctamente.' 
 							}
@@ -61,6 +63,19 @@ export const ViewModel = Map.extend(
 								}
 							}
 						);
+
+						$('#nuevo-articulo-form').find('[name]').each(
+							function()
+							{
+								$(this).parents('.form-group')
+									.removeClass('has-error has-success')
+							}
+						);
+
+						self.attr('articulo', new Articulos());
+
+						self.attr('errorMsg', '');
+
 					}
 				,	function(data)
 					{
@@ -95,10 +110,10 @@ export default Component.extend({
 		{
 			if (!$(el).is(':checked')) {
 				this.viewModel.attr('articulo.ajuste','');
-				can.$('[name="ajuste"]').val('')
+				$('[name="ajuste"]').val('')
 			}
 
-			can.$('[name="ajuste"]')
+			$('[name="ajuste"]')
 				.attr(
 					'disabled'
 				,	(!$(el).is(':checked'))

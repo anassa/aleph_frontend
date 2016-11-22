@@ -40,6 +40,14 @@ export const Articulos = can.Map.extend(
 					return undefined;
 				}
 			}
+		,	stock:
+			{
+				set: function(value)
+				{
+					this.attr('tempStock',value)
+					return value;
+				}
+			}
 		,	tempStock:
 			{
 				serialize: function()
@@ -55,6 +63,7 @@ export const Articulos = can.Map.extend(
 						'stock'
 					,	value || this.attr('tempStock')
 					);
+					return value;
 				}
 			,	serialize: function()
 				{
@@ -63,9 +72,11 @@ export const Articulos = can.Map.extend(
 			}
 		,	padedCodigo:
 			{
-				get: function()
+				get: function(value)
 				{
-					return pad(this.attr('codigo'),4)
+					return	this.attr('codigo')
+							?	pad(this.attr('codigo'),4)
+							:	value;
 				}
 			}
 		}
@@ -82,8 +93,6 @@ export const Articulos = can.Map.extend(
 				,	permisos:	currentUser.attr('permisos')
 				}
 			);
-
-			this.attr('tempStock',this.attr('stock'))
 		}
 	}
 );
@@ -99,15 +108,15 @@ export const connection
 		,	idProp:	'_id'
 		,	Map:	Articulos
 		,	List:	Articulos.List
-		,	name:	'articulos'
+		,	name:	'articulo'
 		}
 	);
+
+tag('articulos-model', connection);
 
 feathers.io.on('articulos created', articulos => connection.createInstance(articulos));
 feathers.io.on('articulos updated', articulos => connection.updateInstance(articulos));
 feathers.io.on('articulos patched', articulos => connection.updateInstance(articulos));
 feathers.io.on('articulos removed', articulos => connection.destroyInstance(articulos));
-
-tag('articulos-model', connection);
 
 export default Articulos;

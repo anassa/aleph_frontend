@@ -15,7 +15,10 @@ export const ViewModel = Map.extend(
 			{
 				value: function()
 				{
-					return	Articulos.getList();
+					var self
+					=	this;
+
+					return	Articulos.getList()
 				}
 			}
 		,	tempArticulo:
@@ -103,7 +106,16 @@ export const ViewModel = Map.extend(
 					{
 						$button.button('reset');
 						$modal.modal('hide');
-						can.$.notify(
+
+						self
+							.attr(
+								'articulos'
+							,	Articulos.getList(
+									self.attr('query').serialize()
+								)
+							);
+
+						$.notify(
 							{
 								message:	'Artículo eliminado correctamente.' 
 							}
@@ -119,7 +131,7 @@ export const ViewModel = Map.extend(
 					}
 				,	function(data)
 					{
-						can.$.notify(
+						$.notify(
 							{
 								message:	'Ocurrio un error al eliminar el articulo. Intentelo nuevamente.' 
 							}

@@ -33,8 +33,7 @@ export const ViewModel = Map.extend(
 
 						can.route.attr('page','home');
 					}
-				).catch(
-					function(error)
+				,	function(error)
 					{
 						$button.button('reset');
 					}
