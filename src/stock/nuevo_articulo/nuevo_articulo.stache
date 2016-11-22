@@ -125,6 +125,9 @@
 								<button type="button" class="btn btn-primary pull-right" data-loading-text="Guardando..." ($click)="saveArticulo( %element )">
 									Guardar
 								</button>
+								<button type="button" class="btn btn-warning pull-right cancel" ($click)="cancelArticulo( %element )">
+									Cancelar
+								</button>
 							</div>
 						</div>
 						{{/articulo.isNew}}

@@ -42,6 +42,10 @@ export const ViewModel = Map.extend(
 					:	null
 				);
 		}
+	,	cancelArticulo: function()
+		{
+			this.attr('articulo', new Articulos({}));
+		}
 	,	saveArticulo: function(el)
 		{
 			var $button
@@ -51,15 +55,19 @@ export const ViewModel = Map.extend(
 
 			$button.button('loading');
 
+			var	newMode
+			=	self.attr('articulo').isNew();
+
 			self.attr('articulo').save()
 				.then(
 					function(data)
 					{
 						$button.button('reset');
 
-						self.attr('articulo.codigo',data.codigo);
 
-						if (!self.attr('articulo').isNew()) {
+						if (newMode) {
+							self.attr('articulo', new Articulos({}));
+						} else {
 							$(el).parents('.modal').modal('hide')
 							self.attr('articulo.tempStock',data.stock);
 							$('#ajuste-switch').click();
@@ -67,7 +75,7 @@ export const ViewModel = Map.extend(
 
 						$.notify(
 							{
-								message:	'Artículo '+(self.attr('articulo').isNew() ? 'creado' : 'actualizado')+' correctamente.' 
+								message:	'Artículo '+(newMode ? 'creado' : 'actualizado')+' correctamente.' 
 							}
 						,	{
 								type:		'success'
