@@ -89,7 +89,7 @@
 									Ajuste de Inventario
 								</label>
 								<div class="material-switch pull-right">
-									<input id="ajuste-switch" name="ajuste-switch" type="checkbox" {{#if articulo.ajuste}} checked {{/if}}/>
+									<input id="ajuste-switch" name="ajuste-switch" type="checkbox" {{#if articulo.ajuste}} checked {{/if}} ($change)="toggleAjuste( %element )"/>
 									<label for="ajuste-switch" class="label-default"></label>
 								</div>
 								<input type="text" class="form-control" name="ajuste" placeholder="Ajuste de inventario" {($value)}="articulo.ajuste" {{^if articulo.ajuste}} disabled {{/if}}>						
