@@ -87,8 +87,6 @@ export const ViewModel = Map.extend(
 							}
 						);
 
-						self.attr('articulo', new Articulos());
-
 						self.attr('errorMsg', '');
 
 					}
