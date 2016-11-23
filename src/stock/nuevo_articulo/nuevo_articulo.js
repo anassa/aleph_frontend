@@ -7,6 +7,8 @@ import template from './nuevo_articulo.stache!';
 import UnidadesDeMedida from 'aleph-frontend/models/unidadesDeMedida';
 import Articulos from 'aleph-frontend/models/articulos';
 
+window.Articulos = Articulos
+
 export const ViewModel = Map.extend(
 	{
 		define:
@@ -63,7 +65,6 @@ export const ViewModel = Map.extend(
 					function(data)
 					{
 						$button.button('reset');
-
 
 						if (newMode) {
 							self.attr('articulo', new Articulos({}));

@@ -23,7 +23,7 @@ export const ViewModel = Map.extend(
 			}
 		,	tempArticulo:
 			{
-				value: Articulos	
+				value: Articulos
 			}
 		,	query:
 			{
@@ -87,7 +87,7 @@ export const ViewModel = Map.extend(
 		}
 	,	setTempArticulo: function(art)
 		{
-			this.attr('tempArticulo',art);
+			this.attr('tempArticulo',new Articulos(art.serialize()));
 		}
 	,	destroyArticulo: function(el)
 		{
