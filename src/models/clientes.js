@@ -3,9 +3,27 @@ import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
 import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
+import 'lodash/lodash.js'
 
-export const Clientes = can.Map.extend({
+import Usuarios from 'aleph-frontend/models/usuarios';
+
+export const Clientes = can.Map.extend(
+	{},
+{
   define: {}
+  ,	init: function (){
+		var	currentUser
+		=	Usuarios.getSession();
+
+		this.attr(
+			'usuario', {
+					_id:		currentUser.attr('_id')
+				,	username: 	currentUser.attr('username')
+				,	permisos:	currentUser.attr('permisos')
+			}
+		);
+	}
+	
 });
 
 Clientes.List = can.List.extend({
