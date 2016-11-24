@@ -1,4 +1,4 @@
-<can-component tag="aleph-paginador">
+<can-component tag="aleph-paginador-list">
 	<style type="less">
 		display: block;
 		
@@ -35,38 +35,31 @@
 			{
 				define:
 				{
-					configured:
+					data:
 					{
-						value: false
-					}
-				,	data:
-					{
-						value: undefined
-					,	set: function(promise)
+						value: can.List
+					,	set: function(list)
 						{
-							var	self
-							=	this;
-
-							promise
-								.then(
-									function(result)
-									{
-										if (!self.attr('configured')) {
-											self.attr('count',result.total)
-											self.attr('offset',result.skip)
-											self.attr('limit',result.limit)
-											self.createPages();
-											self.attr('configured',true)
-										}
-									}
-								);
-
-							return promise;	
+							this.attr('count', list.length);
+							this.createPages();
+							return list;
+						}
+					}
+				,	reset:
+					{
+						set: function(r)
+						{
+							if (r) {
+								this.attr('count', 0);
+								this.attr('offset',0);
+								this.createPages();
+							}
+							return r;
 						}
 					}
 				,	count:
 					{
-						value:	Infinity
+						value:	0
 					}
 				,	offset:
 					{
@@ -94,6 +87,13 @@
 						}
 					)
 					page.attr('active',true)
+					this.attr(
+						'query.current'
+					,	{
+							firstPage:	this.attr('offset')
+						,	lastPage:	this.attr('offset') + this.attr('limit') - 1
+						}
+					)
 				}
 				// create pages array
 			,	createPages: function()
@@ -147,21 +147,43 @@
 							?	Math.ceil( this.attr('count')	/ this.attr('limit') )
 							:	1;
 				}
+			,	updateQuery: function()
+				{
+					this.attr(
+						'query.current'
+					,	{
+							firstPage:	this.attr('offset')
+						,	lastPage:	this.attr('offset') + this.attr('limit') - 1
+						}
+					);
+				}
 			,	init: function()
 				{
 					var	self
 					=	this;
 
-					this
+					this.attr('data')
 						.bind(
-							'offset'
-						,	function(obj,newVal,oldVal)
+							'change'
+						,	function(event, index, action)
 							{
-								if (newVal != undefined) {
-									self.attr('query.$skip',newVal);
+								self.attr('count',self.attr('data').length)
+								self.createPages()
+								switch(action) {
+									case 'remove':
+										self.attr(
+											'query.current'
+										,	{
+												firstPage:	self.attr('offset')
+											,	lastPage:	self.attr('offset') + self.attr('limit') - 1
+											}
+										);
+									case 'add':
+										self.setPage(self.attr('pages').attr(self.attr('pages').length-1))
+										break;
 								}
 							}
-						)
+						);
 				}
 			}
 		);
