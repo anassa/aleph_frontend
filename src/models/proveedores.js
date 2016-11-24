@@ -4,12 +4,63 @@ import tag from 'can-connect/can/tag/';
 import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 
-export const Proveedores = can.Map.extend({
-  define: {}
-});
+import Cuentas from 'aleph-frontend/models/cuentas';
+
+export const Proveedores = can.Map.extend(
+	{
+		define:
+		{
+			articulos:
+			{
+				value: can.List
+			,	serialize: function(list)
+				{
+					return	list.map(
+								function(i)
+								{
+									return	{
+												_id:			i._id
+											,	codigo:			i.codigo
+											,	nombre:			i.nombre
+											,	descripcion:	i.descripcion
+											}
+								}
+							).serialize()
+				}
+			}
+		,	etiquetas:
+			{
+				value: can.List
+			,	serialize: function(list)
+				{
+					return 	list.map(
+								function(i)
+								{
+									return	{
+												tipo:			i.tipo
+											,	descripcion:	i.descripcion
+											}
+								}
+							).serialize()
+				}
+			}
+		,	etiquetasToParse:
+			{
+				serialize: function()
+				{
+					return undefined;
+				}
+			}
+		,	cuenta:
+			{
+				value:	Cuentas
+			}
+		}
+	}
+);
 
 Proveedores.List = can.List.extend({
-  Map: Proveedores
+	Map: Proveedores
 }, {});
 
 export const proveedoresConnection
