@@ -1,5 +1,3 @@
-<!-- <p>{{message}	}</p> -->
-<legend>{{message}}</legend>
 <!-- <div class="division"></div> -->
 <form id="nuevo-cliente-form">
 	
@@ -79,7 +77,16 @@
 				
 			</div>
 
-			<button type="button" class="btn btn-primary pull-right" ($click)="saveCliente( %element )">Registrar</button>		
+			<!-- Movida para editar -->
+			<!-- <div class="modal-footer innter-footer-fix"> -->
+				<!-- Boton de guardar articulo -->
+					<button type="button" class="btn btn-primary pull-right" ($click)="saveCliente( %element )">Guardar</button>		
+				<!-- Boton de cancelar -->
+				{{^cliente.isNew}}
+					<button type="button" class="btn btn-default pull-right">Cancelar</button>		
+				{{/cliente.isNew}}
+			<!-- </div> -->
+			
 		</div>	
 	</div>			
 </form><!-- ./id cliente form -->
