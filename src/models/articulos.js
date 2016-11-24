@@ -7,6 +7,7 @@ import 'lodash/lodash.js'
 
 import UnidadesDeMedida from 'aleph-frontend/models/unidadesDeMedida';
 import Usuarios from 'aleph-frontend/models/usuarios';
+
 import 'aleph-frontend/util/func';
 
 export const Articulos = can.Map.extend(
@@ -38,6 +39,36 @@ export const Articulos = can.Map.extend(
 			,	serialize: function()
 				{
 					return undefined;
+				}
+			}
+		,	proveedores:
+			{
+				value: can.List
+			,	set: function(l)
+				{
+					l.map(
+						function(p, i)
+						{
+							p.attr(
+								'visible'
+							,	(i >= 0 && i <= 4)
+							);
+						}
+					)
+					return l;
+				}
+			,	serialize: function(list)
+				{
+					return	list.map(
+								function(i)
+								{
+									return	{
+												_id:			i._id
+											,	denominacion:	i.denominacion
+											,	etiquetas:		i.etiquetas
+											}
+								}
+							).serialize()
 				}
 			}
 		,	stock:
@@ -79,6 +110,14 @@ export const Articulos = can.Map.extend(
 							:	value;
 				}
 			}
+		,	visible:
+			{
+				value: true
+			,	serialize: function()
+				{
+					return undefined;
+				}
+			}
 		}
 	,	init: function ()
 		{
@@ -114,9 +153,33 @@ export const connection
 
 tag('articulos-model', connection);
 
-feathers.io.on('articulos created', articulos => connection.createInstance(articulos));
-feathers.io.on('articulos updated', articulos => connection.updateInstance(articulos));
-feathers.io.on('articulos patched', articulos => connection.updateInstance(articulos));
-feathers.io.on('articulos removed', articulos => connection.destroyInstance(articulos));
+feathers.io.on(
+	'articulos created'
+,	function(art){
+		connection.createInstance(art);
+	}
+);
+
+feathers.io.on(
+	'articulos updated'
+,	function(art){
+		connection.updateInstance(art);
+		console.log(art.attr('_id'))
+	}
+);
+
+feathers.io.on(
+	'articulos patched'
+,	function(art){
+		connection.updateInstance(art);
+	}
+);
+
+feathers.io.on(
+	'articulos removed'
+,	function(art){
+		connection.destroyInstance(art);
+	}
+);
 
 export default Articulos;

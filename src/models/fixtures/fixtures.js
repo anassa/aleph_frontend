@@ -27,3 +27,5 @@ import 'aleph-frontend/models/fixtures/unidadesDeMedidas';
 import 'aleph-frontend/models/fixtures/usuarios';
 
 import 'aleph-frontend/models/fixtures/ventas';
+
+import 'aleph-frontend/models/fixtures/etiquetas';

@@ -27,3 +27,5 @@ import 'aleph-frontend/models/tests/unidadesDeMedida_test';
 import 'aleph-frontend/models/tests/usuarios_test';
 
 import 'aleph-frontend/models/tests/ventas_test';
+
+import 'aleph-frontend/models/etiquetas_test';

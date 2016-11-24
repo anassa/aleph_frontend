@@ -15,9 +15,6 @@ export const ViewModel = Map.extend(
 			{
 				value: function()
 				{
-					var self
-					=	this;
-
 					return	Articulos.getList()
 				}
 			}
@@ -87,7 +84,7 @@ export const ViewModel = Map.extend(
 		}
 	,	setTempArticulo: function(art)
 		{
-			this.attr('tempArticulo',new Articulos(art.serialize()));
+			this.attr('tempArticulo', new Articulos(art.serialize()));
 		}
 	,	destroyArticulo: function(el)
 		{
