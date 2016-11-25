@@ -23,3 +23,7 @@ function pad (num, max) {
   str = num.toString();
   return str.length < max ? pad("0" + str, max) : str;
 }
+
+Array.prototype.random = function () {
+    return this[Math.floor(Math.random() * this.length)]
+}

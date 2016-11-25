@@ -44,9 +44,18 @@ export const Proveedores = can.Map.extend(
 							).serialize()
 				}
 			}
-		,	etiquetasToParse:
+		,	parsedEtiquetas:
 			{
-				serialize: function()
+				value: function()
+				{
+					return	this.attr('etiquetas').map(
+								function(e)
+								{
+									return	e.descripcion
+								}
+							).join(', ')
+				}
+			,	serialize: function()
 				{
 					return undefined;
 				}

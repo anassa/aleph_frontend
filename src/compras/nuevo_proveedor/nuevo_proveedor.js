@@ -8,6 +8,8 @@ import Proveedores from 'aleph-frontend/models/proveedores';
 import Articulos from 'aleph-frontend/models/articulos';
 import 'aleph-frontend/util/func.js';
 
+const labels = ['label-default','label-primary','label-success','label-info','label-warning','label-danger'];
+
 export const ViewModel = Map.extend({
 	define:
 		{
@@ -175,6 +177,21 @@ export const ViewModel = Map.extend({
 					?	'disabled'
 					:	null
 				);
+		}
+	,	checkEtiquetas: function(el)
+		{
+			this.attr(
+				'proveedor.etiquetas'
+			,	can.$(el).val().split(',').map(
+					function(t,i)
+					{
+						return	{
+									descripcion:	t.trim()
+								,	tipo:			labels[i%labels.length]
+								} 
+					}
+				)
+			);
 		}
 	,	cancelProveedor: function()
 		{

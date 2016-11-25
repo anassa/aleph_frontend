@@ -33,6 +33,21 @@
 								</label>
 								<input type="text" class="form-control" name="dni_cuit" placeholder="CUIT" {($value)}="proveedor.dni_cuit">
 							</div>
+							<div class="form-group">
+								<label for="etiquetas">
+									Etiquetas
+								</label>
+								<input type="text" class="form-control" name="etiquetas" placeholder="Etiquetas" ($keyup)="checkEtiquetas( %element )" {($value)}="proveedor.parsedEtiquetas">
+							</div>
+							<div class="form-group">
+								<p>
+									{{#each proveedor.etiquetas}}
+										<span class="label label-tag {{tipo}}">
+											{{descripcion}}
+										</span>
+									{{/each}}
+								</p>
+							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
@@ -75,13 +90,6 @@
 							</div>
 						</div>						
 					</div>
-					<can-import from="aleph-frontend/util/etiquetas.component!">
-						{{#if isPending}}
-							Loading...
-						{{else}}
-							<aleph-etiquetas {etiquetas}="proveedor.etiquetas"/>
-						{{/if}}
-					</can-import>
 					<div class="row">
 						<div class="col-md-12">
 							{{#errorMsg}}
