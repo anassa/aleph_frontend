@@ -26,6 +26,10 @@ export const ViewModel = Map.extend({
 		, successMsg: {
 			value:	null
 		}
+		// Para ver si se setea la cuenta.
+		, lockCuenta:{
+			value: true
+		}
 	}
 
 	// Funcion para guardar los datos. Ejecutado como ($click)="saveCliente( %element )"
@@ -102,6 +106,24 @@ export const ViewModel = Map.extend({
 		}
 		// Se resetea el boton.
 		$button.button('reset');
+	}
+
+	// Hacer el cambio magico del botoncito de las cuentas
+	, switchCuenta: function(el){
+		
+		/*No se para que mierda hago esto, pero
+		neri lo hace, asi que ya fue ...*/
+		var self = this
+		
+		// Capturamos el atributo global lock cuenta
+		var lock = self.attr('lockCuenta')
+		
+		// Cambiamos el valor actual de lock cuenta (atributo global), por su valor opuesto.
+		self.attr('lockCuenta', lock = !lock)
+		
+		// Cambiamos el atributo disabled de la movida.
+		$("#limiteCuenta").prop('disabled', lock);
+		
 	}
 	
 	

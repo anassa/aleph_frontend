@@ -5,12 +5,19 @@ import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 import 'lodash/lodash.js'
 
+// Importar clases de modelo
 import Usuarios from 'aleph-frontend/models/usuarios';
+import Cuentas from 'aleph-frontend/models/cuentas';
 
-export const Clientes = can.Map.extend(
-	{},
-{
-  define: {}
+export const Clientes = can.Map.extend({
+	define: 
+  	{
+  		cuenta:
+		{
+			value:	Cuentas
+		}
+		
+	}
   ,	init: function (){
 		var	currentUser
 		=	Usuarios.getSession();

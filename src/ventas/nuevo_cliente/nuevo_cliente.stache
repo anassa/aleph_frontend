@@ -40,18 +40,24 @@
 			<div class="form-group">
 				<label class="control-label">Mail</label>
 				<input type="text" class="form-control" name="mail" placeholder="Mail..." {($value)}="cliente.mail" >
-			</div> -->
+			</div> -->		
 
 			<div class="form-group">
-				<label class="control-label">Cuenta</label>
-				<input type="text" class="form-control" name="cuenta" placeholder="Cuenta..." {($value)}="cliente.cuenta" >
-			</div>
+				
+				<label for="cuenta">
+					Cuenta
+				</label>
+				
+				<!-- Switch magico de las cuentas -->
+				<div class="material-switch pull-right">
+					<input id="cuenta-switch" name="cuenta-switch" type="checkbox" ($change) = "switchCuenta()"/>
+					<label for="cuenta-switch" class="label-default"></label>
+				</div>
 
-			<div class="form-group">
-				<label class="control-label">Limite de cuenta</label>
-				<input type="text" class="form-control" name="limiteCuenta" placeholder="Limite..." {($value)}="cliente.limitecuenta" >
+				<!-- Formulario limite de cuenta -->
+				<input type="text" class="form-control" id = "limiteCuenta" name="limiteCuenta" placeholder="Limite de cuenta" disabled/>
 			</div>
-
+			
 		</div>
 	</div>
 	<div class="container">	
@@ -86,11 +92,11 @@
 					<button type="button" class="btn btn-primary pull-right" ($click)="saveCliente( %element )">Guardar</button>		
 				<!-- Boton de cancelar -->
 				{{^cliente.isNew}}
-					<button type="button" class="btn btn-default pull-right">Cancelar</button>		
+					<button type="button" class="btn btn-warning pull-right">Cancelar</button>		
 				{{/cliente.isNew}}
 				{{#if cliente.isNew}}
 					<!-- Se hace un reload a cara de perro -->
-					<button type="button" class="btn btn-default pull-right" onclick="location.reload()">Cancelar</button>
+					<button type="button" class="btn btn-warning pull-right" onclick="location.reload()">Cancelar</button>
 				{{/if}}		
 			<!-- </div> -->
 			
