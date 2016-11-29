@@ -153,7 +153,7 @@
 									<thead>
 										<tr>
 											<th>Proveedor</th>
-											<th>Etiquetas</th>
+											<th>CUIT</th>
 											<th>Accion</th>
 										</tr>
 									</thead>
@@ -165,11 +165,7 @@
 														{{denominacion}}
 													</td>
 													<td>
-														{{#each etiquetas}}
-															<span class="label {{tipo}} label-tag">
-																{{descripcion}}
-															</span>
-														{{/each}}
+														{{dni_cuit}}
 													</td>
 													<td>
 														<a ($click)="addProveedor(.)">
@@ -206,7 +202,7 @@
 									<thead>
 										<tr>
 											<th>Proveedor</th>
-											<th>Etiquetas</th>
+											<th>CUIT</th>
 											<th>Accion</th>
 										</tr>
 									</thead>
@@ -218,11 +214,7 @@
 													{{denominacion}}
 												</td>
 												<td>
-													{{#each etiquetas}}
-															<span class="label {{tipo}} label-tag">
-																{{descripcion}}
-															</span>
-														{{/each}}
+													{{dni_cuit}}
 												</td>
 												<td>
 													<a ($click)="removeProveedor( %element )">
