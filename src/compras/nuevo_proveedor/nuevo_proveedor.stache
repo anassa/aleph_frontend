@@ -170,6 +170,7 @@
 										<aleph-paginador 
 											{data}="articulos"
 											{query}="query"
+											{reset}="resetPaginadorArticulos"
 											/>
 									{{/if}}
 								</can-import>

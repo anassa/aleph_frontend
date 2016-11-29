@@ -25,6 +25,16 @@ export const ViewModel = Map.extend({
 				{
 					return	Articulos.getList()
 				}
+			,	set: function(a)
+				{
+					this.attr('resetPaginadorArticulos',!this.attr('resetPaginadorArticulos'));
+					$('a[href="#datos"]').click();
+					return a;
+				}
+			}
+		,	resetPaginadorArticulos:
+			{
+				value:	false
 			}
 		,	resetPaginador:
 			{

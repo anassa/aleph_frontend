@@ -49,11 +49,9 @@
 					{
 						set: function(r)
 						{
-							if (r) {
-								this.attr('count', 0);
-								this.attr('offset',0);
-								this.createPages();
-							}
+							this.attr('count', 0);
+							this.attr('offset',0);
+							this.createPages();
 							return r;
 						}
 					}

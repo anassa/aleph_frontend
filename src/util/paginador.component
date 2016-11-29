@@ -64,9 +64,29 @@
 							return promise;	
 						}
 					}
+				,	reset:
+					{
+						set: function(r)
+						{
+							var	self
+							=	this;
+
+							this.attr('data')
+								.then(
+									function(result)
+									{
+										self.attr('count',result.total)
+										self.attr('offset',0)
+										self.attr('limit',result.limit)
+										self.createPages();
+									}
+								)
+							return r;
+						}
+					}
 				,	count:
 					{
-						value:	Infinity
+						value:	0
 					}
 				,	offset:
 					{

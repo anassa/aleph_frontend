@@ -22,6 +22,12 @@ export const ViewModel = Map.extend(
 		,	articulo:
 			{
 				value:	Articulos
+			,	set: function(a)
+				{
+					this.attr('resetPaginadorProveedores',!this.attr('resetPaginadorProveedores'));
+					$('a[href="#datos"]').click();
+					return a;
+				}
 			}
 		,	proveedores:
 			{
@@ -29,6 +35,10 @@ export const ViewModel = Map.extend(
 				{
 					return	Proveedores.getList()
 				}
+			}
+		,	resetPaginadorProveedores:
+			{
+				value:	false
 			}
 		,	resetPaginador:
 			{
