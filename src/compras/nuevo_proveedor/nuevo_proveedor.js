@@ -253,6 +253,9 @@ export const ViewModel = Map.extend({
 					}
 				,	function(data)
 					{
+						if (data.code == 409)
+							data.errors[data.message.match( /\w*_1\w*/)[0].split('_1')[0]] = 'duplicado'
+
 						$('#nuevo-proveedor-form').find('[name]').each(
 							function()
 							{
