@@ -59,6 +59,25 @@ export const ViewModel = Map.extend(
 				value:	undefined
 			}
 		}
+	,	init: function()
+		{
+			var self
+			=	this;
+			
+			Articulos.bind(
+				'updated'
+			,	function()
+				{
+					self
+						.attr(
+							'articulos'
+						,	Articulos.getList(
+								self.attr('query').serialize()
+							)
+						)
+				}
+			);
+		}
 	,	search: function(value)
 		{
 			var value

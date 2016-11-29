@@ -78,9 +78,9 @@
 									<input id="cuenta-switch" name="cuenta-switch" type="checkbox" {{^if proveedor.cuenta.isNew}} checked {{/if}} ($change)="toggleCuenta( %element )"/>
 									<label for="cuenta-switch" class="label-default"></label>
 								</div>
-								{{^proveedor.isNew}}
-									<input type="text" class="form-control" name="cuenta" placeholder="Cuenta" {($value)}="proveedor.cuenta" {{#if proveedor.cuenta.isNew}} disabled {{/if}}>
-								{{/proveedor.isNew}}
+								{{^proveedor.cuenta.isNew}}
+									<input type="text" class="form-control" name="cuenta" placeholder="Cuenta" {($value)}="proveedor.cuenta.codigo" {{#if proveedor.cuenta.isNew}} disabled {{/if}}>
+								{{/proveedor.cuenta.isNew}}
 							</div>
 							<div class="form-group">
 								<label for="tope">

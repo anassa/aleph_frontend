@@ -140,7 +140,7 @@ Articulos.List = can.List.extend({
   Map: Articulos
 }, {});
 
-export const connection
+export const articulosConnection
 =	superMap(
 		{
 			url:	feathers.rest('articulos')
@@ -151,35 +151,13 @@ export const connection
 		}
 	);
 
-tag('articulos-model', connection);
+tag('articulos-model', articulosConnection);
 
-feathers.io.on(
-	'articulos created'
-,	function(art){
-		connection.createInstance(art);
-	}
-);
 
-feathers.io.on(
-	'articulos updated'
-,	function(art){
-		connection.updateInstance(art);
-		console.log(art.attr('_id'))
-	}
-);
+feathers.io.on('articulos created', articulos => articulosConnection.createInstance(articulos));
+feathers.io.on('articulos updated', articulos => articulosConnection.updateInstance(articulos));
+feathers.io.on('articulos patched', articulos => articulosConnection.updateInstance(articulos));
+feathers.io.on('articulos removed', articulos => articulosConnection.destroyInstance(articulos));
 
-feathers.io.on(
-	'articulos patched'
-,	function(art){
-		connection.updateInstance(art);
-	}
-);
-
-feathers.io.on(
-	'articulos removed'
-,	function(art){
-		connection.destroyInstance(art);
-	}
-);
 
 export default Articulos;

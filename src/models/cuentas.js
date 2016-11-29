@@ -4,12 +4,20 @@ import tag from 'can-connect/can/tag/';
 import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 
-export const Cuentas = can.Map.extend({
-  define: {}
-});
+export const Cuentas = can.Map.extend(
+	{
+		define:
+		{
+			montoLimite:
+			{
+				value:	""
+			}
+		}
+	}
+);
 
 Cuentas.List = can.List.extend({
-  Map: Cuentas
+	Map: Cuentas
 }, {});
 
 export const cuentasConnection

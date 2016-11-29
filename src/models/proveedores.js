@@ -31,6 +31,19 @@ export const Proveedores = can.Map.extend(
 		,	etiquetas:
 			{
 				value: can.List
+			,	set: function(e)
+				{	
+					this.attr(
+						'parsedEtiquetas'
+					,	e.map(
+							function(e)
+							{
+								return	e.descripcion
+							}
+						).join(', ')
+					);
+					return e;
+				}
 			,	serialize: function(list)
 				{
 					return 	list.map(
@@ -46,16 +59,7 @@ export const Proveedores = can.Map.extend(
 			}
 		,	parsedEtiquetas:
 			{
-				value: function()
-				{
-					return	this.attr('etiquetas').map(
-								function(e)
-								{
-									return	e.descripcion
-								}
-							).join(', ')
-				}
-			,	serialize: function()
+				serialize: function()
 				{
 					return undefined;
 				}
@@ -63,6 +67,10 @@ export const Proveedores = can.Map.extend(
 		,	cuenta:
 			{
 				value:	Cuentas
+			,	serialize: function(c)
+				{
+					return (c.montoLimite && c.montoLimite.length) ? c.attr() : undefined;
+				}
 			}
 		}
 	}
