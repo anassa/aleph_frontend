@@ -2,7 +2,8 @@
 <form id="nuevo-cliente-form">
 	
 	<div class="container">
-		
+		<div class="col-md-3">
+		</div>
 		<!-- columna 1 -->
 		<div class="col-md-3">		
 			
@@ -21,17 +22,17 @@
 				<input type="text" class="form-control" name="dni" placeholder="d.n.i..." {($value)}="cliente.dni" >
 			</div>
 
-			<div class="form-group">	
+			<!-- <div class="form-group">	
 				<label class="control-label">Domicilio</label>
 				<input type="text" class="form-control" name="domicilio" placeholder="Domicilio..." {($value)}="cliente.domicilio">
-			</div>
+			</div> -->
 
 		</div><!-- ./col md3 -->
 		
 		<!-- columna 2 -->
 		<div class="col-md-3">
 
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label class="control-label">Telefono</label>
 				<input type="text" class="form-control" name="telefono" placeholder="Telefono..." {($value)}="cliente.telefono" >
 			</div>	
@@ -39,21 +40,29 @@
 			<div class="form-group">
 				<label class="control-label">Mail</label>
 				<input type="text" class="form-control" name="mail" placeholder="Mail..." {($value)}="cliente.mail" >
-			</div>
+			</div> -->		
 
 			<div class="form-group">
-				<label class="control-label">Cuenta</label>
-				<input type="text" class="form-control" name="cuenta" placeholder="Cuenta..." {($value)}="cliente.cuenta" >
-			</div>
+				
+				<label for="cuenta">
+					Cuenta
+				</label>
+				
+				<!-- Switch magico de las cuentas -->
+				<div class="material-switch pull-right">
+					<input id="cuenta-switch" name="cuenta-switch" type="checkbox" ($change) = "switchCuenta()"/>
+					<label for="cuenta-switch" class="label-default"></label>
+				</div>
 
-			<div class="form-group">
-				<label class="control-label">Limite de cuenta</label>
-				<input type="text" class="form-control" name="limiteCuenta" placeholder="Limite..." {($value)}="cliente.limitecuenta" >
+				<!-- Formulario limite de cuenta -->
+				<input type="text" class="form-control" id = "limiteCuenta" name="limiteCuenta" placeholder="Limite de cuenta" disabled/>
 			</div>
-
+			
 		</div>
 	</div>
 	<div class="container">	
+		<div class="col-md-3">
+		</div>
 		<div class="col-md-6">	
 			
 			<div class="form-group">
@@ -83,8 +92,12 @@
 					<button type="button" class="btn btn-primary pull-right" ($click)="saveCliente( %element )">Guardar</button>		
 				<!-- Boton de cancelar -->
 				{{^cliente.isNew}}
-					<button type="button" class="btn btn-default pull-right">Cancelar</button>		
+					<button type="button" class="btn btn-warning pull-right">Cancelar</button>		
 				{{/cliente.isNew}}
+				{{#if cliente.isNew}}
+					<!-- Se hace un reload a cara de perro -->
+					<button type="button" class="btn btn-warning pull-right" onclick="location.reload()">Cancelar</button>
+				{{/if}}		
 			<!-- </div> -->
 			
 		</div>	

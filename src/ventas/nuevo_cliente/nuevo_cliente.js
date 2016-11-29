@@ -8,7 +8,7 @@ import template from './nuevo_cliente.stache!';
 import Clientes from 'aleph-frontend/models/clientes';
 
 export const ViewModel = Map.extend({
-	
+
 	// Datos que retorna el js
 	define: {
 		message: {
@@ -25,6 +25,10 @@ export const ViewModel = Map.extend({
 		// Error para controlar ...
 		, successMsg: {
 			value:	null
+		}
+		// Para ver si se setea la cuenta.
+		, lockCuenta:{
+			value: true
 		}
 	}
 
@@ -46,29 +50,48 @@ export const ViewModel = Map.extend({
 		.parents('.form-group')
 		.removeClass('has-error')
 
-		// Vamos a controlar....
+		// Vamos a controlar.... a lo negro...
 		if(
-			// Si el nombr efue seteado
+			// Si el nombre fue seteado.
 			self.attr('cliente').nombre
 			&&
-			// Y el apellido
+			// Y el apellido.
 			self.attr('cliente').apellido
 			&&
-			// Y el dni... prque son campos obligatorios
+			// Y el dni... prque basicamente son campos obligatorios.
 			self.attr('cliente').dni
 
 		){
-			// Si todo anda bien, guardar.
-			self.attr('cliente').save()
-			
-			// cuando guardaste, agarra y setea el mensaje que guardaste....
-			.then(
-				function()
-				{
-					self.attr('successMsg','Nuevo cliente creado')
-				}
-			)
+			Clientes
+				// Traemos todos los clientes con el dni seteado en 
+				// el formulario.
+				.getList({ dni: self.attr('cliente').dni })
+				.then(
+					function(lista)
+					{
+						console.log("longitud de la lista")
+						console.log(lista.length)
+						// si la lista tiene longitud > 0 es porque ya existe un flaco...
+						if(lista.length > 0)
+						{
 
+							console.log("Entra en el if")
+							// Como todo anda mal Lanzar error.
+							self.attr('errorMsg','Ya existe un cliente con el mismo número de DNI.');
+
+						}else{
+							
+							// Sino... Es porque no hay ningun flaco registrado...
+							// Podes crear el nuevo cliente.
+							// Entonces lo guardamos.
+							self.attr('cliente').save()
+							
+							// cuando guardaste, agarra y setea el mensaje que guardaste....
+							self.attr('successMsg','Nuevo cliente creado')
+						}
+					}
+				)
+					
 		}else{
 			
 			// Si no complete los mensajes... decirle al tipo, que todo anda mal
@@ -84,6 +107,25 @@ export const ViewModel = Map.extend({
 		// Se resetea el boton.
 		$button.button('reset');
 	}
+
+	// Hacer el cambio magico del botoncito de las cuentas
+	, switchCuenta: function(el){
+		
+		/*No se para que mierda hago esto, pero
+		neri lo hace, asi que ya fue ...*/
+		var self = this
+		
+		// Capturamos el atributo global lock cuenta
+		var lock = self.attr('lockCuenta')
+		
+		// Cambiamos el valor actual de lock cuenta (atributo global), por su valor opuesto.
+		self.attr('lockCuenta', lock = !lock)
+		
+		// Cambiamos el atributo disabled de la movida.
+		$("#limiteCuenta").prop('disabled', lock);
+		
+	}
+	
 	
 });
 
