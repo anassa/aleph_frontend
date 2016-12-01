@@ -67,10 +67,6 @@ export const Proveedores = can.Map.extend(
 		,	cuenta:
 			{
 				value:	Cuentas
-			,	serialize: function(c)
-				{
-					return (c.montoLimite && c.montoLimite.length) ? c.attr() : undefined;
-				}
 			}
 		}
 	}
