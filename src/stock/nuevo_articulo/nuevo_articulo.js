@@ -134,6 +134,10 @@ export const ViewModel = Map.extend(
 						name: 'denominacion'
 					,	type: String	
 					}
+				,	{
+						name: 'dni_cuit'
+					,	type: String	
+					}
 				];
 
 			this.attr(
