@@ -16,7 +16,13 @@ export const Clientes = can.Map.extend({
 		{
 			value:	Cuentas
 		}
-		
+	,	nombreCompleto:
+		{
+			get: function()
+			{
+				return this.attr('apellido')+' '+this.attr('nombre')
+			}
+		}
 	}
   ,	init: function (){
 		var	currentUser

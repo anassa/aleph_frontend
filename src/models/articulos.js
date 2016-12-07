@@ -15,7 +15,16 @@ export const Articulos = can.Map.extend(
 ,	{
 		define:
 		{
-			unidadDeMedidaToParse:
+			cantidad:
+			{
+				value:	1
+			,	type:	Number
+			,	serialize: function()
+				{
+					return undefined
+				}
+			}
+		,	unidadDeMedidaToParse:
 			{
 				set: function(value)
 				{
@@ -108,6 +117,34 @@ export const Articulos = can.Map.extend(
 					return	this.attr('codigo')
 							?	pad(this.attr('codigo'),4)
 							:	value;
+				}
+			}
+		,	precioVenta:
+			{
+				value: 0
+			,	type:	Number
+			}
+		,	precioVenta$:
+			{
+				value: 0
+			,	type:	Number
+			,	get: function()
+				{
+					return this.attr('precioVenta').toFixed(2);	
+				}
+			}
+		,	precioCosto:
+			{
+				value: 0
+			,	type:	Number
+			}
+		,	precioCosto$:
+			{
+				value: 0
+			,	type:	Number
+			,	get: function()
+				{
+					return this.attr('precioCosto').toFixed(2);	
 				}
 			}
 		,	visible:

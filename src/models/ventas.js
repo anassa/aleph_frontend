@@ -4,9 +4,142 @@ import tag from 'can-connect/can/tag/';
 import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 
-export const Ventas = can.Map.extend({
-  define: {}
-});
+import Clientes from 'aleph-frontend/models/clientes';
+
+export const Ventas = can.Map.extend(
+	{
+		define:
+		{
+			articulos:
+			{
+				value: can.List
+			,	serialize: function(list)
+				{
+					return	list.map(
+								function(i)
+								{
+									return	{
+												_id:			i._id
+											,	codigo:			i.codigo
+											,	nombre:			i.nombre
+											,	descripcion:	i.descripcion
+											}
+								}
+							).serialize()
+				}
+			,	set: function(articulos)
+				{
+					var	self
+					=	this;
+
+					articulos
+						.bind(
+							'change'
+						,	function()
+							{
+								self.attr(
+									'total'
+								,	articulos.attr()
+										.reduce(
+											function(a, b)
+											{
+												return a + (b.precioVenta || 0);
+											}
+										,	0
+										)
+								)
+							}
+						);
+					
+					return articulos;
+				}
+			}
+		,	formaDePagoToParse:
+			{
+				set: function(value)
+				{
+					if (value != -1)
+					this.attr(
+						'formaPago'
+					,	{
+							codigo:	value.split('-')[0]
+						,	nombre:	value.split('-')[1]
+						}
+					)
+					return value;
+				}
+			,	get: function()
+				{
+					return	this.attr('formaPago')
+							?	this.attr('formaPago.codigo')+'-'+this.attr('formaPago.nombre')
+							:	-1
+				}
+			,	serialize: function()
+				{
+					return undefined;
+				}
+			}
+		,	clienteToFind:
+			{
+				set: function(dni_cliente)
+				{
+					var self
+					=	this;
+
+					Clientes
+						.getList(
+							{
+								dni: dni_cliente
+							}
+						).then(
+							function(clientes)
+							{
+								self.attr('cliente',clientes.attr(0))
+							}
+						)
+
+					return dni_cliente;
+				}
+			}
+		,	cuentaClienteToFind:
+			{
+				set: function(dni_cliente)
+				{
+					var self
+					=	this;
+
+					Clientes
+						.getList(
+							{
+								dni: dni_cliente
+							}
+						).then(
+							function(clientes)
+							{
+								self.attr('formaPago.cliente',clientes.attr(0))
+							}
+						)
+
+					return dni_cliente;
+				}
+			}
+		,	total:
+			{
+				value:	0
+			,	type:	Number
+			}
+		,	total$:
+			{
+				value:	0
+			,	type:	Number
+			,	get: function()
+				{
+					return this.attr('total').toFixed(2);	
+				}
+			}
+		}
+	}
+);
 
 Ventas.List = can.List.extend({
   Map: Ventas
