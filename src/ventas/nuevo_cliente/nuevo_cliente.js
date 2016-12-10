@@ -8,126 +8,144 @@ import template from './nuevo_cliente.stache!';
 import Clientes from 'aleph-frontend/models/clientes';
 
 export const ViewModel = Map.extend({
-
-	// Datos que retorna el js
-	define: {
-		message: {
-	    	value: 'Nuevo Cliente'
-	    }
-	    // Cargamos en la vista una instancia de clientes.
-	    , cliente:{
+	define:
+	{
+		cliente: {
 			value:	Clientes
 		}
-		// Se viene el Cimopu....
+	
 		, errorMsg: {
 			value:	null
 		}
-		// Error para controlar ...
-		, successMsg: {
-			value:	null
-		}
-		// Para ver si se setea la cuenta.
-		, lockCuenta:{
-			value: true
-		}
 	}
+	, toggleCuenta: function(el)
+	{
+			if (!$(el).is(':checked')) {
+				this.attr('cliente.cuenta','');
+				$('[name="tope"]').val('')
+			}
 
-	// Funcion para guardar los datos. Ejecutado como ($click)="saveCliente( %element )"
-	, saveCliente: function(el){
-		
-		var $button = $(el) , self = this;
+			$('[name="cuenta"]')
+				.attr(
+					'disabled'
+				,	(!$(el).is(':checked'))
+					?	'disabled'
+					:	null
+				);
 
-		// Basicamente cambia el formato del boton cuando ejecuto esto.
-		$button.button('loading');
-		
-		// Cada vez que hacemos click se borran las movidas de error.
-		self.attr('errorMsg',null);
-		self.attr('successMsg',null);
-
-		// Negrada multinacional.
-		// Borrar los colores y cosas raras
-		$( "[name=nombre], [name=apellido], [name=dni]")
-		.parents('.form-group')
-		.removeClass('has-error')
-
-		// Vamos a controlar.... a lo negro...
-		if(
-			// Si el nombre fue seteado.
-			self.attr('cliente').nombre
-			&&
-			// Y el apellido.
-			self.attr('cliente').apellido
-			&&
-			// Y el dni... prque basicamente son campos obligatorios.
-			self.attr('cliente').dni
-
-		){
-			Clientes
-				// Traemos todos los clientes con el dni seteado en 
-				// el formulario.
-				.getList({ dni: self.attr('cliente').dni })
-				.then(
-					function(lista)
+			$('[name="tope"]')
+				.attr(
+					'disabled'
+				,	(!$(el).is(':checked'))
+					?	'disabled'
+					:	null
+				);
+	}
+	,	checkEtiquetas: function(el)
+		{
+			this.attr(
+				'cliente.etiquetas'
+			,	can.$(el).val().split(',').map(
+					function(t,i)
 					{
-						console.log("longitud de la lista")
-						console.log(lista.length)
-						// si la lista tiene longitud > 0 es porque ya existe un flaco...
-						if(lista.length > 0)
-						{
-
-							console.log("Entra en el if")
-							// Como todo anda mal Lanzar error.
-							self.attr('errorMsg','Ya existe un cliente con el mismo número de DNI.');
-
-						}else{
-							
-							// Sino... Es porque no hay ningun flaco registrado...
-							// Podes crear el nuevo cliente.
-							// Entonces lo guardamos.
-							self.attr('cliente').save()
-							
-							// cuando guardaste, agarra y setea el mensaje que guardaste....
-							self.attr('successMsg','Nuevo cliente creado')
-						}
+						return	{
+									descripcion:	t.trim()
+								,	tipo:			labels[i%labels.length]
+								} 
 					}
 				)
-					
-		}else{
-			
-			// Si no complete los mensajes... decirle al tipo, que todo anda mal
-			// para que se enoje con la vida....
-			$( "[name=nombre], [name=apellido], [name=dni]")
-			.parents('.form-group')
-			.addClass('has-error')
-
-			// aca seteamos la variable con el error.
-			self.attr('errorMsg','Datos incorrectos, verifique los datos ingresados.');
-			
+			);
 		}
-		// Se resetea el boton.
-		$button.button('reset');
-	}
+	,	cancelCliente: function()
+		{
+			// alert("cancelar cliente")
+			this.attr('cliente', new Clientes({}));
+		}
+	,	saveCliente: function(el)
+		{
+			
+			var $button
+			=	$(el)
+			,	self
+			=	this;
 
-	// Hacer el cambio magico del botoncito de las cuentas
-	, switchCuenta: function(el){
-		
-		/*No se para que mierda hago esto, pero
-		neri lo hace, asi que ya fue ...*/
-		var self = this
-		
-		// Capturamos el atributo global lock cuenta
-		var lock = self.attr('lockCuenta')
-		
-		// Cambiamos el valor actual de lock cuenta (atributo global), por su valor opuesto.
-		self.attr('lockCuenta', lock = !lock)
-		
-		// Cambiamos el atributo disabled de la movida.
-		$("#limiteCuenta").prop('disabled', lock);
-		
+			$button.button('loading');
+
+			var	newMode
+			=	self.attr('cliente').isNew();
+			console.log("nuevo_cliente.js : saveCliente")
+			self.attr('cliente').save()
+				.then(
+					function(data)
+					{
+						
+						// Reseteamos el boton.
+						$button.button('reset');
+						// Si se actualiza un usuario, cerra la ventana modal.
+						// Si no es nuevo.
+						if (!newMode) {
+							// 	// self.attr('cliente', new Cliente({}));
+							// } else {
+							$(el).parents('.modal').modal('hide')
+							$('#cuenta-switch').click();
+						
+						}else{
+							self.attr('cliente', new Clientes({}));
+						}
+
+						console.log("Voy a lanzar notificacion")
+						// Lanzar una notificacion
+						$.notify(
+							{
+								message:	'Cliente '+(newMode ? 'creado' : 'actualizado')+' correctamente.' 
+							}
+							,{
+								type: 'success'
+								, placement:
+								{
+									from: 'bottom',
+									align: 'right'
+								}
+							}
+						);
+
+						$('#nuevo-cliente-form').find('[name]').each(
+							function()
+							{
+								$(this).parents('.form-group')
+									.removeClass('has-error has-success')
+							}
+						);
+
+						self.attr('errorMsg', '');
+
+					}
+				,	function(data)
+					{
+						if (data.code == 409)
+							data.errors[data.message.match( /\w*_1\w*/)[0].split('_1')[0]] = 'duplicado'
+
+						$('#nuevo-cliente-form').find('[name]').each(
+							function()
+							{
+								$(this).parents('.form-group')
+									.removeClass('has-error has-success')
+									.addClass(
+										(data.errors[$(this).attr('name')])
+										?	'has-error'
+										:	'has-success'
+									)
+							}
+						);
+
+						self.attr('errorMsg','Datos incorrectos, verifique los datos ingresados.');
+
+						$button.button('reset');
+					}
+				)
+		}
 	}
-	
-	
-});
+);
 
 export default Component.extend({
   tag: 'aleph-ventas-nuevo-cliente',

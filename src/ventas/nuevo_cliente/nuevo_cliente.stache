@@ -1,4 +1,11 @@
 <!-- <div class="division"></div> -->
+<!-- Neri me va a odiar por esto... -->
+<style type="text/css">
+	.btn{
+		/*Separacion de botones*/
+		margin-left: 5px;
+	}
+</style>
 <form id="nuevo-cliente-form">
 	
 	<div class="container">
@@ -22,17 +29,17 @@
 				<input type="text" class="form-control" name="dni" placeholder="d.n.i..." {($value)}="cliente.dni" >
 			</div>
 
-			<!-- <div class="form-group">	
+			<div class="form-group">	
 				<label class="control-label">Domicilio</label>
 				<input type="text" class="form-control" name="domicilio" placeholder="Domicilio..." {($value)}="cliente.domicilio">
-			</div> -->
+			</div>
 
 		</div><!-- ./col md3 -->
 		
 		<!-- columna 2 -->
 		<div class="col-md-3">
 
-			<!-- <div class="form-group">
+			<div class="form-group">
 				<label class="control-label">Telefono</label>
 				<input type="text" class="form-control" name="telefono" placeholder="Telefono..." {($value)}="cliente.telefono" >
 			</div>	
@@ -40,25 +47,29 @@
 			<div class="form-group">
 				<label class="control-label">Mail</label>
 				<input type="text" class="form-control" name="mail" placeholder="Mail..." {($value)}="cliente.mail" >
-			</div> -->		
-
+			</div>					
+		</div>
+		<!-- ./col md 3 -->
+		<div class="col-md-4">
 			<div class="form-group">
-				
 				<label for="cuenta">
 					Cuenta
 				</label>
-				
-				<!-- Switch magico de las cuentas -->
-				<div class="material-switch pull-right">
-					<input id="cuenta-switch" name="cuenta-switch" type="checkbox" ($change) = "switchCuenta()"/>
+				<div class="material-switch">
+					<input id="cuenta-switch" name="cuenta-switch" type="checkbox" {{^if cliente.cuenta.isNew}} checked {{/if}} ($change)="toggleCuenta( %element )"/>
 					<label for="cuenta-switch" class="label-default"></label>
-				</div>
-
-				<!-- Formulario limite de cuenta -->
-				<input type="text" class="form-control" id = "limiteCuenta" name="limiteCuenta" placeholder="Limite de cuenta" disabled/>
+				</div><br>
+				{{^cliente.cuenta.isNew}}
+					<!-- <input type="text" class="form-control" name="cuenta" placeholder="Cuenta" {($value)}="cliente.cuenta.codigo" {{#if cliente.cuenta.isNew}} disabled {{/if}}> -->
+				{{/cliente.cuenta.isNew}}
 			</div>
-			
-		</div>
+			<div class="form-group">
+				<label for="tope">
+					Limite de cuenta
+				</label>
+				<input type="text" class="form-control" name="tope" placeholder="Limite de cuenta" {($value)}="cliente.cuenta.montoLimite" {{#if cliente.cuenta.isNew}} disabled {{/if}}>
+			</div>
+		</div>				
 	</div>
 	<div class="container">	
 		<div class="col-md-3">
@@ -66,41 +77,61 @@
 		<div class="col-md-6">	
 			
 			<div class="form-group">
-				<label class="control-label">Etiquetas</label>
-				<input type="text" class="form-control" name="etiquetas">
+				<label for="etiquetas">
+					Etiquetas
+				</label>
+				<input type="text" class="form-control" name="etiquetas" placeholder="Etiquetas" ($keyup)="checkEtiquetas( %element )" {($value)}="cliente.parsedEtiquetas">
+			</div>
+			<div class="form-group">
+				<p>
+					{{#each cliente.etiquetas}}
+						<span class="label label-tag {{tipo}}">
+							{{descripcion}}
+						</span>
+					{{/each}}
+				</p>
 			</div>
 			<br>
 			
-			<!-- Esta va a ser la alerta de que completaste mal el campo ... -->
-			<div class="col-md-12">
-				{{#errorMsg}}
+			<div class="row">
+				<div class="col-md-12">
+					{{#errorMsg}}
 					<div class="alert alert-danger" role="alert">
 						{{.}}
 					</div>
-				{{/errorMsg}}
-				{{#successMsg}}
-					<div class="alert alert-success" role="alert">
-						{{.}}
+					{{/errorMsg}}
+				</div>
+				<!-- Si el chabon es nuevo ... Mostrar esto . -->
+				{{#cliente.isNew}}
+				<div class="col-md-12">
+					<div class="clearfix">
+						<button type="button" class="btn btn-primary pull-right" data-loading-text="Guardando..." ($click)="saveCliente( %element )">
+							Guardar
+						</button>
+						<button type="button" class="btn btn-warning pull-right cancel" ($click)="cancelCliente( %element )">
+							Cancelar
+						</button>
 					</div>
-				{{/successMsg}}
-				
-			</div>
-
-			<!-- Movida para editar -->
-			<!-- <div class="modal-footer innter-footer-fix"> -->
-				<!-- Boton de guardar articulo -->
-					<button type="button" class="btn btn-primary pull-right" ($click)="saveCliente( %element )">Guardar</button>		
-				<!-- Boton de cancelar -->
-				{{^cliente.isNew}}
-					<button type="button" class="btn btn-warning pull-right">Cancelar</button>		
+				</div>
 				{{/cliente.isNew}}
-				{{#if cliente.isNew}}
-					<!-- Se hace un reload a cara de perro -->
-					<button type="button" class="btn btn-warning pull-right" onclick="location.reload()">Cancelar</button>
-				{{/if}}		
-			<!-- </div> -->
+				
+			</div>		
 			
 		</div>	
 	</div>			
 </form><!-- ./id cliente form -->
+<!-- Si el chabon no es nuevo ... -->
+
+	{{^cliente.isNew}}
+		<div class="modal-footer innter-footer-fix">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">
+				Cerrar
+			</button>
+			<button type="button" class="btn btn-primary" data-loading-text="Guardando..." ($click)="saveCliente( %element )">
+				Guardar
+			</button>
+		</div>
+	{{/cliente.isNew}}
+
+
 		

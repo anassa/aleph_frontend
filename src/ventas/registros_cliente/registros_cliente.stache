@@ -10,15 +10,16 @@
 <table class="table table-striped table-bordered">
 	<thead>
 		<tr>
-
+			<!-- Dejar solo estos campos -->
+			<!-- Nombre, Apellido, DNI, Cuenta, Etiquetas, Acciones -->
 			<th>Nombre</th>
 			<th>Apellido</th>
 			<th>DNI</th>
-			<th>Domicilio</th>
-			<th>Telefono</th>
-			<th>Mail</th>
+			<!-- <th>Domicilio</th> -->
+			<!-- <th>Telefono</th> -->
+			<!-- <th>Mail</th> -->
 			<th>Cuenta</th>
-			<th>Limite Cuenta</th>
+			<!-- <th>Limite Cuenta</th> -->
 			<th>Etiquetas</th>
 			<th>Acciones</th>
 
@@ -34,11 +35,16 @@
 					<td>{{nombre}}</td>
 					<td>{{apellido}}</td>
 					<td>{{dni}}</td>
-					<td>{{domicilio}}</td>
-					<td>{{telefono}}</td>
-					<td>{{mail}}</td>
-					<td>{{cuenta}}</td>
-					<td>{{limiteCuenta}}</td>
+					<!-- <td>{{domicilio}}</td> -->
+					<!-- <td>{{telefono}}</td> -->
+					<!-- <td>{{mail}}</td> -->
+					<td>
+						<!-- Si el usuario tiene la cuenta seteada -->
+						{{#cuenta}}
+    						{{cuenta.codigo}}
+						{{/cuenta}}
+					</td>
+					<!-- <td>{{limiteCuenta}}</td> -->
 					<td>{{etiquetas}}</td>
 					<!-- botones de accion. -->
 					<td>

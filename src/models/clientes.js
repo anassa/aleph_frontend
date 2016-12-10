@@ -15,6 +15,20 @@ export const Clientes = can.Map.extend({
   		cuenta:
 		{
 			value:	Cuentas
+			// Si no se seteo el atributo monto limite de la cuenta
+			// entonces no se va a crear la cuenta en el cliente.
+			,serialize: function(){
+				if(this.attr('cuenta.montoLimite')){
+					// return this.attr('cuenta')	
+					return new Cuentas({
+						// Le chanto el monto limite a lo ñeri.
+						montoLimite: this.attr('cuenta.montoLimite')
+					})
+				}else{
+					return undefined
+				}
+				
+			}
 		}
 	,	nombreCompleto:
 		{
@@ -23,6 +37,45 @@ export const Clientes = can.Map.extend({
 				return this.attr('apellido')+' '+this.attr('nombre')
 			}
 		}
+		// Funciones agregadas parecidas a proveedores
+		// Function para tirar etiquetas
+	,	etiquetas:
+		{
+			value: can.List
+		,	set: function(e)
+			{	
+				this.attr(
+					'parsedEtiquetas'
+				,	e.map(
+						function(e)
+						{
+							return	e.descripcion
+						}
+					).join(', ')
+				);
+				return e;
+			}
+		,	serialize: function(list)
+			{
+				return 	list.map(
+							function(i)
+							{
+								return	{
+											tipo:			i.tipo
+										,	descripcion:	i.descripcion
+										}
+							}
+						).serialize()
+			}
+		}
+	,	parsedEtiquetas:
+		{
+			serialize: function()
+			{
+				return undefined;
+			}
+		}
+		
 	}
   ,	init: function (){
 		var	currentUser
