@@ -58,13 +58,14 @@ export const Ventas = can.Map.extend(
 			{
 				set: function(value)
 				{
-					if (value != -1)
 					this.attr(
 						'formaPago'
-					,	{
-							codigo:	value.split('-')[0]
-						,	nombre:	value.split('-')[1]
-						}
+					,	(value != -1)
+						?	{
+								codigo:	value.split('-')[0]
+							,	nombre:	value.split('-')[1]
+							}
+						:	undefined
 					)
 					return value;
 				}
@@ -72,6 +73,32 @@ export const Ventas = can.Map.extend(
 				{
 					return	this.attr('formaPago')
 							?	this.attr('formaPago.codigo')+'-'+this.attr('formaPago.nombre')
+							:	-1
+				}
+			,	serialize: function()
+				{
+					return undefined;
+				}
+			}
+		,	tarjetaToParse:
+			{
+				set: function(value)
+				{
+					this.attr(
+						'formaPago.tarjeta'
+					,	(value != -1)
+						?	{
+								_id:	value.split('-')[0]
+							,	nombre:	value.split('-')[1]
+							}
+						:	undefined
+					)
+					return value;
+				}
+			,	get: function()
+				{
+					return	this.attr('formaPago.tarjeta')
+							?	this.attr('formaPago.tarjeta._id')+'-'+this.attr('formaPago.tarjeta.nombre')
 							:	-1
 				}
 			,	serialize: function()
@@ -123,6 +150,11 @@ export const Ventas = can.Map.extend(
 					return dni_cliente;
 				}
 			}
+		,	descuento:
+			{
+				value:	0
+			,	type:	Number
+			}
 		,	total:
 			{
 				value:	0
@@ -134,7 +166,7 @@ export const Ventas = can.Map.extend(
 			,	type:	Number
 			,	get: function()
 				{
-					return this.attr('total').toFixed(2);	
+					return (this.attr('total')*(1-(this.attr('descuento')/100))).toFixed(2);	
 				}
 			}
 		}
