@@ -5,7 +5,7 @@ import './nueva_venta.less!';
 import template from './nueva_venta.stache!';
 
 import Ventas from 'aleph-frontend/models/ventas';
-import Articulos from 'aleph-frontend/models/articulos';
+import Articulos from 'aleph-frontend/models/articulosVenta';
 import FormasDePago from 'aleph-frontend/models/formasDePago';
 import Tarjetas from 'aleph-frontend/models/tarjetas';
 
@@ -169,18 +169,6 @@ export const ViewModel = Map.extend(
 		{
 			this.attr('venta.articulos').splice(can.$(el).parents('tr').index(),1);
 		}
-	,	verifyCantidad: function(el)
-		{
-			var	$tr
-			=	can.$(el).parents('tr')
-			,	articulo
-			=	this.attr('venta.articulos').attr($tr.index());
-
-			if	((articulo.attr('stock') < articulo.attr('cantidad')) &&  (articulo.attr('cantidad') >= 1))
-				$tr.addClass('has-error')
-			else
-				$tr.removeClass('has-error')
-		}
 	,	cancelVenta: function()
 		{
 			this.attr('venta', new Ventas({}));
@@ -209,6 +197,17 @@ export const ViewModel = Map.extend(
 				frontendValidationErrors.push('formaDePago');
 
 			}
+
+			self.attr('venta.articulos')
+				.each(
+					function(a)
+					{
+						if (a.attr('cantidad') < 0 || a.attr('cantidad') > a.attr('stock'))
+							frontendValidationErrors.push(a.attr('codigo')+'-cantidad');
+					}
+				);
+
+			console.log(frontendValidationErrors)
 			
 			if (frontendValidationErrors.length == 0) {
 
@@ -275,14 +274,18 @@ export const ViewModel = Map.extend(
 					);				
 			} else {
 
-				console.log(frontendValidationErrors)
-
-				$('#nueva-venta-form').find('[name]').each(
+				$('[name]')
+					.each(
 						function()
 						{
-							var eIndex = frontendValidationErrors.indexOf($(this).attr('name'))
-							console.log(eIndex)
-							$(this).parents('.form-group')
+							var	eIndex
+							=	frontendValidationErrors.indexOf($(this).attr('name'))
+							,	$element
+							=	$(this).attr('name').split('-')[1] == 'cantidad'
+								?	$(this).parent()
+								:	$(this).parents('.form-group')
+
+							$element
 								.removeClass('has-error has-success')
 								.addClass(
 									(frontendValidationErrors[eIndex])

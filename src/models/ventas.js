@@ -16,42 +16,19 @@ export const Ventas = can.Map.extend(
 			,	serialize: function(list)
 				{
 					return	list.map(
-								function(i)
+								function(a)
 								{
 									return	{
-												_id:			i._id
-											,	codigo:			i.codigo
-											,	nombre:			i.nombre
-											,	descripcion:	i.descripcion
+												_id:			a._id
+											,	codigo:			a.codigo
+											,	nombre:			a.nombre
+											,	descripcion:	a.descripcion
+											,	cantidad:		a.cantidad
+											,	precioVenta:	a.precioVenta
+											,	precioCosto:	a.precioCosto
 											}
 								}
 							).serialize()
-				}
-			,	set: function(articulos)
-				{
-					var	self
-					=	this;
-
-					articulos
-						.bind(
-							'change'
-						,	function()
-							{
-								self.attr(
-									'total'
-								,	articulos.attr()
-										.reduce(
-											function(a, b)
-											{
-												return a + (b.precioVenta || 0);
-											}
-										,	0
-										)
-								)
-							}
-						);
-					
-					return articulos;
 				}
 			}
 		,	formaDePagoToParse:
@@ -159,6 +136,23 @@ export const Ventas = can.Map.extend(
 			{
 				value:	0
 			,	type:	Number
+			,	get: function()
+				{
+					return	this.attr('articulos')
+							?	(
+									this.attr('articulos').attr()
+										.reduce(
+											function(a, b)
+											{
+												return a + (b.precioVenta || 0)*b.cantidad;
+											}
+										,	0
+										)
+									*
+									( 1 - ( ((this.attr('descuento') < 0) ? 0 : (this.attr('descuento') > 100) ? 100 : this.attr('descuento')) / 100 ) )
+								)
+							:	0
+				}
 			}
 		,	total$:
 			{
@@ -166,7 +160,7 @@ export const Ventas = can.Map.extend(
 			,	type:	Number
 			,	get: function()
 				{
-					return (this.attr('total')*(1-(this.attr('descuento')/100))).toFixed(2);	
+					return this.attr('total').toFixed(2);	
 				}
 			}
 		}

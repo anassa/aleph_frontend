@@ -15,7 +15,12 @@ export const Articulos = can.Map.extend(
 ,	{
 		define:
 		{
-			unidadDeMedidaToParse:
+			cantidad:
+			{
+				value:	1
+			,	type:	Number
+			}
+		,	unidadDeMedidaToParse:
 			{
 				set: function(value)
 				{

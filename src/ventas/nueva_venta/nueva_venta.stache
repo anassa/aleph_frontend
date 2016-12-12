@@ -8,7 +8,7 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form class="form-horizontal"  id="nueva-venta-form" onsubmit="return false;" ($change)="validateForm()">
+					<form class="form-horizontal"  id="nueva-venta-form" onsubmit="return false;">
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="dni_cliente" class="col-sm-2 control-label">Cliente</label>
@@ -249,7 +249,7 @@
 										{{precioVenta$}}
 									</td>
 									<td>
-										<input type="text" class="form-control input-sm" placeholder="Cantidad" {($value)}="cantidad" ($change)="verifyCantidad( %element )">
+										<input type="text" class="form-control input-sm" placeholder="Cantidad" {($value)}="cantidad" ($change)="verifyCantidad( %element )" name="{{codigo}}-cantidad">
 									</td>
 									<td class="tall-td">
 										<a ($click)="removeArticulo( %element )">
