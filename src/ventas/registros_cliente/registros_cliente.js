@@ -6,6 +6,8 @@ import template from './registros_cliente.stache!';
 
 // Importar modelos
 import Clientes from 'aleph-frontend/models/clientes';
+// Libreria de funciones para hacer querys de listas
+import 'aleph-frontend/util/func.js';
 
 // Movida de prueba
 /*var clientes = [];
