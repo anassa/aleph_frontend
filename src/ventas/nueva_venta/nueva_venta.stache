@@ -261,7 +261,7 @@
 								{{/visible}}
 							{{/each}}
 							{{else}}
-								<tr class="warning">
+								<tr class="{{#errorMsg}} danger {/errorMsg}} {{^errorMsg}} warning {/errorMsg}}">
 									<td colspan="5">
 										Aun no se cargo ningun articulo.
 									</td>
@@ -291,6 +291,13 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="col-md-12">
+			{{#errorMsg}}
+			<div class="alert alert-danger" role="alert">
+				{{.}}
+			</div>
+			{{/errorMsg}}
 		</div>
 		<div class="col-md-12">
 			<div class="clearfix">
