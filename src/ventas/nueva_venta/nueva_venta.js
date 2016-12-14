@@ -148,7 +148,9 @@ export const ViewModel = Map.extend(
 	,	addArticulo: function(art)
 		{
 			if (this.attr('venta.articulos').indexOf(art) == -1) {
-				this.attr('venta.articulos').push(art.attr('visible',true));
+				art.attr('visible',true)
+				art.attr('cantidad',1)
+				this.attr('venta.articulos').push(art);
 			} else {
 				$.notify(
 					{
