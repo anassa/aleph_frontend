@@ -80,7 +80,7 @@
 											<label for="tarjeta" class="col-sm-4 control-label">Seleccione tarjeta</label>
 											<div class="col-sm-8">
 												<select class="form-control" name="tarjeta" {($value)}="venta.tarjetaToParse">
-													<option value="-1">Seleccione una tarjeta</option>
+													<option value="-1">Tarjeta</option>
 													{{#if tarjetas.isResolved}}
 														{{#each tarjetas.value}}
 															<option value="{{_id}}-{{nombre}}">
