@@ -65,8 +65,9 @@ export const Ventas = can.Map.extend(
 						'formaPago.tarjeta'
 					,	(value != -1)
 						?	{
-								_id:	value.split('-')[0]
-							,	nombre:	value.split('-')[1]
+								_id:		value.split('-')[0]
+							,	compania:	value.split('-')[1]
+							,	banco:		value.split('-')[2]
 							}
 						:	undefined
 					)
@@ -75,7 +76,7 @@ export const Ventas = can.Map.extend(
 			,	get: function()
 				{
 					return	this.attr('formaPago.tarjeta')
-							?	this.attr('formaPago.tarjeta._id')+'-'+this.attr('formaPago.tarjeta.nombre')
+							?	this.attr('formaPago.tarjeta._id')+'-'+this.attr('formaPago.tarjeta.compania')+'-'+this.attr('formaPago.tarjeta.banco')
 							:	-1
 				}
 			,	serialize: function()

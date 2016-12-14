@@ -51,8 +51,8 @@
 													<option value="-1">Seleccione una tarjeta</option>
 													{{#if tarjetas.isResolved}}
 														{{#each tarjetas.value}}
-															<option value="{{_id}}-{{nombre}}">
-																{{nombre}}
+															<option value="{{_id}}-{{compania}}-{{banco}}">
+																{{compania}}, {{banco}}
 															</option>
 														{{/each}}
 													{{/if}}
@@ -83,8 +83,8 @@
 													<option value="-1">Tarjeta</option>
 													{{#if tarjetas.isResolved}}
 														{{#each tarjetas.value}}
-															<option value="{{_id}}-{{nombre}}">
-																{{nombre}}
+															<option value="{{_id}}-{{compania}}-{{banco}}">
+																{{compania}}, {{banco}}
 															</option>
 														{{/each}}
 													{{/if}}
