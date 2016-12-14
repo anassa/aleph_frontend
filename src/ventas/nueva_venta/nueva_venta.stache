@@ -122,11 +122,11 @@
 								{{#switch venta.formaPago.codigo}}
 									{{#case "03"}}
 										<div class="form-group">
-											<label for="interes" class="col-sm-3 control-label">Interes</label>
-											<div class="col-sm-9">
+											<label for="interes" class="col-sm-5 control-label">Interes</label>
+											<div class="col-sm-7">
 												<select class="form-control" name="interes" {($value)}="venta.formaPago.interes">
-													<option value="-1">Seleccione un interes</option>
-													<option value="0">Sin intereses</option>
+													<option value="-1">Seleccione</option>
+													<option value="0">0%</option>
 													<option value="5">5%</option>
 													<option value="10">10%</option>
 													<option value="15">15%</option>
