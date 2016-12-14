@@ -151,6 +151,8 @@ export const Ventas = can.Map.extend(
 										)
 									*
 									( 1 - ( ((this.attr('descuento') < 0) ? 0 : (this.attr('descuento') > 100) ? 100 : this.attr('descuento')) / 100 ) )
+									*
+									(1 + ( this.attr('formaPago.interes') ? ((this.attr('formaPago.interes') < 0) ? 0 : (this.attr('formaPago.interes') / 100)) : 0) )
 								)
 							:	0
 				}
