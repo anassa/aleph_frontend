@@ -30,7 +30,7 @@
 								<label for="formaDePago" class="col-sm-4 control-label">Forma de Pago</label>
 								<div class="col-sm-8">
 									<select class="form-control" name="formaDePago" {($value)}="venta.formaDePagoToParse">
-										<option value="-1">Seleccione una forma de pago</option>
+										<option value="-1">Seleccionar</option>
 										{{#if formasDePago.isResolved}}
 											{{#each formasDePago.value}}
 												<option value="{{codigo}}-{{nombre}}">
@@ -110,8 +110,8 @@
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
-								<label for="descuento" class="col-sm-3 control-label">Descuento</label>
-								<div class="col-sm-9">
+								<label for="descuento" class="col-sm-5 control-label">Descuento</label>
+								<div class="col-sm-7">
 									<div class="input-group">
 										<input type="text" class="form-control" name="descuento" placeholder="Descuento" {($value)}="venta.descuento">
 										<span class="input-group-addon">%</span>
@@ -234,6 +234,7 @@
 							</tr>
 						</thead>
 						<tbody>
+							{{#if venta.articulos.length}}
 							{{#each venta.articulos}}
 							 	{{#visible}}
 								<tr>
@@ -259,6 +260,13 @@
 								</tr>
 								{{/visible}}
 							{{/each}}
+							{{else}}
+								<tr class="warning">
+									<td colspan="5">
+										Aun no se cargo ningun articulo.
+									</td>
+								</tr>
+							{{/if}}
 						</tbody>
 					</table>
 					<div class="row">
@@ -280,18 +288,18 @@
 								Total: <span> ${{venta.total$}}</span>
 							</p>
 						</div>
-						<div class="col-md-4 padded-box">
-							<div class="clearfix">
-								<button type="button" class="btn btn-primary pull-right" data-loading-text="Guardando..." ($click)="saveVenta( %element )">
-									Guardar
-								</button>
-								<button type="button" class="btn btn-warning pull-right cancel" ($click)="cancelVenta( %element )">
-									Cancelar
-								</button>
-							</div>
-						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="clearfix">
+				<button type="button" class="btn btn-primary pull-right" data-loading-text="Guardando..." ($click)="saveVenta( %element )">
+					Guardar
+				</button>
+				<button type="button" class="btn btn-warning pull-right cancel" ($click)="cancelVenta( %element )">
+					Cancelar
+				</button>
 			</div>
 		</div>
 	</div>
