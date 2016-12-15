@@ -63,12 +63,11 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
+					<div class="col-md-4">
 					{{#tempVenta.cliente}}
-					<div class="col-md-6">
-						<legend>Cliente</legend>
-						<dl class="dl-horizontal">
+						<dl class="dl-horizontal dl-small">
 							<dt>
-								Nombre Completo:
+								Cliente:
 							</dt>
 							<dd>
 								{{apellido}} {{nombre}}
@@ -81,9 +80,7 @@
 								{{codigo}}
 							</dd>
 							{{/cuenta}}
-							<dt>
-								Etiquetas
-							</dt>
+							<dt></dt>
 							<dd>
 								{{#each etiquetas}}
 									<span class="label label-tag {{tipo}}">
@@ -92,10 +89,16 @@
 								{{/each}}
 							</dd>
 						</dl>
-					</div>
 					{{/tempVenta.cliente}}
-					<div class="col-md-6">
-						<legend>Pago</legend>
+					{{^tempVenta.cliente}}
+						<dl>
+							<dd>
+								No hay ningun cliente asociado a la venta.
+							</dd>
+						</dl>
+					{{/tempVenta.cliente}}
+					</div>
+					<div class="col-md-4">
 						<dl class="dl-horizontal">
 							<dt>
 								Forma de Pago:
@@ -124,20 +127,32 @@
 									Interes:
 								</dt>
 								<dd>
-									{{.}}
+									{{.}}%
 								</dd>
 							{{/tempVenta.formaPago.interes}}
 						</dl>
 					</div>
+					<div class="col-md-4">
+						<dl class="dl-horizontal">
+							<dt>
+								Descuento:
+							</dt>
+							<dd>
+								{{tempVenta.descuento}}%
+							</dd>
+						</dl>
+					</div>
 					<div class="col-md-12">
-						<legend>Articulos</legend>
+						<h4>
+							Articulos
+						</h4>
 						<table class="table table-striped table-bordered">
 							<thead>
 								<tr>
 									<th>Codigo</th>
 									<th>Nombre</th>
 									<th>Precio ($)</th>
-									<th>Stock</th>
+									<th>Cantidad</th>
 									<th>Unidad de Medida</th>
 								</tr>
 							</thead>
@@ -156,7 +171,7 @@
 											{{precioVenta$}}
 										</td>
 										<td>
-											{{stock}}
+											{{cantidad}}
 										</td>
 										<td>
 											{{#unidadMedida}}
@@ -189,6 +204,11 @@
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					Cerrar
+				</button>
 			</div>
 		</div>
 	</div>

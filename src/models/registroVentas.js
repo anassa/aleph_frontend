@@ -5,6 +5,7 @@ import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 
 import Clientes from 'aleph-frontend/models/clientes';
+import Articulos from 'aleph-frontend/models/articulosVenta';
 
 export const Ventas = can.Map.extend(
 	{
@@ -21,7 +22,11 @@ export const Ventas = can.Map.extend(
 			}
 		,	articulos:
 			{
-				value: can.List
+				set: function(s)
+				{
+					console.log(s)
+					return	new Articulos.List(s.serialize());
+				}
 			}
 		,	listadoArticulos:
 			{

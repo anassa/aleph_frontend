@@ -28,7 +28,8 @@ export const ViewModel = Map.extend(
 					var query
 					=	new can.Map(
 							{
-								$skip: 0
+								$skip:	0
+							,	$limit:	10
 							}
 						);
 
@@ -109,7 +110,15 @@ export const ViewModel = Map.extend(
 			,	fields
 			=	[
 					{
-						name: 'denominacion'
+						name: 'cliente.nombre'
+					,	type: String	
+					}
+				,	{
+						name: 'cliente.apellido'
+					,	type: String	
+					}
+				,	{
+						name: 'formaPago.nombre'
 					,	type: String	
 					}
 				];
