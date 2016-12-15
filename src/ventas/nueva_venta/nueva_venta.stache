@@ -30,7 +30,6 @@
 								<label for="formaDePago" class="col-sm-4 control-label">Forma de Pago</label>
 								<div class="col-sm-8">
 									<select class="form-control" name="formaDePago" {($value)}="venta.formaDePagoToParse">
-										<option value="-1">Seleccionar</option>
 										{{#if formasDePago.isResolved}}
 											{{#each formasDePago.value}}
 												<option value="{{codigo}}-{{nombre}}">
