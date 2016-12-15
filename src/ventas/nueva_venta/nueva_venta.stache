@@ -45,7 +45,7 @@
 								{{#switch venta.formaPago.codigo}}
 									{{#case "02"}}
 										<div class="form-group">
-											<label for="tarjeta" class="col-sm-4 control-label">Seleccione tarjeta</label>
+											<label for="tarjeta" class="col-sm-4 control-label">Tarjeta</label>
 											<div class="col-sm-8">
 												<select class="form-control" name="tarjeta" {($value)}="venta.tarjetaToParse">
 													<option value="-1">Seleccione una tarjeta</option>
@@ -77,10 +77,10 @@
 									{{/case}}
 									{{#case "03"}}
 										<div class="form-group">
-											<label for="tarjeta" class="col-sm-4 control-label">Seleccione tarjeta</label>
+											<label for="tarjeta" class="col-sm-4 control-label">Tarjeta</label>
 											<div class="col-sm-8">
 												<select class="form-control" name="tarjeta" {($value)}="venta.tarjetaToParse">
-													<option value="-1">Tarjeta</option>
+													<option value="-1">Seleccione una tarjeta</option>
 													{{#if tarjetas.isResolved}}
 														{{#each tarjetas.value}}
 															<option value="{{_id}}-{{compania}}-{{banco}}">
