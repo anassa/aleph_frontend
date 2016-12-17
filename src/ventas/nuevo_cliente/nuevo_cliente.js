@@ -6,6 +6,12 @@ import template from './nuevo_cliente.stache!';
 
 // Importamos los modelos y cosas raras
 import Clientes from 'aleph-frontend/models/clientes';
+import 'aleph-frontend/util/func.js';
+
+// Array Y cosas raras para el tema de las etiquetas
+window.Clientes = Clientes
+// La posta de las etiquetas
+const labels = ['label-default','label-primary','label-success','label-info','label-warning','label-danger'];
 
 export const ViewModel = Map.extend({
 	define:

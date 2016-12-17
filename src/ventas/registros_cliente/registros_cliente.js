@@ -9,22 +9,6 @@ import Clientes from 'aleph-frontend/models/clientes';
 // Libreria de funciones para hacer querys de listas
 import 'aleph-frontend/util/func.js';
 
-// Movida de prueba
-/*var clientes = [];
-for (var i = 0; i <= 10; i++) {
-	clientes.push({
-  		nombre: "Neri",
-  		apellido: "Widis",
-  		dni: "14496338",
-  		domicilio: "Zarate 123",
-  		etiquetas: "Unknow",
-  		telefono: "424687",
-  		mail: "neri.widis@gmai",
-  		cuenta: "314314314314",
-  		limiteCuenta: "500"
-	})
-}*/
-
 export const ViewModel = Map.extend({
   define: 
   {

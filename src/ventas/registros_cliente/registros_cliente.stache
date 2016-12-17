@@ -1,5 +1,9 @@
 <!-- <legend>{{message}}</legend> -->
-
+<style type="text/css">
+	.label{
+		margin-left: 2px
+	}
+</style>
 <!-- Barra de busqueda --> 
 <form onsubmit="return false;">
 	<div class="form-group">
@@ -45,7 +49,14 @@
 						{{/cuenta}}
 					</td>
 					<!-- <td>{{limiteCuenta}}</td> -->
-					<td>{{etiquetas}}</td>
+					<td>
+						<!-- {{etiquetas}} -->
+						{{#each etiquetas}}
+							<span class="label {{tipo}}">
+								{{descripcion}}
+							</span>
+						{{/each}}
+					</td>
 					<!-- botones de accion. -->
 					<td>
 						<!-- Boton para editar cliente -->
