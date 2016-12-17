@@ -177,18 +177,18 @@ export const ViewModel = Map.extend(
 						,section:'registros_cliente'
 						,modulo:'ventas'
 					},
-					// {
-					// 	nombre:"Nueva Forma de Pago"
-					// 	,icon:"fa-credit-card" 
-					// 	,section:'nueva_forma_de_pago'
-					// 	,modulo:'ventas'
-					// },
-					// {
-					// 	nombre:"Registros Forma de Pago" 
-					// 	,icon:"fa-list-alt"
-					// 	,section:'registros_forma_de_pago'
-					// 	,modulo:'ventas'
-					// },
+					{
+						nombre:"Nueva Forma de Pago"
+						,icon:"fa-credit-card" 
+						,section:'nueva_forma_de_pago'
+						,modulo:'ventas'
+					},
+					{
+						nombre:"Registros Forma de Pago" 
+						,icon:"fa-list-alt"
+						,section:'registros_forma_de_pago'
+						,modulo:'ventas'
+					},
 					{
 						nombre:"Reportes"
 						,icon:"fa-file-text"
@@ -244,24 +244,24 @@ export const ViewModel = Map.extend(
 						 ,section:'registros_articulo'
 						 ,modulo:'stock'
 					},
-					// {
-					// 	nombre:"Nuevo Remito"
-					// 	,icon:' fa-clipboard ' 
-					// 	,section:'nuevo_remito'
-					// 	,modulo:'stock'
-					// },
-					// {
-					// 	nombre:"Registros Remito"
-					// 	,icon:' fa-list-alt ' 
-					// 	,section:'registros_remito'
-					// 	,modulo:'stock'
-					// },
-					// {
-					// 	nombre:"Reportes"
-					// 	,icon:'fa-file-text '
-					// 	, section:'reportes'
-					// 	,modulo:'stock'
-					// }
+					{
+						nombre:"Nuevo Remito"
+						,icon:' fa-clipboard ' 
+						,section:'nuevo_remito'
+						,modulo:'stock'
+					},
+					{
+						nombre:"Registros Remito"
+						,icon:' fa-list-alt ' 
+						,section:'registros_remito'
+						,modulo:'stock'
+					},
+					{
+						nombre:"Reportes"
+						,icon:'fa-file-text '
+						, section:'reportes'
+						,modulo:'stock'
+					}
 				]
 				,administracion:[
 					{
