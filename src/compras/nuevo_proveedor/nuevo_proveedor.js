@@ -8,8 +8,6 @@ import Proveedores from 'aleph-frontend/models/proveedores';
 import Articulos from 'aleph-frontend/models/articulos';
 import 'aleph-frontend/util/func.js';
 
-window.Proveedores = Proveedores
-
 const labels = ['label-default','label-primary','label-success','label-info','label-warning','label-danger'];
 
 export const ViewModel = Map.extend({
