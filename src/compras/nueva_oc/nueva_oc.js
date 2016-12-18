@@ -94,11 +94,7 @@ export const ViewModel = Map.extend({
 					return query;
 				}
 			}
-		,	searchInput:
-			{
-				value:	undefined
-			}
-		,	listQuery:
+		,	listQueryF:
 			{
 				value: function()
 				{
@@ -121,7 +117,46 @@ export const ViewModel = Map.extend({
 							'change'
 						,	function()
 							{
-								self.attr('ordenDeCompra.proveedor.articulos')
+								self.attr('articulosFiltrados')
+									.map(
+										function(art, i)
+										{
+											art.attr(
+												'visible'
+											,	(i >= query.current.firstPage && i <= query.current.lastPage)
+											);
+										}
+									)
+							}
+						);
+
+					return query;
+				}
+			}
+		,	listQueryAOC:
+			{
+				value: function()
+				{
+					var self
+					=	this;
+
+					var query
+					=	new can.Map(
+							{
+								current:
+								{
+									firstPage:	0
+								,	lastPage:	4
+								}
+							}
+						);
+
+					query
+						.bind(
+							'change'
+						,	function()
+							{
+								self.attr('ordenDeCompra.articulos')
 									.map(
 										function(art, i)
 										{

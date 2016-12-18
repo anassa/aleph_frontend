@@ -93,7 +93,7 @@
 									{{else}}
 										<aleph-paginador-list 
 											{data}="articulosFiltrados"
-											{query}="listQuery"
+											{query}="listQueryAF"
 											{reset}="resetPaginadorAP"
 											/>
 									{{/if}}
@@ -206,7 +206,7 @@
 											{{else}}
 												<aleph-paginador-list 
 													{data}="ordenDeCompra.articulos"
-													{query}="listQuery"
+													{query}="listQueryAOC"
 													{reset}="resetPaginadorAOC"
 													/>
 											{{/if}}
