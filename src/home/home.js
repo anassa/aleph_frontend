@@ -148,52 +148,63 @@ export const ViewModel = Map.extend(
 						,section:'nueva_venta'
 						,modulo:'ventas'
 					},
-					{
-						nombre:"Registros Venta" 
-						,icon:' fa-list-alt '
-						,section:'registros_venta'
-						,modulo:'ventas'
-					},
+					
 					{	nombre:"Nueva Solicitud"
 						,icon:'fa-shopping-cart'
 						,section:'nueva_solicitud'
 						,modulo:'ventas'
 					},
-					{
-						nombre:"Registros Solicitud" 
-						,icon:'fa-list-alt'
-						,section:'registros_solicitud'
-						,modulo:'ventas'
-					},
+					
 					{	
 						nombre:"Nuevo Cliente" 
 						,icon:'fa-male '
 						,section:'nuevo_cliente'
 						,modulo:'ventas'
 					},
-					{
-						nombre:"Registros Cliente"
-						,icon:'fa-list-alt ' 
-						,section:'registros_cliente'
-						,modulo:'ventas'
-					},
+					
 					{
 						nombre:"Nueva Forma de Pago"
 						,icon:"fa-credit-card" 
 						,section:'nueva_forma_de_pago'
 						,modulo:'ventas'
 					},
+					
+					
+
+					{
+						nombre:"Registros Venta" 
+						,icon:' fa-list-alt '
+						,section:'registros_venta'
+						,modulo:'ventas'
+						,clase:'registro'
+					},
+					{
+						nombre:"Registros Solicitud" 
+						,icon:'fa-list-alt'
+						,section:'registros_solicitud'
+						,modulo:'ventas'
+						,clase:'registro'
+					},
+					{
+						nombre:"Registros Cliente"
+						,icon:'fa-list-alt ' 
+						,section:'registros_cliente'
+						,modulo:'ventas'
+						,clase:'registro'
+					},
 					{
 						nombre:"Registros Forma de Pago" 
 						,icon:"fa-list-alt"
 						,section:'registros_forma_de_pago'
 						,modulo:'ventas'
+						,clase:'registro'
 					},
 					{
 						nombre:"Reportes"
 						,icon:"fa-file-text"
 						,section:'reportes'
 						,modulo:'ventas'
+						,clase:'reporte'
 					},
 				]
 				// Fin modulo de ventas
@@ -206,30 +217,37 @@ export const ViewModel = Map.extend(
 						,section:'nueva_oc'
 						,modulo:'compras'
 					},
-					{
-						nombre:"Registros Orden de Compra"
-						,icon:' fa-list-alt ' 
-						,section:'registros_oc'
-						,modulo:'compras'
-					},
+					
 					{
 						nombre:"Nuevo Proveedor"
 						,icon:' fa-briefcase ' 
 						,section:'nuevo_proveedor'
 						,modulo:'compras'
 					},
+					
+				
+
+					{
+						nombre:"Registros Orden de Compra"
+						,icon:' fa-list-alt ' 
+						,section:'registros_oc'
+						,modulo:'compras'
+						,clase:'registro'
+					},
 					{
 						nombre:"Registros Proveedor"
 						,icon:' fa-list-alt ' 
 						,section:'registros_proveedor'
 						,modulo:'compras'
+						,clase:'registro'
 					},
-					{
+						{
 						nombre:"Reportes"
 						,icon:' fa-file-text ' 
 						,section:'reportes'
 						,modulo:'compras'
-					}
+						,clase:'reporte'
+					},
 				]
 				,stock:[
 					{
@@ -238,29 +256,35 @@ export const ViewModel = Map.extend(
 						,section:'nuevo_articulo'
 						,modulo:'stock'
 					},
-					{
-						nombre:"Registros Articulo"
-						,icon:' fa-list-alt '
-						 ,section:'registros_articulo'
-						 ,modulo:'stock'
-					},
+					
 					{
 						nombre:"Nuevo Remito"
 						,icon:' fa-clipboard ' 
 						,section:'nuevo_remito'
 						,modulo:'stock'
 					},
+					
+					{
+						nombre:"Registros Articulo"
+						,icon:' fa-list-alt '
+						 ,section:'registros_articulo'
+						 ,modulo:'stock'
+						 ,clase:'registro'
+					},
 					{
 						nombre:"Registros Remito"
 						,icon:' fa-list-alt ' 
 						,section:'registros_remito'
 						,modulo:'stock'
+						,clase:'registro'
 					},
+
 					{
 						nombre:"Reportes"
 						,icon:'fa-file-text '
 						, section:'reportes'
 						,modulo:'stock'
+						,clase:'reporte'
 					}
 				]
 				,administracion:[

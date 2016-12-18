@@ -7,6 +7,15 @@
 		background-color: #32bea6!important;
     	border-color: #e0e0e0 !important;
 	}
+
+	.registro{
+		background-color: #2c3e50!important;
+	}
+
+	.reporte{
+		background-color: #95a5a6!important;
+	}
+
 </style>
 <div id="wrapper" class="wrapper-content toggled">
 	{{#user}}
@@ -381,7 +390,7 @@
 		  							<!-- item submodulo-->
 					                <div class="col-md-2 text-center">
 					                    <div class="panel panel-primary submenu">
-					                        <div class="panel-heading submenu-heading">
+					                        <div class="panel-heading submenu-heading {{clase}}">
 					                        	<h1>
 					                           		<i class="fa {{icon}}"></i>
 					                          	</h1>
