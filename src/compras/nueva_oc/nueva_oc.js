@@ -72,18 +72,20 @@ export const ViewModel = Map.extend({
 								).then(
 									function(p)
 									{
-										var prov
-										=	p.attr(0);
+										if (p.length > 0) {
+											var prov
+											=	p.attr(0);
 
-										self.attr('articulosP', new Articulos.List(prov.attr('articulos').attr()));
+											self.attr('articulosP', new Articulos.List(prov.attr('articulos').attr()));
 
-										self.attr('articulosFiltrados', self.attr('articulosP').slice());
+											self.attr('articulosFiltrados', self.attr('articulosP').slice());
 
-										self
-											.attr(
-												'ordenDeCompra.proveedor'
-											,	prov
-											);
+											self
+												.attr(
+													'ordenDeCompra.proveedor'
+												,	prov
+												);
+										}
 									}
 								)
 							}
