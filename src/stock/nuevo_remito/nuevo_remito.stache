@@ -1,1 +1,191 @@
-<p>{{message}}</p>
+<div class="container-fluid">
+  <div class="row">
+    
+    <!-- Columna izquierda -->
+    <div class="col-md-6">
+      
+        <!-- Panel lista -->
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+              <h5>Busqueda de OC</h5>
+            </div>
+            <!-- Tabla en el panl de listas -->
+            <div class="panel-body">
+              
+              <!-- formulario de fecha -->
+              <div class="row">
+                  <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="usr">Desde:</label>
+                          <input type="text" class="form-control">
+                        </div>
+                  </div>
+                   <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="usr">Hasta:</label>
+                          <input type="text" class="form-control">
+                        </div>
+                  </div>
+                  <div class="col-md-4">
+                      <br>
+                      <button class="btn btn-primary"> Buscar</button>
+                  </div>
+              </div>
+              <!-- Tabla para mostrar -->
+              <div class="row">
+                  <table class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Fecha</th>
+                          <th>Numero OC</th>
+                          <th>Proveedor</th>
+                          <th>Cant Remito</th>
+                          <th>Accion</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- La movida de las ordenes de compras -->
+                        {{#if ordenesDeCompra.isResolved}}
+                          {{#each ordenesDeCompra.value}}
+                          <tr>
+                            <td>
+                              {{createdAt}}
+                            </td>
+                            <td>
+                              <span class="text-underline">
+                                {{numero}}
+                              </span>
+                            </td>
+                            <td>
+                                {{proveedor.denominacion}}
+                            </td>
+                            <td>
+                                <!-- {{proveedor.denominacion}} -->
+                                0
+                            </td>
+                            <td>
+                              <a>
+                                <i class="glyphicon glyphicon-plus-sign text-info" ($click)="addOrdenDeCompra(.)"></i>
+                              </a>
+                            </td>
+                          </tr>
+                          {{/each}}
+                        {{/if}}
+                      
+                       </tbody>
+                  </table>
+              </div>
+            </div>
+            <!-- ./Panel body Lista -->
+
+        </div>
+        <!-- /panel lista -->
+
+    </div>
+    <!-- ./col 10 -->
+    
+    <!-- Columna derecha -->
+    <div class="col-md-6">
+
+      <!-- Panel lista -->
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+              <h5>Remito</h5>
+            </div>
+            <!-- Body del formulario de nuevo remito -->
+            <div class="panel-body">
+                          
+                <div class="row">
+                    <div class="col-md-4">
+                          <div class="form-group">
+                              <label for="usr">Proveedor:</label>  {{ordenDeCompraSelected.proveedor.denominacion}}
+                          </div>
+                    </div>
+                    <div class="col-md-4">
+                          <div class="form-group">
+                              <label for="usr">OC:</label>  {{ordenDeCompraSelected.oc}}
+                          </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <!-- Descripcion -->
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        {($value)}="descripcion"
+                        placeholder="Descripcion" 
+                    />
+                  </div>
+                </div><br>
+                <!-- Tabla de nuevo remito. Donde muestra articulos -->
+                <div class="row">
+                  
+                  <table class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Articulo</th>
+                          <th>Unidad Medida</th>
+                          <th>Cant. Solicitada</th>
+                          <th>Cant. Rebicida</th>
+                          <th>Precio Costo ($)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- La movida de las ordenes de compras -->
+                        <!-- {{#if ordenDeCompraSelected}} -->
+                          {{#each ordenDeCompraSelected.articulos}}
+                          <tr>
+                            <td class="col-md-3">
+                              {{nombre}}
+                            </td>
+                            <td class="col-md-3">
+                              <span class="text-underline">
+                                {{unidadMedida.nombre}}
+                              </span>
+                            </td>
+                            <td class="col-md-2">
+                                {{cantidad}}
+                            </td>
+                            <td class="col-md-2">
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    value="{{cantidad}}"
+                                />
+                            </td>
+                            <td class="col-md-2">
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    value="{{precioCosto}}"
+                                />
+                            </td>
+                          </tr>
+                          {{/each}}
+                        <!-- {{/if}} -->
+                      
+                       </tbody>
+
+                  </table>
+                  <!-- tabla nuevo remito -->
+                  <button class="btn btn-primary pull-right" ($click)="nuevoRemito()">Registrar</button>
+                  <button class="btn btn-warning pull-right" ($click)="cancelRemito()">Cancelar</button>
+              </div>
+              <!-- ./row -->
+
+            </div>
+            <!-- ./panel body -->
+
+        </div>
+        <!-- /panel lista -->
+
+    </div>
+    <!-- Col 10 -->
+
+  </div>
+
+</div>

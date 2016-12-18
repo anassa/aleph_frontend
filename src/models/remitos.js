@@ -4,8 +4,21 @@ import tag from 'can-connect/can/tag/';
 import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 
+import Usuarios from 'aleph-frontend/models/usuarios';
+
 export const Remitos = can.Map.extend({
   define: {}
+  ,	init: function (){
+  		// El remito se inicializa con el usuario actual
+		var	currentUser = Usuarios.getSession();
+		this.attr(
+			'usuario', {
+					_id:		currentUser.attr('_id')
+				,	username: 	currentUser.attr('username')
+				,	permisos:	currentUser.attr('permisos')
+			}
+		);
+	}
 });
 
 Remitos.List = can.List.extend({
