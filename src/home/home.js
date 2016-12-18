@@ -9,6 +9,8 @@ import 'aleph-frontend/bootstrap.switch.css!'
 import 'lodash/lodash.js'
 
 import Usuarios from 'aleph-frontend/models/usuarios';
+// Este modelo lo traigo para hacer una negrada +21% (masiva)
+import OrdenesDeCompra from 'aleph-frontend/models/ordenesDeCompra';
 
 export const ViewModel = Map.extend(
 	{
@@ -34,8 +36,26 @@ export const ViewModel = Map.extend(
 		}
 	// Lo que sucede cuando cargo la pagina
 	, init: function(){
+		
+		// Magia para que funcione
+		var self = this
+		
 		// Oculto la movida de submodulos.
 		$("#subModulo").hide()
+		
+		// Traemos algo de la base de datos
+		// No importa que ....
+		OrdenesDeCompra.getList().then(
+			function(){
+				// No hacemos nada
+			}
+			// Si hay un error, es porque el tipo no esta logeado
+			,function(){
+				// Seteamos como el el usuario no fue cargado.
+				self.attr('user',undefined);
+			}
+
+		)
 		// $("#returnButton").remove()
 	}
 	,	updateUser: function(el)
