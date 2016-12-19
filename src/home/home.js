@@ -39,10 +39,9 @@ export const ViewModel = Map.extend(
 		
 		// Magia para que funcione
 		var self = this
-		
 		// Oculto la movida de submodulos.
-		$("#subModulo").hide()
-		
+		$('#subModulo').hide()
+		// this.attr('desplegar',false);
 		// Traemos algo de la base de datos
 		// No importa que ....
 		OrdenesDeCompra.getList().then(
@@ -159,6 +158,8 @@ export const ViewModel = Map.extend(
 		}
 		// Comportamiento cuando tocamos botones
 		, clickIcon: function(modSelected){
+			$('#iconos').hide('slow')
+			// this.attr('desplegar',true);
 			// Creamos un array de JSONS. Practica pco saludable.
 			var subMapping = {
 				ventas:[
@@ -335,7 +336,7 @@ export const ViewModel = Map.extend(
 			//     // Animation complete.
 			//  });
 			$('#iconos').hide('slow')
-			$("#subModulo").hide()
+			// $("#subModulo").hide()
 			$('#subModulo').hide().show('slow')
 
 		}
