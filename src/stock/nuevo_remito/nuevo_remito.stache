@@ -54,7 +54,7 @@
                             </td>
                             <td>
                               <span class="text-underline">
-                                {{numero}}
+                                {{codigo}}
                               </span>
                             </td>
                             <td>
@@ -62,7 +62,7 @@
                             </td>
                             <td>
                                 <!-- {{proveedor.denominacion}} -->
-                                0
+                                {{remitos.length}}
                             </td>
                             <td>
                               <a>
@@ -100,12 +100,12 @@
                 <div class="row">
                     <div class="col-md-4">
                           <div class="form-group">
-                              <label for="usr">Proveedor:</label>  {{ordenDeCompraSelected.proveedor.denominacion}}
+                              <label for="usr">Proveedor:</label> {{ordenDeCompraSelected.proveedor.denominacion}}
                           </div>
                     </div>
                     <div class="col-md-4">
                           <div class="form-group">
-                              <label for="usr">OC:</label>  {{ordenDeCompraSelected.oc}}
+                              <label for="usr">OC:</label> {{ordenDeCompraSelected.codigo}}{{ordenDeCompraSelected.oc}}
                           </div>
                     </div>
                     
@@ -113,12 +113,16 @@
                 <div class="row">
                   <div class="col-md-6">
                     <!-- Descripcion -->
-                    <input 
-                        type="text" 
-                        class="form-control" 
-                        {($value)}="descripcion"
-                        placeholder="Descripcion" 
-                    />
+                    <div class="form-group">
+                          <label for="usr">Observacion:</label>
+                          <input 
+                            type="text" 
+                            class="form-control" 
+                            id = 'observacion'
+                            value='{{ordenDeCompraSelected.observacion}}'
+                            placeholder="Descripcion" 
+                          />
+                    </div>    
                   </div>
                 </div><br>
                 <!-- Tabla de nuevo remito. Donde muestra articulos -->
@@ -144,17 +148,17 @@
                             </td>
                             <td class="col-md-3">
                               <span class="text-underline">
-                                {{unidadMedida.nombre}}
+                                {{unidadMedida}}
                               </span>
                             </td>
                             <td class="col-md-2">
-                                {{cantidad}}
+                                {{stock}}
                             </td>
                             <td class="col-md-2">
                                 <input 
                                     type="text" 
                                     class="form-control" 
-                                    value="{{cantidad}}"
+                                    {($value)}="stock"
                                 />
                             </td>
                             <td class="col-md-2">
