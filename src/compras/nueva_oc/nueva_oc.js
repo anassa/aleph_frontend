@@ -79,7 +79,7 @@ export const ViewModel = Map.extend(
 
 											self
 												.attr(
-													'ordenDeCompra.proveedor'
+													'ordendecompra.proveedor'
 												,	prov
 												);
 										}
@@ -153,7 +153,7 @@ export const ViewModel = Map.extend(
 							'change'
 						,	function()
 							{
-								self.attr('ordenDeCompra.articulos')
+								self.attr('ordendecompra.articulos')
 									.map(
 										function(art, i)
 										{
@@ -202,7 +202,7 @@ export const ViewModel = Map.extend(
 	,	resetProveedor: function()
 		{
 			this.attr('nombreProveedor','');
-			this.removeAttr('ordenDeCompra.proveedor');
+			this.removeAttr('ordendecompra.proveedor');
 			this.attr('articulosP',[]);
 			this.attr('articulosFiltrados',[]);
 			this.attr('resetPaginadorAP', true);
@@ -210,7 +210,7 @@ export const ViewModel = Map.extend(
 		}
 	,	resetOrdenDeCompra: function()
 		{
-			this.attr('ordenDeCompra', new OrdenesDeCompra({}));
+			this.attr('ordendecompra', new OrdenesDeCompra({}));
 			this.attr('resetPaginadorAOC', true);
 		}
 	,	searchProveedor: function(value)
@@ -228,8 +228,8 @@ export const ViewModel = Map.extend(
 		}
 	,	addArticulo: function(art)
 		{
-			if (this.attr('ordenDeCompra.articulos').indexOf(art) == -1) {
-				this.attr('ordenDeCompra.articulos').push(art.attr('visible',true));
+			if (this.attr('ordendecompra.articulos').indexOf(art) == -1) {
+				this.attr('ordendecompra.articulos').push(art.attr('visible',true));
 			} else {
 				$.notify(
 					{
@@ -248,7 +248,7 @@ export const ViewModel = Map.extend(
 		}
 	,	removeArticulo: function(el)
 		{
-			this.attr('ordenDeCompra.articulos').splice(can.$(el).parents('tr').index(),1);
+			this.attr('ordendecompra.articulos').splice(can.$(el).parents('tr').index(),1);
 		}
 	,	cancelOrdenDeCompra: function()
 		{
@@ -265,9 +265,9 @@ export const ViewModel = Map.extend(
 			$button.button('loading');
 
 			var	newMode
-			=	self.attr('ordenDeCompra').isNew();
+			=	self.attr('ordendecompra').isNew();
 
-			self.attr('ordenDeCompra').save()
+			self.attr('ordendecompra').save()
 				.then(
 					function(data)
 					{
@@ -315,14 +315,11 @@ export const ViewModel = Map.extend(
 				'ordendecompra'
 			,	function(ev, oc)
 				{
-
 					self.attr('nombreProveedor',oc.attr('proveedor.denominacion'))
 
 					self.attr('articulosP', new Articulos.List(oc.attr('proveedor.articulos').attr()));
 
 					self.attr('articulosFiltrados', self.attr('articulosP').slice());
-
-					console.log(oc.attr('articulos'))
 				}
 			);
 		}

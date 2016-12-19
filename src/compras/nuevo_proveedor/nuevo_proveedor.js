@@ -101,22 +101,31 @@ export const ViewModel = Map.extend({
 							'change'
 						,	function()
 							{
-								self.attr('proveedor.articulos')
-									.map(
-										function(art, i)
-										{
-											art.attr(
-												'visible'
-											,	(i >= query.current.firstPage && i <= query.current.lastPage)
-											);
-										}
-									)
+								self.toggleArticulosProveedor()
 							}
 						);
 
 					return query;
 				}
 			}
+		}
+	,	toggleArticulosProveedor: function()
+		{
+			var self
+			=	this
+			,	query
+			=	this.attr('listQuery');
+
+			this.attr('proveedor.articulos')
+				.map(
+					function(art, i)
+					{
+						art.attr(
+							'visible'
+						,	(i >= query.current.firstPage && i <= query.current.lastPage)
+						);
+					}
+				)
 		}
 	,	searchArticulo: function(value)
 		{
@@ -282,6 +291,21 @@ export const ViewModel = Map.extend({
 						$button.button('reset');
 					}
 				)
+		}
+	,	init: function()
+		{
+			var self
+			=	this;
+
+			this.bind(
+				'proveedor'
+			,	function(ev, p)
+				{
+					self.attr('proveedor.articulos', new Articulos.List(p.attr('articulos').attr()));
+
+					self.toggleArticulosProveedor();
+				}
+			);
 		}
 	}
 );

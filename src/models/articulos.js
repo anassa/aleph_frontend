@@ -65,7 +65,7 @@ export const Articulos = can.Map.extend(
 									return	{
 												_id:			i._id
 											,	denominacion:	i.denominacion
-											,	etiquetas:		i.etiquetas
+											,	dni_cuit:		i.dni_cuit
 											}
 								}
 							).serialize()

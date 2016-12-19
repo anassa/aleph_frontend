@@ -3,6 +3,7 @@ import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
 import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
+import 'lodash/lodash.js'
 
 import Cuentas from 'aleph-frontend/models/cuentas';
 
@@ -15,17 +16,16 @@ export const Proveedores = can.Map.extend(
 				value: can.List
 			,	serialize: function(list)
 				{
-					return	list.map(
-								function(i)
+					return	_.map(
+								list.serialize()
+							,	function(art)
 								{
-									return	{
-												_id:			i._id
-											,	codigo:			i.codigo
-											,	nombre:			i.nombre
-											,	descripcion:	i.descripcion
-											}
+									return	_.omit(
+												art
+											,	['proveedores', 'usuario']
+											)
 								}
-							).serialize()
+							)
 				}
 			}
 		,	etiquetas:

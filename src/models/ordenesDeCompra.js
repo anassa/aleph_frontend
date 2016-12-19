@@ -3,7 +3,6 @@ import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
 import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
-import 'lodash/lodash.js'
 
 import Usuarios from 'aleph-frontend/models/usuarios';
 import Articulos from 'aleph-frontend/models/articulosOC';
@@ -84,13 +83,16 @@ OrdenesDeCompra.List = can.List.extend({
 	Map: OrdenesDeCompra
 }, {});
 
-export const ordenesDeCompraConnection = superMap({
-	url: feathers.rest('ordenesDeCompra')
-	,idProp: '_id'
-	,Map: OrdenesDeCompra
-	,List: OrdenesDeCompra.List
-	,name: 'ordenesDeCompra'
-});
+export const ordenesDeCompraConnection
+=	superMap(
+		{
+			url:	feathers.rest('ordenesDeCompra')
+		,	idProp:	'_id'
+		,	Map:	OrdenesDeCompra
+		,	List:	OrdenesDeCompra.List
+		,	name:	'ordenesDeCompra'
+		}
+	);
 
 feathers.io.on('ordenesDeCompra created', ordenesDeCompra => ordenesDeCompraConnection.createInstance(ordenesDeCompra));
 feathers.io.on('ordenesDeCompra updated', ordenesDeCompra => ordenesDeCompraConnection.updateInstance(ordenesDeCompra));
