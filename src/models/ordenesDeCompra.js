@@ -55,6 +55,13 @@ export const OrdenesDeCompra = can.Map.extend(
 					return undefined;	
 				}
 			}
+		,	fecha$:
+			{
+				get: function()
+				{
+					return (new Date(this.attr('createdAt'))).toLocaleDateString()
+				}
+			}
 		}
 	,	init: function ()
 		{

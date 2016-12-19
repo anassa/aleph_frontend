@@ -9,20 +9,17 @@ import Proveedores from 'aleph-frontend/models/proveedores';
 import Articulos from 'aleph-frontend/models/articulosOC';
 import 'aleph-frontend/util/func.js';
 
-export const ViewModel = Map.extend({
-	define:
+export const ViewModel = Map.extend(
+	{
+		define:
 		{
-			ordenDeCompra:
+			ordendecompra:
 			{
 				value: OrdenesDeCompra
 			}
 		,	articulosP:
 			{
 				value: Articulos.List
-			}
-		,	articulosOC:
-			{
-				value:	Articulos.List
 			}
 		,	resetPaginadorAP:
 			{
@@ -255,7 +252,6 @@ export const ViewModel = Map.extend({
 		}
 	,	cancelOrdenDeCompra: function()
 		{
-			
 			this.resetProveedor();
 			this.resetOrdenDeCompra();
 		}
@@ -309,6 +305,26 @@ export const ViewModel = Map.extend({
 						$button.button('reset');
 					}
 				)
+		}
+	,	init: function()
+		{
+			var self
+			=	this;
+
+			this.bind(
+				'ordendecompra'
+			,	function(ev, oc)
+				{
+
+					self.attr('nombreProveedor',oc.attr('proveedor.denominacion'))
+
+					self.attr('articulosP', new Articulos.List(oc.attr('proveedor.articulos').attr()));
+
+					self.attr('articulosFiltrados', self.attr('articulosP').slice());
+
+					console.log(oc.attr('articulos'))
+				}
+			);
 		}
 	}
 );
