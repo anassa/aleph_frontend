@@ -6,6 +6,7 @@ import template from './nuevo_remito.stache!';
 
 // Importamos el modelo ordenes de compra.
 import OrdenesDeCompra from 'aleph-frontend/models/ordenesDeCompra';
+// Traemos el modelo de remitos
 import Remitos from 'aleph-frontend/models/remitos';
 
 export const ViewModel = Map.extend({
@@ -26,10 +27,6 @@ export const ViewModel = Map.extend({
     	value: null
     }
     
-    ,descripcion:{
-    	value: null
-    }
-
     // No se para que voy a usar esta query, pero neri lo hace... XD
     ,query: {
 		value: function() {
@@ -65,19 +62,41 @@ export const ViewModel = Map.extend({
   // funcion para crear un nuevo remito
   ,nuevoRemito: function(el){
 
-  		// Creamos el remito seteando los parametros, y lo guardamos.
-  		var remito = new Remitos({
+  		// Esto se hace porque sino hay cosas que no funcionan
+  		var esta = this
+  		var thisordenDeCompra = this.attr('ordenDeCompraSelected')
+  		
+  		// Creamos el remito seteando los parametros, y lo guardamos a lo negro.
+  		var nuevoRemito = new Remitos({
   			codigo: 5454
   			,codigoProv: 5454
-  			,descripcion: this.attr('descripcion')
   			,codigoOC: 54545
-  			,articulos: this.attr('ordenDeCompraSelected.articulos').serialize()
+  			,articulos: 
+  				this
+  				.attr('ordenDeCompraSelected.articulos')
+  				.serialize()
   		})
   		.save()
+
+  		// Se ejecuta cuando finaliza el proceso de guardado.
   		.then(
+  			
+  			// Funcion success
   			function(data){
+
+  				// Data contien el remito guardado
+  				// Lo asociamos a nuestra Orden de compra
+  				thisordenDeCompra.remitos.push(data)
+  				// Modificamos atributos de la observacion
+  				thisordenDeCompra.attr(
+  					'observacion',
+  					$('#observacion').val()
+  				)
+
+  				// La actualizamos
+  				thisordenDeCompra.save()
   				
-  				// Lanzamos una notificacion.
+  				// Lanzamos una notificacion de que todo funciono bien.
   				$.notify({message:'Remito creado correctamente'},{ 
 					type: 'success'
 					,placement: {
@@ -86,14 +105,19 @@ export const ViewModel = Map.extend({
 					}
 				})
 
-				// Se borra la OC seleccionada. a lo cabeza.
-  				this.attr('ordenDeCompraSelected',null)
-  				this.attr('descripcion',null)
+  				// Se borra la OC actualmente seleccionada
+  				esta.attr('ordenDeCompraSelected',null)
+  				
+  				// Se borra la descripcion
+  				esta.attr('descripcion',null)
+
 		  	}
-		  	// Si hubo problemas al guardar...
-		  	,function(){
+		  	
+		  	// funcion BARDO.
+		  	, function(){
 		  		
-		  		// Lanzamos una notificacion de error.
+		  		// Lanzamos una notificacion de error, para que el man
+		  		// se enoje con la vida.
   				$.notify({message:'No se pudo crear el remito'},{ 
 					type: 'danger'
 					,placement: {
@@ -102,9 +126,10 @@ export const ViewModel = Map.extend({
 					}
 				});
 
+
 		  	}
   		)
-  		
+  		// Aca termina el then.
   		
 
   }
