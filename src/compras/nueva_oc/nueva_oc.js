@@ -316,13 +316,17 @@ export const ViewModel = Map.extend(
 				'ordendecompra'
 			,	function(ev, oc)
 				{
-					oc.attr('articulos', new Articulos.List(oc.attr('articulos').attr()));
+					if (!oc.isNew()) {
 
-					self.attr('nombreProveedor',oc.attr('proveedor.denominacion'))
+						oc.attr('articulos', new Articulos.List(oc.attr('articulos').attr()));
 
-					self.attr('articulosP', new Articulos.List(oc.attr('proveedor.articulos').attr()));
+						self.attr('nombreProveedor',oc.attr('proveedor.denominacion'))
 
-					self.attr('articulosFiltrados', self.attr('articulosP').slice());
+						self.attr('articulosP', new Articulos.List(oc.attr('proveedor.articulos').attr()));
+
+						self.attr('articulosFiltrados', self.attr('articulosP').slice());
+						
+					}
 				}
 			);
 		}

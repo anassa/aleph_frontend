@@ -5,6 +5,7 @@ import './registros_oc.less!';
 import template from './registros_oc.stache!';
 
 import OrdenesDeCompra from 'aleph-frontend/models/ordenesDeCompra';
+import Articulos from 'aleph-frontend/models/articulosOC';
 import 'aleph-frontend/util/func.js';
 
 export const ViewModel = Map.extend(
@@ -108,6 +109,8 @@ export const ViewModel = Map.extend(
 	,	setPreviewOrdenDeCompra: function(oc)
 		{
 			this.attr('previewOrdenDeCompra', new OrdenesDeCompra(oc.serialize()));
+
+			this.attr('previewOrdenDeCompra.articulos', new Articulos.List(oc.serialize().articulos));
 		}
 	}
 );
