@@ -39,19 +39,25 @@ export const ViewModel = Map.extend(
 		
 		// Magia para que funcione
 		var self = this
+
 		// Oculto la movida de submodulos.
 		$('#subModulo').hide()
-		// this.attr('desplegar',false);
+
 		// Traemos algo de la base de datos
 		// No importa que ....
 		OrdenesDeCompra.getList().then(
+
+			// en success
 			function(){
 				// No hacemos nada
 			}
+
 			// Si hay un error, es porque el tipo no esta logeado
 			,function(){
+				
 				// Seteamos como el el usuario no fue cargado.
 				self.attr('user',undefined);
+
 			}
 
 		)
@@ -141,25 +147,23 @@ export const ViewModel = Map.extend(
 					}
 				)
 		}
+
+		// Cuando hacemos click en volver al menu.
 		, volverPrincipal: function(elem){
-			// alert(subMapping[modSelected])
-			// $('#iconos').hide()
+
+			// Mostramos los viejos iconos.
 			$('#iconos').show('slow')
-			// $('#iconos').animate({
-			//     // opacity: 0.25,
-			//     // left: "+=50",
-			//     width: "100%"
-			//  }, 500, function() {
-			//     // Animation complete.
-			//  });
-			// // $('#iconos').append('<p id="movida">holamundo</p>')
+			// Ocultamos los iconos del submodulo.
 			$('#subModulo').hide('slow')
 
 		}
+		
 		// Comportamiento cuando tocamos botones
 		, clickIcon: function(modSelected){
+	
+			// Ocultar iconos.
 			$('#iconos').hide('slow')
-			// this.attr('desplegar',true);
+
 			// Creamos un array de JSONS. Practica pco saludable.
 			var subMapping = {
 				ventas:[
@@ -324,19 +328,12 @@ export const ViewModel = Map.extend(
 				]				
 			}
 
+			// Se setea el modulo.
 			this.attr('moduloSelect',subMapping[modSelected]);
+			// Sirve para saber en que modulo se hizo click.
 			this.attr('moduloSelect.volver',modSelected);
-			// alert(subMapping[modSelected])
-
-			// $('#iconos').animate({
-			//     // opacity: 0.25,
-			//     // left: "+=50",
-			//     width: "45%"
-			//  }, 500, function() {
-			//     // Animation complete.
-			//  });
+			// lo mismo de siempre ...
 			$('#iconos').hide('slow')
-			// $("#subModulo").hide()
 			$('#subModulo').hide().show('slow')
 
 		}
