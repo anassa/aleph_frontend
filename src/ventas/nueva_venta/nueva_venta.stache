@@ -29,15 +29,15 @@
 							<div class="form-group">
 								<label for="formaDePago" class="col-sm-4 control-label">Forma de Pago</label>
 								<div class="col-sm-8">
-									<select class="form-control" name="formaDePago" {($value)}="venta.formaDePagoToParse">
-										{{#if formasDePago.isResolved}}
+									{{#if formasDePago.isResolved}}
+										<select class="form-control" name="formaDePago" {($value)}="venta.formaDePagoToParse">
 											{{#each formasDePago.value}}
 												<option value="{{codigo}}-{{nombre}}">
 													{{nombre}}
 												</option>
 											{{/each}}
-										{{/if}}
-									</select>
+										</select>
+									{{/if}}
 								</div>
 							</div>
 							{{#venta.formaPago}}
