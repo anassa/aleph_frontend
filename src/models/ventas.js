@@ -103,12 +103,7 @@ export const Ventas = can.Map.extend(
 			}
 		,	nombreCliente:
 			{
-				get: function()
-				{
-					console.log(this)
-					return "HOLA";
-				}
-			,	serialize: function()
+				serialize: function()
 				{
 					return undefined;
 				}
@@ -188,6 +183,10 @@ export const Ventas = can.Map.extend(
 									(1 + ( this.attr('formaPago.interes') ? ((this.attr('formaPago.interes') < 0) ? 0 : (this.attr('formaPago.interes') / 100)) : 0) )
 								)
 							:	0
+				}
+			,	serialize: function(v)
+				{
+					return	v;
 				}
 			}
 		,	total$:

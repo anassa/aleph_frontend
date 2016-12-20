@@ -24,7 +24,6 @@ export const Ventas = can.Map.extend(
 			{
 				set: function(s)
 				{
-					console.log(s)
 					return	new Articulos.List(s.serialize());
 				}
 			}
@@ -55,8 +54,8 @@ export const Ventas = can.Map.extend(
 			}
 		,	total:
 			{
-				value:	0	
-			,	type:	Number
+				value: 0
+			,	type: Number
 			}
 		,	total$:
 			{
