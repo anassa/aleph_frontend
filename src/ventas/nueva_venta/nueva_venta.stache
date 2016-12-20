@@ -61,16 +61,10 @@
 										<div class="form-group">
 											<label for="tarjeta" class="col-sm-4 control-label">Interes</label>
 											<div class="col-sm-8">
-												<select class="form-control" name="interes" {($value)}="venta.formaPago.interes">
-													<option value="-1">Seleccione un interes</option>
-													<option value="0">Sin intereses</option>
-													<option value="5">5%</option>
-													<option value="10">10%</option>
-													<option value="15">15%</option>
-													<option value="20">20%</option>
-													<option value="25">25%</option>
-													<option value="30">30%</option>
-												</select>
+												<div class="input-group">
+													<input type="text" class="form-control" name="interes" {($value)}="venta.formaPago.interes">
+													<span class="input-group-addon">%</span>
+												</div>
 											</div>
 										</div>
 									{{/case}}
@@ -93,14 +87,7 @@
 										<div class="form-group">
 											<label for="cuotas" class="col-sm-4 control-label">Cuotas</label>
 											<div class="col-sm-8">
-												<select class="form-control" name="cuotas" {($value)}="venta.formaPago.cuotas">
-													<option value="-1">Seleccione las cuotas</option>
-													<option value="1">1</option>
-													<option value="3">3</option>
-													<option value="6">6</option>
-													<option value="9">9</option>
-													<option value="12">12</option>
-												</select>
+												<input type="text" class="form-control" name="cuotas" placeholder="Cuotas" {($value)}="venta.formaPago.cuotas">
 											</div>
 										</div>
 									{{/case}}
@@ -123,16 +110,10 @@
 										<div class="form-group">
 											<label for="interes" class="col-sm-5 control-label">Interes</label>
 											<div class="col-sm-7">
-												<select class="form-control" name="interes" {($value)}="venta.formaPago.interes">
-													<option value="-1">Seleccione</option>
-													<option value="0">0%</option>
-													<option value="5">5%</option>
-													<option value="10">10%</option>
-													<option value="15">15%</option>
-													<option value="20">20%</option>
-													<option value="25">25%</option>
-													<option value="30">30%</option>
-												</select>
+												<div class="input-group">
+													<input type="text" class="form-control" name="interes" {($value)}="venta.formaPago.interes">
+													<span class="input-group-addon">%</span>
+												</div>
 											</div>
 										</div>
 									{{/case}}

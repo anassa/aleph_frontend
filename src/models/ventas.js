@@ -56,8 +56,10 @@ export const Ventas = can.Map.extend(
 						'formaPago'
 					,	(value)
 						?	{
-								codigo:	value.split('-')[0]
-							,	nombre:	value.split('-')[1]
+								codigo:		value.split('-')[0]
+							,	nombre:		value.split('-')[1]
+							,	interes:	0
+							,	cuotas:		1
 							}
 						:	undefined
 					)
