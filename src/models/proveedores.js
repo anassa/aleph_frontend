@@ -66,7 +66,46 @@ export const Proveedores = can.Map.extend(
 			}
 		,	cuenta:
 			{
-				value:	Cuentas
+				value: Cuentas
+			,	set: function(a)
+				{
+					this.attr('tieneCuenta', a ? a.attr('_id') : false);
+					return a;
+				}
+			,	serialize: function(acc)
+				{
+					return this.attr('tieneCuenta') ? acc.attr() : undefined;
+				}
+			}
+		,	tempMontoLimite:
+			{
+				value: ''
+			,	serialize: function()
+				{
+					return undefined;
+				}
+			}
+		,	tieneCuenta:
+			{
+				value: false
+			,	type: Boolean
+			,	set: function(s)
+				{
+					if (this.attr('cuenta'))
+						if (s) {
+							this.attr('cuenta.montoLimite',this.attr('tempMontoLimite'))
+							this.attr('tempMontoLimite','')
+						}	else {
+							this.attr('tempMontoLimite',this.attr('cuenta.montoLimite'))
+							this.attr('cuenta.montoLimite','')
+						}
+
+					return s
+				}
+			,	serialize: function()
+				{
+					return undefined;
+				}
 			}
 		}
 	}

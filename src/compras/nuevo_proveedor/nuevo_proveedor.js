@@ -176,26 +176,7 @@ export const ViewModel = Map.extend({
 		}
 	,	toggleCuenta: function(el)
 		{
-			if (!$(el).is(':checked')) {
-				this.attr('proveedor.cuenta','');
-				$('[name="tope"]').val('')
-			}
-
-			$('[name="cuenta"]')
-				.attr(
-					'disabled'
-				,	(!$(el).is(':checked'))
-					?	'disabled'
-					:	null
-				);
-
-			$('[name="tope"]')
-				.attr(
-					'disabled'
-				,	(!$(el).is(':checked'))
-					?	'disabled'
-					:	null
-				);
+			this.attr('proveedor.tieneCuenta',$(el).is(':checked'));
 		}
 	,	checkEtiquetas: function(el)
 		{

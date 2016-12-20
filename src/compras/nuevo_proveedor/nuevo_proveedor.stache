@@ -75,18 +75,20 @@
 									Cuenta
 								</label>
 								<div class="material-switch pull-right">
-									<input id="cuenta-switch" name="cuenta-switch" type="checkbox" {{^if proveedor.cuenta.isNew}} checked {{/if}} ($change)="toggleCuenta( %element )"/>
+									<input id="cuenta-switch" name="cuenta-switch" type="checkbox" {{#proveedor.tieneCuenta}} checked {{/proveedor.tieneCuenta}} ($change)="toggleCuenta( %element )"/>
 									<label for="cuenta-switch" class="label-default"></label>
 								</div>
 								{{^proveedor.cuenta.isNew}}
-									<input type="text" class="form-control" name="cuenta" placeholder="Cuenta" {($value)}="proveedor.cuenta.codigo" {{#if proveedor.cuenta.isNew}} disabled {{/if}}>
+									{{#proveedor.tieneCuenta}}
+										<input type="text" class="form-control" name="cuenta" placeholder="Cuenta" {($value)}="proveedor.cuenta.codigo" disabled>
+									{{/proveedor.tieneCuenta}}
 								{{/proveedor.cuenta.isNew}}
 							</div>
 							<div class="form-group">
 								<label for="tope">
 									Limite de cuenta
 								</label>
-								<input type="text" class="form-control" name="tope" placeholder="Limite de cuenta" {($value)}="proveedor.cuenta.montoLimite" {{#if proveedor.cuenta.isNew}} disabled {{/if}}>
+								<input type="text" class="form-control" name="tope" placeholder="Limite de cuenta" {{#proveedor.cuenta}} {($value)}="proveedor.cuenta.montoLimite" {{/proveedor.cuenta}} {{^proveedor.tieneCuenta}} disabled {{/proveedor.tieneCuenta}}>
 							</div>
 						</div>						
 					</div>
