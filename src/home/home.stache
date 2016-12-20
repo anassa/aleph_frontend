@@ -22,9 +22,11 @@
 	<div id="sidebar-wrapper">
 		<ul class="sidebar-nav">
 			<li class="sidebar-brand">
-				<a href="{{routeUrl page='home'}}">
+				<a href="/">
+				<!-- <a href="{{routeUrl page='home'}}"> -->
 					Aleph
 				</a>
+				
 			</li>
 			<li>
 				<label class="tree-toggler nav-header">
@@ -346,75 +348,85 @@
 					<div class="container-fluid" id = "items">
 					</div>
 					<div class="container-fluid" id = "iconos">
-						<div class="row thumbnail-list">
-							<div class="col-xs-18 col-sm-6 col-md-3">
-								<div class="thumbnail" ($click)="clickIcon( 'ventas' )">
-									<img src="imgs/ventas-v.png" alt="">
-									<div class="caption">
-										<h4>Ventas</h4>
+						<!-- <a href="{{routeUrl page='home'}}&movida=true"> -->
+							<div class="row thumbnail-list">
+								<div class="col-xs-18 col-sm-6 col-md-3">
+									<div class="thumbnail" ($click)="clickIcon( 'ventas' )">
+										<img src="imgs/ventas-v.png" alt="">
+										<div class="caption">
+											<h4>Ventas</h4>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-18 col-sm-6 col-md-3">
+									<div class="thumbnail" ($click)="clickIcon( 'compras' )">
+										<img src="imgs/compras.png" alt="">
+										<div class="caption">
+											<h4>Compras</h4>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-18 col-sm-6 col-md-3">
+									<div class="thumbnail" ($click)="clickIcon( 'stock' )">
+										<img src="imgs/stock.png" alt="">
+										<div class="caption">
+											<h4>Stock</h4>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-18 col-sm-6 col-md-3">
+									<div class="thumbnail" ($click)="clickIcon( 'administracion' )">
+										<img src="imgs/admin.png" alt="">
+										<div class="caption">
+											<h4>Administración</h4>
+										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-xs-18 col-sm-6 col-md-3">
-								<div class="thumbnail" ($click)="clickIcon( 'compras' )">
-									<img src="imgs/compras.png" alt="">
-									<div class="caption">
-										<h4>Compras</h4>
-									</div>
-								</div>
-							</div>
-							<div class="col-xs-18 col-sm-6 col-md-3">
-								<div class="thumbnail" ($click)="clickIcon( 'stock' )">
-									<img src="imgs/stock.png" alt="">
-									<div class="caption">
-										<h4>Stock</h4>
-									</div>
-								</div>
-							</div>
-							<div class="col-xs-18 col-sm-6 col-md-3">
-								<div class="thumbnail" ($click)="clickIcon( 'administracion' )">
-									<img src="imgs/admin.png" alt="">
-									<div class="caption">
-										<h4>Administración</h4>
-									</div>
-								</div>
-							</div>
-						</div>
+						<!-- </a> -->
 					</div>
 
 					<!-- Sub Iconos de las diferentes Cosas -->
+					
 					<div id="subModulo">
+						
 						<div class="row">
-			                {{#each moduloSelect}}
-		  						<a href="/#!{{modulo}}&section={{section}}">
-		  							<!-- item submodulo-->
-					                <div class="col-md-2 text-center">
-					                    <div class="panel panel-primary submenu">
-					                        <div class="panel-heading submenu-heading {{clase}}">
-					                        	<h1>
-					                           		<i class="fa {{icon}}"></i>
-					                          	</h1>
-					                        </div>
-					                        <div class="panel-body text-center">
-					                           <h5>{{nombre}}</h5>
-					                        </div>
-					                    </div>
-					                </div>
-					                <!-- /item -->
-					            </a>
-			                {{/each}}
+			               		<!-- {{#movida}} -->
+				                {{#each moduloSelect}}
+			  						<a href="/#!{{modulo}}&section={{section}}">
+			  							<!-- item submodulo-->
+						                <div class="col-md-2 text-center">
+						                    <div class="panel panel-primary submenu">
+						                        <div class="panel-heading submenu-heading {{clase}}">
+						                        	<h1>
+						                           		<i class="fa {{icon}}"></i>
+						                          	</h1>
+						                        </div>
+						                        <div class="panel-body text-center">
+						                           <h5>{{nombre}}</h5>
+						                        </div>
+						                    </div>
+						                </div>
+						                <!-- /item -->
+						            </a>
+				                {{/each}}
+				            	<!-- {{/movida}}        -->
+
 				        </div>
 			            <div class="row ">	
 			                <div class="col-md-2">
+		                		<!-- {{#movida}}        -->
 		                		{{#if moduloSelect}}
 				               		<button class="btn btn-default" id="returnButton" ($click)="volverPrincipal()">
 				               			<< {{ moduloSelect.volver}}
 				               		</button>
 			               		{{/if}} 
+			               		<!-- {{/movida}}        -->
 		                	</div>
 						</div>
+						
 				   	</div>
-				              
+				      
 							
 			            
 			      
