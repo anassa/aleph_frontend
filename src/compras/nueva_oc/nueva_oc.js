@@ -206,7 +206,6 @@ export const ViewModel = Map.extend(
 			this.attr('articulosP',[]);
 			this.attr('articulosFiltrados',[]);
 			this.attr('resetPaginadorAP', true);
-			this.resetOrdenDeCompra()
 		}
 	,	resetOrdenDeCompra: function()
 		{
@@ -223,8 +222,10 @@ export const ViewModel = Map.extend(
 					,	$options:	'i'
 					}
 				);
-			else
+			else {
 				this.resetProveedor();
+				this.resetOrdenDeCompra()
+			}
 		}
 	,	addArticulo: function(art)
 		{
@@ -315,6 +316,8 @@ export const ViewModel = Map.extend(
 				'ordendecompra'
 			,	function(ev, oc)
 				{
+					oc.attr('articulos', new Articulos.List(oc.attr('articulos').attr()));
+
 					self.attr('nombreProveedor',oc.attr('proveedor.denominacion'))
 
 					self.attr('articulosP', new Articulos.List(oc.attr('proveedor.articulos').attr()));
