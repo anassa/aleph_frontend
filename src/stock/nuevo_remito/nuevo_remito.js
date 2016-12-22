@@ -3,7 +3,8 @@ import Map from 'can/map/';
 import 'can/map/define/';
 import './nuevo_remito.less!';
 import template from './nuevo_remito.stache!';
-
+import 'bootstrap-datepicker/js/bootstrap-datepicker.js'
+import 'bootstrap-datepicker/js/locales/bootstrap-datepicker.es.js'
 // Importamos el modelo ordenes de compra.
 import OrdenesDeCompra from 'aleph-frontend/models/ordenesDeCompra';
 // Traemos el modelo de remitos
@@ -14,11 +15,11 @@ export const ViewModel = Map.extend({
     // Traemos las ordenes de compras
     ordenesDeCompra:{
     	
-    	// Se traen todas las ordenes de compra de la DB.
-		value: function(){
-			// console.log(OrdenesDeCompra.getList())
-			return	OrdenesDeCompra.getList()
-		}
+      // Se traen todas las ordenes de compra de la DB.
+  		value: function(){
+  			// console.log(OrdenesDeCompra.getList())
+  			return	OrdenesDeCompra.getList()
+		  }
 
     }
     
@@ -29,30 +30,33 @@ export const ViewModel = Map.extend({
     
     // No se para que voy a usar esta query, pero neri lo hace... XD
     ,query: {
-		value: function() {
-			var self = this;
-			var query =	new can.Map({ $skip: 0 });
-			query.bind( 'change' , function(){
-				
-				self.attr( 'ordenesDeCompra' ,
-					OrdenesDeCompra.getList(
-						query.serialize()
-					)
-				)
+		  value: function() {
+  			var self = this;
+  			var query =	new can.Map({ $skip: 0 });
+  			query.bind( 'change' , function(){
+  				
+  				self.attr( 'ordenesDeCompra' ,
+  					OrdenesDeCompra.getList(
+  						query.serialize()
+  					)
+  				)
 
-			});
+			  });
 
-			return query;
-		}
-	}
+		    return query;
+		  }
+	  }
 
   }
-  
+  // ,calendario: function(e){
+  //     // alert('ho')
+  //     $('.date input').datepicker({language: 'es'});
+  // }
   // Funcion para agregar una OC al remito
   ,addOrdenDeCompra: function(oc){
   		// Se carga en la variable orden de compra la seleccionada.
   		this.attr('ordenDeCompraSelected' , oc);
-  }
+  } 
 
   // Funcion para cancelar el remito nuevo.
   ,cancelRemito: function(el){
@@ -139,5 +143,10 @@ export const ViewModel = Map.extend({
 export default Component.extend({
   tag: 'aleph-stock-nuevo-remito',
   viewModel: ViewModel,
-  template
+  events: {
+    'inserted': function(el, ev){
+      $('.date input').datepicker({language: 'es'});
+    }
+  }
+  ,template
 });
