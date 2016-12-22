@@ -50,11 +50,11 @@
                           {{#each ordenesDeCompra.value}}
                           <tr>
                             <td>
-                              {{createdAt}}
+                              {{fecha$}}
                             </td>
                             <td>
                               <span class="text-underline">
-                                {{codigo}}
+                                {{numero}}
                               </span>
                             </td>
                             <td>
@@ -165,7 +165,7 @@
                                 <input 
                                     type="text" 
                                     class="form-control" 
-                                    value="{{precioCosto}}"
+                                     {($value)}="precio"
                                 />
                             </td>
                           </tr>
