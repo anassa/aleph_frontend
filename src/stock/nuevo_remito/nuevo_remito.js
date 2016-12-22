@@ -48,10 +48,7 @@ export const ViewModel = Map.extend({
 	  }
 
   }
-  // ,calendario: function(e){
-  //     // alert('ho')
-  //     $('.date input').datepicker({language: 'es'});
-  // }
+  
   // Funcion para agregar una OC al remito
   ,addOrdenDeCompra: function(oc){
   		// Se carga en la variable orden de compra la seleccionada.
@@ -61,6 +58,48 @@ export const ViewModel = Map.extend({
   // Funcion para cancelar el remito nuevo.
   ,cancelRemito: function(el){
   		this.attr('ordenDeCompraSelected' , null);
+  }
+
+  // Filtrar las OC por fechas.
+  ,findRemitoFecha: function(el){
+      
+      /*Te cuento algo? ...
+      lo que mas odio en mi vida es trabajar con fechas....
+      saludos.
+      */
+
+      // Capturamos la fecha desde los datepicker
+      var desde
+      var hasta
+      
+      // Esto que estoy haciendo, es muy desprolijo. pero funciona... ya fue.
+      if(
+          $('#desde').val() && 
+          $('#hasta').val()
+      ){
+          desde = $('#desde').val() + ' 00:00:00.000Z'
+          hasta = $('#hasta').val() + ' 00:00:00.000Z'
+      }else{
+          desde = '2001-01-01 01:01:01.000Z'
+          hasta = '2070-01-01 01:01:01.000Z'
+      }
+     
+      // Traemos las ordenes filtradas, y las seteamos
+      // en la var ordenesDeCompra
+      this.attr( 'ordenesDeCompra', 
+          OrdenesDeCompra.getList({
+              // Parametros de fecha.
+              createdAt:{
+                $gte: desde,
+                $lt: hasta
+              }
+          })
+      )
+
+      // Utilizar este formato.
+      // $gte: '2016-12-22 05:15:13.648Z',
+      // $lt: '2017-12-22 05:15:13.648Z'
+     
   }
 
   // funcion para crear un nuevo remito
@@ -145,7 +184,11 @@ export default Component.extend({
   viewModel: ViewModel,
   events: {
     'inserted': function(el, ev){
-      $('.date input').datepicker({language: 'es'});
+      $('.date input').datepicker({
+        language: 'es',
+        format: 'yyyy-mm-dd',
+        autoclose: true
+      });
     }
   }
   ,template
