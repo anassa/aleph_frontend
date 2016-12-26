@@ -8,6 +8,8 @@ import 'bootstrap-notify/bootstrap-notify.js'
 import 'aleph-frontend/bootstrap.switch.css!'
 import 'lodash/lodash.js'
 
+console.log("HOLA")
+
 import Usuarios from 'aleph-frontend/models/usuarios';
 // Este modelo lo traigo para hacer una negrada +21% (masiva)
 import OrdenesDeCompra from 'aleph-frontend/models/ordenesDeCompra';

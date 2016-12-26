@@ -16,13 +16,13 @@
     "document": "documentjs",
     "build": "node build"
   },
-  "main": "aleph-frontend/index.stache!done-autorender",
+  "main": "aleph-frontend/index.stache",
   "files": [
     "src"
   ],
   "keywords": [],
   "system": {
-    "main": "aleph-frontend/index.stache!done-autorender",
+    "main": "aleph-frontend/index.stache",
     "directories": {
       "lib": "src"
     },
@@ -64,21 +64,21 @@
     "bootstrap": "^3.3.7",
     "bootstrap-datepicker": "^1.6.4",
     "bootstrap-notify": "^3.1.3",
-    "can": "^2.3.27",
-    "can-connect": "^0.5.5",
-    "can-connect-feathers": "^1.2.1",
-    "can-define": "^1.0.4",
-    "can-zone": "^0.5.9",
+    "can-component": "^3.0.4",
+    "can-compute": "^3.0.5",
+    "can-connect": "^1.0.19",
+    "can-connect-feathers": "^2.0.0",
+    "can-construct": "^3.0.6",
+    "can-construct-super": "^3.0.0",
+    "can-control": "^3.0.5",
+    "can-define": "^1.0.8",
+    "can-zone": "^0.6.0",
     "chart.js": "^2.2.2",
-    "done-autorender": "^0.8.0",
-    "done-component": "^0.4.0",
-    "done-css": "~2.0.2",
-    "done-serve": "^0.2.0",
     "font-awesome": "^4.6.3",
-    "generator-donejs": "^0.9.0",
     "jquery": "~3.1.1",
     "lodash": "^4.17.0",
-    "steal": "^0.16.0"
+    "steal": "^1.0.5",
+    "steal-stache": "^3.0.4"
   },
   "devDependencies": {
     "documentjs": "^0.4.2",
