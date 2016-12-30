@@ -11,7 +11,7 @@ export const Usuarios
 			{
 				return	feathers.authenticate(
 							{
-								type:		'local'
+								strategy:	'local'
 							,	username:	username
 							,	password:	password
 							}

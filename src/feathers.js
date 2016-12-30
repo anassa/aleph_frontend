@@ -1,3 +1,4 @@
+/*
 import Feathers from 'can-connect-feathers';
 import $ from 'can-jquery'
 
@@ -26,3 +27,23 @@ const feathers = new Feathers(
 window.feathers = feathers;
  
 export default feathers;
+*/
+
+import feathers from 'feathers-client';
+import socketio from 'feathers-socketio';
+import io from 'socket.io-client';
+import hooks from 'feathers-hooks';
+import auth from 'feathers-authentication-client';
+import localstorage from 'feathers-localstorage';
+
+const socket = io('http://localhost:3030/');
+
+const feathersClient
+=	feathers()
+		.configure(hooks())
+		.configure(socketio(socket))
+		.configure(auth({ storage: window.localStorage }));
+
+window.feathers = feathersClient;
+
+export default feathersClient;
