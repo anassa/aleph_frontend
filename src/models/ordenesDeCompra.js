@@ -1,65 +1,62 @@
-import can from 'can';
+import Map from 'can-define/map/map';
+import List from 'can-define/list/list';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
-import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 
 import Usuarios from 'aleph-frontend/models/usuarios';
 import Articulos from 'aleph-frontend/models/articulosOC';
 
-export const OrdenesDeCompra = can.Map.extend(
+export const OrdenesDeCompra = Map.extend(
 	{
-		define:
+		articulos:
 		{
-			articulos:
+			value: Articulos.List
+		}
+	,	total:
+		{
+			get: function()
 			{
-				value: Articulos.List
+				return	this.articulos.length
+						?	(
+								this.articulos.get()
+									.reduce(
+										function(a, b)
+										{
+											return a + (b.precioCosto || 0)*b.cantidad;
+										}
+									,	0
+									)
+							)
+						:	0
 			}
-		,	total:
+		,	serialize: function()
 			{
-				get: function()
-				{
-					return	this.attr('articulos')
-							?	(
-									this.attr('articulos').attr()
-										.reduce(
-											function(a, b)
-											{
-												return a + (b.precioCosto || 0)*b.cantidad;
-											}
-										,	0
-										)
-								)
-							:	0
-				}
-			,	serialize: function()
-				{
-					return	this.attr('total')
-				}
+				return	this.total
 			}
-		,	remitos:
+		}
+	,	remitos:
+		{
+			value:	List
+		}
+	,	total$:
+		{
+			value:	0
+		,	type:	Number
+		,	get: function()
 			{
-				value:	can.List
+				return this.total.toFixed(2);	
 			}
-		,	total$:
+		,	serialize: function()
 			{
-				value:	0
-			,	type:	Number
-			,	get: function()
-				{
-					return this.attr('total').toFixed(2);	
-				}
-			,	serialize: function()
-				{
-					return undefined;	
-				}
+				return undefined;	
 			}
-		,	fecha$:
+		}
+	,	fecha$:
+		{
+			get: function()
 			{
-				get: function()
-				{
-					return (new Date(this.attr('createdAt'))).toLocaleDateString()
-				}
+				return (new Date(this.createdAt)).toLocaleDateString()
 			}
 		}
 	,	init: function ()
@@ -67,21 +64,19 @@ export const OrdenesDeCompra = can.Map.extend(
 			var	currentUser
 			=	Usuarios.getSession();
 
-			this.attr(
-				'usuario'
-			,	{
-					_id:		currentUser.attr('_id')
-				,	username: 	currentUser.attr('username')
-				,	permisos:	currentUser.attr('permisos')
-				}
-			);
+			this.usuario
+			=	{
+					_id:		currentUser._id
+				,	username: 	currentUser.username
+				,	permisos:	currentUser.permisos
+				};
 		}
 	}
 );
 
-OrdenesDeCompra.List = can.List.extend({
-	Map: OrdenesDeCompra
-}, {});
+OrdenesDeCompra.List = List.extend({
+	'#': OrdenesDeCompra
+});
 
 export const ordenesDeCompraConnection
 =	superMap(

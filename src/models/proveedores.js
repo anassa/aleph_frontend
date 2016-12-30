@@ -1,119 +1,115 @@
-import can from 'can';
+import Map from 'can-define/map/map';
+import List from 'can-define/list/list';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
-import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 import 'lodash/lodash.js'
 
 import Cuentas from 'aleph-frontend/models/cuentas';
 
-export const Proveedores = can.Map.extend(
+export const Proveedores = Map.extend(
 	{
-		define:
+		articulos:
 		{
-			articulos:
+			value: List
+		,	serialize: function(list)
 			{
-				value: can.List
-			,	serialize: function(list)
-				{
-					return	_.map(
-								list.serialize()
-							,	function(art)
-								{
-									return	_.omit(
-												art
-											,	['proveedores', 'usuario']
-											)
-								}
-							)
-				}
-			}
-		,	etiquetas:
-			{
-				value: can.List
-			,	set: function(e)
-				{	
-					this.attr(
-						'parsedEtiquetas'
-					,	e.map(
-							function(e)
+				return	_.map(
+							list.get()
+						,	function(art)
 							{
-								return	e.descripcion
+								return	_.omit(
+											art
+										,	['proveedores', 'usuario']
+										)
 							}
-						).join(', ')
-					);
-					return e;
-				}
-			,	serialize: function(list)
-				{
-					return 	list.map(
-								function(i)
-								{
-									return	{
-												tipo:			i.tipo
-											,	descripcion:	i.descripcion
-											}
-								}
-							).serialize()
-				}
+						)
 			}
-		,	parsedEtiquetas:
-			{
-				serialize: function()
-				{
-					return undefined;
-				}
-			}
-		,	cuenta:
-			{
-				value: Cuentas
-			,	set: function(a)
-				{
-					this.attr('tieneCuenta', a ? a.attr('_id') : false);
-					return a;
-				}
-			,	serialize: function(acc)
-				{
-					return this.attr('tieneCuenta') ? acc.attr() : undefined;
-				}
-			}
-		,	tempMontoLimite:
-			{
-				value: ''
-			,	serialize: function()
-				{
-					return undefined;
-				}
-			}
-		,	tieneCuenta:
-			{
-				value: false
-			,	type: Boolean
-			,	set: function(s)
-				{
-					if (this.attr('cuenta'))
-						if (s) {
-							this.attr('cuenta.montoLimite',this.attr('tempMontoLimite'))
-							this.attr('tempMontoLimite','')
-						}	else {
-							this.attr('tempMontoLimite',this.attr('cuenta.montoLimite'))
-							this.attr('cuenta.montoLimite','')
+		}
+	,	etiquetas:
+		{
+			value: List
+		,	set: function(e)
+			{	
+				this.parsedEtiquetas
+				=	e.map(
+						function(e)
+						{
+							return	e.descripcion
 						}
+					).join(', ')
 
-					return s
-				}
-			,	serialize: function()
-				{
-					return undefined;
-				}
+				return e;
+			}
+		,	serialize: function(list)
+			{
+				return 	list.map(
+							function(i)
+							{
+								return	{
+											tipo:			i.tipo
+										,	descripcion:	i.descripcion
+										}
+							}
+						).get()
+			}
+		}
+	,	parsedEtiquetas:
+		{
+			serialize: function()
+			{
+				return undefined;
+			}
+		}
+	,	cuenta:
+		{
+			value: Cuentas
+		,	set: function(a)
+			{
+				this.tieneCuenta = a ? a._id : false;
+				return a;
+			}
+		,	serialize: function(acc)
+			{
+				return this.tieneCuenta ? acc.get() : undefined;
+			}
+		}
+	,	tempMontoLimite:
+		{
+			value: ''
+		,	serialize: function()
+			{
+				return undefined;
+			}
+		}
+	,	tieneCuenta:
+		{
+			value: false
+		,	type: Boolean
+		,	set: function(s)
+			{
+				if (this.cuenta)
+					if (s) {
+						this.cuenta.montoLimite = this.tempMontoLimite;
+						this.tempMontoLimite = 0;
+					}	else {
+						this.tempMontoLimite = this.cuenta.montoLimite;
+						this.cuenta.montoLimite = '';
+					}
+
+				return s
+			}
+		,	serialize: function()
+			{
+				return undefined;
 			}
 		}
 	}
 );
 
-Proveedores.List = can.List.extend({
-	Map: Proveedores
-}, {});
+Proveedores.List = List.extend({
+	'#': Proveedores
+});
 
 export const proveedoresConnection
 =	superMap(

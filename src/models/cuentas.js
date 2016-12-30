@@ -1,24 +1,21 @@
-import can from 'can';
+import Map from 'can-define/map/map';
+import List from 'can-define/list/list';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
-import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 
-export const Cuentas = can.Map.extend(
+export const Cuentas = Map.extend(
 	{
-		define:
+		montoLimite:
 		{
-			montoLimite:
-			{
-				value:	""
-			}
+			value:	""
 		}
 	}
 );
 
-Cuentas.List = can.List.extend({
-	Map: Cuentas
-}, {});
+Cuentas.List = List.extend({
+	'#': Cuentas
+});
 
 export const cuentasConnection
 =	superMap(

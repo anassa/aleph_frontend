@@ -1,16 +1,14 @@
-import can from 'can';
+import Map from 'can-define/map/map';
+import List from 'can-define/list/list';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
-import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 
-export const Alarmas = can.Map.extend({
-	define: {}
-});
+export const Alarmas = Map.extend({});
 
-Alarmas.List = can.List.extend({
-	Map: Alarmas
-}, {});
+Alarmas.List = List.extend({
+	'#': Alarmas
+});
 
 export const alarmasConnection
 =	superMap(

@@ -1,0 +1,258 @@
+<div class="container-fluid">
+	<div>
+	<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class="active">
+				<a href="#datos" aria-controls="data" role="tab" data-toggle="tab">
+					Datos
+				</a>
+			</li>
+			<li role="presentation">
+				<a href="#proveedores" aria-controls="provider" role="tab" data-toggle="tab">
+					Proveedores
+				</a>
+			</li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="datos">
+				<form id="nuevo-articulo-form">
+					<div class="row">
+						<div class="col-md-3">
+							{{^articulo.isNew}}
+							<div class="form-group">
+								<label for="codigo">
+									Codigo
+								</label>
+								<input type="text" class="form-control" name="codigo" placeholder="Codigo" {($value)}="articulo.padedCodigo" disabled>
+							</div>
+							{{/articulo.isNew}}
+							<div class="form-group">
+								<label for="nombre">
+									Nombre *
+								</label>
+								<input type="text" class="form-control" name="nombre" placeholder="Nombre" {($value)}="articulo.nombre">
+							</div>
+							<div class="form-group">
+								<label for="descripcion">
+									Descripcion
+								</label>
+								<input type="text" class="form-control" name="descripcion" placeholder="Descripcion" {($value)}="articulo.descripcion">
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="stock">
+									Stock *
+								</label>
+								<input type="text" class="form-control" name="stock" placeholder="Stock" {($value)}="articulo.stock" {{^articulo.isNew}} disabled {{/articulo.isNew}}>
+							</div>
+							<div class="form-group">
+								<label for="minimo">
+									Stock Minimo *
+								</label>
+								<input type="text" class="form-control" name="minimo" placeholder="Stock Minimo" {($value)}="articulo.minimo">
+							</div>
+							<div class="form-group">
+								<label for="maximo">
+									Stock Maximo *
+								</label>
+								<input type="text" class="form-control" name="maximo" placeholder="Stock Maximo" {($value)}="articulo.maximo">
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="unidadMedida">
+									Unidad de Medida
+								</label>
+								<select class="form-control" name="unidadMedida" {($value)}="articulo.unidadDeMedidaToParse">
+									<option value="-1">Seleccione una unidad</option>
+									{{#if unidadesDeMedida.isResolved}}
+										{{#each unidadesDeMedida.value}}
+											<option value="{{_id}}-{{nombre}}">
+												{{nombre}}
+											</option>
+										{{/each}}
+									{{/if}}
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="descuento">
+									Descuento
+								</label>
+								<input type="text" class="form-control" name="descuento" placeholder="Descuento" {($value)}="articulo.descuento">
+							</div>
+							{{^articulo.isNew}}
+							<div class="form-group">
+								<label for="ajuste">
+									Ajuste de Inventario
+								</label>
+								<div class="material-switch pull-right">
+									<input id="ajuste-switch" name="ajuste-switch" type="checkbox" {{#if articulo.ajuste}} checked {{/if}} ($change)="toggleAjuste( %element )"/>
+									<label for="ajuste-switch" class="label-default"></label>
+								</div>
+								<input type="text" class="form-control" name="ajuste" placeholder="Ajuste de inventario" {($value)}="articulo.ajuste" {{^if articulo.ajuste}} disabled {{/if}}>						
+							</div>
+							{{/articulo.isNew}}
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="precioCosto">
+									Precio de costo
+								</label>
+								<input type="text" class="form-control" name="precioCosto" placeholder="Precio de costo" {($value)}="articulo.precioCosto">
+							</div>
+							<div class="form-group">
+								<label for="precioVenta">
+									Precio de venta
+								</label>
+								<input type="text" class="form-control" name="precioVenta" placeholder="Precio de venta" {($value)}="articulo.precioVenta">
+							</div>
+						</div>			
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							{{#errorMsg}}
+							<div class="alert alert-danger" role="alert">
+								{{.}}
+							</div>
+							{{/errorMsg}}
+						</div>
+						{{#articulo.isNew}}
+						<div class="col-md-12">
+							<div class="clearfix">
+								<button type="button" class="btn btn-primary pull-right" data-loading-text="Guardando..." ($click)="saveArticulo( %element )">
+									Guardar
+								</button>
+								<button type="button" class="btn btn-warning pull-right cancel" ($click)="cancelArticulo( %element )">
+									Cancelar
+								</button>
+							</div>
+						</div>
+						{{/articulo.isNew}}
+					</div>
+				</form>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="proveedores">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									Busqueda de Proveedores
+								</h3>
+							</div>
+							<div class="panel-body">
+								<form onsubmit="return false;">
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="Buscar Proveedores" {($value)}="searchInput" ($change)="searchProveedor()">
+									</div>
+								</form>
+								<table class="table table-striped table-bordered">
+									<thead>
+										<tr>
+											<th>Proveedor</th>
+											<th>CUIT</th>
+											<th>Accion</th>
+										</tr>
+									</thead>
+									<tbody>
+										{{#if proveedores.isResolved}}
+											{{#each proveedores.value}}
+												<tr>
+													<td>
+														{{denominacion}}
+													</td>
+													<td>
+														{{dni_cuit}}
+													</td>
+													<td>
+														<a ($click)="addProveedor(.)">
+															<i class="glyphicon glyphicon-plus-sign text-info "></i>
+														</a>
+													</td>
+												</tr>
+											{{/each}}
+										{{/if}}
+									</tbody>
+								</table>
+								<can-import from="aleph-frontend/components/util/paginador/">
+									{{#if isPending}}
+										Loading...
+									{{else}}
+										<aleph-paginador 
+											{data}="proveedores"
+											{query}="query"
+											{reset}="resetPaginadorProveedores"
+											/>
+									{{/if}}
+								</can-import>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									Proveedores agregados al articulo
+								</h3>
+							</div>
+							<div class="panel-body">
+								<table class="table table-striped table-bordered">
+									<thead>
+										<tr>
+											<th>Proveedor</th>
+											<th>CUIT</th>
+											<th>Accion</th>
+										</tr>
+									</thead>
+									<tbody>
+										{{#each articulo.proveedores}}
+										 	{{#visible}}
+											<tr>
+												<td>
+													{{denominacion}}
+												</td>
+												<td>
+													{{dni_cuit}}
+												</td>
+												<td>
+													<a ($click)="removeProveedor( %element )">
+														<i class="glyphicon glyphicon-minus-sign text-danger "></i>
+													</a>
+												</td>
+											</tr>
+											{{/visible}}
+										{{/each}}
+									</tbody>
+								</table>
+								<can-import from="aleph-frontend/components/util/paginadorList/">
+									{{#if isPending}}
+										Loading...
+									{{else}}
+										<aleph-paginador-list 
+											{data}="articulo.proveedores"
+											{query}="listQuery"
+											{reset}="resetPaginador"
+											/>
+									{{/if}}
+								</can-import>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{^articulo.isNew}}
+<div class="modal-footer innter-footer-fix">
+	<button type="button" class="btn btn-secondary" data-dismiss="modal">
+		Cerrar
+	</button>
+	<button type="button" class="btn btn-primary" data-loading-text="Guardando..." ($click)="saveArticulo( %element )">
+		Guardar
+	</button>
+</div>
+{{/articulo.isNew}}

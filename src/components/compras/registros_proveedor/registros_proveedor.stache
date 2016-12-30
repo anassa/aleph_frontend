@@ -1,0 +1,109 @@
+<form onsubmit="return false;">
+	<div class="form-group">
+		<input type="text" class="form-control" placeholder="Buscar proveedores" {($value)}="searchInput" ($change)="search()">
+	</div>
+</form>
+<!-- Barra de busqueda -->
+<table class="table table-striped table-bordered" id="registros-proveedores">
+	<thead>
+		<tr>
+			<th>Razon Social</th>
+			<th>Domicilio</th>
+			<th>Mail</th>
+			<th>Telefono</th>
+			<th>Accion</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#if proveedores.isResolved}}
+			{{#each proveedores.value}}
+				<tr>
+					<td>
+						{{denominacion}}
+					</td>
+					<td>
+						{{domicilio}}
+					</td>
+					<td>
+						{{mail}}
+					</td>
+					<td>
+						{{telefono}}
+					</td>
+					<td>
+						<a data-toggle="modal" data-target="#modal-editar-proveedor" ($click)="setTempProveedor(.)">
+							<i class="glyphicon glyphicon-pencil text-info "></i>
+						</a>
+						<a data-toggle="modal" data-target="#modal-eliminar-proveedor" ($click)="setTempProveedor(.)">
+							<i class="glyphicon glyphicon-trash text-danger"></i>
+						</a>
+					</td>
+				</tr>
+			{{/each}}
+		{{/if}}
+	</tbody>
+</table>
+<can-import from="aleph-frontend/components/util/paginador/">
+	{{#if isPending}}
+		Loading...
+	{{else}}
+		<aleph-paginador 
+			{data}="proveedores"
+			{query}="query"
+			/>
+	{{/if}}
+</can-import>
+
+<!-- Modal - Perfil de usuario -->
+<div class="modal fade" id="modal-editar-proveedor">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">
+					Editar proveedor
+				</h4>
+			</div>
+			<div class="modal-body">
+				<can-import from="aleph-frontend/compras/nuevo_proveedor/">
+					{{#if isPending}}
+						Loading...
+					{{else}}
+						<aleph-compras-nuevo-proveedor {proveedor}="tempProveedor"/>
+					{{/if}}
+				</can-import>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Salir-->
+<div class="modal fade" id="modal-eliminar-proveedor">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">
+					Salir
+				</h4>
+			</div>
+			<div class="modal-body">
+				<p>
+					¿Está seguro que desea eliminar este proveedor?
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					Cancelar
+				</button>
+				<button type="button" class="btn btn-danger" data-loading-text="Eliminando..." ($click)="destroyProveedor( %element )">
+					Eliminar
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

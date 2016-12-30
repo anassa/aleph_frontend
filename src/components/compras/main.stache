@@ -1,0 +1,56 @@
+{{#switch section}}
+	{{#case "nuevo_articulo"}}
+		<can-import from="aleph-frontend/components/stock/nuevo_articulo/">
+			{{#if isPending}}
+				Loading...
+			{{else}}
+				<aleph-stock-nuevo-articulo/>
+			{{/if}}
+		</can-import>
+	{{/case}}
+	{{#case "nuevo_remito"}}
+		<can-import from="aleph-frontend/components/stock/nuevo_remito/">
+			{{#if isPending}}
+				Loading...
+			{{else}}
+				<aleph-stock-nuevo-remito/>
+			{{/if}}
+		</can-import>
+	{{/case}}
+	{{#case "registros_articulo"}}
+		<can-import from="aleph-frontend/components/stock/registros_articulo/">
+			{{#if isPending}}
+				Loading...
+			{{else}}
+				<aleph-stock-registros-articulo/>
+			{{/if}}
+		</can-import>
+	{{/case}}
+	{{#case "registros_remito"}}
+		<can-import from="aleph-frontend/components/stock/registros_remito/">
+			{{#if isPending}}
+				Loading...
+			{{else}}
+				<aleph-stock-registros-remito/>
+			{{/if}}
+		</can-import>
+	{{/case}}
+	{{#case "reportes"}}
+		<can-import from="aleph-frontend/components/stock/reportes/">
+			{{#if isPending}}
+				Loading...
+			{{else}}
+				<aleph-stock-reportes/>
+			{{/if}}
+		</can-import>
+	{{/case}}
+	{{#default}}
+		<can-import from="aleph-frontend/components/util/notfound/">
+			{{#if isPending}}
+				Loading...
+			{{else}}
+				<aleph-not-found/>
+			{{/if}}
+		</can-import>
+	{{/case}}
+{{/switch}}

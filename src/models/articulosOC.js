@@ -1,7 +1,7 @@
-import can from 'can';
+import Map from 'can-define/map/map';
+import List from 'can-define/list/list';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
-import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 import 'lodash/lodash.js'
 
@@ -10,69 +10,65 @@ import Usuarios from 'aleph-frontend/models/usuarios';
 
 import 'aleph-frontend/util/func';
 
-export const Articulos = can.Map.extend(
-	{}
-,	{
-		define:
+export const Articulos = Map.extend(
+	{
+		padedCodigo:
 		{
-			padedCodigo:
+			get: function(value)
 			{
-				get: function(value)
-				{
-					return	this.attr('codigo')
-							?	pad(this.attr('codigo'),4)
-							:	value;
-				}
+				return	this.codigo
+						?	pad(this.codigo,4)
+						:	value;
 			}
-		,	cantidad:
+		}
+	,	cantidad:
+		{
+			value: 1
+		,	type: Number
+		}
+	,	alarma$:
+		{
+			get: function()
 			{
-				value: 1
-			,	type: Number
+				return	this.stock <= this.minimo
+						?	'Min'
+						:	this.stock >= this.maximo
+							?	'Max'
+							:	undefined	
 			}
-		,	alarma$:
+		,	serialize: function()
 			{
-				get: function()
-				{
-					return	this.attr('stock') <= this.attr('minimo')
-							?	'Min'
-							:	this.attr('stock') >= this.attr('maximo')
-								?	'Max'
-								:	undefined	
-				}
-			,	serialize: function()
-				{
-					return undefined;	
-				}
+				return undefined;	
 			}
-		,	precioCosto:
+		}
+	,	precioCosto:
+		{
+			value: 0
+		,	type:	Number
+		}
+	,	precioCosto$:
+		{
+			value: 0
+		,	type:	Number
+		,	get: function()
 			{
-				value: 0
-			,	type:	Number
+				return this.precioCosto.toFixed(2);	
 			}
-		,	precioCosto$:
+		}
+	,	visible:
+		{
+			value: true
+		,	serialize: function()
 			{
-				value: 0
-			,	type:	Number
-			,	get: function()
-				{
-					return this.attr('precioCosto').toFixed(2);	
-				}
-			}
-		,	visible:
-			{
-				value: true
-			,	serialize: function()
-				{
-					return undefined;
-				}
+				return undefined;
 			}
 		}
 	}
 );
 
-Articulos.List = can.List.extend({
-  Map: Articulos
-}, {});
+Articulos.List = List.extend({
+  '#': Articulos
+});
 
 export const articulosConnection
 =	superMap(

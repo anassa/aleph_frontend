@@ -1,0 +1,236 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Busqueda de articulos
+				</div>
+				<div class="panel-body">
+					<form>
+						<div class="row">
+							<div class="form-group col-md-5">
+								<label for="exampleInputEmail1">Proveedor</label>
+								<input type="text" class="form-control" name="nombreProveedor" placeholder="Proveedor" {($value)}="nombreProveedor" ($change)="searchProveedor()" {{^ordendecompra.isNew}} disabled {{/ordendecompra.isNew}}>
+							</div>
+							<div class="form-group col-md-7">
+								<label for="exampleInputEmail1">Articulo</label>
+								<div class="row">
+									<div class="col-md-6">
+										<input type="text" class="form-control" name="nombreArticulo" placeholder="Articulo" {($value)}="nombreArticulo" ($change)="filterArticulo()" {{^ordendecompra.proveedor}} disabled {{/ordendecompra.proveedor}}>
+									</div>
+									<div class="col-md-6">
+										<input type="text" class="form-control" name="codigoArticulo" placeholder="Codigo" {($value)}="codigoArticulo" ($change)="filterArticulo()" {{^ordendecompra.proveedor}} disabled {{/ordendecompra.proveedor}}>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+					<table class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Codigo</th>
+								<th>Nombre</th>
+								<th>Costo</th>
+								<th>Stock</th>
+								<th>Unidad</th>
+								<th>Alarma</th>
+								<th>Accion</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{#each articulosFiltrados}}
+								<tr>
+									<td>
+										{{padedCodigo}}
+									</td>
+									<td>
+										<span class="text-underline">
+											{{nombre}}
+										</span>
+									</td>
+									<td>
+										{{precioCosto$}}
+									</td>
+									<td>
+										{{stock}}
+									</td>
+									<td>
+										{{unidadMedida.nombre}}
+									</td>
+									<td>
+										<span class="label label-danger">{{alarma$}}</span>
+									</td>
+									<td>
+										<a ($click)="addArticulo(.)">
+											<i class="glyphicon glyphicon-plus-sign text-info "></i>
+										</a>
+									</td>
+								</tr>
+							{{/each}}
+						</tbody>
+					</table>
+					<can-import from="aleph-frontend/components/util/paginadorList/">
+						{{#if isPending}}
+							Loading...
+						{{else}}
+							<aleph-paginador-list 
+								{data}="articulosFiltrados"
+								{query}="listQueryAF"
+								{reset}="resetPaginadorAP"
+								/>
+						{{/if}}
+					</can-import>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-default order">
+				<div class="panel-heading">
+					Orden de compra
+				</div>
+				<div class="panel-body">
+					{{#ordendecompra.proveedor}}
+					<div class="row">
+						<div class="col-md-12">
+							<h4 class="text-underline">
+								{{ordendecompra.proveedor.denominacion}}
+							</h4>
+						</div>
+						<div class="col-md-5">
+							<dl>
+								<dt>CUIL</dt>
+								<dd>{{ordendecompra.proveedor.dni_cuit}}</dd>
+							</dl>
+							<dl>
+								<dt>Telefono</dt>
+								<dd>{{ordendecompra.proveedor.telefono}}</dd>
+							</dl>
+						</div>
+						<div class="col-md-7">
+							<dl>
+								<dt>Direccion</dt>
+								<dd>{{ordendecompra.proveedor.domicilio}}</dd>
+							</dl>
+							<dl>
+								<dt>Mail</dt>
+								<dd>{{ordendecompra.proveedor.mail}}</dd>
+							</dl>
+						</div>
+						<div class="col-md-12">
+							{{#each ordendecompra.proveedor.etiquetas}}
+								<span class="label label-tag {{tipo}}">
+									{{descripcion}}
+								</span>
+							{{/each}}
+						</div>
+					</div>
+					{{/ordendecompra.proveedor}}
+					<div class="row">
+						<div class="col-md-12">
+							<form class="form">
+								<label>
+									Oservacion
+								</label>
+								<textarea class="form-control" rows="2" {($value)}="ordendecompra.observacion"></textarea>
+							</form>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<h4 class="text-underline not-padded-top">
+								Articulos
+							</h4>
+							<table class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th class="col-md-2">Codigo</th>
+										<th class="col-md-4">Nombre</th>
+										<th class="col-md-2">Costo</th>
+										<th class="col-md-2">Cantidad</th>
+										<th class="col-md-2">Accion</th>
+									</tr>
+								</thead>
+								<tbody>
+									{{#each ordendecompra.articulos}}
+									 	{{#visible}}
+										<tr>
+											<td>
+												{{padedCodigo}}
+											</td>
+											<td>
+												<span class="text-underline">
+													{{nombre}}
+												</span>
+											</td>
+											<td>
+												{{precioCosto$}}
+											</td>
+											<td>
+												<input type="text" class="form-control input-sm" placeholder="Cantidad" {($value)}="cantidad">
+											</td>
+											<td>
+												<a ($click)="removeArticulo( %element )">
+													<i class="glyphicon glyphicon-minus-sign text-danger "></i>
+												</a>
+											</td>
+										</tr>
+										{{/visible}}
+									{{/each}}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-8">
+							<can-import from="aleph-frontend/components/util/paginadorList/">
+								{{#if isPending}}
+									Loading...
+								{{else}}
+									<aleph-paginador-list 
+										{data}="ordendecompra.articulos"
+										{query}="listQueryAOC"
+										{reset}="resetPaginadorAOC"
+										/>
+								{{/if}}
+							</can-import>
+						</div>
+						<div class="col-md-4 padded-box">
+							<p class="label label-info">
+								Total: <span> ${{ordendecompra.total$}}</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			{{#errorMsg}}
+			<div class="alert alert-danger" role="alert">
+				{{.}}
+			</div>
+			{{/errorMsg}}
+		</div>
+		{{#ordendecompra.isNew}}
+		<div class="col-md-12">
+			<div class="clearfix">
+				<button type="button" class="btn btn-primary pull-right" data-loading-text="Guardando..." ($click)="saveOrdenDeCompra( %element )">
+					Guardar
+				</button>
+				<button type="button" class="btn btn-warning pull-right cancel" ($click)="cancelOrdenDeCompra( %element )">
+					Cancelar
+				</button>
+			</div>
+		</div>
+		{{/ordendecompra.isNew}}
+	</div>
+</div>
+{{^ordendecompra.isNew}}
+<div class="modal-footer innter-footer-fix">
+	<button type="button" class="btn btn-secondary" data-dismiss="modal">
+		Cerrar
+	</button>
+	<button type="button" class="btn btn-primary" data-loading-text="Guardando..." ($click)="saveOrdenDeCompra( %element )">
+		Guardar
+	</button>
+</div>
+{{/ordendecompra.isNew}}

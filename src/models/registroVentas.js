@@ -1,78 +1,75 @@
-import can from 'can';
+import Map from 'can-define/map/map';
+import List from 'can-define/list/list';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
-import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 
 import Clientes from 'aleph-frontend/models/clientes';
 import Articulos from 'aleph-frontend/models/articulosVenta';
 
-export const Ventas = can.Map.extend(
+export const Ventas = Map.extend(
 	{
-		define:
+		fecha:
 		{
-			fecha:
+			value:	''
+		,	type:	String
+		,	get: function()
 			{
-				value:	''
-			,	type:	String
-			,	get: function()
-				{
-					return new Date(this.attr('createdAt')).toLocaleDateString()
-				}
+				return new Date(this.createdAt).toLocaleDateString()
 			}
-		,	articulos:
+		}
+	,	articulos:
+		{
+			set: function(s)
 			{
-				set: function(s)
-				{
-					return	new Articulos.List(s.serialize());
-				}
+				return	new Articulos.List(s.get());
 			}
-		,	listadoArticulos:
+		}
+	,	listadoArticulos:
+		{
+			get: function()
 			{
-				get: function()
-				{
-					var text
-					=	this.attr('articulos').serialize()
-							.map(
-								function(a)
-								{
-									return a.cantidad+' '+a.nombre
-								}
-							).join(', ');
+				var text
+				=	this.articulos
+						.map(
+							function(a)
+							{
+								return a.cantidad+' '+a.nombre
+							}
+						).join(', ');
 
-					return (text.length > 60) ? text.substring(0,60)+'...' : text;
-				}
+				return (text.length > 60) ? text.substring(0,60)+'...' : text;
 			}
-		,	clientes:
+		}
+	,	clientes:
+		{
+			type: Clientes
+		}
+	,	descuento:
+		{
+			value:	0	
+		,	type:	Number
+		}
+	,	total:
+		{
+			value: 0
+		,	type: Number
+		}
+	,	total$:
+		{
+			value:	0
+		,	type:	Number
+		,	get: function()
 			{
-				type: Clientes
-			}
-		,	descuento:
-			{
-				value:	0	
-			,	type:	Number
-			}
-		,	total:
-			{
-				value: 0
-			,	type: Number
-			}
-		,	total$:
-			{
-				value:	0
-			,	type:	Number
-			,	get: function()
-				{
-					return this.attr('total').toFixed(2);	
-				}
+				return this.total.toFixed(2);	
 			}
 		}
 	}
 );
 
-Ventas.List = can.List.extend({
-  Map: Ventas
-}, {});
+Ventas.List = List.extend({
+  '#': Ventas
+});
 
 export const ventasConnection
 =	superMap(

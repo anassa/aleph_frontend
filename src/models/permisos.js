@@ -1,16 +1,14 @@
-import can from 'can';
+import Map from 'can-define/map/map';
+import List from 'can-define/list/list';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
-import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 
-export const Permisos = can.Map.extend({
-  define: {}
-});
+export const Permisos = Map.extend({});
 
-Permisos.List = can.List.extend({
-  Map: Permisos
-}, {});
+Permisos.List = List.extend({
+  '#': Permisos
+});
 
 export const permisosConnection
 =	superMap(

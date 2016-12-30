@@ -1,29 +1,29 @@
-import can from 'can';
+import Map from 'can-define/map/map';
+import List from 'can-define/list/list';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
-import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 
 import Usuarios from 'aleph-frontend/models/usuarios';
 
-export const Remitos = can.Map.extend({
-  define: {}
-  ,	init: function (){
-  		// El remito se inicializa con el usuario actual
-		var	currentUser = Usuarios.getSession();
-		this.attr(
-			'usuario', {
-					_id:		currentUser.attr('_id')
-				,	username: 	currentUser.attr('username')
-				,	permisos:	currentUser.attr('permisos')
-			}
-		);
+export const Remitos = Map.extend(
+	{
+	  	init: function (){
+			// El remito se inicializa con el usuario actual
+			var	currentUser = Usuarios.getSession();
+			this.attr(
+				'usuario', {
+						_id:		currentUser.attr('_id')
+					,	username: 	currentUser.attr('username')
+					,	permisos:	currentUser.attr('permisos')
+				}
+			);
 	}
 });
 
-Remitos.List = can.List.extend({
-  Map: Remitos
-}, {});
+Remitos.List = List.extend({
+  '#': Remitos
+});
 
 export const remitosConnection
 =	superMap(

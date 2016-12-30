@@ -1,0 +1,56 @@
+{{#switch section}}
+	{{#case "nueva_oc"}}
+		<can-import from="aleph-frontend/components/compras/nueva_oc/">
+			{{#if isPending}}
+				Loading...
+			{{else}}
+				<aleph-compras-nueva-oc/>
+			{{/if}}
+		</can-import>
+	{{/case}}
+	{{#case "nuevo_proveedor"}}
+		<can-import from="aleph-frontend/components/compras/nuevo_proveedor/">
+			{{#if isPending}}
+				Loading...
+			{{else}}
+				<aleph-compras-nuevo-proveedor/>
+			{{/if}}
+		</can-import>
+	{{/case}}
+	{{#case "registros_oc"}}
+		<can-import from="aleph-frontend/components/compras/registros_oc/">
+			{{#if isPending}}
+				Loading...
+			{{else}}
+				<aleph-compras-registros-oc/>
+			{{/if}}
+		</can-import>
+	{{/case}}
+	{{#case "registros_proveedor"}}
+		<can-import from="aleph-frontend/components/compras/registros_proveedor/">
+			{{#if isPending}}
+				Loading...
+			{{else}}
+				<aleph-compras-registros-proveedor/>
+			{{/if}}
+		</can-import>
+	{{/case}}
+	{{#case "reportes"}}
+		<can-import from="aleph-frontend/components/compras/reportes/">
+			{{#if isPending}}
+				Loading...
+			{{else}}
+				<aleph-compras-reportes/>
+			{{/if}}
+		</can-import>
+	{{/case}}
+	{{#default}}
+		<can-import from="aleph-frontend/components/util/notfound/">
+			{{#if isPending}}
+				Loading...
+			{{else}}
+				<aleph-not-found/>
+			{{/if}}
+		</can-import>
+	{{/case}}
+{{/switch}}

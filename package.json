@@ -10,9 +10,6 @@
   },
   "scripts": {
     "test": "testee src/test.html --browsers firefox --reporter Spec",
-    "start": "done-serve --port 8080",
-    "static": "done-serve --static --port 8080",
-    "develop": "done-serve --develop --port 8080",
     "document": "documentjs",
     "build": "node build"
   },
@@ -30,6 +27,11 @@
       "node_modules/can-zone/register"
     ],
     "npmAlgorithm": "flat",
+    "ext": {
+      "stache": "steal-stache",
+      "css": "steal-css",
+      "less": "steal-less"
+    },
     "bundle": [
       "aleph-frontend/login/",
       "aleph-frontend/admin/main.component!",
@@ -72,22 +74,42 @@
     "can-construct-super": "^3.0.0",
     "can-control": "^3.0.5",
     "can-define": "^1.0.8",
+    "can-event": "^3.0.2",
+    "can-jquery": "^3.0.3",
+    "can-list": "^3.0.2",
+    "can-map": "^3.0.4",
+    "can-map-backup": "^3.0.2",
+    "can-map-define": "^3.0.2",
+    "can-model": "^3.0.0",
+    "can-mustache": "^0.2.0",
+    "can-route": "^3.0.6",
+    "can-stache": "^3.0.17",
+    "can-util": "^3.2.0",
+    "can-view-autorender": "^3.0.3",
+    "can-view-callbacks": "^3.0.3",
+    "can-view-href": "^3.0.3",
+    "can-view-import": "^3.0.4",
+    "can-view-live": "^3.0.5",
+    "can-view-nodelist": "^3.0.4",
+    "can-view-parser": "^3.0.4",
+    "can-view-scope": "^3.1.2",
     "can-zone": "^0.6.0",
     "chart.js": "^2.2.2",
-    "font-awesome": "^4.6.3",
+    "font-awesome": "^4.7.0",
     "jquery": "~3.1.1",
     "lodash": "^4.17.0",
     "steal": "^1.0.5",
     "steal-stache": "^3.0.4"
   },
   "devDependencies": {
+    "can-fixture": "^0.1.2",
     "documentjs": "^0.4.2",
     "donejs-deploy": "^0.4.0",
     "funcunit": "~3.0.0",
+    "steal-css": "^1.0.0",
+    "steal-less": "^1.0.1",
     "steal-qunit": "^0.1.1",
     "steal-tools": "^0.16.0",
-    "testee": "^0.2.4",
-    "donejs-cli": "^0.9.4",
-    "can-fixture": "^0.1.2"
+    "testee": "^0.2.4"
   }
 }

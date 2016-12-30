@@ -1,17 +1,10 @@
-import Map from "can-map";
-import route from "can-route";
+import $ from 'can-jquery'
+import Map from 'can-map';
+import Route from 'can-route';
 import 'can-map-define';
+import template from './index.stache!';
 
-const AppViewModel = Map.extend({
-	define: {
-		title:
-		{
-			value:		'Aleph'
-		,	serialize:	false
-		}
-	}
-});
+Route('{page}/{section}');
+Route.ready();
 
-route('{page}', { page: undefined });
-
-export default AppViewModel;
+$('body').append(template())

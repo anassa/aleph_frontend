@@ -1,7 +1,7 @@
-import can from 'can';
+import Map from 'can-define/map/map';
+import List from 'can-define/list/list';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
-import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 import 'lodash/lodash.js'
 
@@ -10,146 +10,141 @@ import Usuarios from 'aleph-frontend/models/usuarios';
 
 import 'aleph-frontend/util/func';
 
-export const Articulos = can.Map.extend(
-	{}
-,	{
-		define:
+export const Articulos = Map.extend(
+	{
+		cantidad:
 		{
-			cantidad:
+			value:	1
+		,	type:	Number
+		}
+	,	unidadDeMedidaToParse:
+		{
+			set: function(value)
 			{
-				value:	1
-			,	type:	Number
-			}
-		,	unidadDeMedidaToParse:
-			{
-				set: function(value)
-				{
-					this.attr(
-						'unidadMedida'
-					,	(value != -1)
-						?	{
-								_id:	value.split('-')[0]
-							,	nombre:	value.split('-')[1]
-							}
-						:	undefined
-					)
-					return value;
-				}
-			,	get: function()
-				{
-					return	this.attr('unidadMedida')
-							?	this.attr('unidadMedida._id')+'-'+this.attr('unidadMedida.nombre')
-							:	-1
-				}
-			,	serialize: function()
-				{
-					return undefined;
-				}
-			}
-		,	proveedores:
-			{
-				value: can.List
-			,	set: function(l)
-				{
-					l.map(
-						function(p, i)
-						{
-							p.attr(
-								'visible'
-							,	(i >= 0 && i <= 4)
-							);
+				this.unidadMedida
+				=	(value != -1)
+					?	{
+							_id:	value.split('-')[0]
+						,	nombre:	value.split('-')[1]
 						}
-					)
-					return l;
-				}
-			,	serialize: function(list)
-				{
-					return	list.map(
-								function(i)
-								{
-									return	{
-												_id:			i._id
-											,	denominacion:	i.denominacion
-											,	etiquetas:		i.etiquetas
-											}
-								}
-							).serialize()
-				}
+					:	undefined
+				
+				return value;
 			}
-		,	stock:
+		,	get: function()
 			{
-				set: function(value)
-				{
-					this.attr('tempStock',value)
-					return value;
-				}
+				return	this.unidadMedida
+						?	this.unidadMedida._id+'-'+this.unidadMedida.nombre
+						:	-1
 			}
-		,	tempStock:
+		,	serialize: function()
 			{
-				serialize: function()
-				{
-					return undefined;
-				}
+				return undefined;
 			}
-		,	ajuste:
+		}
+	,	proveedores:
+		{
+			value: List
+		,	set: function(l)
 			{
-				set: function(value)
-				{
-					this.attr(
-						'stock'
-					,	value || this.attr('tempStock')
-					);
-					return value;
-				}
-			,	serialize: function()
-				{
-					return undefined;
-				}
+				l.map(
+					function(p, i)
+					{
+						p.attr(
+							'visible'
+						,	(i >= 0 && i <= 4)
+						);
+					}
+				)
+
+				return l;
 			}
-		,	padedCodigo:
+		,	serialize: function(list)
 			{
-				get: function(value)
-				{
-					return	this.attr('codigo')
-							?	pad(this.attr('codigo'),4)
-							:	value;
-				}
+				return	list.map(
+							function(i)
+							{
+								return	{
+											_id:			i._id
+										,	denominacion:	i.denominacion
+										,	etiquetas:		i.etiquetas
+										}
+							}
+						).get()
 			}
-		,	precioVenta:
+		}
+	,	stock:
+		{
+			set: function(value)
 			{
-				value: 0
-			,	type:	Number
+				this.tempStock = value
+				return value;
 			}
-		,	precioVenta$:
+		}
+	,	tempStock:
+		{
+			serialize: function()
 			{
-				value: 0
-			,	type:	Number
-			,	get: function()
-				{
-					return this.attr('precioVenta').toFixed(2);	
-				}
+				return undefined;
 			}
-		,	precioCosto:
+		}
+	,	ajuste:
+		{
+			set: function(value)
 			{
-				value: 0
-			,	type:	Number
+				this.stock
+				=	value || this.tempStock
+				
+				return value;
 			}
-		,	precioCosto$:
+		,	serialize: function()
 			{
-				value: 0
-			,	type:	Number
-			,	get: function()
-				{
-					return this.attr('precioCosto').toFixed(2);	
-				}
+				return undefined;
 			}
-		,	visible:
+		}
+	,	padedCodigo:
+		{
+			get: function(value)
 			{
-				value: true
-			,	serialize: function()
-				{
-					return undefined;
-				}
+				return	this.codigo
+						?	pad(this.codigo,4)
+						:	value;
+			}
+		}
+	,	precioVenta:
+		{
+			value: 0
+		,	type:	Number
+		}
+	,	precioVenta$:
+		{
+			value: 0
+		,	type:	Number
+		,	get: function()
+			{
+				return this.precioVenta.toFixed(2);	
+			}
+		}
+	,	precioCosto:
+		{
+			value: 0
+		,	type:	Number
+		}
+	,	precioCosto$:
+		{
+			value: 0
+		,	type:	Number
+		,	get: function()
+			{
+				return this.precioCosto.toFixed(2);	
+			}
+		}
+	,	visible:
+		{
+			value: true
+		,	serialize: function()
+			{
+				return undefined;
 			}
 		}
 	,	init: function ()
@@ -157,21 +152,19 @@ export const Articulos = can.Map.extend(
 			var	currentUser
 			=	Usuarios.getSession();
 
-			this.attr(
-				'usuario'
-			,	{
-					_id:		currentUser.attr('_id')
-				,	username: 	currentUser.attr('username')
-				,	permisos:	currentUser.attr('permisos')
-				}
-			);
+			this.usuario
+			=	{
+					_id:		currentUser._id
+				,	username: 	currentUser.username
+				,	permisos:	currentUser.permisos
+				};
 		}
 	}
 );
 
-Articulos.List = can.List.extend({
-  Map: Articulos
-}, {});
+Articulos.List = List.extend({
+  '#': Articulos
+});
 
 export const articulosConnection
 =	superMap(

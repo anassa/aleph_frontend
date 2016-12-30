@@ -1,11 +1,11 @@
-import can from 'can';
+import Map from 'can-define/map/map';
+import List from 'can-define/list/list';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
-import 'can/map/define/define';
 import feathers from 'aleph-frontend/feathers';
 
 export const Usuarios
-=	can.Map.extend(
+=	Map.extend(
 		{
 			login: function(username,password)
 			{
@@ -39,17 +39,12 @@ export const Usuarios
 						:	false
 			}
 		}
-	,	{
-			define:
-			{
-
-			}
-		}
+	,	{}
 	);
 
-Usuarios.List = can.List.extend({
-  Map: Usuarios
-}, {});
+Usuarios.List = List.extend({
+  '#': Usuarios
+});
 
 export const usuariosConnection
 =	superMap(

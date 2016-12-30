@@ -1,121 +1,120 @@
-import can from 'can';
+import Map from 'can-define/map/map';
+import List from 'can-define/list/list';
 import superMap from 'can-connect/can/super-map/';
-import tag from 'can-connect/can/tag/';
-import 'can/map/define/define';
+import tag from 'can-connect/can/tag/';;
 import feathers from 'aleph-frontend/feathers';
 
 import Clientes from 'aleph-frontend/models/clientes';
 
-export const Ventas = can.Map.extend(
+export const Ventas = Map.extend(
 	{
-		define:
+		articulos:
 		{
-			articulos:
+			value: List
+		,	serialize: function(list)
 			{
-				value: can.List
-			,	serialize: function(list)
-				{
-					return	list.map(
+				return	list.map(
+							function(a)
+							{
+								return	{
+											_id:			a._id
+										,	codigo:			a.codigo
+										,	nombre:			a.nombre
+										,	descripcion:	a.descripcion
+										,	cantidad:		a.cantidad
+										,	precioVenta:	a.precioVenta
+										,	precioCosto:	a.precioCosto
+										}
+							}
+						).serialize()
+			}
+		}
+	,	listadoArticulos:
+		{
+			get: function()
+			{
+				return	this.articulos
+							.map(
 								function(a)
 								{
-									return	{
-												_id:			a._id
-											,	codigo:			a.codigo
-											,	nombre:			a.nombre
-											,	descripcion:	a.descripcion
-											,	cantidad:		a.cantidad
-											,	precioVenta:	a.precioVenta
-											,	precioCosto:	a.precioCosto
-											}
+									return a.cantidad+' '+a.nombre
 								}
-							).serialize()
-				}
+							).join(', ')
 			}
-		,	listadoArticulos:
+		,	serialize: function()
 			{
-				get: function()
-				{
-					return	this.attr('articulos').serialize()
-								.map(
-									function(a)
-									{
-										return a.cantidad+' '+a.nombre
-									}
-								).join(', ')
-				}
-			,	serialize: function()
-				{
-					return undefined;
-				}
+				return undefined;
 			}
-		,	formaDePagoToParse:
+		}
+	,	formaDePagoToParse:
+		{
+			set: function(value)
 			{
-				set: function(value)
-				{
-					this.attr(
-						'formaPago'
-					,	(value)
-						?	{
-								codigo:		value.split('-')[0]
-							,	nombre:		value.split('-')[1]
-							,	interes:	0
-							,	cuotas:		1
-							}
+				this.formaPago
+				=	(value)
+					?	{
+							codigo:		value.split('-')[0]
+						,	nombre:		value.split('-')[1]
+						,	interes:	0
+						,	cuotas:		1
+						}
+					:	undefined
+				
+				return value;
+			}
+		,	get: function()
+			{
+				return	this.formaPago
+						?	this.formaPago.codigo+'-'+this.formaPago.nombre
 						:	undefined
-					)
-					return value;
-				}
-			,	get: function()
-				{
-					return	this.attr('formaPago')
-							?	this.attr('formaPago.codigo')+'-'+this.attr('formaPago.nombre')
-							:	undefined
-				}
-			,	serialize: function()
-				{
-					return undefined;
-				}
 			}
-		,	tarjetaToParse:
+		,	serialize: function()
 			{
-				set: function(value)
-				{
-					this.attr(
-						'formaPago.tarjeta'
-					,	(value != -1)
-						?	{
-								_id:		value.split('-')[0]
-							,	compania:	value.split('-')[1]
-							,	banco:		value.split('-')[2]
-							}
-						:	undefined
-					)
-					return value;
-				}
-			,	get: function()
-				{
-					return	this.attr('formaPago.tarjeta')
-							?	this.attr('formaPago.tarjeta._id')+'-'+this.attr('formaPago.tarjeta.compania')+'-'+this.attr('formaPago.tarjeta.banco')
-							:	-1
-				}
-			,	serialize: function()
-				{
-					return undefined;
-				}
+				return undefined;
 			}
-		,	nombreCliente:
+		}
+	,	tarjetaToParse:
+		{
+			set: function(value)
 			{
-				serialize: function()
-				{
-					return undefined;
-				}
+				this.formaPago.tarjeta
+				=	(value != -1)
+					?	{
+							_id:		value.split('-')[0]
+						,	compania:	value.split('-')[1]
+						,	banco:		value.split('-')[2]
+						}
+					:	undefined
+				
+				return value;
 			}
-		,	clienteToFind:
+		,	get: function()
 			{
-				set: function(dni_cliente)
-				{
-					var self
-					=	this;
+				return	this.formaPago.tarjeta
+						?	this.formaPago.tarjeta._id+'-'+this.formaPago.tarjeta.compania+'-'+this.formaPago.tarjeta.banco
+						:	-1
+			}
+		,	serialize: function()
+			{
+				return undefined;
+			}
+		}
+	,	nombreCliente:
+		{
+			serialize: function()
+			{
+				return undefined;
+			}
+		}
+	,	cliente: Clientes
+	,	clienteToFind:
+		{
+			set: function(dni_cliente)
+			{
+				var self
+				=	this;
+
+				if (dni_cliente.length) {
 
 					Clientes
 						.getList(
@@ -125,92 +124,98 @@ export const Ventas = can.Map.extend(
 						).then(
 							function(clientes)
 							{
-								self.attr('cliente',clientes.attr(0))
+								self.cliente = clientes.get(0);
 							}
-						)
+						);
 
-					return dni_cliente;
-				}
-			}
-		,	cuentaClienteToFind:
-			{
-				set: function(dni_cliente)
-				{
-					var self
-					=	this;
+				} else {
 
-					Clientes
-						.getList(
-							{
-								dni: dni_cliente
-							}
-						).then(
-							function(clientes)
-							{
-								self.attr('formaPago.cliente',clientes.attr(0))
-							}
-						)
+					self.cliente = undefined;
+				
+				}
 
-					return dni_cliente;
-				}
-			,	serialize: function()
-				{
-					return undefined;	
-				}
+
+				return dni_cliente;
 			}
-		,	descuento:
+		}
+	,	cuentaClienteToFind:
+		{
+			set: function(dni_cliente)
 			{
-				value:	0
-			,	type:	Number
+				var self
+				=	this;
+
+				Clientes
+					.getList(
+						{
+							dni: dni_cliente
+						}
+					).then(
+						function(clientes)
+						{
+							self.formaPago.cliente = clientes.get(0);
+						}
+					)
+
+				return dni_cliente;
 			}
-		,	total:
+		,	serialize: function()
 			{
-				value:	0
-			,	type:	Number
-			,	get: function()
-				{
-					return	this.attr('articulos')
-							?	(
-									this.attr('articulos').attr()
-										.reduce(
-											function(a, b)
-											{
-												return a + (b.precioVenta || 0)*b.cantidad;
-											}
-										,	0
-										)
-									*
-									( 1 - ( ((this.attr('descuento') < 0) ? 0 : (this.attr('descuento') > 100) ? 100 : this.attr('descuento')) / 100 ) )
-									*
-									(1 + ( this.attr('formaPago.interes') ? ((this.attr('formaPago.interes') < 0) ? 0 : (this.attr('formaPago.interes') / 100)) : 0) )
-								)
-							:	0
-				}
-			,	serialize: function(v)
-				{
-					return	v;
-				}
+				return undefined;	
 			}
-		,	total$:
+		}
+	,	descuento:
+		{
+			value:	0
+		,	type:	Number
+		}
+	,	total:
+		{
+			value:	0
+		,	type:	Number
+		,	get: function()
 			{
-				value:	0
-			,	type:	Number
-			,	get: function()
-				{
-					return this.attr('total').toFixed(2);	
-				}
-			,	serialize: function()
-				{
-					return undefined;	
-				}
+				return	this.articulos.length
+						?	(
+								this.articulos.get()
+									.reduce(
+										function(a, b)
+										{
+											return a + (b.precioVenta || 0)*b.cantidad;
+										}
+									,	0
+									)
+								*
+								( 1 - ( ((this.descuento < 0) ? 0 : (this.descuento > 100) ? 100 : this.descuento) / 100 ) )
+								*
+								(1 + ( this.formaPago.interes ? ((this.formaPago.interes < 0) ? 0 : (this.formaPago.interes / 100)) : 0) )
+							)
+						:	0
+			}
+		,	serialize: function(v)
+			{
+				return	v;
+			}
+		}
+	,	total$:
+		{
+			value:	0
+		,	type:	Number
+		,	get: function()
+			{
+				return this.total.toFixed(2);	
+			}
+		,	serialize: function()
+			{
+				return undefined;	
 			}
 		}
 	}
 );
 
-Ventas.List = can.List.extend({
-  Map: Ventas
-}, {});
+Ventas.List = List.extend({
+  '#': Ventas
+});
 
 export const ventasConnection
 =	superMap(
