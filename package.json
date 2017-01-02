@@ -98,11 +98,11 @@
     "feathers-authentication-client": "^0.1.6",
     "feathers-client": "^1.8.0",
     "feathers-hooks": "^1.7.1",
-    "feathers-localstorage": "^1.0.0",
     "feathers-rest": "^1.5.3",
     "feathers-socketio": "^1.4.2",
     "font-awesome": "^4.7.0",
     "jquery": "~3.1.1",
+    "localstorage-memory": "^1.0.2",
     "lodash": "^4.17.0",
     "socket.io-client": "^1.7.2",
     "steal": "^1.0.5",
@@ -117,6 +117,7 @@
     "steal-less": "^1.0.1",
     "steal-qunit": "^0.1.1",
     "steal-tools": "^0.16.0",
-    "testee": "^0.2.4"
+    "testee": "^0.2.4",
+    "debug": "^2.5.2"
   }
 }

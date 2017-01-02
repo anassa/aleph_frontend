@@ -30,11 +30,11 @@ export default feathers;
 */
 
 import feathers from 'feathers-client';
-import socketio from 'feathers-socketio';
+import socketio from 'feathers-socketio/client';
 import io from 'socket.io-client';
 import hooks from 'feathers-hooks';
+import localStorage from 'localstorage-memory';
 import auth from 'feathers-authentication-client';
-import localstorage from 'feathers-localstorage';
 
 const socket = io('http://localhost:3030/');
 
@@ -42,7 +42,7 @@ const feathersClient
 =	feathers()
 		.configure(hooks())
 		.configure(socketio(socket))
-		.configure(auth({ storage: window.localStorage }));
+		.configure(auth({ storage: localStorage }));
 
 window.feathers = feathersClient;
 
