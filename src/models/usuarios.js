@@ -29,7 +29,7 @@ export const Usuarios = Map.extend(
 			{
 				return	feathers.authenticate(
 							{
-								type:		'local'
+								strategy:	'local'
 							,	username:	username
 							,	password:	password
 							}

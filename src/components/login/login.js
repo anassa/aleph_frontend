@@ -1,7 +1,7 @@
 import Component from 'can-component';
-import Map from 'can-map';
+import Map from 'can-define/map/map';
 import Route from 'can-route';
-import 'can-map-define';
+import 'can-stache/helpers/route';
 import './login.less!';
 import template from './login.stache!';
 import 'bootstrap/js/button.js'
@@ -10,10 +10,7 @@ import Usuarios from 'aleph-frontend/models/usuarios';
 
 export const ViewModel = Map.extend(
 	{
-		define:
-		{
-		}
-	,	login: function(el)
+		login: function(el)
 		{
 			var $button = $(el);
 
@@ -47,6 +44,6 @@ export default Component.extend(
 	{
 		tag:		'aleph-login'
 	,	viewModel:	ViewModel
-	,	view: template
+	,	view:		template
 	}
 );

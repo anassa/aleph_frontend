@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+/*
+>>>>>>> 2417f7ff501d5d91c3646b26f86d11dcffa2c0ef
 import Feathers from 'can-connect-feathers';
 import $ from 'can-jquery'
 
@@ -27,15 +31,25 @@ const feathers = new Feathers(
 window.feathers = feathers;
  
 export default feathers;
+<<<<<<< HEAD
 =======
 import feathers from 'feathers/client';
+=======
+*/
+
+import feathers from 'feathers-client';
+>>>>>>> 2417f7ff501d5d91c3646b26f86d11dcffa2c0ef
 import socketio from 'feathers-socketio/client';
 import io from 'socket.io-client';
 import hooks from 'feathers-hooks';
 import localStorage from 'localstorage-memory';
 import auth from 'feathers-authentication-client';
 
+<<<<<<< HEAD
 const socket = io('http://localhost:3030');
+=======
+const socket = io('http://localhost:3030/');
+>>>>>>> 2417f7ff501d5d91c3646b26f86d11dcffa2c0ef
 
 const feathersClient
 =	feathers()
@@ -45,5 +59,9 @@ const feathersClient
 
 window.feathers = feathersClient;
 
+<<<<<<< HEAD
 export default feathersClient;
 >>>>>>> Stashed changes
+=======
+export default feathersClient;
+>>>>>>> 2417f7ff501d5d91c3646b26f86d11dcffa2c0ef

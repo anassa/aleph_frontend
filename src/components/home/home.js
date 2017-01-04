@@ -11,7 +11,7 @@ import 'lodash/lodash.js'
 
 import Usuarios from 'aleph-frontend/models/usuarios';
 // Este modelo lo traigo para hacer una negrada +21% (masiva)
-import OrdenesDeCompra from 'aleph-frontend/models/ordenesDeCompra';
+//import OrdenesDeCompra from 'aleph-frontend/models/ordenesDeCompra';
 
 export const ViewModel = Map.extend(
 	{
@@ -40,6 +40,7 @@ export const ViewModel = Map.extend(
 			value: undefined
 		}
 	// Lo que sucede cuando cargo la pagina
+	/*
 	,	init: function(){
 		
 		// Magia para que funcione
@@ -61,13 +62,14 @@ export const ViewModel = Map.extend(
 			,function(){
 				
 				// Seteamos como el el usuario no fue cargado.
-				self.attr('user',undefined);
+				self.user = undefined;
 
 			}
 
 		)
 		// $("#returnButton").remove()
 	}
+	*/
 	,	updateUser: function(el)
 		{
 			var	$button
@@ -82,10 +84,11 @@ export const ViewModel = Map.extend(
 			,	confirmPassword
 			=	$modal.find('input[name=cpassword]').val();
 
-			this.attr('passwordError',null);
+			this.passwordError = null;
 
 			if (newPassword === confirmPassword) {
-				this.attr('user').attr('password',newPassword).save()
+				this.user.password = newPassword;
+				this.user.save()
 					.then(
 						function()
 						{
@@ -107,12 +110,12 @@ export const ViewModel = Map.extend(
 						}
 					,	function()
 						{
-							this.attr('passwordError','Ocurrio un error. Intentelo nuevamente.');
+							this.passwordError = 'Ocurrio un error. Intentelo nuevamente';
 							$button.button('reset');
 						}
 					)
 			}	else {
-				this.attr('passwordError','Las contraseñas ingresadas no coinciden');
+				this.passwordError = 'Las contraseñas ingresadas no coinciden';
 				$button.button('reset');
 			}
 		}
@@ -129,10 +132,10 @@ export const ViewModel = Map.extend(
 					function()
 					{
 						$modal.modal('hide');
-						self.attr('user',null);
-						self.attr('passwordError',null);
-						Route.removeAttr('page');
-						Route.removeAttr('section');
+						self.user = null;
+						self.passwordError = null;
+						Route.data.page = null;
+						Route.data.section = null;
 					}
 				,	function()
 					{
@@ -334,9 +337,9 @@ export const ViewModel = Map.extend(
 			}
 
 			// Se setea el modulo.
-			this.attr('moduloSelect',subMapping[modSelected]);
+			this.moduloSelect = subMapping[modSelected];
 			// Sirve para saber en que modulo se hizo click.
-			this.attr('moduloSelect.volver',modSelected);
+			this.moduloSelect.volver = modSelected;
 			// lo mismo de siempre ...
 			$('#iconos').hide('slow')
 			$('#subModulo').hide().show('slow')
@@ -361,7 +364,7 @@ export default Component.extend(
 
 				var $visibleTree = $('ul.tree:visible');
 
-				if ($currentTree.attr('from') != $visibleTree.attr('from'))
+				if ($currentTree.from != $visibleTree.from)
 					$visibleTree.toggle(300);
 
 				$currentTree.toggle(300);
