@@ -21,18 +21,15 @@ export const ViewModel = Map.extend(
 					$('form.form-signin input[name=username]').val()
 				,	$('form.form-signin input[name=password]').val()
 				).then(
-					function()
+					function(usuario)
 					{
-						$('aleph-home').viewModel()
-							.attr(
-								'user'
-							,	Usuarios.getSession()
-							);
+						$('aleph-home').viewModel().user = Usuarios.getSession();
 
 						Route.attr('page','home');
 					}
 				,	function(error)
 					{
+						console.log("login error", error)
 						$button.button('reset');
 					}
 				);

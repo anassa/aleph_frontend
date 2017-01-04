@@ -1,14 +1,28 @@
+import connect from 'can-connect';
 import Map from 'can-define/map/map';
 import List from 'can-define/list/list';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
+import set from "can-set";
 import feathers from 'aleph-frontend/feathers';
-import 'lodash/lodash.js'
 
+//	service related
+import feathersServiceBehavior from 'can-connect-feathers/service';
+import dataParse from 'can-connect/data/parse/';
+import realtime from 'can-connect/real-time/';
+import construct from 'can-connect/constructor/';
+import constructStore from 'can-connect/constructor/store/';
+import constructOnce from 'can-connect/constructor/callbacks-once/';
+import canMap from 'can-connect/can/map/';
+import canRef from 'can-connect/can/ref/';
+import dataCallbacks from 'can-connect/data/callbacks/';
+
+//	app models
 import UnidadesDeMedida from 'aleph-frontend/models/unidadesDeMedida';
 import Usuarios from 'aleph-frontend/models/usuarios';
 
-import 'aleph-frontend/util/func';
+// Use feathersClient.service(url) to create a service
+const articulosService = feathers.service('/api/articulos');
 
 export const Articulos = Map.extend(
 	{
@@ -143,41 +157,49 @@ export const Articulos = Map.extend(
 		}
 	,	init: function ()
 		{
-			var	currentUser
-			=	Usuarios.getSession();
-
+			// El remito se inicializa con el usuario actual
 			this.usuario
 			=	{
-					_id:		currentUser._id
-				,	username: 	currentUser.username
-				,	permisos:	currentUser.permisos
-				};
+					_id:		feathers.get('usuario')._id
+				,	username:	feathers.get('usuario').username
+				,	permisos:	feathers.get('usuario').permisos
+				}
 		}
 	}
 );
 
-Articulos.List = List.extend({
-  '#': Articulos
-});
+Articulos.List = List.extend(
+	{
+		'#': Articulos
+	}
+);
 
-export const articulosConnection
-=	superMap(
-		{
-			url:	feathers.rest('articulos')
-		,	idProp:	'_id'
-		,	Map:	Articulos
-		,	List:	Articulos.List
-		,	name:	'articulo'
-		}
-	);
+Articulos.algebra = new set.Algebra(
+	set.comparators.id('_id')
+);
 
-tag('articulos-model', articulosConnection);
+Articulos.connection = connect(
+	[
+		feathersServiceBehavior
+	,	dataParse
+	,	construct
+	,	constructStore
+	,	constructOnce
+	,	canMap
+	,	canRef
+	,	dataCallbacks
+	,	realtime
+	]
+,	{
+		idProp:	'_id'
+	,	Map:	Articulos
+	,	List:	Articulos.List
+	,	name:	'articulos'
+	,	feathersService: articulosService
+	,	algebra: Articulos.algebra
+	}
+);
 
-
-feathers.io.on('articulos created', articulos => articulosConnection.createInstance(articulos));
-feathers.io.on('articulos updated', articulos => articulosConnection.updateInstance(articulos));
-feathers.io.on('articulos patched', articulos => articulosConnection.updateInstance(articulos));
-feathers.io.on('articulos removed', articulos => articulosConnection.destroyInstance(articulos));
-
+tag('articulos-model', Articulos.connection);
 
 export default Articulos;

@@ -24,18 +24,7 @@ export const Usuarios = Map.extend(
 	{
 		login: function(username,password)
 		{
-<<<<<<< Updated upstream
-			login: function(username,password)
-			{
-				return	feathers.authenticate(
-							{
-								strategy:	'local'
-							,	username:	username
-							,	password:	password
-							}
-						).then(
-							function(result)
-=======
+			console.log("login")
 			//	auth user
 			return	feathers.authenticate(
 						{
@@ -47,19 +36,22 @@ export const Usuarios = Map.extend(
 						function(response)
 						{
 							//	auth ok, get token
+							console.log("auth",response)
 							return feathers.passport.verifyJWT(response.accessToken);
 						}
 					).then(
 						function(payload)
 						{
 							// token ready, get user
-							return feathers.service('api/usuarios').get(payload.userId);
+							console.log("token",payload)
+							return	Usuarios.get(payload.usuarioId);
 						}
 					).then(
 						function(user)
 						{
 							// user ready, set session
-							feathers.set('user', user);
+							console.log("user",user)
+							feathers.set('usuario', user);
 						}
 					)
 		}
@@ -68,15 +60,14 @@ export const Usuarios = Map.extend(
 			return	feathers.logout()
 						.then(
 							function()
->>>>>>> Stashed changes
 							{
-								//feathers.set('user',undefined)
+								//feathers.set('usuario',undefined)
 							}
 						);
 		}
 	,	getSession: function()
 		{
-			return	feathers.get('user')
+			return	feathers.get('usuario')
 		}
 	}
 ,	{
@@ -117,5 +108,7 @@ Usuarios.connection = connect(
 );
 
 tag('usuarios-model', Usuarios.connection);
+
+window.Usuarios = Usuarios
 
 export default Usuarios;

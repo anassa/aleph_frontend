@@ -1,8 +1,24 @@
+import connect from 'can-connect';
 import Map from 'can-define/map/map';
 import List from 'can-define/list/list';
 import superMap from 'can-connect/can/super-map/';
-import tag from 'can-connect/can/tag/';;
+import tag from 'can-connect/can/tag/';
+import set from "can-set";
 import feathers from 'aleph-frontend/feathers';
+
+//	service related
+import feathersServiceBehavior from 'can-connect-feathers/service';
+import dataParse from 'can-connect/data/parse/';
+import realtime from 'can-connect/real-time/';
+import construct from 'can-connect/constructor/';
+import constructStore from 'can-connect/constructor/store/';
+import constructOnce from 'can-connect/constructor/callbacks-once/';
+import canMap from 'can-connect/can/map/';
+import canRef from 'can-connect/can/ref/';
+import dataCallbacks from 'can-connect/data/callbacks/';
+
+// Use feathersClient.service(url) to create a service
+const ventasService = feathers.service('/api/ventas');
 
 import Clientes from 'aleph-frontend/models/clientes';
 
@@ -213,27 +229,39 @@ export const Ventas = Map.extend(
 	}
 );
 
-Ventas.List = List.extend({
-  '#': Ventas
-});
+Ventas.List = List.extend(
+	{
+		'#': Ventas
+	}
+);
 
-export const ventasConnection
-=	superMap(
-		{
-			url:	feathers.rest('ventas')
-		,	idProp:	'_id'
-		,	Map:	Ventas
-		,	List:	Ventas.List
-		,	name:	'ventas'
-		}
-	);
+Ventas.algebra = new set.Algebra(
+	set.comparators.id('_id')
+);
 
-feathers.io.on('ventas created', ventas => ventasConnection.createInstance(ventas));
-feathers.io.on('ventas updated', ventas => ventasConnection.updateInstance(ventas));
-feathers.io.on('ventas patched', ventas => ventasConnection.updateInstance(ventas));
-feathers.io.on('ventas removed', ventas => ventasConnection.destroyInstance(ventas));
+Ventas.connection = connect(
+	[
+		feathersServiceBehavior
+	,	dataParse
+	,	construct
+	,	constructStore
+	,	constructOnce
+	,	canMap
+	,	canRef
+	,	dataCallbacks
+	,	realtime
+	]
+,	{
+		idProp:	'_id'
+	,	Map:	Ventas
+	,	List:	Ventas.List
+	,	name:	'Ventas'
+	,	feathersService: ventasService
+	,	algebra: Ventas.algebra
+	}
+);
 
 
-tag('ventas-model', ventasConnection);
+tag('ventas-model', Ventas.connection);
 
 export default Ventas;

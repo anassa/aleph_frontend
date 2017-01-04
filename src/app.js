@@ -1,3 +1,6 @@
+/* DEBUG Issue */
+import debug from 'debug';
+
 import $ from 'can-jquery'
 import Map from 'can-map';
 import Route from 'can-route';

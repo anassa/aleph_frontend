@@ -69,15 +69,7 @@
     "can-component": "^3.0.4",
     "can-compute": "^3.0.5",
     "can-connect": "^1.0.19",
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-    "can-connect-feathers": "^2.0.0",
-=======
     "can-connect-feathers": "^3.0.6",
->>>>>>> Stashed changes
-=======
-    "can-connect-feathers": "^3.0.1",
->>>>>>> 2417f7ff501d5d91c3646b26f86d11dcffa2c0ef
     "can-construct": "^3.0.6",
     "can-construct-super": "^3.0.0",
     "can-control": "^3.0.5",
@@ -104,43 +96,23 @@
     "can-view-scope": "^3.1.2",
     "can-zone": "^0.6.0",
     "chart.js": "^2.2.2",
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
+    "component-emitter": "^1.2.1",
     "debug": "^2.6.0",
     "engine.io-client": "^1.8.2",
     "feathers": "^2.0.3",
     "feathers-authentication-client": "^0.1.6",
     "feathers-client": "^1.8.0",
     "feathers-hooks": "^1.7.1",
-    "feathers-rest": "^1.6.0",
     "feathers-socketio": "^1.4.2",
->>>>>>> Stashed changes
-=======
-    "feathers-authentication-client": "^0.1.6",
-    "feathers-client": "^1.8.0",
-    "feathers-hooks": "^1.7.1",
-    "feathers-rest": "^1.5.3",
-    "feathers-socketio": "^1.4.2",
->>>>>>> 2417f7ff501d5d91c3646b26f86d11dcffa2c0ef
     "font-awesome": "^4.7.0",
     "jquery": "~3.1.1",
     "localstorage-memory": "^1.0.2",
     "lodash": "^4.17.0",
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-    "socket.io-client": "^1.7.2",
->>>>>>> 2417f7ff501d5d91c3646b26f86d11dcffa2c0ef
-    "steal": "^1.0.5",
-    "steal-stache": "^3.0.4"
-=======
     "socket.io-client": "^1.7.2",
     "steal": "^1.0.7",
     "steal-socket.io": "^4.0.8",
     "steal-stache": "^3.0.4",
     "steal-tools": "^1.0.1"
->>>>>>> Stashed changes
   },
   "devDependencies": {
     "can-fixture": "^0.1.2",
@@ -150,19 +122,8 @@
     "steal-css": "^1.0.0",
     "steal-npm": "^1.0.0",
     "steal-less": "^1.0.1",
-<<<<<<< Updated upstream
-    "steal-qunit": "^0.1.1",
-    "steal-tools": "^0.16.0",
-<<<<<<< HEAD
-    "testee": "^0.2.4"
-=======
     "steal-qunit": "^1.0.0",
     "testee": "^0.2.4",
     "debug": "^2.5.2"
->>>>>>> Stashed changes
-=======
-    "testee": "^0.2.4",
-    "debug": "^2.5.2"
->>>>>>> 2417f7ff501d5d91c3646b26f86d11dcffa2c0ef
   }
 }
