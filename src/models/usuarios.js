@@ -24,7 +24,6 @@ export const Usuarios = Map.extend(
 	{
 		login: function(username,password)
 		{
-			console.log("login")
 			//	auth user
 			return	feathers.authenticate(
 						{
@@ -36,21 +35,18 @@ export const Usuarios = Map.extend(
 						function(response)
 						{
 							//	auth ok, get token
-							console.log("auth",response)
 							return feathers.passport.verifyJWT(response.accessToken);
 						}
 					).then(
 						function(payload)
 						{
 							// token ready, get user
-							console.log("token",payload)
 							return	Usuarios.get(payload.usuarioId);
 						}
 					).then(
 						function(user)
 						{
 							// user ready, set session
-							console.log("user",user)
 							feathers.set('usuario', user);
 						}
 					)
@@ -58,16 +54,29 @@ export const Usuarios = Map.extend(
 	,	logout: function()
 		{
 			return	feathers.logout()
-						.then(
-							function()
-							{
-								//feathers.set('usuario',undefined)
-							}
-						);
 		}
 	,	getSession: function()
 		{
-			return	feathers.get('usuario')
+			return	feathers.authenticate()
+						.then(
+							function(response)
+							{
+								//	auth ok, get token
+								return feathers.passport.verifyJWT(response.accessToken);
+							}
+						).then(
+							function(payload)
+							{
+								// token ready, get user
+								return	Usuarios.get(payload.usuarioId);
+							}
+						).then(
+							function(user)
+							{
+								// user ready, set session
+								feathers.set('usuario', user);
+							}
+						);
 		}
 	}
 ,	{

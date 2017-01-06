@@ -23,7 +23,7 @@ export const ViewModel = Map.extend(
 				).then(
 					function(usuario)
 					{
-						$('aleph-home').viewModel().user = Usuarios.getSession();
+						$('aleph-home').viewModel().user = feathers.get('usuario');
 
 						Route.attr('page','home');
 					}

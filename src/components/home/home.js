@@ -24,10 +24,7 @@ export const ViewModel = Map.extend(
 		}
 	,	user:
 		{
-			value: function()
-			{
-				return	Usuarios.getSession();
-			}
+			value: undefined
 		,	serialize:	false
 		}
 	,	passwordError:
@@ -35,41 +32,27 @@ export const ViewModel = Map.extend(
 			value:	undefined
 		,	type:	'string'
 		}
-		// Valor que van a tomar los diferentes submodulos
-	,	moduloSelect:{
+	,	moduloSelect:
+		{
 			value: undefined
 		}
-	// Lo que sucede cuando cargo la pagina
-	/*
-	,	init: function(){
-		
-		// Magia para que funcione
-		var self = this
+	,	init: function()
+		{
+			var self
+			=	this;
 
-		// Oculto la movida de submodulos.
-		$('#subModulo').hide()
-
-		// Traemos algo de la base de datos
-		// No importa que ....
-		OrdenesDeCompra.getList().then(
-
-			// en success
-			function(){
-				// No hacemos nada
-			}
-
-			// Si hay un error, es porque el tipo no esta logeado
-			,function(){
-				
-				// Seteamos como el el usuario no fue cargado.
-				self.user = undefined;
-
-			}
-
-		)
-		// $("#returnButton").remove()
-	}
-	*/
+			Usuarios.getSession()
+				.then(
+					function()
+					{
+						self.user = feathers.get('usuario');
+					}
+				,	function()
+					{
+						self.user = undefined;
+					}
+				)	
+		}
 	,	updateUser: function(el)
 		{
 			var	$button
