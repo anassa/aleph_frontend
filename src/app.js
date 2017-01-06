@@ -2,12 +2,13 @@
 import debug from 'debug';
 
 import $ from 'can-jquery'
-import Map from 'can-map';
+import Map from 'can-define/map/map';
 import Route from 'can-route';
-import 'can-map-define';
 import template from './index.stache!';
 
 Route('{page}/{section}');
 Route.ready();
+
+window.Route = Route
 
 $('body').append(template())
