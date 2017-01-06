@@ -1,9 +1,6 @@
 import Map from 'can-define/map/map';
 import List from 'can-define/list/list';
 import superMap from 'can-connect/can/super-map/';
-import tag from 'can-connect/can/tag/';
-import feathers from 'aleph-frontend/feathers';
-import 'lodash/lodash.js'
 
 import UnidadesDeMedida from 'aleph-frontend/models/unidadesDeMedida';
 import Usuarios from 'aleph-frontend/models/usuarios';
@@ -165,25 +162,5 @@ export const Articulos = Map.extend(
 Articulos.List = List.extend({
   '#': Articulos
 });
-
-export const articulosConnection
-=	superMap(
-		{
-			url:	feathers.rest('articulos')
-		,	idProp:	'_id'
-		,	Map:	Articulos
-		,	List:	Articulos.List
-		,	name:	'articulo'
-		}
-	);
-
-tag('articulos-model', articulosConnection);
-
-
-feathers.io.on('articulos created', articulos => articulosConnection.createInstance(articulos));
-feathers.io.on('articulos updated', articulos => articulosConnection.updateInstance(articulos));
-feathers.io.on('articulos patched', articulos => articulosConnection.updateInstance(articulos));
-feathers.io.on('articulos removed', articulos => articulosConnection.destroyInstance(articulos));
-
 
 export default Articulos;
