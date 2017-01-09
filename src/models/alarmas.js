@@ -19,7 +19,12 @@ import dataCallbacks from 'can-connect/data/callbacks/';
 // Use feathersClient.service(url) to create a service
 const alarmasService = feathers.service('/api/alarmas');
 
-export const Alarmas = Map.extend({});
+export const Alarmas = Map.extend(
+	{
+		seal: false
+	}
+,	{}
+);
 
 Alarmas.List = List.extend(
 	{

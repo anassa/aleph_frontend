@@ -22,6 +22,9 @@ const remitosService = feathers.service('/api/remitos');
 
 export const Remitos = Map.extend(
 	{
+		seal: false
+	}
+,	{
 		init: function ()
 		{
 			// El remito se inicializa con el usuario actual

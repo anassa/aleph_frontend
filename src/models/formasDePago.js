@@ -20,7 +20,12 @@ import dataCallbacks from 'can-connect/data/callbacks/';
 // Use feathersClient.service(url) to create a service
 const formasDePagoService = feathers.service('/api/formasDePago');
 
-export const FormasDePago = Map.extend({});
+export const FormasDePago = Map.extend(
+	{
+		seal: false
+	}
+,	{}
+);
 
 FormasDePago.List = List.extend(
 	{

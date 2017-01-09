@@ -20,7 +20,12 @@ import dataCallbacks from 'can-connect/data/callbacks/';
 // Use feathersClient.service(url) to create a service
 const permisosService = feathers.service('/api/permisos');
 
-export const Permisos = Map.extend({});
+export const Permisos = Map.extend(
+	{
+		seal: false
+	}
+,	{}
+);
 
 Permisos.List = List.extend(
 	{

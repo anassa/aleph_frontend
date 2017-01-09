@@ -25,6 +25,9 @@ const proveedoresService = feathers.service('/api/proveedores');
 
 export const Proveedores = Map.extend(
 	{
+		seal: false
+	}
+,	{
 		articulos:
 		{
 			value: List

@@ -20,7 +20,12 @@ import dataCallbacks from 'can-connect/data/callbacks/';
 // Use feathersClient.service(url) to create a service
 const solicitudesService = feathers.service('/api/solicitudes');
 
-export const Solicitudes = Map.extend({});
+export const Solicitudes = Map.extend(
+	{
+		seal: false
+	}
+,	{}
+);
 
 Solicitudes.List = List.extend(
 	{

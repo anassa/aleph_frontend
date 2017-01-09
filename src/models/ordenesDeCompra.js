@@ -22,6 +22,9 @@ const ordenesDeCompraService = feathers.service('/api/ordenesDeCompra');
 
 export const OrdenesDeCompra = Map.extend(
 	{
+		seal: false
+	}
+,	{
 		articulos:
 		{
 			value: Articulos.List

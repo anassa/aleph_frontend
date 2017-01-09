@@ -20,7 +20,12 @@ import dataCallbacks from 'can-connect/data/callbacks/';
 // Use feathersClient.service(url) to create a service
 const unidadesDeMedidaService = feathers.service('/api/unidadesDeMedida');
 
-export const UnidadesDeMedida = Map.extend({});
+export const UnidadesDeMedida = Map.extend(
+	{
+		seal: false
+	}
+,	{}
+);
 
 UnidadesDeMedida.List = List.extend(
 	{

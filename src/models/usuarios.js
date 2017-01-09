@@ -22,7 +22,8 @@ const usuariosService = feathers.service('/api/usuarios');
 
 export const Usuarios = Map.extend(
 	{
-		login: function(username,password)
+		seal: false
+	,	login: function(username,password)
 		{
 			//	auth user
 			return	feathers.authenticate(

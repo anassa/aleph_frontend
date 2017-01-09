@@ -26,6 +26,9 @@ const clientesService = feathers.service('/api/clientes');
 
 export const Clientes = Map.extend(
 	{
+		seal: false
+	}
+,	{
 		cuenta:
 		{
 			value:	Cuentas
@@ -88,16 +91,16 @@ export const Clientes = Map.extend(
 				return undefined;
 			}
 		}
-	  ,	init: function (){
-			var	currentUser
-			=	Usuarios.getSession();
-
-			this.usuario
-			=	{
-					_id:		currentUser._id
-				,	username: 	currentUser.username
-				,	permisos:	currentUser.permisos
-				};
+	,	usuario:
+		{
+			value: function()
+			{
+				return	{
+							_id:		feathers.get('usuario')._id
+						,	username: 	feathers.get('usuario').username
+						,	permisos:	feathers.get('usuario').permisos
+						}
+			}
 		}
 	}
 );

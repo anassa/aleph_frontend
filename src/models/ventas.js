@@ -24,6 +24,9 @@ import Clientes from 'aleph-frontend/models/clientes';
 
 export const Ventas = Map.extend(
 	{
+		seal: false
+	}
+,	{
 		articulos:
 		{
 			value: List

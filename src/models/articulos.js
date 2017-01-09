@@ -26,6 +26,9 @@ const articulosService = feathers.service('/api/articulos');
 
 export const Articulos = Map.extend(
 	{
+		seal: false
+	}
+,	{
 		unidadDeMedidaToParse:
 		{
 			set: function(value)
