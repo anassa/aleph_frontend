@@ -1,46 +1,46 @@
 {{#switch section}}
-	{{#case "nueva_oc"}}
-		<can-import from="aleph-frontend/components/compras/nueva_oc/">
+	{{#case "nuevo_articulo"}}
+		<can-import from="aleph-frontend/components/stock/nuevo_articulo/">
 			{{#if isPending}}
 				Loading...
 			{{else}}
-				<aleph-compras-nueva-oc/>
+				<aleph-stock-nuevo-articulo/>
 			{{/if}}
 		</can-import>
 	{{/case}}
-	{{#case "nuevo_proveedor"}}
-		<can-import from="aleph-frontend/components/compras/nuevo_proveedor/">
+	{{#case "nuevo_remito"}}
+		<can-import from="aleph-frontend/components/stock/nuevo_remito/">
 			{{#if isPending}}
 				Loading...
 			{{else}}
-				<aleph-compras-nuevo-proveedor/>
+				<aleph-stock-nuevo-remito/>
 			{{/if}}
 		</can-import>
 	{{/case}}
-	{{#case "registros_oc"}}
-		<can-import from="aleph-frontend/components/compras/registros_oc/">
+	{{#case "registros_articulo"}}
+		<can-import from="aleph-frontend/components/stock/registros_articulo/">
 			{{#if isPending}}
 				Loading...
 			{{else}}
-				<aleph-compras-registros-oc/>
+				<aleph-stock-registros-articulo/>
 			{{/if}}
 		</can-import>
 	{{/case}}
-	{{#case "registros_proveedor"}}
-		<can-import from="aleph-frontend/components/compras/registros_proveedor/">
+	{{#case "registros_remito"}}
+		<can-import from="aleph-frontend/components/stock/registros_remito/">
 			{{#if isPending}}
 				Loading...
 			{{else}}
-				<aleph-compras-registros-proveedor/>
+				<aleph-stock-registros-remito/>
 			{{/if}}
 		</can-import>
 	{{/case}}
 	{{#case "reportes"}}
-		<can-import from="aleph-frontend/components/compras/reportes/">
+		<can-import from="aleph-frontend/components/stock/reportes/">
 			{{#if isPending}}
 				Loading...
 			{{else}}
-				<aleph-compras-reportes/>
+				<aleph-stock-reportes/>
 			{{/if}}
 		</can-import>
 	{{/case}}

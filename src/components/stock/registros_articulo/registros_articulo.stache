@@ -81,7 +81,7 @@
 				</h4>
 			</div>
 			<div class="modal-body">
-				<can-import from="aleph-frontend/stock/nuevo_articulo/">
+				<can-import from="aleph-frontend/components/stock/nuevo_articulo/">
 					{{#if isPending}}
 						Loading...
 					{{else}}

@@ -67,7 +67,7 @@
 				</h4>
 			</div>
 			<div class="modal-body">
-				<can-import from="aleph-frontend/compras/nuevo_proveedor/">
+				<can-import from="aleph-frontend/components/compras/nuevo_proveedor/">
 					{{#if isPending}}
 						Loading...
 					{{else}}

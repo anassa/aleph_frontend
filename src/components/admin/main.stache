@@ -1,4 +1,3 @@
-<{{{section}}}>
 {{#switch section}}
 	{{#case "nuevo_usuario"}}
 		<can-import from="aleph-frontend/components/admin/nuevo_usuario/">

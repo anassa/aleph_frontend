@@ -105,19 +105,6 @@ export const Proveedores = Map.extend(
 		{
 			value: false
 		,	type: Boolean
-		,	set: function(s)
-			{
-				if (this.cuenta)
-					if (s) {
-						this.cuenta.montoLimite = this.tempMontoLimite;
-						this.tempMontoLimite = 0;
-					}	else {
-						this.tempMontoLimite = this.cuenta.montoLimite;
-						this.cuenta.montoLimite = '';
-					}
-
-				return s
-			}
 		,	serialize: function()
 			{
 				return undefined;

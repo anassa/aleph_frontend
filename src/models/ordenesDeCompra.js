@@ -20,6 +20,9 @@ import dataCallbacks from 'can-connect/data/callbacks/';
 // Use feathersClient.service(url) to create a service
 const ordenesDeCompraService = feathers.service('/api/ordenesDeCompra');
 
+// api models
+import Articulos from 'aleph-frontend/models/articulosOC';
+
 export const OrdenesDeCompra = Map.extend(
 	{
 		seal: false
