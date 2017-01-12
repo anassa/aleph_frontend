@@ -1,6 +1,6 @@
 import Component from 'can-component';
-import Map from 'can-map';
-import 'can-map-define';
+import Map from 'can-define/map/map';
+import Route from 'can-route';
 import './nuevo_proveedor.less!';
 import template from './nuevo_proveedor.stache!';
 
@@ -10,128 +10,24 @@ import 'aleph-frontend/util/func.js';
 
 const labels = ['label-default','label-primary','label-success','label-info','label-warning','label-danger'];
 
-export const ViewModel = Map.extend({
-	define:
-		{
-			proveedor:
-			{
-				value:	Proveedores
-			}
-		,	articulos:
-			{
-				value: function()
-				{
-					return	Articulos.getList()
-				}
-			,	set: function(a)
-				{
-					this.attr('resetPaginadorArticulos',!this.attr('resetPaginadorArticulos'));
-					$('a[href="#datos"]').click();
-					return a;
-				}
-			}
-		,	resetPaginadorArticulos:
-			{
-				value:	false
-			}
-		,	resetPaginador:
-			{
-				value:	false
-			}
-		,	errorMsg:
-			{
-				value:	null
-			}
-		,	query:
-			{
-				value: function()
-				{
-					var self
-					=	this;
-
-					var query
-					=	new Map(
-							{
-								$skip: 0
-							}
-						);
-
-					query
-						.bind(
-							'change'
-						,	function()
-							{
-								self
-									.attr(
-										'articulos'
-									,	Articulos.getList(
-											query.serialize()
-										)
-									)
-							}
-						);
-
-					return query;
-				}
-			}
-		,	searchInput:
-			{
-				value:	undefined
-			}
-		,	listQuery:
-			{
-				value: function()
-				{
-					var self
-					=	this;
-
-					var query
-					=	new Map(
-							{
-								current:
-								{
-									firstPage:	0
-								,	lastPage:	4
-								}
-							}
-						);
-
-					query
-						.bind(
-							'change'
-						,	function()
-							{
-								self.toggleArticulosProveedor()
-							}
-						);
-
-					return query;
-				}
-			}
-		}
-	,	toggleArticulosProveedor: function()
+export const ViewModel = Map.extend(
+	{
+		toggleArticulosProveedor: function()
 		{
 			var self
-			=	this
-			,	query
-			=	this.attr('listQuery');
+			=	this;
 
-			this.attr('proveedor.articulos')
+			self.proveedor.articulos
 				.map(
 					function(art, i)
 					{
-						art.attr(
-							'visible'
-						,	(i >= query.current.firstPage && i <= query.current.lastPage)
-						);
+						art.visible = (i >= self.listQuery.current.firstPage && i <= self.listQuery.current.lastPage);
 					}
-				)
+				);
 		}
 	,	searchArticulo: function(value)
 		{
-			var value
-			=	this.attr('searchInput')
-			,	fields
+			var fields
 			=	[
 					{
 						name: 'nombre'
@@ -143,21 +39,20 @@ export const ViewModel = Map.extend({
 					}
 				];
 
-			this.attr(
-				'query.$or'
-			,	value.length
+			this.query.$or
+			=	this.searchInput.length
 				?	createQuery(fields,value)
-				:	undefined
-			);
+				:	undefined;
 		}
 	,	addArticulo: function(art)
 		{
-			if (this.attr('proveedor.articulos').indexOf(art) == -1) {
-				this.attr('proveedor.articulos').push(art.attr('visible',true));
+			if (this.proveedor.articulos.indexOf(art) == -1) {
+				art.visible = true;
+				this.proveedor.articulos.push(art);
 			} else {
 				$.notify(
 					{
-						message:	'El Articulo '+art.attr('nombre')+' ya fue agregado al proveedor.' 
+						message:	'El Articulo '+art.nombre+' ya fue agregado al proveedor.' 
 					}
 				,	{
 						type:		'danger'
@@ -172,17 +67,16 @@ export const ViewModel = Map.extend({
 		}
 	,	removeArticulo: function(el)
 		{
-			this.attr('proveedor.articulos').splice($(el).parents('tr').index(),1);
+			this.proveedor.articulos.splice($(el).parents('tr').index(),1);
 		}
 	,	toggleCuenta: function(el)
 		{
-			this.attr('proveedor.tieneCuenta',$(el).is(':checked'));
+			this.proveedor.tieneCuenta = $(el).is(':checked');
 		}
 	,	checkEtiquetas: function(el)
 		{
-			this.attr(
-				'proveedor.etiquetas'
-			,	$(el).val().split(',').map(
+			this.proveedor.etiquetas
+			=	$(el).val().split(',').map(
 					function(t,i)
 					{
 						return	{
@@ -190,13 +84,12 @@ export const ViewModel = Map.extend({
 								,	tipo:			labels[i%labels.length]
 								} 
 					}
-				)
-			);
+				);
 		}
 	,	cancelProveedor: function()
 		{
-			this.attr('proveedor', new Proveedores({}));
-			this.attr('resetPaginador', true);
+			this.proveedor = new Proveedores({});
+			this.resetPaginador = true;
 		}
 	,	saveProveedor: function(el)
 		{
@@ -208,17 +101,17 @@ export const ViewModel = Map.extend({
 			$button.button('loading');
 
 			var	newMode
-			=	self.attr('proveedor').isNew();
+			=	self.proveedor.isNew();
 
-			self.attr('proveedor').save()
+			self.proveedor.save()
 				.then(
 					function(data)
 					{
 						$button.button('reset');
 
 						if (newMode) {
-							self.attr('proveedor', new Proveedores({}));
-							self.attr('resetPaginador', true);
+							self.proveedor = new Proveedores({});
+							self.resetPaginador = true;
 						} else {
 							$(el).parents('.modal').modal('hide')
 							$('#cuenta-switch').click();
@@ -246,7 +139,7 @@ export const ViewModel = Map.extend({
 							}
 						);
 
-						self.attr('errorMsg', '');
+						self.errorMsg = '';
 
 					}
 				,	function(data)
@@ -267,7 +160,7 @@ export const ViewModel = Map.extend({
 							}
 						);
 
-						self.attr('errorMsg','Datos incorrectos, verifique los datos ingresados.');
+						self.errorMsg = 'Datos incorrectos, verifique los datos ingresados.';
 
 						$button.button('reset');
 					}
@@ -278,15 +171,107 @@ export const ViewModel = Map.extend({
 			var self
 			=	this;
 
-			this.bind(
+			this.on(
 				'proveedor'
 			,	function(ev, p)
 				{
-					self.attr('proveedor.articulos', new Articulos.List(p.attr('articulos').attr()));
+					self.proveedor.articulos = new Articulos.List(p.articulos.get());
 
 					self.toggleArticulosProveedor();
 				}
 			);
+		}
+	,	proveedor:
+		{
+			value: Proveedores
+		}
+	,	articulos:
+		{
+			value: function()
+			{
+				return	Articulos.getList()
+			}
+		,	set: function(a)
+			{
+				this.resetPaginadorArticulos = !this.resetPaginadorArticulos;
+				$('a[href="#datos"]').click();
+				return a;
+			}
+		}
+	,	resetPaginadorArticulos:
+		{
+			value:	false
+		}
+	,	resetPaginador:
+		{
+			value:	false
+		}
+	,	errorMsg:
+		{
+			value:	null
+		}
+	,	query:
+		{
+			value: function()
+			{
+				var self
+				=	this;
+
+				var query
+				=	new Map(
+						{
+							$skip: 0
+						}
+					);
+
+				query
+					.bind(
+						'change'
+					,	function()
+						{
+							self.articulos
+						=		Articulos.getList(
+									query.serialize()
+								);
+						}
+					);
+
+				return query;
+			}
+		}
+	,	searchInput:
+		{
+			value:	undefined
+		}
+	,	listQuery:
+		{
+			value: function()
+			{
+				var self
+				=	this;
+
+				var query
+				=	new Map(
+						{
+							current:
+							{
+								firstPage:	0
+							,	lastPage:	4
+							}
+						}
+					);
+
+				query
+					.bind(
+						'change'
+					,	function()
+						{
+							self.toggleArticulosProveedor()
+						}
+					);
+
+				return query;
+			}
 		}
 	}
 );
