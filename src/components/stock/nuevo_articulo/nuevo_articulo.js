@@ -1,6 +1,5 @@
 import Component from 'can-component';
-import Map from 'can-map';
-import 'can-map-define';
+import Map from 'can-define/map/map';
 import './nuevo_articulo.less!';
 import template from './nuevo_articulo.stache!';
 
@@ -10,124 +9,114 @@ import Proveedores from 'aleph-frontend/models/proveedores';
 
 export const ViewModel = Map.extend(
 	{
-		define:
+		unidadesDeMedida:
 		{
-			unidadesDeMedida:
+			value: function()
 			{
-				value: function()
-				{
-					return UnidadesDeMedida.getList();
-				}
+				return UnidadesDeMedida.getList();
 			}
-		,	articulo:
+		}
+	,	articulo:
+		{
+			value:	Articulos
+		,	set: function(a)
 			{
-				value:	Articulos
-			,	set: function(a)
-				{
-					this.attr('resetPaginadorProveedores',!this.attr('resetPaginadorProveedores'));
-					$('a[href="#datos"]').click();
-					return a;
-				}
+				this.resetPaginadorProveedores = !this.resetPaginadorProveedores;
+				$('a[href="#datos"]').click();
+				return a;
 			}
-		,	proveedores:
+		}
+	,	proveedores:
+		{
+			value: function()
 			{
-				value: function()
-				{
-					return	Proveedores.getList()
-				}
+				return	Proveedores.getList()
 			}
-		,	resetPaginadorProveedores:
+		}
+	,	resetPaginadorProveedores:
+		{
+			value:	false
+		}
+	,	resetPaginador:
+		{
+			value:	false
+		}
+	,	errorMsg:
+		{
+			value:	null
+		}
+	,	query:
+		{
+			value: function()
 			{
-				value:	false
-			}
-		,	resetPaginador:
-			{
-				value:	false
-			}
-		,	errorMsg:
-			{
-				value:	null
-			}
-		,	query:
-			{
-				value: function()
-				{
-					var self
-					=	this;
+				var self
+				=	this;
 
-					var query
-					=	new Map(
+				var query
+				=	new Map(
+						{
+							$skip: 0
+						}
+					);
+
+				query
+					.bind(
+						'change'
+					,	function()
+						{
+							self.proveedores
+							=	Proveedores.getList(query.get());
+						}
+					);
+
+				return query;
+			}
+		}
+	,	searchInput:
+		{
+			value:	undefined
+		}
+	,	listQuery:
+		{
+			value: function()
+			{
+				var self
+				=	this;
+
+				var query
+				=	new Map(
+						{
+							current:
 							{
-								$skip: 0
+								firstPage:	0
+							,	lastPage:	4
 							}
-						);
+						}
+					);
 
-					query
-						.bind(
-							'change'
-						,	function()
-							{
-								self
-									.attr(
-										'proveedores'
-									,	Proveedores.getList(
-											query.serialize()
-										)
-									)
-							}
-						);
+				query
+					.bind(
+						'change'
+					,	function()
+						{
+							self.articulo.proveedores
+								.map(
+									function(prov, i)
+									{
+										prov.visible
+										=	(i >= query.current.firstPage && i <= query.current.lastPage);
+									}
+								);
+						}
+					);
 
-					return query;
-				}
-			}
-		,	searchInput:
-			{
-				value:	undefined
-			}
-		,	listQuery:
-			{
-				value: function()
-				{
-					var self
-					=	this;
-
-					var query
-					=	new Map(
-							{
-								current:
-								{
-									firstPage:	0
-								,	lastPage:	4
-								}
-							}
-						);
-
-					query
-						.bind(
-							'change'
-						,	function()
-							{
-								self.attr('articulo.proveedores')
-									.map(
-										function(prov, i)
-										{
-											prov.attr(
-												'visible'
-											,	(i >= query.current.firstPage && i <= query.current.lastPage)
-											);
-										}
-									)
-							}
-						);
-
-					return query;
-				}
+				return query;
 			}
 		}
 	,	searchProveedor: function(value)
 		{
 			var value
-			=	this.attr('searchInput')
+			=	this.searchInput
 			,	fields
 			=	[
 					{
@@ -140,21 +129,20 @@ export const ViewModel = Map.extend(
 					}
 				];
 
-			this.attr(
-				'query.$or'
-			,	value.length
+			this.query.$or
+			=	value.length
 				?	createQuery(fields,value)
-				:	undefined
-			);
+				:	undefined;
 		}
 	,	addProveedor: function(prov)
 		{
-			if (this.attr('articulo.proveedores').indexOf(prov) == -1) {
-				this.attr('articulo.proveedores').push(prov.attr('visible',true));
+			if (this.articulo.proveedores.indexOf(prov) == -1) {
+				prov.visible = true;
+				this.articulo.proveedores.push(prov);
 			} else {
 				$.notify(
 					{
-						message:	'El Proveedor '+prov.attr('denominacion')+' ya fue agregado al articulo.' 
+						message:	'El Proveedor '+prov.denominacion+' ya fue agregado al articulo.' 
 					}
 				,	{
 						type:		'danger'
@@ -169,12 +157,12 @@ export const ViewModel = Map.extend(
 		}
 	,	removeProveedor: function(el)
 		{
-			this.attr('articulo.proveedores').splice($(el).parents('tr').index(),1);
+			this.articulo.proveedores.splice($(el).parents('tr').index(),1);
 		}
 	,	toggleAjuste: function(el)
 		{
 			if (!$(el).is(':checked')) {
-				this.attr('articulo.ajuste','');
+				this.articulo.ajuste = '';
 				$('[name="ajuste"]').val('')
 			}
 
@@ -188,7 +176,7 @@ export const ViewModel = Map.extend(
 		}
 	,	cancelArticulo: function()
 		{
-			this.attr('articulo', new Articulos({}));
+			this.articulo = new Articulos({});
 		}
 	,	saveArticulo: function(el)
 		{
@@ -200,19 +188,19 @@ export const ViewModel = Map.extend(
 			$button.button('loading');
 
 			var	newMode
-			=	self.attr('articulo').isNew();
+			=	self.articulo.isNew();
 
-			self.attr('articulo').save()
+			self.articulo.save()
 				.then(
 					function(data)
 					{
 						$button.button('reset');
 
 						if (newMode) {
-							self.attr('articulo', new Articulos({}));
+							self.articulo = new Articulos({});
 						} else {
 							$(el).parents('.modal').modal('hide')
-							self.attr('articulo.tempStock',data.stock);
+							self.articulo.tempStock = data.stock;
 							$('#ajuste-switch').click();
 						}
 
@@ -238,7 +226,7 @@ export const ViewModel = Map.extend(
 							}
 						);
 
-						self.attr('errorMsg', '');
+						self.errorMsg = '';
 
 					}
 				,	function(data)
@@ -259,7 +247,7 @@ export const ViewModel = Map.extend(
 							}
 						);
 
-						self.attr('errorMsg','Datos incorrectos, verifique los datos ingresados.');
+						self.errorMsg = 'Datos incorrectos, verifique los datos ingresados.';
 
 						$button.button('reset');
 					}
@@ -268,8 +256,10 @@ export const ViewModel = Map.extend(
 	}
 );
 
-export default Component.extend({
-	tag: 'aleph-stock-nuevo-articulo',
-	viewModel: ViewModel,
-	view: template
-});
+export default Component.extend(
+	{
+		tag: 'aleph-stock-nuevo-articulo'
+	,	viewModel: ViewModel
+	,	view: template
+	}
+);

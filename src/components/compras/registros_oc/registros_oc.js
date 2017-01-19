@@ -1,6 +1,5 @@
 import Component from 'can-component';
-import Map from 'can-map';
-import 'can-map-define';
+import Map from 'can-define/map/map';
 import './registros_oc.less!';
 import template from './registros_oc.stache!';
 
@@ -10,55 +9,47 @@ import 'aleph-frontend/util/func.js';
 
 export const ViewModel = Map.extend(
 	{
-		define:
+		ordenesDeCompra:
 		{
-			ordenesDeCompra:
+			value: function()
 			{
-				value: function()
-				{
-					return	OrdenesDeCompra.getList()
-				}
+				return	OrdenesDeCompra.getList()
 			}
-		,	previewOrdenDeCompra:
+		}
+	,	previewOrdenDeCompra:
+		{
+			value: OrdenesDeCompra
+		}
+	,	query:
+		{
+			value: function()
 			{
-				value: OrdenesDeCompra
-			}
-		,	query:
-			{
-				value: function()
-				{
-					var self
-					=	this;
+				var self
+				=	this;
 
-					var query
-					=	new Map(
-							{
-								$skip: 0
-							}
-						);
+				var query
+				=	new Map(
+						{
+							$skip: 0
+						}
+					);
 
-					query
-						.bind(
-							'change'
-						,	function()
-							{
-								self
-									.attr(
-										'ordenesDeCompra'
-									,	OrdenesDeCompra.getList(
-											query.serialize()
-										)
-									)
-							}
-						);
+				query
+					.bind(
+						'change'
+					,	function()
+						{
+							self.ordenesDeCompra
+							=	OrdenesDeCompra.getList(query.get());
+						}
+					);
 
-					return query;
-				}
+				return query;
 			}
-		,	searchInput:
-			{
-				value:	undefined
-			}
+		}
+	,	searchInput:
+		{
+			value:	undefined
 		}
 	,	init: function()
 		{
@@ -69,20 +60,15 @@ export const ViewModel = Map.extend(
 				'updated'
 			,	function()
 				{
-					self
-						.attr(
-							'ordenesDeCompra'
-						,	OrdenesDeCompra.getList(
-								self.attr('query').serialize()
-							)
-						)
+					self.ordenesDeCompra
+					=	OrdenesDeCompra.getList(self.query.get());
 				}
 			);
 		}
 	,	search: function(value)
 		{
 			var value
-			=	this.attr('searchInput')
+			=	this.searchInput
 			,	fields
 			=	[
 					{
@@ -95,28 +81,28 @@ export const ViewModel = Map.extend(
 					}
 				];
 
-			this.attr(
-				'query.$or'
-			,	value.length
+			this.query.$or
+			=	value.length
 				?	createQuery(fields,value)
-				:	undefined
-			);
+				:	undefined;
 		}
 	,	setTempOrdenDeCompra: function(oc)
 		{
-			this.attr('tempOrdenDeCompra', new OrdenesDeCompra(oc.serialize()));
+			this.tempOrdenDeCompra = new OrdenesDeCompra(oc.get());
 		}
 	,	setPreviewOrdenDeCompra: function(oc)
 		{
-			this.attr('previewOrdenDeCompra', new OrdenesDeCompra(oc.serialize()));
+			this.previewOrdenDeCompra = new OrdenesDeCompra(oc.get());
 
-			this.attr('previewOrdenDeCompra.articulos', new Articulos.List(oc.serialize().articulos));
+			this.previewOrdenDeCompra.articulos = new Articulos.List(oc.articulos.get());
 		}
 	}
 );
 
-export default Component.extend({
-	tag: 'aleph-compras-registros-oc',
-	viewModel: ViewModel,
-	view: template
-});
+export default Component.extend(
+	{
+		tag: 'aleph-compras-registros-oc'
+	,	viewModel: ViewModel
+	,	view: template
+	}
+);

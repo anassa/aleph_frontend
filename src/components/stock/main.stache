@@ -26,15 +26,6 @@
 			{{/if}}
 		</can-import>
 	{{/case}}
-	{{#case "registros_remito"}}
-		<can-import from="aleph-frontend/components/stock/registros_remito/">
-			{{#if isPending}}
-				Loading...
-			{{else}}
-				<aleph-stock-registros-remito/>
-			{{/if}}
-		</can-import>
-	{{/case}}
 	{{#case "reportes"}}
 		<can-import from="aleph-frontend/components/stock/reportes/">
 			{{#if isPending}}

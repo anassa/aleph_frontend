@@ -1,6 +1,5 @@
 import Component from 'can-component';
-import Map from 'can-map';
-import 'can-map-define';
+import Map from 'can-define/map/map';
 import './nueva_oc.less!';
 import template from './nueva_oc.stache!';
 
@@ -11,217 +10,199 @@ import 'aleph-frontend/util/func.js';
 
 export const ViewModel = Map.extend(
 	{
-		define:
+		ordendecompra:
 		{
-			ordendecompra:
+			value: OrdenesDeCompra
+		}
+	,	articulosP:
+		{
+			value: Articulos.List
+		}
+	,	resetPaginadorAP:
+		{
+			value:	false
+		}
+	,	resetPaginadorAOC:
+		{
+			value:	false
+		}
+	,	errorMsg:
+		{
+			value:	null
+		}
+	,	nombreProveedor:
+		{
+			value: ''
+		}
+	,	nombreArticulo:
+		{
+			value: ''
+		}
+	,	codigoArticulo:
+		{
+			value: ''
+		}
+	,	query:
+		{
+			value: function()
 			{
-				value: OrdenesDeCompra
-			}
-		,	articulosP:
-			{
-				value: Articulos.List
-			}
-		,	resetPaginadorAP:
-			{
-				value:	false
-			}
-		,	resetPaginadorAOC:
-			{
-				value:	false
-			}
-		,	errorMsg:
-			{
-				value:	null
-			}
-		,	nombreProveedor:
-			{
-				value: ''
-			}
-		,	nombreArticulo:
-			{
-				value: ''
-			}
-		,	codigoArticulo:
-			{
-				value: ''
-			}
-		,	query:
-			{
-				value: function()
-				{
-					var self
-					=	this;
+				var self
+				=	this;
 
-					var query
-					=	new Map(
+				var query
+				=	new Map(
+						{
+							$skip: 0
+						}
+					);
+
+				query
+					.bind(
+						'change'
+					,	function()
+						{
+							Proveedores.getList(
+								query.serialize()
+							).then(
+								function(p)
+								{
+									if (p.length > 0) {
+										var prov
+										=	p.get(0);
+
+										self.articulosP = new Articulos.List(prov.articulos.get());
+
+										self.articulosFiltrados = self.articulosP.slice();
+
+										self.ordendecompra.proveedor = prov;
+
+									}
+								}
+							)
+						}
+					);
+
+				return query;
+			}
+		}
+	,	listQueryF:
+		{
+			value: function()
+			{
+				var self
+				=	this;
+
+				var query
+				=	new Map(
+						{
+							current:
 							{
-								$skip: 0
+								firstPage:	0
+							,	lastPage:	4
 							}
-						);
+						}
+					);
 
-					query
-						.bind(
-							'change'
-						,	function()
-							{
-								Proveedores.getList(
-									query.serialize()
-								).then(
-									function(p)
+				query
+					.bind(
+						'change'
+					,	function()
+						{
+							self.articulosFiltrados
+								.map(
+									function(art, i)
 									{
-										if (p.length > 0) {
-											var prov
-											=	p.attr(0);
-
-											self.attr('articulosP', new Articulos.List(prov.attr('articulos').attr()));
-
-											self.attr('articulosFiltrados', self.attr('articulosP').slice());
-
-											self
-												.attr(
-													'ordendecompra.proveedor'
-												,	prov
-												);
-										}
+										art.visible = (i >= query.current.firstPage && i <= query.current.lastPage);
 									}
 								)
-							}
-						);
+						}
+					);
 
-					return query;
-				}
+				return query;
 			}
-		,	listQueryF:
+		}
+	,	listQueryAOC:
+		{
+			value: function()
 			{
-				value: function()
-				{
-					var self
-					=	this;
+				var self
+				=	this;
 
-					var query
-					=	new Map(
+				var query
+				=	new Map(
+						{
+							current:
 							{
-								current:
-								{
-									firstPage:	0
-								,	lastPage:	4
-								}
+								firstPage:	0
+							,	lastPage:	4
 							}
-						);
+						}
+					);
 
-					query
-						.bind(
-							'change'
-						,	function()
-							{
-								self.attr('articulosFiltrados')
-									.map(
-										function(art, i)
-										{
-											art.attr(
-												'visible'
-											,	(i >= query.current.firstPage && i <= query.current.lastPage)
-											);
-										}
-									)
-							}
-						);
+				query
+					.bind(
+						'change'
+					,	function()
+						{
+							self.ordendecompra.articulos
+								.map(
+									function(art, i)
+									{
+										art.visible = (i >= query.current.firstPage && i <= query.current.lastPage);
+									}
+								)
+						}
+					);
 
-					return query;
-				}
-			}
-		,	listQueryAOC:
-			{
-				value: function()
-				{
-					var self
-					=	this;
-
-					var query
-					=	new Map(
-							{
-								current:
-								{
-									firstPage:	0
-								,	lastPage:	4
-								}
-							}
-						);
-
-					query
-						.bind(
-							'change'
-						,	function()
-							{
-								self.attr('ordendecompra.articulos')
-									.map(
-										function(art, i)
-										{
-											art.attr(
-												'visible'
-											,	(i >= query.current.firstPage && i <= query.current.lastPage)
-											);
-										}
-									)
-							}
-						);
-
-					return query;
-				}
+				return query;
 			}
 		}
 	,	filterArticulo: function()
 		{
 			var nombreArticulo
-			=	this.attr('nombreArticulo')
+			=	this.nombreArticulo
 			,	codigoArticulo
-			=	this.attr('codigoArticulo');
+			=	this.codigoArticulo;
 
-			this.attr(
-				'articulosFiltrados'
-			,	this.attr('articulosP').filter(
+			this.articulosFiltrados
+			=	this.articulosP.filter(
 					function(item, index, list)
 					{
 						if 	(nombreArticulo.length && codigoArticulo.length)
-							return	(item.attr('nombre').toLowerCase().indexOf(nombreArticulo) != -1)
-								&&	(item.attr('codigo') == Number(codigoArticulo))
+							return	(item.nombre.toLowerCase().indexOf(nombreArticulo) != -1)
+								&&	(item.codigo == Number(codigoArticulo))
 						else
 							if 	(nombreArticulo.length)
-								return	(item.attr('nombre').toLowerCase().indexOf(nombreArticulo) != -1)
+								return	(item.nombre.toLowerCase().indexOf(nombreArticulo) != -1)
 							else
 								if (codigoArticulo.length)
-									return (item.attr('codigo') == Number(codigoArticulo))
+									return (item.codigo == Number(codigoArticulo))
 								else
 									return true;
 					}
-				)
-			)
-
-
+				);
 		}
 	,	resetProveedor: function()
 		{
-			this.attr('nombreProveedor','');
-			this.removeAttr('ordendecompra.proveedor');
-			this.attr('articulosP',[]);
-			this.attr('articulosFiltrados',[]);
-			this.attr('resetPaginadorAP', true);
+			this.nombreProveedor = '';
+			this.ordendecompra.proveedor = undefined;
+			this.articulosP = [];
+			this.articulosFiltrados = [];
+			this.resetPaginadorAP = true;
 		}
 	,	resetOrdenDeCompra: function()
 		{
-			this.attr('ordendecompra', new OrdenesDeCompra({}));
-			this.attr('resetPaginadorAOC', true);
+			this.ordendecompra = new OrdenesDeCompra({});
+			this.resetPaginadorAOC = true;
 		}
 	,	searchProveedor: function(value)
 		{
-			if (this.attr('nombreProveedor').length)
-				this.attr(
-					'query.denominacion'
-				,	{
-						$regex:		this.attr('nombreProveedor')
+			if (this.nombreProveedor.length)
+				this.query.denominacion
+				=	{
+						$regex:		this.nombreProveedor
 					,	$options:	'i'
-					}
-				);
+					};
 			else {
 				this.resetProveedor();
 				this.resetOrdenDeCompra()
@@ -229,12 +210,13 @@ export const ViewModel = Map.extend(
 		}
 	,	addArticulo: function(art)
 		{
-			if (this.attr('ordendecompra.articulos').indexOf(art) == -1) {
-				this.attr('ordendecompra.articulos').push(art.attr('visible',true));
+			if (this.ordendecompra.articulos.indexOf(art) == -1) {
+				art.visible = true;
+				this.ordendecompra.articulos.push(art);
 			} else {
 				$.notify(
 					{
-						message:	'El Articulo '+art.attr('nombre')+' ya fue agregado a la Orden de Compra.' 
+						message:	'El Articulo '+art.nombre+' ya fue agregado a la Orden de Compra.' 
 					}
 				,	{
 						type:		'danger'
@@ -249,7 +231,7 @@ export const ViewModel = Map.extend(
 		}
 	,	removeArticulo: function(el)
 		{
-			this.attr('ordendecompra.articulos').splice($(el).parents('tr').index(),1);
+			this.ordendecompra.articulos.splice($(el).parents('tr').index(),1);
 		}
 	,	cancelOrdenDeCompra: function()
 		{
@@ -266,9 +248,9 @@ export const ViewModel = Map.extend(
 			$button.button('loading');
 
 			var	newMode
-			=	self.attr('ordendecompra').isNew();
+			=	self.ordendecompra.isNew();
 
-			self.attr('ordendecompra').save()
+			self.ordendecompra.save()
 				.then(
 					function(data)
 					{
@@ -296,12 +278,12 @@ export const ViewModel = Map.extend(
 							}
 						);
 
-						self.attr('errorMsg', '');
+						self.errorMsg = '';
 
 					}
 				,	function(data)
 					{
-						self.attr('errorMsg','Datos incorrectos, verifique los datos ingresados.');
+						self.errorMsg = 'Datos incorrectos, verifique los datos ingresados.';
 
 						$button.button('reset');
 					}
@@ -318,13 +300,13 @@ export const ViewModel = Map.extend(
 				{
 					if (!oc.isNew()) {
 
-						oc.attr('articulos', new Articulos.List(oc.attr('articulos').attr()));
+						oc.articulos = new Articulos.List(oc.articulos.get());
 
-						self.attr('nombreProveedor',oc.attr('proveedor.denominacion'))
+						self.nombreProveedor = oc.proveedor.denominacion;
 
-						self.attr('articulosP', new Articulos.List(oc.attr('proveedor.articulos').attr()));
+						self.articulosP = new Articulos.List(oc.proveedor.articulos.get());
 
-						self.attr('articulosFiltrados', self.attr('articulosP').slice());
+						self.articulosFiltrados = self.articulosP.slice();
 						
 					}
 				}
@@ -333,8 +315,10 @@ export const ViewModel = Map.extend(
 	}
 );
 
-export default Component.extend({
-	tag: 'aleph-compras-nueva-oc',
-	viewModel: ViewModel,
-	view: template
-});
+export default Component.extend(
+	{
+		tag: 'aleph-compras-nueva-oc'
+	,	viewModel: ViewModel
+	,	view: template
+	}
+);

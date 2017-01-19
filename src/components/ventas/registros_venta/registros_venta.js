@@ -1,6 +1,5 @@
 import Component from 'can-component';
-import Map from 'can-map';
-import 'can-map-define';
+import Map from 'can-define/map/map';
 import './registros_venta.less!';
 import template from './registros_venta.stache!';
 
@@ -9,104 +8,94 @@ import 'aleph-frontend/util/func.js';
 
 export const ViewModel = Map.extend(
 	{
-		define:
+		ventas:
 		{
-			ventas:
+			value: function()
 			{
-				value: function()
-				{
-					return	Ventas.getList()
-				}
+				return	Ventas.getList()
 			}
-		,	query:
+		}
+	,	query:
+		{
+			value: function()
 			{
-				value: function()
-				{
-					var self
-					=	this;
+				var self
+				=	this;
 
-					var query
-					=	new Map(
+				var query
+				=	new Map(
+						{
+							$skip:	0
+						,	$limit:	10
+						}
+					);
+
+				query
+					.bind(
+						'change'
+					,	function()
+						{
+							self.ventas
+							=	Ventas.getList(query.get());
+						}
+					);
+
+				return query;
+			}
+		}
+	,	searchInput:
+		{
+			value:	undefined
+		}
+	,	tempVenta:
+		{
+			value: Ventas
+		}
+	,	resetPaginador:
+		{
+			value:	false
+		}
+	,	listQuery:
+		{
+			value: function()
+			{
+				var self
+				=	this;
+
+				var query
+				=	new Map(
+						{
+							current:
 							{
-								$skip:	0
-							,	$limit:	10
+								firstPage:	0
+							,	lastPage:	4
 							}
-						);
+						}
+					);
 
-					query
-						.bind(
-							'change'
-						,	function()
-							{
-								self
-									.attr(
-										'ventas'
-									,	Ventas.getList(
-											query.serialize()
-										)
-									)
-							}
-						);
+				query
+					.bind(
+						'change'
+					,	function()
+						{
+							self.venta.articulos
+								.map(
+									function(art, i)
+									{
+										art.visible
+										=	(i >= query.current.firstPage && i <= query.current.lastPage);
+									}
+								);
+						}
+					);
 
-					return query;
-				}
-			}
-		,	searchInput:
-			{
-				value:	undefined
-			}
-		,	tempVenta:
-			{
-				value: Ventas
-			}
-		,	resetPaginador:
-			{
-				value:	false
-			}
-		,	listQuery:
-			{
-				value: function()
-				{
-					var self
-					=	this;
-
-					var query
-					=	new Map(
-							{
-								current:
-								{
-									firstPage:	0
-								,	lastPage:	4
-								}
-							}
-						);
-
-					query
-						.bind(
-							'change'
-						,	function()
-							{
-								self.attr('venta.articulos')
-									.map(
-										function(art, i)
-										{
-											art.attr(
-												'visible'
-											,	(i >= query.current.firstPage && i <= query.current.lastPage)
-											);
-										}
-									)
-							}
-						);
-
-					return query;
-				}
+				return query;
 			}
 		}
 	,	search: function(value)
 		{
 			var value
-			=	this.attr('searchInput')
+			=	this.searchInput
 			,	fields
 			=	[
 					{
@@ -123,24 +112,22 @@ export const ViewModel = Map.extend(
 					}
 				];
 
-			this.attr(
-				'query.$or'
-			,	value.length
+			this.query.$or
+			=	value.length
 				?	createQuery(fields,value)
-				:	undefined
-			);
+				:	undefined;
 		}
 	,	setTempVenta: function(v)
 		{
-			this.attr('tempVenta', new Ventas(v.serialize()));
+			this.tempVenta = new Ventas(v.get());
 		}
 	}
 );
 
 export default Component.extend(
 	{
-		tag: 'aleph-ventas-registros-venta',
-		viewModel: ViewModel,
-		view: template
+		tag: 'aleph-ventas-registros-venta'
+	,	viewModel: ViewModel
+	,	view: template
 	}
 );

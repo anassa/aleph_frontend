@@ -1,6 +1,5 @@
 import Component from 'can-component';
-import Map from 'can-map';
-import 'can-map-define';
+import Map from 'can-define/map/map';
 import './nuevo_cliente.less!';
 import template from './nuevo_cliente.stache!';
 
@@ -13,21 +12,20 @@ window.Clientes = Clientes
 // La posta de las etiquetas
 const labels = ['label-default','label-primary','label-success','label-info','label-warning','label-danger'];
 
-export const ViewModel = Map.extend({
-	define:
+export const ViewModel = Map.extend(
+{
+	cliente:
 	{
-		cliente: {
-			value:	Clientes
-		}
-	
-		, errorMsg: {
-			value:	null
-		}
+		value:	Clientes
 	}
-	, toggleCuenta: function(el)
+,	errorMsg:
+	{
+		value:	null
+	}
+,	toggleCuenta: function(el)
 	{
 			if (!$(el).is(':checked')) {
-				this.attr('cliente.cuenta','');
+				this.cliente.cuenta = '';
 				$('[name="tope"]').val('')
 			}
 
@@ -49,9 +47,8 @@ export const ViewModel = Map.extend({
 	}
 	,	checkEtiquetas: function(el)
 		{
-			this.attr(
-				'cliente.etiquetas'
-			,	$(el).val().split(',').map(
+			this.cliente.etiquetas
+			=	$(el).val().split(',').map(
 					function(t,i)
 					{
 						return	{
@@ -59,13 +56,12 @@ export const ViewModel = Map.extend({
 								,	tipo:			labels[i%labels.length]
 								} 
 					}
-				)
-			);
+				);
 		}
 	,	cancelCliente: function()
 		{
 			// alert("cancelar cliente")
-			this.attr('cliente', new Clientes({}));
+			this.cliente = new Clientes({});
 		}
 	,	saveCliente: function(el)
 		{
@@ -78,9 +74,9 @@ export const ViewModel = Map.extend({
 			$button.button('loading');
 
 			var	newMode
-			=	self.attr('cliente').isNew();
+			=	self.cliente.isNew();
 			console.log("nuevo_cliente.js : saveCliente")
-			self.attr('cliente').save()
+			self.cliente.save()
 				.then(
 					function(data)
 					{
@@ -96,7 +92,7 @@ export const ViewModel = Map.extend({
 							$('#cuenta-switch').click();
 						
 						}else{
-							self.attr('cliente', new Clientes({}));
+							self.cliente = new Clientes({});
 						}
 
 						console.log("Voy a lanzar notificacion")
@@ -123,7 +119,7 @@ export const ViewModel = Map.extend({
 							}
 						);
 
-						self.attr('errorMsg', '');
+						self.errorMsg = '';
 
 					}
 				,	function(data)
@@ -144,7 +140,7 @@ export const ViewModel = Map.extend({
 							}
 						);
 
-						self.attr('errorMsg','Datos incorrectos, verifique los datos ingresados.');
+						self.errorMsg = 'Datos incorrectos, verifique los datos ingresados.';
 
 						$button.button('reset');
 					}
@@ -153,8 +149,10 @@ export const ViewModel = Map.extend({
 	}
 );
 
-export default Component.extend({
-  tag: 'aleph-ventas-nuevo-cliente',
-  viewModel: ViewModel,
-  view: template
-});
+export default Component.extend(
+	{
+		tag: 'aleph-ventas-nuevo-cliente'
+	,	viewModel: ViewModel
+	,	view: template
+	}
+);

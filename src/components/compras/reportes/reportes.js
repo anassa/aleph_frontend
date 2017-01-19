@@ -1,6 +1,5 @@
 import Component from 'can-component';
-import Map from 'can-map';
-import 'can-map-define';
+import Map from 'can-define/map/map';
 import './reportes.less!';
 import template from './reportes.stache!';
 import 'bootstrap-datepicker/js/bootstrap-datepicker.js'
@@ -8,13 +7,14 @@ import 'bootstrap-datepicker/js/locales/bootstrap-datepicker.es.js'
 import 'bootstrap-datepicker/build/build3.less!';
 import 'chart.js/dist/Chart.js'
 
-export const ViewModel = Map.extend({
-	define: {
-		message: {
+export const ViewModel = Map.extend(
+	{
+		message:
+		{
 			value: 'This is the aleph-compras-reportes component'
 		}
 	}
-});
+);
 
 function toggle_report()
 {
@@ -25,21 +25,23 @@ function toggle_report()
 	$('#option-'+opt).show();
 }
 
-export default Component.extend({
-	tag: 'aleph-compras-reportes',
-	viewModel: ViewModel,
-	events:
+export default Component.extend(
 	{
-		'inserted': function(el, ev)
+		tag: 'aleph-compras-reportes'
+	,	viewModel: ViewModel
+	,	events:
 		{
-			$('.date input').datepicker({language: 'es'});
+			'inserted': function(el, ev)
+			{
+				$('.date input').datepicker({language: 'es'});
 
-			toggle_report();
+				toggle_report();
+			}
+		,	'select[name=type] change': function()
+			{
+				toggle_report();
+			}
 		}
-	,	'select[name=type] change': function()
-		{
-			toggle_report();
-		}
-	},
-	view: template
-});
+	,	view: template
+	}
+);

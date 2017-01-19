@@ -1,6 +1,5 @@
 import Component from 'can-component';
-import Map from 'can-map';
-import 'can-map-define';
+import Map from 'can-define/map/map';
 import './registros_proveedor.less!';
 import template from './registros_proveedor.stache!';
 
@@ -9,55 +8,47 @@ import 'aleph-frontend/util/func.js';
 
 export const ViewModel = Map.extend(
 	{
-		define:
+		proveedores:
 		{
-			proveedores:
+			value: function()
 			{
-				value: function()
-				{
-					return	Proveedores.getList()
-				}
+				return	Proveedores.getList()
 			}
-		,	tempProveedor:
+		}
+	,	tempProveedor:
+		{
+			value: Proveedores
+		}
+	,	query:
+		{
+			value: function()
 			{
-				value: Proveedores
-			}
-		,	query:
-			{
-				value: function()
-				{
-					var self
-					=	this;
+				var self
+				=	this;
 
-					var query
-					=	new Map(
-							{
-								$skip: 0
-							}
-						);
+				var query
+				=	new Map(
+						{
+							$skip: 0
+						}
+					);
 
-					query
-						.bind(
-							'change'
-						,	function()
-							{
-								self
-									.attr(
-										'proveedores'
-									,	Proveedores.getList(
-											query.serialize()
-										)
-									)
-							}
-						);
+				query
+					.bind(
+						'change'
+					,	function()
+						{
+							self.proveedores
+							=	Proveedores.getList(query.serialize());
+						}
+					);
 
-					return query;
-				}
+				return query;
 			}
-		,	searchInput:
-			{
-				value:	undefined
-			}
+		}
+	,	searchInput:
+		{
+			value:	undefined
 		}
 	,	init: function()
 		{
@@ -68,20 +59,15 @@ export const ViewModel = Map.extend(
 				'updated'
 			,	function()
 				{
-					self
-						.attr(
-							'proveedores'
-						,	Proveedores.getList(
-								self.attr('query').serialize()
-							)
-						)
+					self.proveedores
+					=	Proveedores.getList(self.query.get());
 				}
 			);
 		}
 	,	search: function(value)
 		{
 			var value
-			=	this.attr('searchInput')
+			=	this.searchInput
 			,	fields
 			=	[
 					{
@@ -90,16 +76,14 @@ export const ViewModel = Map.extend(
 					}
 				];
 
-			this.attr(
-				'query.$or'
-			,	value.length
+			this.query.$or
+			=	value.length
 				?	createQuery(fields,value)
-				:	undefined
-			);
+				:	undefined;
 		}
 	,	setTempProveedor: function(prov)
 		{
-			this.attr('tempProveedor', new Proveedores(prov.serialize()));
+			this.tempProveedor = new Proveedores(prov.get());
 		}
 	,	destroyProveedor: function(el)
 		{
@@ -112,20 +96,15 @@ export const ViewModel = Map.extend(
 
 			$button.button('loading');
 
-			this.attr('tempProveedor').destroy()
+			this.tempProveedor.destroy()
 				.then(
 					function()
 					{
 						$button.button('reset');
 						$modal.modal('hide');
 
-						self
-							.attr(
-								'proveedores'
-							,	Proveedores.getList(
-									self.attr('query').serialize()
-								)
-							);
+						self.proveedores
+						=	Proveedores.getList(self.query.get());
 
 						$.notify(
 							{
@@ -165,8 +144,8 @@ export const ViewModel = Map.extend(
 
 export default Component.extend(
 	{
-		tag: 'aleph-compras-registros-proveedor',
-		viewModel: ViewModel,
-		view: template
+		tag: 'aleph-compras-registros-proveedor'
+	,	viewModel: ViewModel
+	,	view: template
 	}
 );

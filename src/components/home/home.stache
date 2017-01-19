@@ -112,12 +112,7 @@
 						<a href="{{routeUrl page='stock' section='nuevo_remito'}}">
 							Nuevo Remito
 						</a>
-					</li>
-					<li>
-						<a href="{{routeUrl page='stock' section='registros_remito'}}">
-							Registros Remito
-						</a>
-					</li>
+					</li>f
 					<li>
 						<a href="{{routeUrl page='stock' section='reportes'}}">
 							Reportes
@@ -224,9 +219,6 @@
 											{{/case}}
 											{{#case "registros_articulo"}}
 												Registros Articulo
-											{{/case}}
-											{{#case "registros_remito"}}
-												Registros Remito
 											{{/case}}
 											{{#case "reportes"}}
 												Reportes de Stock

@@ -1,6 +1,5 @@
 import Component from 'can-component';
-import Map from 'can-map';
-import 'can-map-define';
+import Map from 'can-define/map/map';
 import './registros_articulo.less!';
 import template from './registros_articulo.stache!';
 
@@ -9,55 +8,47 @@ import 'aleph-frontend/util/func.js';
 
 export const ViewModel = Map.extend(
 	{
-		define:
+		articulos:
 		{
-			articulos:
+			value: function()
 			{
-				value: function()
-				{
-					return	Articulos.getList()
-				}
+				return	Articulos.getList()
 			}
-		,	tempArticulo:
+		}
+	,	tempArticulo:
+		{
+			value: Articulos
+		}
+	,	query:
+		{
+			value: function()
 			{
-				value: Articulos
-			}
-		,	query:
-			{
-				value: function()
-				{
-					var self
-					=	this;
+				var self
+				=	this;
 
-					var query
-					=	new Map(
-							{
-								$skip: 0
-							}
-						);
+				var query
+				=	new Map(
+						{
+							$skip: 0
+						}
+					);
 
-					query
-						.bind(
-							'change'
-						,	function()
-							{
-								self
-									.attr(
-										'articulos'
-									,	Articulos.getList(
-											query.serialize()
-										)
-									)
-							}
-						);
+				query
+					.bind(
+						'change'
+					,	function()
+						{
+							self.articulos
+							=	Articulos.getList(query.get());
+						}
+					);
 
-					return query;
-				}
+				return query;
 			}
-		,	searchInput:
-			{
-				value:	undefined
-			}
+		}
+	,	searchInput:
+		{
+			value:	undefined
 		}
 	,	init: function()
 		{
@@ -68,20 +59,15 @@ export const ViewModel = Map.extend(
 				'updated'
 			,	function()
 				{
-					self
-						.attr(
-							'articulos'
-						,	Articulos.getList(
-								self.attr('query').serialize()
-							)
-						)
+					self.articulos
+					=	Articulos.getList(self.query.get());
 				}
 			);
 		}
 	,	search: function(value)
 		{
 			var value
-			=	this.attr('searchInput')
+			=	this.searchInput
 			,	fields
 			=	[
 					{
@@ -94,16 +80,14 @@ export const ViewModel = Map.extend(
 					}
 				];
 
-			this.attr(
-				'query.$or'
-			,	value.length
+			this.query.$or
+			=	value.length
 				?	createQuery(fields,value)
-				:	undefined
-			);
+				:	undefined;
 		}
 	,	setTempArticulo: function(art)
 		{
-			this.attr('tempArticulo', new Articulos(art.serialize()));
+			this.tempArticulo = new Articulos(art.get());
 		}
 	,	destroyArticulo: function(el)
 		{
@@ -116,19 +100,16 @@ export const ViewModel = Map.extend(
 
 			$button.button('loading');
 
-			this.attr('tempArticulo').destroy()
+			this.tempArticulo.destroy()
 				.then(
 					function()
 					{
 						$button.button('reset');
 						$modal.modal('hide');
 
-						self
-							.attr(
-								'articulos'
-							,	Articulos.getList(
-									self.attr('query').serialize()
-								)
+						self.articulos
+						=	Articulos.getList(
+								self.query.get()
 							);
 
 						$.notify(

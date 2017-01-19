@@ -1,6 +1,5 @@
 import Component from 'can-component';
-import Map from 'can-map';
-import 'can-map-define';
+import Map from 'can-define/map/map';
 import './nueva_venta.less!';
 import template from './nueva_venta.stache!';
 
@@ -11,121 +10,111 @@ import Tarjetas from 'aleph-frontend/models/tarjetas';
 
 export const ViewModel = Map.extend(
 	{
-		define:
+		venta:
 		{
-			venta:
+			value: Ventas
+		}
+	,	formasDePago:
+		{
+			value: function()
 			{
-				value: Ventas
+				return	FormasDePago.getList()
 			}
-		,	formasDePago:
+		}
+	,	tarjetas:
+		{
+			value: function()
 			{
-				value: function()
-				{
-					return	FormasDePago.getList()
-				}
+				return	Tarjetas.getList()
 			}
-		,	tarjetas:
+		}
+	,	articulos:
+		{
+			value: function()
 			{
-				value: function()
-				{
-					return	Tarjetas.getList()
-				}
+				return	Articulos.getList()
 			}
-		,	articulos:
+		}
+	,	resetPaginadorArticulos:
+		{
+			value:	false
+		}
+	,	resetPaginador:
+		{
+			value:	false
+		}
+	,	query:
+		{
+			value: function()
 			{
-				value: function()
-				{
-					return	Articulos.getList()
-				}
-			}
-		,	resetPaginadorArticulos:
-			{
-				value:	false
-			}
-		,	resetPaginador:
-			{
-				value:	false
-			}
-		,	query:
-			{
-				value: function()
-				{
-					var self
-					=	this;
+				var self
+				=	this;
 
-					var query
-					=	new Map(
+				var query
+				=	new Map(
+						{
+							$skip: 0
+						}
+					);
+
+				query
+					.bind(
+						'change'
+					,	function()
+						{
+							self.articulos
+							=	Articulos.getList(query.get());
+						}
+					);
+
+				return query;
+			}
+		}
+	,	searchInput:
+		{
+			value:	undefined
+		}
+	,	listQuery:
+		{
+			value: function()
+			{
+				var self
+				=	this;
+
+				var query
+				=	new Map(
+						{
+							current:
 							{
-								$skip: 0
+								firstPage:	0
+							,	lastPage:	4
 							}
-						);
+						}
+					);
 
-					query
-						.bind(
-							'change'
-						,	function()
-							{
-								self
-									.attr(
-										'articulos'
-									,	Articulos.getList(
-											query.serialize()
-										)
-									)
-							}
-						);
+				query
+					.bind(
+						'change'
+					,	function()
+						{
+							self.venta.articulos
+								.map(
+									function(art, i)
+									{
+										art.visible
+										=	(i >= query.current.firstPage && i <= query.current.lastPage);
+									}
+								);
+						}
+					);
 
-					return query;
-				}
-			}
-		,	searchInput:
-			{
-				value:	undefined
-			}
-		,	listQuery:
-			{
-				value: function()
-				{
-					var self
-					=	this;
-
-					var query
-					=	new Map(
-							{
-								current:
-								{
-									firstPage:	0
-								,	lastPage:	4
-								}
-							}
-						);
-
-					query
-						.bind(
-							'change'
-						,	function()
-							{
-								self.attr('venta.articulos')
-									.map(
-										function(art, i)
-										{
-											art.attr(
-												'visible'
-											,	(i >= query.current.firstPage && i <= query.current.lastPage)
-											);
-										}
-									)
-							}
-						);
-
-					return query;
-				}
+				return query;
 			}
 		}
 	,	searchArticulo: function(value)
 		{
 			var value
-			=	this.attr('searchInput')
+			=	this.searchInput
 			,	fields
 			=	[
 					{
@@ -138,23 +127,21 @@ export const ViewModel = Map.extend(
 					}
 				];
 
-			this.attr(
-				'query.$or'
-			,	value.length
+			this.query.$or
+			=	value.length
 				?	createQuery(fields,value)
-				:	undefined
-			);
+				:	undefined;
 		}
 	,	addArticulo: function(art)
 		{
-			if (this.attr('venta.articulos').indexOf(art) == -1) {
-				art.attr('visible',true)
-				art.attr('cantidad',1)
-				this.attr('venta.articulos').push(art);
+			if (this.venta.articulos.indexOf(art) == -1) {
+				art.visible = true;
+				art.cantidad = 1;
+				this.venta.articulos.push(art);
 			} else {
 				$.notify(
 					{
-						message:	'El Articulo '+art.attr('nombre')+' ya fue agregado a la Venta.' 
+						message:	'El Articulo '+art.nombre+' ya fue agregado a la Venta.' 
 					}
 				,	{
 						type:		'danger'
@@ -169,11 +156,11 @@ export const ViewModel = Map.extend(
 		}
 	,	removeArticulo: function(el)
 		{
-			this.attr('venta.articulos').splice($(el).parents('tr').index(),1);
+			this.venta.articulos.splice($(el).parents('tr').index(),1);
 		}
 	,	cancelVenta: function()
 		{
-			this.attr('venta', new Ventas({}));
+			this.venta =new Ventas({});
 		}
 	,	saveVenta: function(el)
 		{
@@ -186,9 +173,9 @@ export const ViewModel = Map.extend(
 			
 			$button.button('loading');
 
-			if	(self.attr('venta.formaPago')) {
+			if	(self.venta.formaPago) {
 				
-				if 	((self.attr('venta.formaPago.codigo') == "04") && !(self.attr('venta.cliente'))) {
+				if 	((self.venta.formaPago.codigo == "04") && !(self.venta.cliente)) {
 
 					frontendValidationErrors.push('dni_cliente');
 
@@ -200,28 +187,28 @@ export const ViewModel = Map.extend(
 
 			}
 
-			self.attr('venta.articulos')
+			self.venta.articulos
 				.each(
 					function(a)
 					{
-						if (a.attr('cantidad') < 0 || a.attr('cantidad') > a.attr('stock'))
-							frontendValidationErrors.push(a.attr('codigo')+'-cantidad');
+						if (a.cantidad < 0 || a.cantidad > a.stock)
+							frontendValidationErrors.push(a.codigo+'-cantidad');
 					}
 				);
 			
 			if (frontendValidationErrors.length == 0) {
 
 				var	newMode
-				=	self.attr('venta').isNew();
+				=	self.venta.isNew();
 
-				self.attr('venta').save()
+				self.venta.save()
 					.then(
 						function(data)
 						{
 							$button.button('reset');
 
 							if (newMode) {
-								self.attr('venta', new Ventas({}));
+								self.venta = new Ventas({});
 							} else {
 								$(el).parents('.modal').modal('hide')
 								$('#ajuste-switch').click();
@@ -249,7 +236,7 @@ export const ViewModel = Map.extend(
 								}
 							);
 
-							self.attr('errorMsg', '');
+							self.errorMsg = '';
 
 						}
 					,	function(data)
@@ -267,7 +254,7 @@ export const ViewModel = Map.extend(
 								}
 							);
 
-							self.attr('errorMsg','Datos incorrectos, verifique los datos ingresados.');
+							self.errorMsg = 'Datos incorrectos, verifique los datos ingresados.';
 
 							$button.button('reset');
 						}
@@ -295,7 +282,7 @@ export const ViewModel = Map.extend(
 						}
 					);
 
-				self.attr('errorMsg','Datos incorrectos, verifique los datos ingresados.');
+				self.errorMsg = 'Datos incorrectos, verifique los datos ingresados.';
 
 				$button.button('reset');
 			}
@@ -303,8 +290,10 @@ export const ViewModel = Map.extend(
 	}
 );
 
-export default Component.extend({
-	tag: 'aleph-ventas-nueva-venta',
-	viewModel: ViewModel,
-	view: template
-});
+export default Component.extend(
+	{
+		tag: 'aleph-ventas-nueva-venta'
+	,	viewModel: ViewModel
+	,	view: template
+	}
+);
